@@ -22,13 +22,10 @@ class GamePanel extends JFrame {
     this.add(new GameAreaPanel());
     
     this.requestFocusInWindow();  
+    //this.setUndecorated(true);
     
     this.setVisible(true);
   
-    dispose();
-   
-
-   
   } //End of Constructor
 
 
