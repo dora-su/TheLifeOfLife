@@ -31,7 +31,7 @@ class GamePanel extends JFrame {
     
     this.setVisible(true);
     
-    map = Toolkit.getDefaultToolkit().getImage("boardSize.png");
+    map = Toolkit.getDefaultToolkit().getImage("boardSize.jpg");
     
     MyMouseListener mouseListener =  new MyMouseListener();
     this.addMouseListener(mouseListener);
