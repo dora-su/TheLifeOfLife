@@ -10,9 +10,11 @@ public class Player {
 	private int y;
 	private BankAccount bankAccount;
 	
-	Player(String name, double balance){
+	Player(String name, double balance, int x, int y){
 		this.name = name;
 		bankAccount = new BankAccount(balance);
+		this.x = x;
+		this.y = y;
 	}
 	
 	
