@@ -6,15 +6,13 @@ public class Player {
 	private String career; 
 	private ArrayList<Property> property;
 	private int child;
-	private int x; 
-	private int y;
+	private int tile; 
 	private BankAccount bankAccount;
 	
 	Player(String name, double balance, int x, int y){
 		this.name = name;
 		bankAccount = new BankAccount(balance);
-		this.x = x;
-		this.y = y;
+		tile = 0;
 	}
 	
 	
@@ -50,20 +48,14 @@ public class Player {
 		this.child = child;
 	}
 
-	public int getX() {
-		return x;
+
+	public int getTile() {
+		return tile;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
 
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+	public void setTile(int tile) {
+		this.tile = tile;
 	}
 	
 	
