@@ -52,8 +52,10 @@ class GamePanel extends JFrame {
 		path = new ArrayList<ActionTile>();
 
 		path.add(new ActionTile(26,317,null,0));
-		path.add(new ActionTile(38,317,"HI",20));
-		path.add(new ActionTile(50,317,"B",0));
+		path.add(new ActionTile(75,317,"HI",0));
+		path.add(new ActionTile(126,317,"B",0));
+		path.add(new ActionTile(173,299,"D",0));
+		path.add(new ActionTile(183,256,"D",0));
 		
 
 
@@ -71,7 +73,7 @@ class GamePanel extends JFrame {
 			setDoubleBuffered(true);
 			// System.out.println("HI");
 			g.drawImage(map, 0, 0, null, this);
-			g.drawImage(mango1, 26 - 17, 317 - 17, null, this);
+			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null, this);
 
 			repaint();
 
@@ -85,11 +87,15 @@ class GamePanel extends JFrame {
 			if (path.get(player.getTile() + i).getIndex() > 0) {
 				//  choice panel
 				//  spin
-				break;
+				//move();
+				return;
+			}else {
+				player.setTile(player.getTile() + 1);
+				gamePanel.repaint();
+
+				
 			}
 		}
-		player.setTile(player.getTile() + i + 1);
-
 	}
 
 	private class MyMouseListener implements MouseListener {
@@ -98,7 +104,7 @@ class GamePanel extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("X: " + e.getX() + " Y: " + e.getY());
 
-			move(player1,1);
+			move(player1,3);
 		}
 
 		@Override
