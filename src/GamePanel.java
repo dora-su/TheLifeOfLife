@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Point;
+
 
 class GamePanel extends JFrame {
 
@@ -58,6 +59,8 @@ class GamePanel extends JFrame {
 		path.add(new ActionTile(173,299,"D",0));
 		path.add(new ActionTile(183,256,"D",0));
 		
+		
+		
  
 
 	} // End of Constructor
@@ -84,20 +87,15 @@ class GamePanel extends JFrame {
 		for (i = 0; i < spin; i++) {
 			if (path.get(player.getTile()).getIndex() > 0) {
 				
-//			    boolean changePath; 
-//			    String changePathValue = input.next();
-//			    if(changePathValue.equals(true)) {
-//			    	changePath = true;
-//			    }else {
-//			    	changePath = false;
-//			    }
-			    
-			    System.out.println("decision point");
-				//  choice panel
-				//  spin
-				//move();
+
+				System.out.println("Choices");
+				//popUp(path.get(player.getTile()).getMessage());
+				
 				return;
-			}else {
+			
+				
+			}
+			if (path.get(player.getTile()).getIndex() == 0) {
 				player.setTile(player.getTile() + 1);
 				gamePanel.repaint();
 				
@@ -105,6 +103,16 @@ class GamePanel extends JFrame {
 		}
 	}
 	
+	private void popUp(String message) {
+		 JFrame popUp = new JFrame();
+		 popUp.setUndecorated(false);
+		 popUp.setResizable(true);
+		 popUp.setVisible(true);
+
+		 //popUp.
+		 System.out.println("HI");
+		 popUp.setSize(120, 120);
+	}
 
 
 	private class MyMouseListener implements MouseListener {
@@ -113,7 +121,7 @@ class GamePanel extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("X: " + e.getX() + " Y: " + e.getY());
 
-			move(player1,3);
+			move(player1,1);
 		}
 
 		@Override
