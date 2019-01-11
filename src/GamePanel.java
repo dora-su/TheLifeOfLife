@@ -1,3 +1,5 @@
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -35,9 +38,9 @@ class GamePanel extends JFrame {
 		path = new ArrayList<ActionTile>();
 
 		path.add(new ActionTile(26, 317, null, 0));
-		path.add(new ActionTile(75, 317, "HI", 20));
+		path.add(new ActionTile(75, 317, "a", 0));
 		path.add(new ActionTile(126, 317, "B", 0));
-		path.add(new ActionTile(173, 299, "D", 0));
+		path.add(new ActionTile(173, 299, "D", 20));
 		path.add(new ActionTile(183, 256, "D", 0));
 
 		map = Toolkit.getDefaultToolkit().getImage("graphics/boardSize.jpg");
@@ -98,37 +101,69 @@ class GamePanel extends JFrame {
 
 		}
 		if (path.get(player.getTile()).getIndex() > 0) {
-			popUp(path.get(player.getTile()).getMessage(), false);
+			popUp(path.get(player.getTile()).getMessage(), true, path.get(player.getTile()));
 			System.out.println("choices");
+		}else {
+			popUp(path.get(player.getTile()).getMessage(), false, null);
+			System.out.println("normal");
 		}
 	}
 
 	boolean pop;
 
-	private void popUp(String message, boolean choice) {
+	private void popUp(String message, boolean choice, ActionTile tile) {
 		if (pop) {
 			return;
 		}
 		
 		pop = true;
 		JFrame popUp = new JFrame();
+
+		
 		popUp.setUndecorated(true);
 		popUp.setResizable(true);
-
 		popUp.setAlwaysOnTop(true);
 		popUp.setLocation(640 - 200, 360 - 100);
 		popUp.setSize(400, 200);
-		JPanel panel = new JPanel();
-		
-		panel.add(new JLabel("HI"));
-		popUp.add(panel);
 		popUp.setVisible(true);
-
-
 		
-		
+		JPanel panel = new JPanel();
+		popUp.setContentPane(panel);
+		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+		panel.add(Box.createRigidArea(new Dimension(0,50)));
+		panel.add(new JLabel(message));
+		panel.add(Box.createRigidArea(new Dimension(0,75)));
+		JPanel options = new JPanel();
+		popUp.add(options);
 		
 		if (choice) {
+			JButton option1 = new JButton("Option 1");
+			JButton option2 = new JButton("Option 2");
+			
+			option1.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					//go to certain index
+					popUp.dispose();
+					pop= false;
+				}
+				
+			});
+			
+			option2.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					//go to new index
+					popUp.dispose();
+					pop= false;
+					player1.setTile(tile.getIndex());
+				}
+			});
+			
+			options.add(option1);
+			options.add(Box.createRigidArea(new Dimension(50,0)));
+			options.add(option2);
 
 		} else {
 			//adding a close button after the message is displayed
@@ -142,7 +177,8 @@ class GamePanel extends JFrame {
 				}
 			});
 
-			panel.add(close);
+			close.setAlignmentX(JButton.CENTER_ALIGNMENT);
+			options.add(close);
 		}
 		
 		
