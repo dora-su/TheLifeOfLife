@@ -99,6 +99,7 @@ class GamePanel extends JFrame {
 		}
 		if (path.get(player.getTile()).getIndex() > 0) {
 			popUp(path.get(player.getTile()).getMessage(), false);
+			System.out.println("choices");
 		}
 	}
 
@@ -108,6 +109,7 @@ class GamePanel extends JFrame {
 		if (pop) {
 			return;
 		}
+		
 		pop = true;
 		JFrame popUp = new JFrame();
 		popUp.setUndecorated(true);
@@ -116,15 +118,20 @@ class GamePanel extends JFrame {
 		popUp.setAlwaysOnTop(true);
 		popUp.setLocation(640 - 200, 360 - 100);
 		popUp.setSize(400, 200);
+		JPanel panel = new JPanel();
+		
+		panel.add(new JLabel("HI"));
+		popUp.add(panel);
 		popUp.setVisible(true);
 
-		JPanel panel = new JPanel();
-		popUp.add(panel);
+
 		
-		panel.add(new JLabel(message));
+		
+		
 		if (choice) {
 
 		} else {
+			//adding a close button after the message is displayed
 			JButton close = new JButton("Close");
 			close.addActionListener(new ActionListener() {
 				@Override
@@ -135,8 +142,10 @@ class GamePanel extends JFrame {
 				}
 			});
 
-			popUp.add(close);
+			panel.add(close);
 		}
+		
+		
 
 	}
 
