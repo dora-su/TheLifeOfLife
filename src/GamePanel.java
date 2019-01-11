@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -52,16 +53,12 @@ class GamePanel extends JFrame {
 		path = new ArrayList<ActionTile>();
 
 		path.add(new ActionTile(26,317,null,0));
-		path.add(new ActionTile(75,317,"HI",0));
+		path.add(new ActionTile(75,317,"HI",20));
 		path.add(new ActionTile(126,317,"B",0));
 		path.add(new ActionTile(173,299,"D",0));
 		path.add(new ActionTile(183,256,"D",0));
 		
-
-
-		
-		
-		 
+ 
 
 	} // End of Constructor
 
@@ -82,9 +79,20 @@ class GamePanel extends JFrame {
 	}
 
 	public void move(Player player, int spin) {
+		Scanner input = new Scanner(System.in);
 		int i;
 		for (i = 0; i < spin; i++) {
-			if (path.get(player.getTile() + i).getIndex() > 0) {
+			if (path.get(player.getTile()).getIndex() > 0) {
+				
+//			    boolean changePath; 
+//			    String changePathValue = input.next();
+//			    if(changePathValue.equals(true)) {
+//			    	changePath = true;
+//			    }else {
+//			    	changePath = false;
+//			    }
+			    
+			    System.out.println("decision point");
 				//  choice panel
 				//  spin
 				//move();
@@ -92,11 +100,12 @@ class GamePanel extends JFrame {
 			}else {
 				player.setTile(player.getTile() + 1);
 				gamePanel.repaint();
-
 				
 			}
 		}
 	}
+	
+
 
 	private class MyMouseListener implements MouseListener {
 
