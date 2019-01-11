@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 public class ActionTile {
 	private int x;
@@ -9,7 +9,7 @@ public class ActionTile {
 	ActionTile(int x, int y, String message, int index){
 		this.x = x;
 		this.y = y;
-		
+		this.index = index;
 		this.message = message; 
 		
 	}
@@ -32,6 +32,14 @@ public class ActionTile {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 

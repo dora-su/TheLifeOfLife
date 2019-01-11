@@ -16,6 +16,7 @@ class GamePanel extends JFrame {
 	Image map;
 	Image mango1;
 	Player player1;
+	ArrayList<ActionTile> path;
 
 	// Constructor - this runs first
 	GamePanel() {
@@ -48,7 +49,7 @@ class GamePanel extends JFrame {
 		 * X: 26 Y: 339 X: 74 Y: 339 X: 129 Y: 339 X: 178 Y: 331
 		 */
 		
-		ArrayList<ActionTile> path = new ArrayList<ActionTile>();
+		path = new ArrayList<ActionTile>();
 
 		path.add(new ActionTile(26,317,null,0));
 		path.add(new ActionTile(38,317,"HI",20));
@@ -78,12 +79,16 @@ class GamePanel extends JFrame {
 
 	}
 
-	public void move(Player player) {
-		int spin = 1;
-		repaint();
-
-//		player.setX(23);
-//		player.setY(23);
+	public void move(Player player, int spin) {
+		int i;
+		for (i = 0; i < spin; i++) {
+			if (path.get(player.getTile() + i).getIndex() > 0) {
+				//  choice panel
+				//  spin
+				break;
+			}
+		}
+		player.setTile(player.getTile() + i + 1);
 
 	}
 
@@ -93,7 +98,7 @@ class GamePanel extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("X: " + e.getX() + " Y: " + e.getY());
 
-			move(player1);
+			move(player1,1);
 		}
 
 		@Override
