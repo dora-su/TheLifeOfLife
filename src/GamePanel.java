@@ -3,7 +3,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,7 +11,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -21,11 +22,10 @@ class GamePanel extends JFrame {
 	// class variables
 	JPanel gamePanel;
 
-	Image map;
-	Image mango1;
+	Image map,mango1,popWindow;
 	Player player1;
 	ArrayList<ActionTile> path;
-
+	
 	// Constructor - this runs first
 	GamePanel() {
 		super("My Game");
@@ -45,6 +45,7 @@ class GamePanel extends JFrame {
 
 		map = Toolkit.getDefaultToolkit().getImage("graphics/boardSize.jpg");
 		mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
+		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 		
 		player1 = new Player("Eric", 5000, 26, 317);
 
@@ -119,26 +120,44 @@ class GamePanel extends JFrame {
 		pop = true;
 		JFrame popUp = new JFrame();
 
-		
+		popUp.addMouseListener(new MyMouseListener());
 		popUp.setUndecorated(true);
 		popUp.setResizable(true);
 		popUp.setAlwaysOnTop(true);
 		popUp.setLocation(640 - 200, 360 - 100);
-		popUp.setSize(400, 200);
+		popUp.setSize(400, 250);
 		popUp.setVisible(true);
 		
-		JPanel panel = new JPanel();
+		JPanel panel = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				
+				if(pop) {
+					g.drawImage(popWindow,0, 0,null);
+				}
+				repaint();
+			}
+		};
+		
+		JLabel messageLabel = new JLabel(message);
+		messageLabel.setForeground(Color.white);
+		messageLabel.setFont(new Font("Arial",Font.PLAIN,30));
 		popUp.setContentPane(panel);
 		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(0,50)));
-		panel.add(new JLabel(message));
-		panel.add(Box.createRigidArea(new Dimension(0,75)));
+		panel.add(Box.createRigidArea(new Dimension(0,63)));
+
+		panel.add(messageLabel);
+		panel.add(Box.createRigidArea(new Dimension(0,70)));
 		JPanel options = new JPanel();
+		options.setOpaque(false);;
 		popUp.add(options);
 		
 		if (choice) {
 			JButton option1 = new JButton("Option 1");
 			JButton option2 = new JButton("Option 2");
+			option1.setFocusPainted(false);
+			option1.setFocusPainted(false);
+			
 			
 			option1.addActionListener(new ActionListener() {
 
@@ -168,6 +187,7 @@ class GamePanel extends JFrame {
 		} else {
 			//adding a close button after the message is displayed
 			JButton close = new JButton("Close");
+			close.setFocusPainted(false);
 			close.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -191,7 +211,7 @@ class GamePanel extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("X: " + e.getX() + " Y: " + e.getY());
 
-			move(player1, 1);
+			move(player1, 2);
 		}
 
 		@Override

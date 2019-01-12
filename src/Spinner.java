@@ -134,7 +134,7 @@ public class Spinner extends JFrame {
 				// delay increase each time
 				// so the spinner slows down
 				try {
-					//Thread.sleep(delay);
+					Thread.sleep(delay);
 					if (i % 20 == 0) increase--;
 					increase = Math.max(1,increase);
 				} catch (InterruptedException e) {
