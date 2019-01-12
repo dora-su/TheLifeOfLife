@@ -73,15 +73,24 @@ class GamePanel extends JFrame {
 	/** --------- INNER CLASSES ------------- **/
 	private class GameAreaPanel extends JPanel {
 
+		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			setDoubleBuffered(true);
 			// System.out.println("HI");
 			g.drawImage(map, 0, 0, null);
 			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
-
 			repaint();
-
+		}
+		
+		public void repaintWindow() {
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			gamePanel.repaint();
 		}
 
 	}
@@ -93,7 +102,7 @@ class GamePanel extends JFrame {
 
 			if (!(path.get(player.getTile()) instanceof ChoiceTile)) {
 				player.setTile(player.getTile() + 1);
-				gamePanel.repaint();
+				((GameAreaPanel) gamePanel).repaintWindow();
 			}
 
 			if (path.get(player.getTile()) instanceof ChoiceTile) {
@@ -147,7 +156,7 @@ class GamePanel extends JFrame {
 		panel.add(Box.createRigidArea(new Dimension(0,78)));
 
 		panel.add(messageLabel);
-		panel.add(Box.createRigidArea(new Dimension(0,95)));
+		panel.add(Box.createRigidArea(new Dimension(0,96)));
 		JPanel options = new JPanel();
 		options.setOpaque(false);;
 		popUp.add(options);
