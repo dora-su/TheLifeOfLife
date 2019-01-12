@@ -37,11 +37,11 @@ class GamePanel extends JFrame {
 		// Set up the game panel (where we put our graphics)
 		path = new ArrayList<ActionTile>();
 
-		path.add(new ActionTile(26, 317, null, 0));
-		path.add(new ActionTile(75, 317, "a", 0));
-		path.add(new ActionTile(126, 317, "B", 0));
-		path.add(new ActionTile(173, 299, "D", 20));
-		path.add(new ActionTile(183, 256, "D", 0));
+		path.add(new MoneyTile(26, 317, null, 0));
+		path.add(new MoneyTile(75, 317, "a", 0));
+		path.add(new MoneyTile(126, 317, "B", 0));
+		path.add(new ChoiceTile(173, 299, "D", 20));
+		path.add(new MoneyTile(183, 256, "D", 0));
 
 		map = Toolkit.getDefaultToolkit().getImage("graphics/boardSize.jpg");
 		mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
@@ -91,28 +91,28 @@ class GamePanel extends JFrame {
 		int i;
 		for (i = 0; i < spin; i++) {
 
-			if (path.get(player.getTile()).getIndex() == 0) {
+			if (!(path.get(player.getTile()) instanceof ChoiceTile)) {
 				player.setTile(player.getTile() + 1);
 				gamePanel.repaint();
 			}
 
-			if (path.get(player.getTile()).getIndex() > 0) {
+			if (path.get(player.getTile()) instanceof ChoiceTile) {
 				break;
 			}
 
 		}
-		if (path.get(player.getTile()).getIndex() > 0) {
-			popUp(path.get(player.getTile()).getMessage(), true, path.get(player.getTile()));
+		if (path.get(player.getTile()) instanceof ChoiceTile) {
+			popUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()));
 			System.out.println("choices");
 		}else {
-			popUp(path.get(player.getTile()).getMessage(), false, null);
+			popUp(path.get(player.getTile()).getMessage(), null);
 			System.out.println("normal");
 		}
 	}
 
 	boolean pop;
 
-	private void popUp(String message, boolean choice, ActionTile tile) {
+	private void popUp(String message, ActionTile tile) {
 		if (pop) {
 			return;
 		}
@@ -144,15 +144,15 @@ class GamePanel extends JFrame {
 		messageLabel.setFont(new Font("Arial",Font.PLAIN,30));
 		popUp.setContentPane(panel);
 		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(0,63)));
+		panel.add(Box.createRigidArea(new Dimension(0,78)));
 
 		panel.add(messageLabel);
-		panel.add(Box.createRigidArea(new Dimension(0,70)));
+		panel.add(Box.createRigidArea(new Dimension(0,95)));
 		JPanel options = new JPanel();
 		options.setOpaque(false);;
 		popUp.add(options);
 		
-		if (choice) {
+		if (tile instanceof ChoiceTile) {
 			JButton option1 = new JButton("Option 1");
 			JButton option2 = new JButton("Option 2");
 			option1.setFocusPainted(false);
@@ -176,7 +176,7 @@ class GamePanel extends JFrame {
 					//go to new index
 					popUp.dispose();
 					pop= false;
-					player1.setTile(tile.getIndex());
+					player1.setTile(((ChoiceTile)tile).getIndex());
 				}
 			});
 			

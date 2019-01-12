@@ -1,15 +1,13 @@
 
 
-public class ActionTile {
+abstract public class ActionTile {
 	private int x;
 	private int y;
 	private String message;
-	private int index;
 	
-	ActionTile(int x, int y, String message, int index){
+	ActionTile(int x, int y, String message){
 		this.x = x;
 		this.y = y;
-		this.index = index;
 		this.message = message; 
 		
 	}
@@ -34,13 +32,7 @@ public class ActionTile {
 		this.message = message;
 	}
 
-	public int getIndex() {
-		return index;
-	}
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
 
 
 	
