@@ -122,13 +122,15 @@ class GamePanel extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
             System.out.println("X: " + e.getX() + " Y: " + e.getY());
-            Thread t = new Thread(new Runnable() {
-            	public void run() {
-            		player1.move(2, path);
+           // Thread t = new Thread(new Runnable() {
+            	//public void run() {
+            		player1.move(1, path);
+            		gamePanel.repaint();
+            		player1.move(1, path);
             		
-            	}
-           });
-            t.start();
+            //	}
+         //  });
+          //  t.start();
             
         }
 
