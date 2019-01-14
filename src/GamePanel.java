@@ -19,234 +19,143 @@ import java.awt.Image;
 
 class GamePanel extends JFrame {
 
-	// class variables
-	JPanel gamePanel;
+    // class variables
+    JPanel gamePanel;
 
-	Image map,mango1,popWindow;
-	Player player1;
-	ArrayList<ActionTile> path;
-	
-	// Constructor - this runs first
-	GamePanel() {
-		super("My Game");
+    Image map, mango1, popWindow;
+    Player player1;
+    ArrayList<ActionTile> path;
 
-		// Set the frame to full screen
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1280, 720);
+    // Constructor - this runs first
+    GamePanel() {
+        super("My Game");
 
-		// Set up the game panel (where we put our graphics)
-		path = new ArrayList<ActionTile>();
+        // Set the frame to full screen
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1280, 720);
 
-		path.add(new MoneyTile(26, 317, null, 0));
-		path.add(new MoneyTile(75, 317, "a", 0));
-		path.add(new MoneyTile(126, 317, "B", 0));
-		path.add(new ChoiceTile(173, 299, "D", 20));
-		path.add(new MoneyTile(183, 256, "D", 0));
+        // Set up the game panel (where we put our graphics)
+        path = new ArrayList<ActionTile>();
 
-		map = Toolkit.getDefaultToolkit().getImage("graphics/boardSize.jpg");
-		mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
-		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
-		
-		player1 = new Player("Eric", 5000, 26, 317);
+        path.add(new MoneyTile(26, 317, null, 0));
+        path.add(new MoneyTile(75, 317, "a", 0));
+        path.add(new MoneyTile(126, 317, "B", 0));
+        path.add(new ChoiceTile(173, 299, "D", 20));
+        path.add(new MoneyTile(183, 256, "D", 0));
 
-		gamePanel = new GameAreaPanel();
-		this.add(new GameAreaPanel());
+        map = Toolkit.getDefaultToolkit().getImage("graphics/boardSize.jpg");
+        mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
+        popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
-		this.requestFocusInWindow();
-		this.setUndecorated(true);
+        player1 = new Player("Eric", 5000, 26, 317);
 
-		this.setVisible(true);
+        gamePanel = new GameAreaPanel();
+        this.add(new GameAreaPanel());
 
-		MyMouseListener mouseListener = new MyMouseListener();
-		this.addMouseListener(mouseListener);
+        this.requestFocusInWindow();
+        this.setUndecorated(true);
 
-		
+        this.setVisible(true);
 
-		// TILE LOCATION
-		// First Path
-		/*
-		 * X: 26 Y: 339 X: 74 Y: 339 X: 129 Y: 339 X: 178 Y: 331
-		 */
+        MyMouseListener mouseListener = new MyMouseListener();
+        this.addMouseListener(mouseListener);
 
-	} // End of Constructor
 
-	/** --------- INNER CLASSES ------------- **/
-	private class GameAreaPanel extends JPanel {
+        // TILE LOCATION
+        // First Path
+        /*
+         * X: 26 Y: 339 X: 74 Y: 339 X: 129 Y: 339 X: 178 Y: 331
+         */
 
-		
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g); // required
-			setDoubleBuffered(true);
-			// System.out.println("HI");
-			g.drawImage(map, 0, 0, null);
-			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
-			repaint();
-		}
-		
-		public void repaintWindow() {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			gamePanel.repaint();
-		}
+    } // End of Constructor
 
-	}
+    /**
+     * --------- INNER CLASSES -------------
+     **/
+    private class GameAreaPanel extends JPanel {
 
-	public void move(Player player, int spin) {
-		Scanner input = new Scanner(System.in);
-		int i;
-		for (i = 0; i < spin; i++) {
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g); // required
+            setDoubleBuffered(true);
+            // System.out.println("HI");
+            g.drawImage(map, 0, 0, null);
+            g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
+            repaint();
 
-			if (!(path.get(player.getTile()) instanceof ChoiceTile)) {
-				player.setTile(player.getTile() + 1);
-				((GameAreaPanel) gamePanel).repaintWindow();
-			}
+        }
 
-			if (path.get(player.getTile()) instanceof ChoiceTile) {
-				break;
-			}
 
-		}
-		if (path.get(player.getTile()) instanceof ChoiceTile) {
-			popUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()));
-			System.out.println("choices");
-		}else {
-			popUp(path.get(player.getTile()).getMessage(), null);
-			System.out.println("normal");
-		}
-	}
+    }
+//
+//	public void move(Player player, int spin) {
+////		Scanner input = new Scanner(System.in);
+//		int i;
+//		for (i = 0; i < spin; i++) {
+//
+//			if (!(path.get(player.getTile()) instanceof ChoiceTile)) {
+//				player.setTile(player.getTile() + 1);
+//			}
+//			try {
+//				Thread.sleep(100);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			if (path.get(player.getTile()) instanceof ChoiceTile) {
+//				break;
+//			}
+//
+//		}
+//
+//		if (path.get(player.getTile()) instanceof ChoiceTile) {
+//			popUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()));
+//			System.out.println("choices");
+//		} else {
+//			popUp(path.get(player.getTile()).getMessage(), null);
+//			System.out.println("normal");
+//		}
+//	}
 
-	boolean pop;
 
-	private void popUp(String message, ActionTile tile) {
-		if (pop) {
-			return;
-		}
-		
-		pop = true;
-		JFrame popUp = new JFrame();
+    private class MyMouseListener implements MouseListener {
 
-		popUp.addMouseListener(new MyMouseListener());
-		popUp.setUndecorated(true);
-		popUp.setResizable(true);
-		popUp.setAlwaysOnTop(true);
-		popUp.setLocation(640 - 200, 360 - 100);
-		popUp.setSize(400, 250);
-		popUp.setVisible(true);
-		
-		JPanel panel = new JPanel() {
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				
-				if(pop) {
-					g.drawImage(popWindow,0, 0,null);
-				}
-				repaint();
-			}
-		};
-		
-		JLabel messageLabel = new JLabel(message);
-		messageLabel.setForeground(Color.white);
-		messageLabel.setFont(new Font("Arial",Font.PLAIN,30));
-		popUp.setContentPane(panel);
-		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(0,78)));
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            System.out.println("X: " + e.getX() + " Y: " + e.getY());
+            Thread t = new Thread(new Runnable() {
+            	public void run() {
+            		player1.move(2, path);
+            		
+            	}
+           });
+            t.start();
+            
+        }
 
-		panel.add(messageLabel);
-		panel.add(Box.createRigidArea(new Dimension(0,96)));
-		JPanel options = new JPanel();
-		options.setOpaque(false);;
-		popUp.add(options);
-		
-		if (tile instanceof ChoiceTile) {
-			JButton option1 = new JButton("Option 1");
-			JButton option2 = new JButton("Option 2");
-			option1.setFocusPainted(false);
-			option1.setFocusPainted(false);
-			
-			
-			option1.addActionListener(new ActionListener() {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            // TODO Auto-generated method stub
 
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					//go to certain index
-					popUp.dispose();
-					pop= false;
-				}
-				
-			});
-			
-			option2.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					//go to new index
-					popUp.dispose();
-					pop= false;
-					player1.setTile(((ChoiceTile)tile).getIndex());
-				}
-			});
-			
-			options.add(option1);
-			options.add(Box.createRigidArea(new Dimension(50,0)));
-			options.add(option2);
+        }
 
-		} else {
-			//adding a close button after the message is displayed
-			JButton close = new JButton("Close");
-			close.setFocusPainted(false);
-			close.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					popUp.dispose();
-					pop = false;
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            // TODO Auto-generated method stub
 
-				}
-			});
+        }
 
-			close.setAlignmentX(JButton.CENTER_ALIGNMENT);
-			options.add(close);
-		}
-		
-		
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            // TODO Auto-generated method stub
 
-	}
+        }
 
-	private class MyMouseListener implements MouseListener {
+        @Override
+        public void mouseExited(MouseEvent e) {
+            // TODO Auto-generated method stub
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			System.out.println("X: " + e.getX() + " Y: " + e.getY());
+        }
 
-			move(player1, 2);
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
+    }
 
 }
