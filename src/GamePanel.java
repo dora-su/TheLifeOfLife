@@ -72,48 +72,44 @@ class GamePanel extends JFrame {
 
 	/** --------- INNER CLASSES ------------- **/
 	private class GameAreaPanel extends JPanel {
-
-		
+	
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			setDoubleBuffered(true);
 			// System.out.println("HI");
 			g.drawImage(map, 0, 0, null);
 			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
+			System.out.println("hI");
 			repaint();
 		}
 		
-		public void repaintWindow() {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			gamePanel.repaint();
-		}
 
 	}
 
 	public void move(Player player, int spin) {
-		Scanner input = new Scanner(System.in);
+//		Scanner input = new Scanner(System.in);
 		int i;
 		for (i = 0; i < spin; i++) {
 
 			if (!(path.get(player.getTile()) instanceof ChoiceTile)) {
 				player.setTile(player.getTile() + 1);
-				((GameAreaPanel) gamePanel).repaintWindow();
 			}
-
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (path.get(player.getTile()) instanceof ChoiceTile) {
 				break;
 			}
 
 		}
+		
 		if (path.get(player.getTile()) instanceof ChoiceTile) {
 			popUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()));
 			System.out.println("choices");
-		}else {
+		} else {
 			popUp(path.get(player.getTile()).getMessage(), null);
 			System.out.println("normal");
 		}
