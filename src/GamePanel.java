@@ -20,7 +20,7 @@ import java.awt.Image;
 class GamePanel extends JFrame {
 
     // class variables
-    JPanel gamePanel;
+    JPanel gameAreaPanel;
 
     Image map, mango1, popWindow;
     Player player1;
@@ -49,8 +49,8 @@ class GamePanel extends JFrame {
 
         player1 = new Player("Eric", 5000, 26, 317);
 
-        gamePanel = new GameAreaPanel();
-        this.add(new GameAreaPanel());
+        gameAreaPanel = new GameAreaPanel();
+        this.add(gameAreaPanel);
 
         this.requestFocusInWindow();
         this.setUndecorated(true);
@@ -88,36 +88,6 @@ class GamePanel extends JFrame {
 
 
     }
-//
-//	public void move(Player player, int spin) {
-////		Scanner input = new Scanner(System.in);
-//		int i;
-//		for (i = 0; i < spin; i++) {
-//
-//			if (!(path.get(player.getTile()) instanceof ChoiceTile)) {
-//				player.setTile(player.getTile() + 1);
-//			}
-//			try {
-//				Thread.sleep(100);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			if (path.get(player.getTile()) instanceof ChoiceTile) {
-//				break;
-//			}
-//
-//		}
-//
-//		if (path.get(player.getTile()) instanceof ChoiceTile) {
-//			popUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()));
-//			System.out.println("choices");
-//		} else {
-//			popUp(path.get(player.getTile()).getMessage(), null);
-//			System.out.println("normal");
-//		}
-//	}
-
 
     private class MyMouseListener implements MouseListener {
 
@@ -127,7 +97,7 @@ class GamePanel extends JFrame {
            // Thread t = new Thread(new Runnable() {
             	//public void run() {
             	
-            		player1.move(2, path);
+             		player1.move(2, path);
             		
             //	}
          //  });
