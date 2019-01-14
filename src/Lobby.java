@@ -6,11 +6,12 @@ import javax.swing.JPanel;
 public class Lobby extends JFrame {
 	
 	public static void main(String [] args) {
-		new GamePanel();
+		//new GamePanel();
 //		new Spinner();
 //		Spinner.getRoll();
 		//new MainMenu();
 		//new Lobby();
+		new Rules();
 	}
 	
 	JPanel lobbyPanel = new JPanel();

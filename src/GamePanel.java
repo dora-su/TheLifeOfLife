@@ -33,14 +33,14 @@ class GamePanel extends JFrame {
         // Set the frame to full screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1280, 720);
-
+        
         // Set up the game panel (where we put our graphics)
         path = new ArrayList<ActionTile>();
 
         path.add(new MoneyTile(26, 317, null, 0));
         path.add(new MoneyTile(75, 317, "a", 0));
         path.add(new MoneyTile(126, 317, "B", 0));
-        path.add(new ChoiceTile(173, 299, "D", 20));
+        path.add(new ChoiceTile(173, 299, "D", 0));
         path.add(new MoneyTile(183, 256, "D", 0));
 
         map = Toolkit.getDefaultToolkit().getImage("graphics/boardSize.jpg");
@@ -82,6 +82,8 @@ class GamePanel extends JFrame {
             g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
             repaint();
 
+            
+            //draw bottom game menu image
         }
 
 
@@ -124,9 +126,8 @@ class GamePanel extends JFrame {
             System.out.println("X: " + e.getX() + " Y: " + e.getY());
            // Thread t = new Thread(new Runnable() {
             	//public void run() {
-            		player1.move(1, path);
-            		gamePanel.repaint();
-            		player1.move(1, path);
+            	
+            		player1.move(2, path);
             		
             //	}
          //  });

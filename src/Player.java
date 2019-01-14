@@ -65,9 +65,9 @@ public class Player {
             if (!(path.get(this.getTile()) instanceof ChoiceTile)) {
                 this.setTile(this.getTile() + 1);
             }
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) { }
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) { }
             
             if (path.get(this.getTile()) instanceof ChoiceTile) {
                 break;
