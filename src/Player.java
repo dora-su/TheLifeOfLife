@@ -59,22 +59,21 @@ public class Player {
     }
 
     public void move(int spin, ArrayList<ActionTile> path) {
-        int i;
-        for (i = 0; i < spin; i++) {
+       
+        for (int i = 0; i < spin; i++) {
 
             if (!(path.get(this.getTile()) instanceof ChoiceTile)) {
                 this.setTile(this.getTile() + 1);
             }
             try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                Thread.sleep(500);
+            } catch (InterruptedException e) { }
+            
             if (path.get(this.getTile()) instanceof ChoiceTile) {
                 break;
             }
-
+            
+            System.out.println(this.getTile());
         }
 
         new PopUp(path.get(this.getTile()).getMessage(), path.get(this.getTile()), this);

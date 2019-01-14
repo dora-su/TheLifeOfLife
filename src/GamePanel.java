@@ -80,8 +80,8 @@ class GamePanel extends JFrame {
             // System.out.println("HI");
             g.drawImage(map, 0, 0, null);
             g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
-            System.out.println("hI");
             repaint();
+
         }
 
 
@@ -116,108 +116,20 @@ class GamePanel extends JFrame {
 //		}
 //	}
 
-    boolean pop;
-
-    private void popUp(String message, ActionTile tile) {
-        if (pop) {
-            return;
-        }
-
-        pop = true;
-        JFrame popUp = new JFrame();
-
-        popUp.addMouseListener(new MyMouseListener());
-        popUp.setUndecorated(true);
-        popUp.setResizable(true);
-        popUp.setAlwaysOnTop(true);
-        popUp.setLocation(640 - 200, 360 - 100);
-        popUp.setSize(400, 250);
-        popUp.setVisible(true);
-
-        JPanel panel = new JPanel() {
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-
-                if (pop) {
-                    g.drawImage(popWindow, 0, 0, null);
-                }
-                repaint();
-            }
-        };
-
-        JLabel messageLabel = new JLabel(message);
-        messageLabel.setForeground(Color.white);
-        messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-        popUp.setContentPane(panel);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(Box.createRigidArea(new Dimension(0, 78)));
-
-        panel.add(messageLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 96)));
-        JPanel options = new JPanel();
-        options.setOpaque(false);
-        ;
-        popUp.add(options);
-
-        if (tile instanceof ChoiceTile) {
-            JButton option1 = new JButton("Option 1");
-            JButton option2 = new JButton("Option 2");
-            option1.setFocusPainted(false);
-            option1.setFocusPainted(false);
-
-
-            option1.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    //go to certain index
-                    popUp.dispose();
-                    pop = false;
-                }
-
-            });
-
-            option2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    //go to new index
-                    popUp.dispose();
-                    pop = false;
-                    player1.setTile(((ChoiceTile) tile).getIndex());
-                }
-            });
-
-            options.add(option1);
-            options.add(Box.createRigidArea(new Dimension(50, 0)));
-            options.add(option2);
-
-        } else {
-            //adding a close button after the message is displayed
-            JButton close = new JButton("Close");
-            close.setFocusPainted(false);
-            close.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    popUp.dispose();
-                    pop = false;
-
-                }
-            });
-
-            close.setAlignmentX(JButton.CENTER_ALIGNMENT);
-            options.add(close);
-        }
-
-
-    }
 
     private class MyMouseListener implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
             System.out.println("X: " + e.getX() + " Y: " + e.getY());
-
-            player1.move(2, path);
+            Thread t = new Thread(new Runnable() {
+            	public void run() {
+            		player1.move(2, path);
+            		
+            	}
+           });
+            t.start();
+            
         }
 
         @Override

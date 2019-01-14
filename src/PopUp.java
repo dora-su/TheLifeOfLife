@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 
 public class PopUp {
 
-    boolean pop;
 
     PopUp(String message, ActionTile tile,Player player1) {
 
@@ -35,9 +34,8 @@ public class PopUp {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
 
-                if (pop) {
                     g.drawImage(popWindow, 0, 0, null);
-                }
+                
                 repaint();
             }
         };
@@ -68,7 +66,6 @@ public class PopUp {
                 public void actionPerformed(ActionEvent arg0) {
                     // go to certain index
                     popUp.dispose();
-                    pop = false;
                 }
 
             });
@@ -78,7 +75,6 @@ public class PopUp {
                 public void actionPerformed(ActionEvent arg0) {
                     // go to new index
                     popUp.dispose();
-                    pop = false;
                     player1.setTile(((ChoiceTile) tile).getIndex());
                 }
             });
@@ -95,7 +91,6 @@ public class PopUp {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     popUp.dispose();
-                    pop = false;
 
                 }
             });
