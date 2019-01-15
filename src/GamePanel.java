@@ -26,28 +26,43 @@ class GamePanel extends JFrame {
     Player player1;
     ArrayList<ActionTile> path;
 
+    static double screenX = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    static double screenY =  Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+
     // Constructor - this runs first
     GamePanel() {
         super("My Game");
 
+
+        
         // Set the frame to full screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1280, 720);
+        this.setSize((int)screenX, (int)screenY);
+        //this.setSize(1920,1150);
+        System.out.println(screenX + " " + screenY);
+        double scale = (screenX * screenY) /(1920 * 1150.0) ;
+        System.out.println("scale" + scale);
         
+        double scaleX =screenX / 1920.0;
+        double scaleY = screenY / 1150.0;
+
         // Set up the game panel (where we put our graphics)
         path = new ArrayList<ActionTile>();
 
-        path.add(new MoneyTile(26, 317, null, 0));
-        path.add(new MoneyTile(75, 317, "a", 0));
-        path.add(new MoneyTile(126, 317, "B", 0));
-        path.add(new ChoiceTile(173, 299, "D", 0));
-        path.add(new MoneyTile(183, 256, "D", 0));
+        path.add(new MoneyTile((int)(scaleX* 90),(int)(scaleY* 444), null, 0));
+        path.add(new MoneyTile((int)(scaleX* 165),(int)(scaleY* 447), "a", 0));
+        path.add(new MoneyTile((int)(scaleX* 232),(int)(scaleY* 449), "a", 0));
+        path.add(new MoneyTile((int)(scaleX* 313),(int)(scaleY* 433), "a", 0));
 
-        map = Toolkit.getDefaultToolkit().getImage("graphics/boardSize.jpg");
+        map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
+        map = map.getScaledInstance((int)screenX,(int)screenY, Image.SCALE_DEFAULT);
         mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
+        
+        mango1 = mango1.getScaledInstance((int)(45*scale),(int)(45*scale), Image.SCALE_DEFAULT);
+        
         popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
-        player1 = new Player("Eric", 5000, 26, 317);
+        player1 = new Player("Eric", 91, 91, 444);
 
         gameAreaPanel = new GameAreaPanel();
         this.add(gameAreaPanel);
@@ -97,7 +112,7 @@ class GamePanel extends JFrame {
            // Thread t = new Thread(new Runnable() {
             	//public void run() {
             	
-             		player1.move(2, path);
+             		player1.move(1, path);
             		
             //	}
          //  });

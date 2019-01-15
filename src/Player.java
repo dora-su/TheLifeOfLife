@@ -74,7 +74,6 @@ public class Player {
                 break;
             }
             
-            System.out.println(this.getTile());
         }
 
         new PopUp(path.get(this.getTile()).getMessage(), path.get(this.getTile()), this);
