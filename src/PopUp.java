@@ -26,7 +26,7 @@ public class PopUp {
         popUp.setUndecorated(true);
         popUp.setResizable(true);
         popUp.setAlwaysOnTop(true);
-        popUp.setLocation(((int)GamePanel.screenX/2) - 200, ((int)GamePanel.screenY/2) - 150);
+        popUp.setLocation((int)(GamePanel.screenX/2) - 200, ((int)(GamePanel.screenY/2) - 150));
         popUp.setSize(400, 250);
         popUp.setVisible(true);
 
