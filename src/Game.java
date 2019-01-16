@@ -27,6 +27,7 @@ class Game extends JFrame {
 	ArrayList<ActionTile> path;
 	static ArrayList<Career> collegeCareers;
 	static ArrayList<Career> normalCareers;
+	static ArrayList<Property> properties;
 
 	static int rotate;
 	static boolean finished = false;
@@ -77,6 +78,15 @@ class Game extends JFrame {
         normalCareers.add(new Career("Police", 1000));
         normalCareers.add(new Career("Dancer", 1000));
         normalCareers.add(new Career("Stripper", 100000000));
+        
+        properties.add(new Property("house1", 500));
+        properties.add(new Property("house1", 500));
+        properties.add(new Property("house1", 500));
+        properties.add(new Property("house1", 500));
+        properties.add(new Property("house1", 500));
+        properties.add(new Property("house1", 500));
+        properties.add(new Property("house1", 500));
+        properties.add(new Property("house1", 500));
 
 
         map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
