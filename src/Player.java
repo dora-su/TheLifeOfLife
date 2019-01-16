@@ -8,6 +8,8 @@ public class Player {
     private int child;
     private int tile;
     private int money;
+    
+    private boolean college;
 
     Player(String name, double balance, int x, int y) {
         this.name = name;
@@ -74,7 +76,7 @@ public class Player {
         	
         	//choose career
         	if(this.getTile() == 36) {
-        		
+        		new CareerPopUp(college,this);
         		
         	}
         	if(path.get(this.getTile()) instanceof PayDayTile){
