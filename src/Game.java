@@ -1,9 +1,5 @@
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-class GamePanel extends JFrame {
+class Game extends JFrame {
 
     // class variables
     JPanel gameAreaPanel;
@@ -50,8 +46,11 @@ class GamePanel extends JFrame {
     double scaleX = screenX / 1920.0;
     double scaleY = screenY / 1150.0;
 
+	private ImageIcon icon;
+
+
     // Constructor - this runs first
-    GamePanel() {
+    Game() {
         super("My Game");
 
         // Set the frame to full screen
@@ -99,6 +98,10 @@ class GamePanel extends JFrame {
 
         this.requestFocusInWindow();
         this.setUndecorated(true);
+
+		//set icon image
+		icon = new ImageIcon("graphics/icon.png");
+		this.setIconImage(icon.getImage());
 
         this.setVisible(true);
 

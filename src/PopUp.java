@@ -7,15 +7,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PopUp {
 
+    private ImageIcon icon;
 
     PopUp(String message, ActionTile tile,Player player1) {
 
@@ -26,8 +22,13 @@ public class PopUp {
         popUp.setUndecorated(true);
         popUp.setResizable(true);
         popUp.setAlwaysOnTop(true);
-        popUp.setLocation((int)(GamePanel.screenX/2) - 200, ((int)(GamePanel.screenY/2) - 150));
+        popUp.setLocation((int)(Game.screenX/2) - 200, ((int)(Game.screenY/2) - 150));
         popUp.setSize(400, 250);
+
+        //set icon image
+        icon = new ImageIcon("graphics/icon.png");
+        popUp.setIconImage(icon.getImage());
+
         popUp.setVisible(true);
 
         JPanel panel = new JPanel() {

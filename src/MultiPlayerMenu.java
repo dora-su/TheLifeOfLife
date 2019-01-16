@@ -1,12 +1,10 @@
 import java.awt.Font;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class MultiPlayerMenu extends JFrame {
+
+	private ImageIcon icon;
 
 	int numPlayers;
 	MultiPlayerMenu() {
@@ -17,7 +15,9 @@ public class MultiPlayerMenu extends JFrame {
 
 		this.requestFocusInWindow();
 
-		this.setVisible(true);
+		//set icon image
+		icon = new ImageIcon("graphics/icon.png");
+		this.setIconImage(icon.getImage());
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -31,6 +31,8 @@ public class MultiPlayerMenu extends JFrame {
 
 		mainPanel.add(title);
 
+
+		this.setVisible(true);
 	}
 	
 }

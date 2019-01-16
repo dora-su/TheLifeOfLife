@@ -8,8 +8,9 @@ public class Lobby extends JFrame {
 
 	private MyKeyListener keyListener;
 	private ImageIcon icon;
+
 	public static void main(String [] args) {
-	new GamePanel();
+	new Game();
 //	new Spinner();
 //		Spinner.getRoll();
 		//new MainMenu();
