@@ -118,7 +118,15 @@ class Game extends JFrame {
         Timer timer = new Timer(1, new SpinnerListener());
         timer.start();
         
-        JButton button = new JButton("Button");
+        JButton button = new JButton("Close");
+        button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();	
+			}
+        	
+        });
 //        button.setAlignmentY(JButton.CENTER_ALIGNMENT);
         button.setVerticalAlignment(JButton.CENTER);
         roll.setVerticalAlignment(JButton.CENTER);
@@ -177,7 +185,7 @@ class Game extends JFrame {
 			// Thread t = new Thread(new Runnable() {
 			// public void run() {
 
-			player1.move(1, path);
+			//player1.move(1, path);
 
 			// }
 			// });
