@@ -79,14 +79,16 @@ public class Player {
         		new CareerPopUp(college,this);
         		
         	}
+        	
         	if(path.get(this.getTile()) instanceof PayDayTile){
-        		money = (int) (money + career.getSalary());
+        		money = (money + career.getSalary());
         	}
 
             if (!(path.get(this.getTile()) instanceof ChoiceTile)) {
                 this.setTile(this.getTile() + 1);
                 
             }
+            
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) { }
@@ -95,6 +97,10 @@ public class Player {
                 break;
             }
             
+        }
+        
+        if((path.get(this.getTile()) instanceof PayDayTile)){
+        	career.setSalary((int)(career.getSalary() * 1.05));
         }
 
         new PopUp(path.get(this.getTile()).getMessage(), path.get(this.getTile()), this);

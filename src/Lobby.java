@@ -14,7 +14,7 @@ public class Lobby extends JFrame {
 //	new Spinner();
 //		Spinner.getRoll();
 		//new MainMenu();
-		//new Lobby();
+		//new Lobby();	`
 		//new Rules();
 	}
 	
@@ -51,7 +51,7 @@ public class Lobby extends JFrame {
 		@Override
 		/**
 		 * check for key presses
-		 * use presses instead of typed to make adding 10000 balls simpler
+		 *
 		 */
 		public void keyPressed(KeyEvent e) {
 			//exit if esc is pressed

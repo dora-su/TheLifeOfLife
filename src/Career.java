@@ -16,7 +16,7 @@ public class Career {
 		this.careerName = careerName;
 	}
 	
-	public double getSalary() {
+	public int getSalary() {
 		return salary;
 	}
 	
