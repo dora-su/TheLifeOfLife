@@ -1,9 +1,9 @@
 public class Career {
 	
 	private String careerName;
-	private double salary;
+	private int salary;
 	
-	Career(String careerName, double salary){
+	Career(String careerName, int salary){
 		this.careerName = careerName;
 		this.salary = salary;
 	}
@@ -20,7 +20,7 @@ public class Career {
 		return salary;
 	}
 	
-	public void setSalary(double salary) {
+	public void setSalary(int salary) {
 		this.salary = salary;
 	}
 	

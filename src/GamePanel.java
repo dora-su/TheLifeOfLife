@@ -31,6 +31,8 @@ class GamePanel extends JFrame {
 	Image map, mango1, popWindow;
 	Player player1;
 	ArrayList<ActionTile> path;
+	ArrayList<Career> collegeCareers;
+	ArrayList<Career> normalCareers;
 
 	static int rotate;
 	static boolean finished = false;
@@ -66,6 +68,18 @@ class GamePanel extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 165), (int) (scaleY * 447), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 232), (int) (scaleY * 449), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 313), (int) (scaleY * 433), "a", 0));
+		
+		
+		collegeCareers = new ArrayList<Career>();
+		collegeCareers.add(new Career("Lawyer", 10000));
+		collegeCareers.add(new Career("Doctor", 10000));
+		collegeCareers.add(new Career("Software Enginner", 1000000));
+		
+		normalCareers = new ArrayList<Career>();
+		normalCareers.add(new Career("Police", 1000));
+		normalCareers.add(new Career("Dancer", 1000));
+		normalCareers.add(new Career("Stripper", 100000000));
+		
 
 		map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
 		map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
@@ -115,6 +129,7 @@ class GamePanel extends JFrame {
 			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
 
 			// draw bottom game menu image
+			g.drawString(Integer.toString(player1.getMoney()), 1745, 1013);
 
 			// spinner
 			BufferedImage image = null;
@@ -232,7 +247,7 @@ class GamePanel extends JFrame {
 				// if not running, start running
 			} else if (roll.getText().equals("Spinning")) {
 				finished = false;
-				cycle = rand.nextInt(1000) + 1000;
+				cycle = rand.nextInt(360) + 2000;
 				running = true;
 				i = 0;
 				delay = 5;
