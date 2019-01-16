@@ -3,15 +3,16 @@ import java.util.ArrayList;
 public class Player {
 
     private String name;
-    private String career;
+    private Career career;
     private ArrayList<Property> property;
     private int child;
     private int tile;
-    private BankAccount bankAccount;
+    private int money;
+    
+    private boolean college;
 
     Player(String name, double balance, int x, int y) {
         this.name = name;
-        bankAccount = new BankAccount(balance);
         tile = 0;
     }
 
@@ -22,14 +23,6 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCareer() {
-        return career;
-    }
-
-    public void setCareer(String career) {
-        this.career = career;
     }
 
     public ArrayList<Property> getProperty() {
@@ -57,10 +50,38 @@ public class Player {
     public void setTile(int tile) {
         this.tile = tile;
     }
+    
+	public int getMoney() {
+		return money;
+	}
+
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+
+	public Career getCareer() {
+		return career;
+	}
+
+
+	public void setCareer(Career career) {
+		this.career = career;
+	}
 
     public void move(int spin, ArrayList<ActionTile> path) {
        
         for (int i = 0; i < spin; i++) {
+        	
+        	//choose career
+        	if(this.getTile() == 36) {
+        		new CareerPopUp(college,this);
+        		
+        	}
+        	if(path.get(this.getTile()) instanceof PayDayTile){
+        		money = (int) (money + career.getSalary());
+        	}
 
             if (!(path.get(this.getTile()) instanceof ChoiceTile)) {
                 this.setTile(this.getTile() + 1);
@@ -79,5 +100,8 @@ public class Player {
         new PopUp(path.get(this.getTile()).getMessage(), path.get(this.getTile()), this);
 
     }
+
+
+
 
 }

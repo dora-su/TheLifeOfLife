@@ -3,15 +3,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class MainMenu extends JFrame {
+
+	private ImageIcon icon;
 
 	MainMenu() {
 		super("Main Menu");
@@ -21,7 +17,9 @@ public class MainMenu extends JFrame {
 
 		this.requestFocusInWindow();
 
-		this.setVisible(true);
+		//set icon image
+		icon = new ImageIcon("graphics/icon.png");
+		this.setIconImage(icon.getImage());
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -49,6 +47,8 @@ public class MainMenu extends JFrame {
 		mainPanel.add(Box.createRigidArea(new Dimension(0, 500)));
 		mainPanel.add(options);
 
+
+		this.setVisible(true);
 	}
 	
 	private class SinglePlayerListener implements ActionListener {
