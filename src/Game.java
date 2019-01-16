@@ -34,7 +34,7 @@ class Game extends JFrame {
 	static Random rand = new Random();
 	static JLabel rollText;
 	static Clock c = new Clock();
-	JButton roll;
+	JButton close, spin;
 
 	Polygon p;
 
@@ -99,9 +99,17 @@ class Game extends JFrame {
         gameAreaPanel.add(p1);
         this.setContentPane(gameAreaPanel);
         
-        roll = new JButton("Spin");
-        p1.add(roll);
-        roll.addActionListener(new RollListener());
+        close = new JButton("Close");
+        p1.add(close);
+        close.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();	
+			}
+        	
+        });
+        
 
         this.requestFocusInWindow();
         this.setUndecorated(true);
@@ -118,20 +126,14 @@ class Game extends JFrame {
         Timer timer = new Timer(1, new SpinnerListener());
         timer.start();
         
-        JButton button = new JButton("Close");
-        button.addActionListener(new ActionListener() {
+        spin = new JButton("Spin");
+        spin.addActionListener(new RollListener());
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();	
-			}
-        	
-        });
 //        button.setAlignmentY(JButton.CENTER_ALIGNMENT);
-        button.setVerticalAlignment(JButton.CENTER);
-        roll.setVerticalAlignment(JButton.CENTER);
+        spin.setVerticalAlignment(JButton.CENTER);
+        close.setVerticalAlignment(JButton.CENTER);
         p1.add(Box.createHorizontalStrut((int)(scaleX * 1750)));
-        p1.add(button);
+        p1.add(spin);
         revalidate();
         this.setVisible(true);
     } // End of Constructor
@@ -256,14 +258,14 @@ class Game extends JFrame {
 					}
 					finished = true;
 					running = false;
-					roll.setText("Spin");
+					spin.setText("Spin");
 				}
 
 				// delay vel each time
 				// so the spinner slows down
 				vel += accel * c.getElapsedTime();
 				// if not running, start running
-			} else if (roll.getText().equals("Spinning")) {
+			} else if (spin.getText().equals("Spinning")) {
 				finished = false;
 				dist = rand.nextInt(360) + 2000;
 				running = true;
@@ -278,7 +280,7 @@ class Game extends JFrame {
 	class RollListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			roll.setText("Spinning");
+			spin.setText("Spinning");
 		}
 	}
 
