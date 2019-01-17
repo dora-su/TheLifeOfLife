@@ -19,41 +19,42 @@ import java.util.Random;
 
 class Game extends JFrame {
 
-    // class variables
-    JPanel gameAreaPanel;
+	// class variables
+	JPanel gameAreaPanel;
 
-    Image map, mango1, popWindow;
-    Player player1;
-    ArrayList<Player> players;
-    ArrayList<ActionTile> path;
-    static ArrayList<Career> collegeCareers;
-    static ArrayList<Career> normalCareers;
+	Image map, mango1, popWindow;
+	Player player1;
+	ArrayList<Player> players;
+	ArrayList<ActionTile> path;
+	static ArrayList<Career> collegeCareers;
+	static ArrayList<Career> normalCareers;
+	static ArrayList<Property> properties;
 
-    static int rotate;
-    static boolean finished = false;
-    static int rollNum = -1;
-    static Random rand = new Random();
-    static JLabel rollText;
-    static Clock c = new Clock();
-    JButton close, spin;
+	static int rotate;
+	static boolean finished = false;
+	static int rollNum = -1;
+	static Random rand = new Random();
+	static JLabel rollText;
+	static Clock c = new Clock();
+	JButton close, spin;
 
-    Polygon p;
+	Polygon p;
 
-    static double screenX = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    static double screenY = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	static double screenX = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	static double screenY = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
-    double scale = (screenX * screenY) / (1920 * 1150.0);
+	double scale = (screenX * screenY) / (1920 * 1150.0);
 
-    double scaleX = screenX / 1920.0;
-    double scaleY = screenY / 1150.0;
+	double scaleX = screenX / 1920.0;
+	double scaleY = screenY / 1150.0;
 
-    private ImageIcon icon;
+	private ImageIcon icon;
 
-    // Constructor - this runs first
-    // Constructor - this runs first
+	// Constructor - this runs first
+	// Constructor - this runs first
     Game() {
         super("My Game");
-
+        
         // Set the frame to full screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize((int) screenX, (int) screenY);
@@ -62,6 +63,7 @@ class Game extends JFrame {
 
         // Set up the game panel (where we put our graphics)
         path = new ArrayList<ActionTile>();
+        properties = new ArrayList<Property>();
 
         path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
         path.add(new MoneyTile((int) (scaleX * 165), (int) (scaleY * 447), "a", 0));
@@ -79,6 +81,15 @@ class Game extends JFrame {
         normalCareers.add(new Career("Dancer", 1000));
         normalCareers.add(new Career("Stripper", 100000000));
 
+		properties.add(new Property("Mansion", 500, new ImageIcon("graphics/homes/mansion.png")));
+        properties.add(new Property("Castle", 500, new ImageIcon("graphics/homes/castle.png")));
+        properties.add(new Property("Condo", 500, new ImageIcon("graphics/homes/condo.png")));
+        properties.add(new Property("Detached", 500,new ImageIcon("graphics/homes/detatched.png")));
+        properties.add(new Property("Farm", 500,new ImageIcon("graphics/homes/farm.png")));
+        properties.add(new Property("Hut", 500,new ImageIcon("graphics/homes/hut.png")));
+        properties.add(new Property("Igloo", 500,new ImageIcon("graphics/homes/igloo.png")));
+        properties.add(new Property("bungalow", 500,new ImageIcon("graphics/homes/bungalow.png")));
+
 
         map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
         map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
@@ -87,34 +98,35 @@ class Game extends JFrame {
         mango1 = mango1.getScaledInstance((int) (45 * scaleX), (int) (45 * scaleY), Image.SCALE_DEFAULT);
 
         popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
-        players = new ArrayList<Player>();
-        player1 = new Player("Eric", 91, 91, 444);
-        players.add(player1);
-        gameAreaPanel = new GameAreaPanel();
-        gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel, BoxLayout.Y_AXIS));
 
+        player1 = new Player("Eric", 91, 91, 444);
+
+        gameAreaPanel = new GameAreaPanel();
+        gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel,BoxLayout.Y_AXIS));
+        
         JPanel p1 = new JPanel();
-        p1.setLayout(new BoxLayout(p1, BoxLayout.X_AXIS));
+        p1.setLayout(new BoxLayout(p1,BoxLayout.X_AXIS));
         p1.setOpaque(false);
-        gameAreaPanel.add(Box.createVerticalStrut((int) (1018 * scaleY)));
+        gameAreaPanel.add(Box.createVerticalStrut((int)(1018*scaleY)));
         gameAreaPanel.add(p1);
         this.setContentPane(gameAreaPanel);
-
+        
         close = new JButton("Close");
         p1.add(close);
         close.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                dispose();
-            }
-
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();	
+			}
+        	
         });
-
+        
 
         this.requestFocusInWindow();
         this.setUndecorated(true);
 
+        
 
         MyMouseListener mouseListener = new MyMouseListener();
         this.addMouseListener(mouseListener);
@@ -125,14 +137,14 @@ class Game extends JFrame {
         p.addPoint((int) (scaleX * 1524), (int) (scaleY * 340));
         Timer timer = new Timer(1, new SpinnerListener());
         timer.start();
-
+        
         spin = new JButton("Spin");
         spin.addActionListener(new RollListener());
 
 //        button.setAlignmentY(JButton.CENTER_ALIGNMENT);
         spin.setVerticalAlignment(JButton.CENTER);
         close.setVerticalAlignment(JButton.CENTER);
-        p1.add(Box.createHorizontalStrut((int) (scaleX * 1750)));
+        p1.add(Box.createHorizontalStrut((int)(scaleX * 1750)));
         p1.add(spin);
         revalidate();
         this.setVisible(true);
@@ -168,98 +180,98 @@ class Game extends JFrame {
         boolean first = true;
         double dist = 75;
 
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g); // required
-            setDoubleBuffered(true);
-            // System.out.println("HI");
-            g.drawImage(map, 0, 0, null);
-            g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g); // required
+			setDoubleBuffered(true);
+			// System.out.println("HI");
+			g.drawImage(map, 0, 0, null);
+			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
 
-            // draw bottom game menu image
-            g.drawString(Integer.toString(player1.getMoney()), 1745, 1013);
+			// draw bottom game menu image
+			g.drawString(Integer.toString(player1.getMoney()), 1745, 1013);
 
-            // spinner
-            BufferedImage image = null;
-            try {
-                image = ImageIO.read(new File("graphics/tempSpinner.png"));
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            AffineTransform at = AffineTransform.getTranslateInstance(scaleX * 1362, scaleY * 323);
-            at.scale(scaleX, scaleY);
-            at.rotate(Math.toRadians(rotate), image.getWidth() / 2, image.getHeight() / 2);
-            ((Graphics2D) g).drawImage(image, at, null);
+			// spinner
+			BufferedImage image = null;
+			try {
+				image = ImageIO.read(new File("graphics/tempSpinner.png"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			AffineTransform at = AffineTransform.getTranslateInstance(scaleX * 1362, scaleY * 323);
+			at.scale(scaleX, scaleY);
+			at.rotate(Math.toRadians(rotate), image.getWidth() / 2, image.getHeight() / 2);
+			((Graphics2D) g).drawImage(image, at, null);
 
-            // adds pointer
-            g.setColor(Color.WHITE);
-            g.fillPolygon(p);
-            try {
-                // Thread.sleep(100);
-            } catch (Exception e) {
-            }
+			// adds pointer
+			g.setColor(Color.WHITE);
+			g.fillPolygon(p);
+			try {
+				// Thread.sleep(100);
+			} catch (Exception e) {
+			}
 
-            repaint();
-        }
-    }
+			repaint();
+		}
+	}
 
-    private class MyMouseListener implements MouseListener {
+	private class MyMouseListener implements MouseListener {
 
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            System.out.println("X: " + e.getX() + " Y: " + e.getY());
-            // Thread t = new Thread(new Runnable() {
-            // public void run() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			System.out.println("X: " + e.getX() + " Y: " + e.getY());
+			// Thread t = new Thread(new Runnable() {
+			// public void run() {
 
-            //player1.move(1, path);
+			//player1.move(1, path);
 
-            // }
-            // });
-            // t.start();
+			// }
+			// });
+			// t.start();
 
-        }
+		}
 
-        @Override
-        public void mousePressed(MouseEvent e) {
-            // TODO Auto-generated method stub
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
 
-        }
+		}
 
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            // TODO Auto-generated method stub
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
 
-        }
+		}
 
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            // TODO Auto-generated method stub
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
 
-        }
+		}
 
-        @Override
-        public void mouseExited(MouseEvent e) {
-            // TODO Auto-generated method stub
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
 
-        }
+		}
 
-    }
+	}
 
-    private class SpinnerListener implements ActionListener {
+	private class SpinnerListener implements ActionListener {
 
-        boolean running = false;
-        int j;
-        double dist, i = 0, vel, accel;
+		boolean running = false;
+		int j;
+		double dist, i = 0, vel, accel;
 
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            // if currently spinning
-            if (running) {
-                c.update();
-                // checks if dist is over
-                if (vel > 0) {
-                    double deltad = vel * c.getElapsedTime();
-                    rotate -= deltad;
-                    i += deltad;
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// if currently spinning
+			if (running) {
+				c.update();
+				// checks if dist is over
+				if (vel > 0) {
+					double deltad = vel * c.getElapsedTime();
+					rotate -= deltad;
+					i += deltad;
 
                     // end dist
                 } else {
@@ -275,37 +287,37 @@ class Game extends JFrame {
 //                            player1.move(j + 1, path);
                             player1.setDestination(player1.getTile() + 1 + 1);
 
-                            //								}
-                            //							});
-                            //							t.start();
-                        }
-                    }
-                    finished = true;
-                    running = false;
-                    spin.setText("Spin");
-                }
+							//								}
+							//							});
+							//							t.start();
+						}
+					}
+					finished = true;
+					running = false;
+					spin.setText("Spin");
+				}
 
-                // delay vel each time
-                // so the spinner slows down
-                vel += accel * c.getElapsedTime();
-                // if not running, start running
-            } else if (spin.getText().equals("Spinning")) {
-                finished = false;
-                dist = rand.nextInt(360) + 2000;
-                running = true;
-                i = 0;
-                vel = dist / 2.0;
-                accel = -dist / 8.0;
-            }
-        }
+				// delay vel each time
+				// so the spinner slows down
+				vel += accel * c.getElapsedTime();
+				// if not running, start running
+			} else if (spin.getText().equals("Spinning")) {
+				finished = false;
+				dist = rand.nextInt(360) + 2000;
+				running = true;
+				i = 0;
+				vel = dist / 2.0;
+				accel = -dist / 8.0;
+			}
+		}
 
-    }
+	}
 
-    class RollListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            spin.setText("Spinning");
-        }
-    }
+	class RollListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			spin.setText("Spinning");
+		}
+	}
 
 }
