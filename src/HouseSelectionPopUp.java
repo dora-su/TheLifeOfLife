@@ -16,11 +16,11 @@ public class HouseSelectionPopUp extends JFrame {
 	// }
 
 	HouseSelectionPopUp(Player player) {
-		this.setSize(1000, 800);
+		this.setSize((int)(Game.scaleX * 1000), (int)(Game.scaleY*  800));
 		this.setResizable(false);
 		this.setUndecorated(true);
 		// 250, 400
-		this.setLocation((int) (Game.screenX / 2) - 500, ((int) (Game.screenY / 2) - 400));
+		this.setLocation((int) (Game.screenX / 2) - ((int)(Game.scaleX * 1000) / 2), ((int) (Game.screenY / 2) - ((int)(Game.scaleY * 800)/2)));
 		this.setFocusable(true);
 		JPanel panel = new JPanel();
 
@@ -41,17 +41,21 @@ public class HouseSelectionPopUp extends JFrame {
 					// setImage to bought
 
 					String[] options = new String[] { "Confirm", "Back" };
-					int confirm = JOptionPane.showOptionDialog(null, "Are you sure you want to purchase " + p.getName() + " for #" + p.getValue(), "CONFIRM YOUR PURCHASE", JOptionPane.DEFAULT_OPTION,
-							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+					int confirm = JOptionPane.showOptionDialog(null,
+							"Are you sure you want to purchase " + p.getName() + " for $" + p.getValue(),
+							"CONFIRM YOUR PURCHASE", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+							options, options[0]);
 
+					if(confirm != 0){
+						return;
+					}
 					
+					
+					player.addProperty(p);
+					player.setMoney(player.getMoney() - p.getValue());
 					button.removeActionListener(this);
 					button.setIcon((new ImageIcon("graphics/" + p.getName() + "Sold")));
 
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-					}
 					dispose();
 				}
 

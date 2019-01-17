@@ -44,8 +44,8 @@ class Game extends JFrame {
 
 	double scale = (screenX * screenY) / (1920 * 1150.0);
 
-	double scaleX = screenX / 1920.0;
-	double scaleY = screenY / 1150.0;
+	static double scaleX = screenX / 1920.0;
+	static double scaleY = screenY / 1150.0;
 
 	private ImageIcon icon;
 
@@ -80,9 +80,18 @@ class Game extends JFrame {
         normalCareers.add(new Career("Dancer", 1000));
         normalCareers.add(new Career("Stripper", 100000000));
         
-		properties.add(new Property("Mansion", 500, new ImageIcon("graphics/homes/mansion.png")));
-        properties.add(new Property("Castle", 500, new ImageIcon("graphics/homes/castle.png")));
-        properties.add(new Property("Condo", 500, new ImageIcon("graphics/homes/condo.png")));
+        ImageIcon mannsion = new ImageIcon("graphics/homes/mansion.png");
+        ImageIcon castle = new ImageIcon("graphics/homes/castle.png");
+        ImageIcon condo = new ImageIcon("graphics/homes/condo.png");
+        ImageIcon detached = new ImageIcon("graphics/homes/detatched.png");
+        ImageIcon hut = new ImageIcon("graphics/homes/hut.png");
+        ImageIcon igloo = new ImageIcon("graphics/homes/igloo.png");
+        ImageIcon bungalow = new ImageIcon("graphics/homes/bungalow.png");
+        ImageIcon farm = new ImageIcon("graphics/homes/farm.png");
+        	
+		properties.add(new Property("Mansion", 500, ));
+        properties.add(new Property("Castle", 500, )));
+        properties.add(new Property("Condo", 500, ));
         properties.add(new Property("Detached", 500,new ImageIcon("graphics/homes/detatched.png")));
         properties.add(new Property("Farm", 500,new ImageIcon("graphics/homes/farm.png")));
         properties.add(new Property("Hut", 500,new ImageIcon("graphics/homes/hut.png")));
