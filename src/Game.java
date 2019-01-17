@@ -161,7 +161,7 @@ class Game extends JFrame {
                 loop();
             }
         });
-        t.start();
+       // t.start();
     } // End of Constructor
 
     private void loop() {
@@ -286,8 +286,8 @@ class Game extends JFrame {
                             //							Thread t = new Thread(new Runnable() {
                             //								public void run() {
                             //player1.move(j + 1, path);
-//                            player1.move(3, path);
-                            player1.setDestination(player1.getTile() + 2);
+                           player1.move(3, path);
+                            //player1.(player1.getTile() + 2);
                             //								}
                             //							});
                             //							t.start();
