@@ -84,7 +84,7 @@ class Game extends JFrame {
         ImageIcon mannsion = new ImageIcon("graphics/homes/mansion.png");
         ImageIcon castle = new ImageIcon("graphics/homes/castle.png");
         ImageIcon condo = new ImageIcon("graphics/homes/condo.png");
-        ImageIcon detached = new ImageIcon("graphics/homes/detatched.png");
+        ImageIcon detached = new ImageIcon("graphics/homes/detached.png");
         ImageIcon hut = new ImageIcon("graphics/homes/hut.png");
         ImageIcon igloo = new ImageIcon("graphics/homes/igloo.png");
         ImageIcon bungalow = new ImageIcon("graphics/homes/bungalow.png");
