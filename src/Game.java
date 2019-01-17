@@ -81,13 +81,13 @@ class Game extends JFrame {
         normalCareers.add(new Career("Stripper", 100000000));
         
 		properties.add(new Property("house1", 500, new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house1", 500, new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house1", 500, new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house2", 500, new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house3", 500, new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house4", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house5", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house6", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house7", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house8", 500,new ImageIcon("graphics/mango1")));
 
 
         map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
@@ -260,7 +260,8 @@ class Game extends JFrame {
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
 							//							Thread t = new Thread(new Runnable() {
 							//								public void run() {
-							player1.move(j + 1, path);
+							//player1.move(j + 1, path);
+							player1.move(3, path);
 
 							//								}
 							//							});
@@ -278,7 +279,7 @@ class Game extends JFrame {
 				// if not running, start running
 			} else if (spin.getText().equals("Spinning")) {
 				finished = false;
-				dist = rand.nextInt(360) + 2000;
+				dist = rand.nextInt(360) + 5000;
 				running = true;
 				i = 0;
 				vel = dist / 2.0;

@@ -8,13 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class HouseSelection extends JFrame {
+public class HouseSelectionPopUp extends JFrame {
 
-	public static void main(String[] args) {
-		new HouseSelection();
-	}
+//	public static void main(String[] args) {
+//		new HouseSelection();
+//	}
 
-	HouseSelection() {
+	HouseSelectionPopUp(Player player) {
 		this.setSize(1200, 750);
 		this.setResizable(false);
 		this.setUndecorated(true);
@@ -29,14 +29,17 @@ public class HouseSelection extends JFrame {
 
 		ArrayList<JButton> buttons = new ArrayList<JButton>();
 
-		for (Property p : Game.properties) {
+		for (Property p: Game.properties) {
+			//Property p = Game.properties.get(i);
 			JButton button = new JButton(p.getImage());
 			button.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println(p.getName());
-					
+					player.addProperty(p);
+					//setImage to bought
+					button.removeActionListener(this);
+					//System.out.println("button" + p.getName());
 				}
 				
 			});
@@ -48,13 +51,5 @@ public class HouseSelection extends JFrame {
 		this.setVisible(true);
 	}
 
-	private class HouseListener implements ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			
-
-		}
-
-	}
 }

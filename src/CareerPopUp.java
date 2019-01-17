@@ -7,6 +7,10 @@ import javax.swing.JLabel;
 
 public class CareerPopUp extends JFrame {
 
+	public static void main(String [] args) {
+		new CareerPopUp(true, new Player("jason",200,1,1));
+	}
+	
 	ArrayList<Career> careers;
 	CareerPopUp(boolean university, Player player) {
 
@@ -27,17 +31,22 @@ public class CareerPopUp extends JFrame {
 
 		this.add(image);
 
+		careers = new ArrayList<Career>();
+		careers.add(new Career("Police", 1000));
+		careers.add(new Career("Dancer", 1000));
+		careers.add(new Career("Stripper", 100000000));
+		
+//		
+//		if(university) {
+//			 careers = Game.collegeCareers;
+//		}else {
+//			 careers = Game.normalCareers;
+//		}
+		
 		this.setVisible(true);
 		
-		if(university) {
-			 careers = Game.collegeCareers;
-		}else {
-			 careers = Game.normalCareers;
-		}
-		
-
 		Random rand = new Random();
-		int index = rand.nextInt(careers.size());
+		int index = rand.nextInt(careers.size() + 1);
 		int cycle = rand.nextInt(5) + 1;
 
 		for (int j = 0; j < cycle; j++) {
@@ -47,7 +56,7 @@ public class CareerPopUp extends JFrame {
 				} catch (InterruptedException e) {
 				}
 				image.setIcon(images.get(i));
-
+				//System.out.println("CHANGE");
 			}
 		}
 		
@@ -58,13 +67,16 @@ public class CareerPopUp extends JFrame {
 			image.setIcon(images.get(i));
 		}
 		
-		player.setCareer(careers.get(index));
-		careers.remove(index);
-		
+//		player.setCareer(careers.get(index));
+//		careers.remove(index);
+//		
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {}
-		dispose();
+		
+		//dispose();
+		
+		
 
 	}
 
