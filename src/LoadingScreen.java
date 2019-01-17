@@ -16,12 +16,12 @@ public class LoadingScreen extends JFrame {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new LoadingScreen(100);
+		new LoadingScreen(5000);
 	}
 	
 	LoadingScreen(int time) {
 		setSize(500,300);
-		this.setLocation((int)(GamePanel.screenX/2) - 250, ((int)(GamePanel.screenY/2) - 150));
+		this.setLocation((int)(Game.screenX/2) - 250, ((int)(Game.screenY/2) - 150));
 		model = new DefaultBoundedRangeModel(0,time,0,time);
 		loadingBar = new JProgressBar(model);
 		add(loadingBar);

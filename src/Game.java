@@ -62,6 +62,7 @@ class Game extends JFrame {
 
         // Set up the game panel (where we put our graphics)
         path = new ArrayList<ActionTile>();
+        properties = new ArrayList<Property>();
 
         path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
         path.add(new MoneyTile((int) (scaleX * 165), (int) (scaleY * 447), "a", 0));
@@ -79,14 +80,14 @@ class Game extends JFrame {
         normalCareers.add(new Career("Dancer", 1000));
         normalCareers.add(new Career("Stripper", 100000000));
         
-        properties.add(new Property("house1", 500));
-        properties.add(new Property("house1", 500));
-        properties.add(new Property("house1", 500));
-        properties.add(new Property("house1", 500));
-        properties.add(new Property("house1", 500));
-        properties.add(new Property("house1", 500));
-        properties.add(new Property("house1", 500));
-        properties.add(new Property("house1", 500));
+		properties.add(new Property("house1", 500, new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house1", 500, new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house1", 500, new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
+        properties.add(new Property("house1", 500,new ImageIcon("graphics/mango1")));
 
 
         map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
