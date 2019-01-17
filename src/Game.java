@@ -89,14 +89,14 @@ class Game extends JFrame {
         ImageIcon bungalow = new ImageIcon("graphics/homes/bungalow.png");
         ImageIcon farm = new ImageIcon("graphics/homes/farm.png");
         	
-		properties.add(new Property("Mansion", 500, ));
-        properties.add(new Property("Castle", 500, )));
-        properties.add(new Property("Condo", 500, ));
-        properties.add(new Property("Detached", 500,new ImageIcon("graphics/homes/detatched.png")));
-        properties.add(new Property("Farm", 500,new ImageIcon("graphics/homes/farm.png")));
-        properties.add(new Property("Hut", 500,new ImageIcon("graphics/homes/hut.png")));
-        properties.add(new Property("Igloo", 500,new ImageIcon("graphics/homes/igloo.png")));
-        properties.add(new Property("bungalow", 500,new ImageIcon("graphics/homes/bungalow.png")));
+		properties.add(new Property("Mansion", 500,mannsion ));
+        properties.add(new Property("Castle", 500, castle));
+        properties.add(new Property("Condo", 500,condo ));
+        properties.add(new Property("Detached", 500,detached));
+        properties.add(new Property("Farm", 500,farm));
+        properties.add(new Property("Hut", 500,hut));
+        properties.add(new Property("Igloo", 500,igloo));
+        properties.add(new Property("bungalow", 500,bungalow));
 
 
         map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");

@@ -2,66 +2,73 @@ import java.util.ArrayList;
 
 public class Player {
 
-	private String name;
-	private Career career;
-	private ArrayList<Property> property;
-	private int child;
-	private int tile;
-	private int money;
-	Player player;
+    private String name;
+    private Career career;
+    private ArrayList<Property> property;
+    private int child;
+    private int tile;
+    private int money;
+    private int destination;
+    Player player;
 
-	private boolean college;
+    private boolean college;
 
 	Player(String name, double balance, int x, int y) {
 		this.name = name;
 		tile = 0;
 		property = new ArrayList<Property>();
 		this.player = this;
+		destination = 0;
 	}
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public ArrayList<Property> getProperty() {
-		return property;
-	}
+    public ArrayList<Property> getProperty() {
+        return property;
+    }
 
-	public void addProperty(Property property) {
-		this.property.add(property);
-	}
+    public void addProperty(Property property) {
+        this.property.add(property);
+    }
 
-	public int getChild() {
-		return child;
-	}
+    public int getChild() {
+        return child;
+    }
 
-	public void setChild(int child) {
-		this.child = child;
-	}
+    public void setChild(int child) {
+        this.child = child;
+    }
 
-	public int getTile() {
-		return tile;
-	}
 
-	public void setTile(int tile) {
-		this.tile = tile;
-	}
+    public int getTile() {
+        return tile;
+    }
 
+
+    public void setTile(int tile) {
+        this.tile = tile;
+    }
+    
 	public int getMoney() {
 		return money;
 	}
+
 
 	public void setMoney(int money) {
 		this.money = money;
 	}
 
+
 	public Career getCareer() {
 		return career;
 	}
+
 
 	public void setCareer(Career career) {
 		this.career = career;
@@ -123,4 +130,11 @@ public class Player {
 		}
 	}
 
+    public int getDestination() {
+        return destination;
+    }
+
+    public void setDestination(int destination) {
+        this.destination = destination;
+    }
 }
