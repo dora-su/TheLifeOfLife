@@ -73,7 +73,7 @@ public class Player {
 		for (int i = 0; i < spin; i++) {
 			specialPopup = false;
 			//choose career
-			if (this.getTile() == 2) {
+			if (this.getTile() == 35) {
 				Thread t = new Thread(new Runnable() {
 					public void run() {
 
@@ -87,7 +87,7 @@ public class Player {
 				break;
 			}
 
-			if (this.getTile() == 15) {
+			if (this.getTile() == 2) {
 				System.out.println("HOUSe");
 				new HouseSelectionPopUp(this);
 				specialPopup = true;

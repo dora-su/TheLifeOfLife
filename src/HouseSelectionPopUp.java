@@ -6,21 +6,22 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class HouseSelectionPopUp extends JFrame {
 
-//	public static void main(String[] args) {
-//		new HouseSelection();
-//	}
+	// public static void main(String[] args) {
+	// new HouseSelection();
+	// }
 
 	HouseSelectionPopUp(Player player) {
-		this.setSize(1200, 750);
+		this.setSize(1000, 800);
 		this.setResizable(false);
 		this.setUndecorated(true);
-
-		this.setLocation((int) (Game.screenX / 2) - 600, ((int) (Game.screenY / 2) - 400));
-
+		// 250, 400
+		this.setLocation((int) (Game.screenX / 2) - 500, ((int) (Game.screenY / 2) - 400));
+		this.setFocusable(true);
 		JPanel panel = new JPanel();
 
 		this.add(panel);
@@ -29,19 +30,31 @@ public class HouseSelectionPopUp extends JFrame {
 
 		ArrayList<JButton> buttons = new ArrayList<JButton>();
 
-		for (Property p: Game.properties) {
-			//Property p = Game.properties.get(i);
+		for (Property p : Game.properties) {
+			// Property p = Game.properties.get(i);
 			JButton button = new JButton(p.getImage());
 			button.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					player.addProperty(p);
-					//setImage to bought
+					// setImage to bought
+
+					String[] options = new String[] { "Confirm", "Back" };
+					int confirm = JOptionPane.showOptionDialog(null, "Are you sure you want to purchase " + p.getName() + " for #" + p.getValue(), "CONFIRM YOUR PURCHASE", JOptionPane.DEFAULT_OPTION,
+							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+					
 					button.removeActionListener(this);
-					//System.out.println("button" + p.getName());
+					button.setIcon((new ImageIcon("graphics/" + p.getName() + "Sold")));
+
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+					}
+					dispose();
 				}
-				
+
 			});
 			buttons.add(button);
 			panel.add(button);
@@ -50,6 +63,5 @@ public class HouseSelectionPopUp extends JFrame {
 
 		this.setVisible(true);
 	}
-
 
 }

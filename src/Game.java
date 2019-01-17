@@ -80,14 +80,14 @@ class Game extends JFrame {
         normalCareers.add(new Career("Dancer", 1000));
         normalCareers.add(new Career("Stripper", 100000000));
         
-		properties.add(new Property("house1", 500, new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house2", 500, new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house3", 500, new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house4", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house5", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house6", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house7", 500,new ImageIcon("graphics/mango1")));
-        properties.add(new Property("house8", 500,new ImageIcon("graphics/mango1")));
+		properties.add(new Property("Mansion", 500, new ImageIcon("graphics/homes/mansion.png")));
+        properties.add(new Property("Castle", 500, new ImageIcon("graphics/homes/castle.png")));
+        properties.add(new Property("Condo", 500, new ImageIcon("graphics/homes/condo.png")));
+        properties.add(new Property("Detached", 500,new ImageIcon("graphics/homes/detatched.png")));
+        properties.add(new Property("Farm", 500,new ImageIcon("graphics/homes/farm.png")));
+        properties.add(new Property("Hut", 500,new ImageIcon("graphics/homes/hut.png")));
+        properties.add(new Property("Igloo", 500,new ImageIcon("graphics/homes/igloo.png")));
+        properties.add(new Property("bungalow", 500,new ImageIcon("graphics/homes/bungalow.png")));
 
 
         map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
