@@ -1,7 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.Timer;
 
 public class Player {
@@ -72,23 +71,24 @@ public class Player {
 		add += money;
 		new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				if (Math.abs(add) < 500) {
-					if (add > 0) {
-						add--;
-						player.setMoney(player.getMoney() + 1);
-					} else if (add < 0) {
-						add++;
-						player.setMoney(player.getMoney() - 1);
-					}
-				} else {
-					if (add > 0) {
-						add-=100;
-						player.setMoney(player.getMoney() + 100);
-					} else if (add < 0) {
-						add+=100;
-						player.setMoney(player.getMoney() - 100);
-					}
+				int decrease = 0;
+				if (Math.abs(add) < 250) {
+					decrease = 1;
+				} else if (Math.abs(add) < 500){
+					decrease = 5;
+				} else if (Math.abs(add) < 1000) {
+					decrease = 10;
+				} else if (Math.abs(add) < 10000) {
+					decrease = 100;
+				} else if (Math.abs(add) < 100000) {
+					decrease = 100000;
+				}
+				if (add > 0) {
+					add -= decrease;
+					player.setMoney(player.getMoney() + decrease);
+				} else if (add < 0) {
+					add += decrease;
+					player.setMoney(player.getMoney() - decrease);
 				}
 			}
 		}).start();
