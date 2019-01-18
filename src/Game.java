@@ -30,12 +30,13 @@ class Game extends JFrame {
 	Image map, mango1, popWindow, menuPic;
 	Image spinPic;
 	Player player1;
+	Image careerPlaceHolder;
+	Image housePlaceHolder;
 	ArrayList<Player> players = new ArrayList<Player>();
 	ArrayList<ActionTile> path;
 	static ArrayList<Career> collegeCareers;
 	static ArrayList<Career> normalCareers;
 	static ArrayList<Property> properties;
-
 	static int rotate;
 	static boolean finished = false;
 	static int rollNum = -1;
@@ -43,6 +44,7 @@ class Game extends JFrame {
 	static JLabel rollText;
 	static Clock c = new Clock();
 	JButton close, spin, menu;
+	JButton myCareer, myHouse;
 
 	Polygon p;
 
@@ -60,15 +62,15 @@ class Game extends JFrame {
 	// Constructor - this runs first
 	Game() {
 		super("My Game");
-
 		// Set the frame to full screen
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize((int) screenX, (int) screenY);
+
 		icon = new ImageIcon("graphics/icon.png");
 		this.setIconImage(icon.getImage());
 		System.out.println(screenX + " " + screenY);
 
-		//Declaring fonts 
+		// Declaring fonts
 
 		path = new ArrayList<ActionTile>();
 		properties = new ArrayList<Property>();
@@ -122,7 +124,7 @@ class Game extends JFrame {
 		properties.add(new Property("Igloo", 500, igloo));
 		properties.add(new Property("bungalow", 500, bungalow));
 
-		//resizing the properties
+		// resizing the properties
 		for (int i = 0; i < properties.size(); i++) {
 			Property p = properties.get(i);
 			ImageIcon pic = p.getImage();
@@ -146,6 +148,14 @@ class Game extends JFrame {
 
 		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
+		careerPlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/careers/chef.png");
+		careerPlaceHolder = careerPlaceHolder.getScaledInstance((int) (114 * scaleX), (int) (184 * scaleY),
+				Image.SCALE_DEFAULT);
+
+		housePlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/homes/farm.png");
+		housePlaceHolder = housePlaceHolder.getScaledInstance((int) (114 * scaleX), (int) (184 * scaleY),
+				Image.SCALE_DEFAULT);
+
 		player1 = new Player("Eric", 1200, 91, 444);
 		players.add(player1);
 		gameAreaPanel = new GameAreaPanel();
@@ -154,7 +164,7 @@ class Game extends JFrame {
 		JPanel p1 = new JPanel();
 		p1.setLayout(new BoxLayout(p1, BoxLayout.X_AXIS));
 		p1.setOpaque(false);
-		gameAreaPanel.add(Box.createVerticalStrut((int) (1018 * scaleY)));
+		gameAreaPanel.add(Box.createVerticalStrut((int) (1012 * scaleY)));
 		gameAreaPanel.add(p1);
 		this.setContentPane(gameAreaPanel);
 
@@ -179,7 +189,6 @@ class Game extends JFrame {
 		spin.addActionListener(new RollListener());
 		spin.setVerticalAlignment(JButton.CENTER);
 
-		
 		menu = new JButton(new ImageIcon(menuPic));
 		menu.setContentAreaFilled(false);
 		menu.setFocusPainted(false);
@@ -188,20 +197,135 @@ class Game extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//new Menu()
+				// new Menu()
 
 			}
 
 		});
 		p1.add(menu);
-		
-
-
-
-
 
 		p1.add(spin);
-		p1.add(Box.createHorizontalStrut((int) (scaleX * 1750)));
+		p1.add(Box.createHorizontalStrut((int) (scaleX * 205)));
+
+		myHouse = new JButton(new ImageIcon(housePlaceHolder));
+		myHouse.setContentAreaFilled(false);
+		myHouse.setBorderPainted(false);
+		myHouse.setFocusPainted(false);
+		myHouse.addMouseListener(new MouseListener() {
+			JFrame houseFrame;
+			JFrame frame;
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				frame = new JFrame();
+				frame.setSize((int)screenX, (int)screenY);
+				frame.setUndecorated(true);
+				frame.setResizable(false);
+				frame.setVisible(true);
+				frame.setOpacity(0.5f);
+				houseFrame = new JFrame();
+				houseFrame.setSize(250, 400);
+				houseFrame.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
+				houseFrame.setUndecorated(true);
+				houseFrame.setResizable(false);
+
+				if (player1.getProperty() != null) {
+					JLabel image = new JLabel(new ImageIcon(
+							"graphics/homes/" + player1.getProperty().get(0).getName().toLowerCase() + ".png"));
+					houseFrame.add(image);
+
+					houseFrame.setVisible(true);
+				}
+				houseFrame.setAlwaysOnTop(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				houseFrame.dispose();
+				frame.dispose();
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+
+		p1.add(myHouse);
+		p1.add(Box.createHorizontalStrut((int) (scaleX * 0)));
+
+		myCareer = new JButton(new ImageIcon(careerPlaceHolder));
+		myCareer.setContentAreaFilled(false);
+		myCareer.setBorderPainted(false);
+		myCareer.setFocusPainted(false);
+		myCareer.addMouseListener(new MouseListener() {
+			JFrame careerFrame;
+			JFrame frame;
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				frame = new JFrame();
+				frame.setSize((int)screenX, (int)screenY);
+				frame.setUndecorated(true);
+				frame.setResizable(false);
+				frame.setVisible(true);
+				frame.setOpacity(0.5f);
+				careerFrame = new JFrame();
+				careerFrame.setSize(250, 400);
+				careerFrame.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
+				careerFrame.setUndecorated(true);
+				careerFrame.setResizable(false);
+
+				if (player1.getCareer() != null) {
+					JLabel image = new JLabel(new ImageIcon(
+							"graphics/careers/" + player1.getCareer().getCareerName().toLowerCase() + ".png"));
+					careerFrame.add(image);
+
+					careerFrame.setVisible(true);
+				}
+				careerFrame.setAlwaysOnTop(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				careerFrame.dispose();
+				frame.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+		p1.add(myCareer);
+		p1.add(Box.createHorizontalStrut((int) (scaleX * 1225)));
 
 		close = new JButton("Close");
 		p1.add(close);
@@ -285,7 +409,7 @@ class Game extends JFrame {
 			// Thread t = new Thread(new Runnable() {
 			// public void run() {
 
-			//player1.move(1, path);
+			// player1.move(1, path);
 
 			// }
 			// });
@@ -345,14 +469,14 @@ class Game extends JFrame {
 						}
 						angle = 360 - angle;
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
-							//							Thread t = new Thread(new Runnable() {
-							//								public void run() {
-							//player1.move(j + 1, path);
+							// Thread t = new Thread(new Runnable() {
+							// public void run() {
+							// player1.move(j + 1, path);
 							player1.move(3, path);
-							//player1.(player1.getTile() + 2);
-							//								}
-							//							});
-							//							t.start();
+							// player1.(player1.getTile() + 2);
+							// }
+							// });
+							// t.start();
 						}
 					}
 					finished = true;
