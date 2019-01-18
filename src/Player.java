@@ -141,7 +141,7 @@ public class Player {
 					if ((path.get(player.getTile()) instanceof PayDayTile)) {
 						career.setSalary((int) (career.getSalary() * 1.05));
 					}
-					if (!specialPopup) {
+					if (count == 0 && !specialPopup) {
 						new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
 					}
 				}
