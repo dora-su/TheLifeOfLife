@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -43,10 +44,10 @@ class Game extends JFrame {
 	static double screenX = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	static double screenY = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
-	double scale = (screenX * screenY) / (1920 * 1150.0);
+	double scale = (screenX * screenY) / (1920 * 1200.0);
 
 	static double scaleX = screenX / 1920.0;
-	static double scaleY = screenY / 1150.0;
+	static double scaleY = screenY / 1200.0;
 
 	private ImageIcon icon;
 
@@ -126,7 +127,7 @@ class Game extends JFrame {
 			p.setImage(new ImageIcon(image));
 		}
 
-		map = Toolkit.getDefaultToolkit().getImage("graphics/board.jpg");
+		map = Toolkit.getDefaultToolkit().getImage("graphics/board.png");
 		map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
 		mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
 
@@ -134,7 +135,7 @@ class Game extends JFrame {
 
 		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
-		player1 = new Player("Eric", 91, 91, 444);
+		player1 = new Player("Eric", 1200, 91, 444);
 		players.add(player1);
 		gameAreaPanel = new GameAreaPanel();
 		gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel, BoxLayout.Y_AXIS));
@@ -170,10 +171,10 @@ class Game extends JFrame {
 		Timer timer = new Timer(1, new SpinnerListener());
 		timer.start();
 
-		spin = new JButton("Spin");
+		spin = new JButton("spin");
 		spin.addActionListener(new RollListener());
 
-		//        button.setAlignmentY(JButton.CENTER_ALIGNMENT);
+		//button.setAlignmentY(JButton.CENTER_ALIGNMENT);
 		spin.setVerticalAlignment(JButton.CENTER);
 		close.setVerticalAlignment(JButton.CENTER);
 		p1.add(Box.createHorizontalStrut((int) (scaleX * 1750)));
@@ -214,7 +215,8 @@ class Game extends JFrame {
 			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
 
 			// draw bottom game menu image
-			g.drawString(Integer.toString(player1.getMoney()), 1745, 1013);
+			g.setFont(new Font("Arial",Font.PLAIN, 100));
+			g.drawString(Integer.toString(player1.getMoney()), 995, 1027);
 
 			// spinner
 			BufferedImage image = null;
