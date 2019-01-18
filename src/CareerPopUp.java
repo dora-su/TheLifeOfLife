@@ -1,81 +1,69 @@
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class CareerPopUp extends JFrame {
-
-	public static void main(String [] args) {
-		new CareerPopUp(true, new Player("jason",200,1,1));
-	}
 	
 	ArrayList<Career> careers;
-	CareerPopUp(boolean university, Player player) {
+	CareerPopUp(boolean college, Player player) {
 
 		//Images 
 		this.setSize(250, 400);
-		this.setLocation((int) (Game.screenX / 2) - 150, ((int) (Game.screenY / 2) - 200));
-
-		ArrayList<ImageIcon> images = new ArrayList<ImageIcon>();
-
-		images.add(new ImageIcon("graphics/mango1.png"));
-		images.add(new ImageIcon("graphics/blue_pp.png"));
-		images.add(new ImageIcon("graphics/pink_pp.png"));
-
+		this.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
 		this.setUndecorated(true);
 		this.setResizable(false);
 
-		JLabel image = new JLabel(images.get(0));
-
-		this.add(image);
-
-		careers = new ArrayList<Career>();
-		careers.add(new Career("Police", 1000));
-		careers.add(new Career("Dancer", 1000));
-		careers.add(new Career("Stripper", 100000000));
 		
-//		
-//		if(university) {
-//			 careers = Game.collegeCareers;
-//		}else {
-//			 careers = Game.normalCareers;
-//		}
+		if(college) {
+			 careers = Game.collegeCareers;
+		}else {
+			 careers = Game.normalCareers;
+		}
+		
+		JLabel image = new JLabel(careers.get(1).getImage());
+		
+		this.add(image);
 		
 		this.setVisible(true);
 		
 		Random rand = new Random();
-		int index = rand.nextInt(careers.size() + 1);
-		int cycle = rand.nextInt(5) + 1;
+		int index = rand.nextInt(careers.size());
+		int cycle = rand.nextInt(3) + 1 ;
 
+		System.out.println(index);
 		for (int j = 0; j < cycle; j++) {
 			for (int i = 0; i < careers.size(); i++) {
+				Career c = careers.get(i);
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
 				}
-				image.setIcon(images.get(i));
+				image.setIcon(c.getImage());
 				//System.out.println("CHANGE");
 			}
 		}
 		
-		for(int i = 0; i< index; i++) {
+		for(int i = 0; i<=index; i++) {
+			Career c = careers.get(i);
 			try {
-				Thread.sleep(100 + i * 10);
+				Thread.sleep(100 + i * 100);
 			} catch (InterruptedException e) {}
-			image.setIcon(images.get(i));
+			image.setIcon(c.getImage());
 		}
 		
-//		player.setCareer(careers.get(index));
-//		careers.remove(index);
-//		
+		
+		player.setCareer(careers.get(index));
+		
+		JOptionPane.showMessageDialog(null,"You got the job " + careers.get(index).getCareerName());
 		try {
-			Thread.sleep(200);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {}
+		careers.remove(index);
 		
-		//dispose();
-		
+		dispose();
+	
 		
 
 	}

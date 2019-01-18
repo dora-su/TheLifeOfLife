@@ -27,9 +27,6 @@ public class Lobby extends JFrame {
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		this.setResizable(false);
 		//this.setUndecorated(true);
-		
-
-
 		keyListener = new MyKeyListener();
 		this.addKeyListener(keyListener); //adds the keylistener
 
