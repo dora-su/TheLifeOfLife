@@ -9,8 +9,7 @@ public class Player {
     private int tile;
     private int money;
     private int destination;
-    Player player;
-
+    private Player player;
     private boolean college;
 
 	Player(String name, double balance, int x, int y) {
@@ -63,6 +62,24 @@ public class Player {
 	public void setMoney(int money) {
 		this.money = money;
 	}
+	
+	public void addMoney(int money) {
+		for(int i = 0; i<money; i++) {
+			this.money++;
+		}
+	}
+	
+	public void removeMoney(int money) {
+		for(int i = 0; i<money; i++) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.money--;
+		}
+	}
 
 
 	public Career getCareer() {
@@ -73,14 +90,25 @@ public class Player {
 	public void setCareer(Career career) {
 		this.career = career;
 	}
+	
+	public void setCollege(boolean college) {
+		this.college = college;
+	}
+	
+	public boolean getCollege() {
+		return college;
+	}
 
 	public void move(int spin, ArrayList<ActionTile> path) {
 
 		boolean specialPopup = false;
 		for (int i = 0; i < spin; i++) {
+			
+			this.setTile(this.getTile() + 1);
+			
 			specialPopup = false;
 			//choose career
-			if (this.getTile() == 35) {
+			if (this.getTile() == 1232) {
 				Thread t = new Thread(new Runnable() {
 					public void run() {
 
@@ -95,19 +123,22 @@ public class Player {
 			}
 
 			if (this.getTile() == 2) {
-				System.out.println("HOUSe");
-				new HouseSelectionPopUp(this);
+				
+				Thread t = new Thread(new Runnable() {
+					public void run() {
+
+						new HouseSelectionPopUp(player);
+
+					}
+				});
+				t.start();
+				
 				specialPopup = true;
 				break;
 			}
 
 			if (path.get(this.getTile()) instanceof PayDayTile) {
 				money = (money + career.getSalary());
-			}
-
-			if (!(path.get(this.getTile()) instanceof ChoiceTile)) {
-				this.setTile(this.getTile() + 1);
-
 			}
 
 			//			try {

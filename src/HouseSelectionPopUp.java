@@ -52,7 +52,7 @@ public class HouseSelectionPopUp extends JFrame {
 					
 					
 					player.addProperty(p);
-					player.setMoney(player.getMoney() - p.getValue());
+					player.removeMoney(p.getValue());
 					button.removeActionListener(this);
 					button.setIcon((new ImageIcon("graphics/" + p.getName() + "Sold")));
 
