@@ -1,4 +1,6 @@
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,11 +18,12 @@ public class HouseSelectionPopUp extends JFrame {
 	// }
 
 	HouseSelectionPopUp(Player player) {
-		this.setSize((int)(Game.scaleX * 1000), (int)(Game.scaleY*  800));
+		this.setSize((int) (Game.scaleX * 1000), (int) (Game.scaleY * 800));
 		this.setResizable(false);
 		this.setUndecorated(true);
 		// 250, 400
-		this.setLocation((int) (Game.screenX / 2) - ((int)(Game.scaleX * 1000) / 2), ((int) (Game.screenY / 2) - ((int)(Game.scaleY * 800)/2)));
+		this.setLocation((int) (Game.screenX / 2) - ((int) (Game.scaleX * 1000) / 2),
+				((int) (Game.screenY / 2) - ((int) (Game.scaleY * 800) / 2)));
 		this.setFocusable(true);
 		JPanel panel = new JPanel();
 
@@ -46,16 +49,27 @@ public class HouseSelectionPopUp extends JFrame {
 							"CONFIRM YOUR PURCHASE", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
 							options, options[0]);
 
-					if(confirm != 0){
+					if (confirm != 0) {
 						return;
 					}
-					
-					
+
 					player.addProperty(p);
 					player.removeMoney(p.getValue());
 					button.removeActionListener(this);
-					button.setIcon((new ImageIcon("graphics/" + p.getName() + "Sold")));
 
+					
+					Image soldImg = Toolkit.getDefaultToolkit()
+							.getImage("graphics/homes/" + p.getName().toLowerCase() + "SOLD.png");
+					soldImg = soldImg.getScaledInstance((int) (250 * Game.scaleX), (int) (400 * Game.scaleY),
+							java.awt.Image.SCALE_SMOOTH);
+
+					button.setIcon(new ImageIcon(soldImg));
+
+//					try {
+//						Thread.sleep(1000);
+//					} catch (InterruptedException e) {
+//					}
+					
 					dispose();
 				}
 

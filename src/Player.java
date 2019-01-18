@@ -16,9 +16,6 @@ public class Player {
 	private boolean college;
 	private int add;
 	private int count;
-	private int x, y;
-	private double xDiff, yDiff;
-	private int step;
 
 	Player(String name, double balance, int x, int y) {
 		this.name = name;
@@ -28,17 +25,6 @@ public class Player {
 		destination = 0;
 		add = 0;
 		count = 0;
-		this.x = x;
-		this.y = y;
-		step = 0;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
 	}
 
 	public String getName() {
@@ -88,7 +74,7 @@ public class Player {
 				int decrease = 0;
 				if (Math.abs(add) < 250) {
 					decrease = 1;
-				} else if (Math.abs(add) < 500) {
+				} else if (Math.abs(add) < 500){
 					decrease = 5;
 				} else if (Math.abs(add) < 1000) {
 					decrease = 10;
@@ -99,7 +85,7 @@ public class Player {
 				}
 				if (add > 0) {
 					add -= decrease;
-					player.setMoney(player.getMoney() + decrease);
+					player.setMoney(player.money + decrease);
 				} else if (add < 0) {
 					add += decrease;
 					player.setMoney(player.getMoney() - decrease);
@@ -130,22 +116,14 @@ public class Player {
 
 	public void move(int spin, ArrayList<ActionTile> path) {
 		count += spin;
-		step = 5;
-		xDiff = -(double) (x - path.get(player.getTile() + 1).getX()) / 5;
-		yDiff = -(double) (y - path.get(player.getTile() + 1).getY()) / 5;
 		new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (count > 0) {
-					//if (step >= 0) {
-					//step--;
-					//x = (int)(xDiff + x);
-					//y = (int)(yDiff + y);
-					//if  {
-					//step = 5;
 					boolean specialPopup = false;
 					count--;
 					player.setTile(player.getTile() + 1);
-					if (player.getTile() == 1232) {
+
+					if (player.getTile() == 122) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
 								new CareerPopUp(college, player);
@@ -163,9 +141,7 @@ public class Player {
 						t.start();
 						specialPopup = true;
 						count = 0;
-					} else if (path.get(player.getTile()) instanceof PayDayTile)
-
-					{
+					} else if (path.get(player.getTile()) instanceof PayDayTile) {
 						player.addMoney(career.getSalary());
 					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
 						count = 0;
