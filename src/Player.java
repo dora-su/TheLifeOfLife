@@ -16,12 +16,15 @@ public class Player {
     private Player player;
     private boolean college;
     private int add;
+    private int count;
 	Player(String name, double balance, int x, int y) {
 		this.name = name;
 		tile = 0;
 		property = new ArrayList<Property>();
 		this.player = this;
 		destination = 0;
+		add = 0;
+		count = 0;
 	}
 
     public String getName() {
@@ -105,65 +108,45 @@ public class Player {
 	}
 
 	public void move(int spin, ArrayList<ActionTile> path) {
-
-		boolean specialPopup = false;
-		for (int i = 0; i < spin; i++) {
-			
-			this.setTile(this.getTile() + 1);
-			
-			specialPopup = false;
-			//choose career
-			if (this.getTile() == 1232) {
-				Thread t = new Thread(new Runnable() {
-					public void run() {
-
-						new CareerPopUp(college, player);
-
+		count += spin;
+		new Timer(1, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (count > 0) {
+					boolean specialPopup = false;
+					count--;
+					player.setTile(player.getTile() + 1);
+					if (player.getTile() == 1232) {
+						Thread t = new Thread(new Runnable() {
+							public void run() {
+								new CareerPopUp(college, player);
+							}
+						});
+						t.start();
+						specialPopup = true;
+						count = 0;
+					} else if (player.getTile() == 2) {
+						Thread t = new Thread(new Runnable() {
+							public void run() {
+								new HouseSelectionPopUp(player);
+							}
+						});
+						t.start();
+						specialPopup = true;
+						count = 0;
+					} else if (path.get(player.getTile()) instanceof PayDayTile) {
+						player.addMoney(career.getSalary());
+					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
+						count = 0;
 					}
-				});
-				t.start();
-
-				specialPopup = true;
-				break;
-			}
-
-			if (this.getTile() == 2) {
-				
-				Thread t = new Thread(new Runnable() {
-					public void run() {
-
-						new HouseSelectionPopUp(player);
-
+					if ((path.get(player.getTile()) instanceof PayDayTile)) {
+						career.setSalary((int) (career.getSalary() * 1.05));
 					}
-				});
-				t.start();
-				
-				specialPopup = true;
-				break;
+					if (!specialPopup) {
+						new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
+					}
+				}
 			}
-
-			if (path.get(this.getTile()) instanceof PayDayTile) {
-				money = (money + career.getSalary());
-			}
-
-			//			try {
-			//				Thread.sleep(500);
-			//			} catch (InterruptedException e) {
-			//			}
-
-			if (path.get(this.getTile()) instanceof ChoiceTile) {
-				break;
-			}
-
-		}
-
-		if ((path.get(this.getTile()) instanceof PayDayTile)) {
-			career.setSalary((int) (career.getSalary() * 1.05));
-		}
-
-		if (!specialPopup) {
-			new PopUp(path.get(this.getTile()).getMessage(), path.get(this.getTile()), this);
-		}
+		}).start();			
 	}
 
     public int getDestination() {

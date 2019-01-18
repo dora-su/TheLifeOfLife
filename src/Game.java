@@ -180,24 +180,8 @@ class Game extends JFrame {
 		p1.add(spin);
 		revalidate();
 		this.setVisible(true);
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				loop();
-			}
-		});
-		// t.start();
 	} // End of Constructor
 
-	private void loop() {
-		while (true) {
-			for (Player p : players) {
-				if (p.getTile() != p.getDestination()) {
-					p.move(p.getDestination() - p.getTile(), path);
-				}
-			}
-		}
-	}
 
 	/**
 	 * --------- INNER CLASSES -------------
@@ -232,7 +216,7 @@ class Game extends JFrame {
 			g.setColor(Color.WHITE);
 			g.fillPolygon(p);
 			try {
-				// Thread.sleep(100);
+				 Thread.sleep(100);
 			} catch (Exception e) {
 			}
 
@@ -311,7 +295,8 @@ class Game extends JFrame {
 							//							Thread t = new Thread(new Runnable() {
 							//								public void run() {
 							//player1.move(j + 1, path);
-							player1.move(3, path);
+							player1.move(j + 1, path);
+							System.out.println(j + 1);
 							//player1.(player1.getTile() + 2);
 							//								}
 							//							});
