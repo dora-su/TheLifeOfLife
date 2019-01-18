@@ -2,8 +2,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Toolkit;
@@ -21,9 +23,12 @@ import java.util.Random;
 class Game extends JFrame {
 
 	// class variables
+	boolean spinText;
+
 	JPanel gameAreaPanel;
 
-	Image map, mango1, popWindow;
+	Image map, mango1, popWindow, menuPic;
+	Image spinPic;
 	Player player1;
 	ArrayList<Player> players = new ArrayList<Player>();
 	ArrayList<ActionTile> path;
@@ -37,7 +42,7 @@ class Game extends JFrame {
 	static Random rand = new Random();
 	static JLabel rollText;
 	static Clock c = new Clock();
-	JButton close, spin;
+	JButton close, spin, menu;
 
 	Polygon p;
 
@@ -63,7 +68,8 @@ class Game extends JFrame {
 		this.setIconImage(icon.getImage());
 		System.out.println(screenX + " " + screenY);
 
-		// Set up the game panel (where we put our graphics)
+		//Declaring fonts 
+
 		path = new ArrayList<ActionTile>();
 		properties = new ArrayList<Property>();
 
@@ -106,7 +112,7 @@ class Game extends JFrame {
 		ImageIcon igloo = new ImageIcon("graphics/homes/igloo.png");
 		ImageIcon bungalow = new ImageIcon("graphics/homes/bungalow.png");
 		ImageIcon farm = new ImageIcon("graphics/homes/farm.png");
-		
+
 		properties.add(new Property("Mansion", 500, mansion));
 		properties.add(new Property("Castle", 500, castle));
 		properties.add(new Property("Condo", 500, condo));
@@ -115,27 +121,32 @@ class Game extends JFrame {
 		properties.add(new Property("Hut", 500, hut));
 		properties.add(new Property("Igloo", 500, igloo));
 		properties.add(new Property("bungalow", 500, bungalow));
-		
+
 		//resizing the properties
-		for(int i = 0; i<properties.size(); i++) {
+		for (int i = 0; i < properties.size(); i++) {
 			Property p = properties.get(i);
 			ImageIcon pic = p.getImage();
 			String name = p.getName().toLowerCase();
-			
-			Image image = pic.getImage(); 
-			image = image.getScaledInstance((int)(250 * scaleX), (int)(400 * scaleY), java.awt.Image.SCALE_SMOOTH); 
+
+			Image image = pic.getImage();
+			image = image.getScaledInstance((int) (250 * scaleX), (int) (400 * scaleY), java.awt.Image.SCALE_SMOOTH);
 			p.setImage(new ImageIcon(image));
 		}
 
 		map = Toolkit.getDefaultToolkit().getImage("graphics/board.png");
 		map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
 		mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
-
 		mango1 = mango1.getScaledInstance((int) (45 * scaleX), (int) (45 * scaleY), Image.SCALE_DEFAULT);
+
+		spinPic = Toolkit.getDefaultToolkit().getImage("graphics/spin_button.png");
+		spinPic = spinPic.getScaledInstance((int) (149 * scaleX), (int) (149 * scaleY), Image.SCALE_DEFAULT);
+
+		menuPic = Toolkit.getDefaultToolkit().getImage("graphics/menu.png");
+		menuPic = menuPic.getScaledInstance((int) (154 * scaleX), (int) (130 * scaleY), Image.SCALE_DEFAULT);
 
 		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
-		player1 = new Player("Eric", 1200, path.get(0).getX(), path.get(0).getY());
+		player1 = new Player("Eric", 1200, 91, 444);
 		players.add(player1);
 		gameAreaPanel = new GameAreaPanel();
 		gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel, BoxLayout.Y_AXIS));
@@ -146,17 +157,6 @@ class Game extends JFrame {
 		gameAreaPanel.add(Box.createVerticalStrut((int) (1018 * scaleY)));
 		gameAreaPanel.add(p1);
 		this.setContentPane(gameAreaPanel);
-
-		close = new JButton("Close");
-		p1.add(close);
-		close.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-
-		});
 
 		this.requestFocusInWindow();
 		this.setUndecorated(true);
@@ -171,14 +171,49 @@ class Game extends JFrame {
 		Timer timer = new Timer(1, new SpinnerListener());
 		timer.start();
 
-		spin = new JButton("spin");
+		spin = new JButton(new ImageIcon(spinPic));
+		spin.setBackground(null);
+		spin.setContentAreaFilled(false);
+		spin.setBorderPainted(false);
+		spin.setFocusPainted(false);
 		spin.addActionListener(new RollListener());
-
-		//button.setAlignmentY(JButton.CENTER_ALIGNMENT);
 		spin.setVerticalAlignment(JButton.CENTER);
-		close.setVerticalAlignment(JButton.CENTER);
-		p1.add(Box.createHorizontalStrut((int) (scaleX * 1750)));
+
+		
+		menu = new JButton(new ImageIcon(menuPic));
+		menu.setContentAreaFilled(false);
+		menu.setFocusPainted(false);
+		menu.setBorderPainted(false);
+		menu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//new Menu()
+
+			}
+
+		});
+		p1.add(menu);
+		
+
+
+
+
+
 		p1.add(spin);
+		p1.add(Box.createHorizontalStrut((int) (scaleX * 1750)));
+
+		close = new JButton("Close");
+		p1.add(close);
+		close.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+
+		});
+		close.setVerticalAlignment(JButton.CENTER);
 		revalidate();
 		this.setVisible(true);
 		Thread t = new Thread(new Runnable() {
@@ -212,10 +247,10 @@ class Game extends JFrame {
 			setDoubleBuffered(true);
 			// System.out.println("HI");
 			g.drawImage(map, 0, 0, null);
-			g.drawImage(mango1, player1.getX() - 17, player1.getY() - 17, null);
+			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
 
 			// draw bottom game menu image
-			g.setFont(new Font("Arial",Font.PLAIN, 100));
+			g.setFont(new Font("langdon", Font.PLAIN, 100));
 			g.drawString(Integer.toString(player1.getMoney()), 995, 1027);
 
 			// spinner
@@ -322,14 +357,15 @@ class Game extends JFrame {
 					}
 					finished = true;
 					running = false;
-					spin.setText("Spin");
+
+					spinText = false;
 				}
 
 				// delay vel each time
 				// so the spinner slows down
 				vel += accel * c.getElapsedTime();
 				// if not running, start running
-			} else if (spin.getText().equals("Spinning")) {
+			} else if (spinText) {
 				finished = false;
 				dist = rand.nextInt(360) + 5000;
 				running = true;
@@ -344,7 +380,7 @@ class Game extends JFrame {
 	class RollListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			spin.setText("Spinning");
+			spinText = true;
 		}
 	}
 
