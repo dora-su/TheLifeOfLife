@@ -73,7 +73,7 @@ public class Player {
 		new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (money < 500) {
+				if (Math.abs(add) < 500) {
 					if (add > 0) {
 						add--;
 						player.setMoney(player.getMoney() + 1);
@@ -83,11 +83,11 @@ public class Player {
 					}
 				} else {
 					if (add > 0) {
-						add--;
-						player.setMoney(player.getMoney() + 1);
+						add-=100;
+						player.setMoney(player.getMoney() + 100);
 					} else if (add < 0) {
-						add++;
-						player.setMoney(player.getMoney() - 1);
+						add+=100;
+						player.setMoney(player.getMoney() - 100);
 					}
 				}
 			}
