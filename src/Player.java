@@ -1,4 +1,8 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.Timer;
 
 public class Player {
 
@@ -11,7 +15,7 @@ public class Player {
     private int destination;
     private Player player;
     private boolean college;
-
+    private int add;
 	Player(String name, double balance, int x, int y) {
 		this.name = name;
 		tile = 0;
@@ -64,21 +68,22 @@ public class Player {
 	}
 	
 	public void addMoney(int money) {
-		for(int i = 0; i<money; i++) {
-			this.money++;
-		}
+		add += money;
+		new Timer(1, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (add > 0) {
+					add--;
+					player.setMoney(player.getMoney() + 1);
+				} else if (add < 0) {
+					add++;
+					player.setMoney(player.getMoney() - 1);
+				}
+			}
+		}).start();
 	}
 	
 	public void removeMoney(int money) {
-		for(int i = 0; i<money; i++) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			this.money--;
-		}
+		addMoney(-money);
 	}
 
 
