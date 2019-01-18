@@ -109,7 +109,7 @@ public class Player {
 
 	public void move(int spin, ArrayList<ActionTile> path) {
 		count += spin;
-		new Timer(1, new ActionListener() {
+		new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (count > 0) {
 					boolean specialPopup = false;
