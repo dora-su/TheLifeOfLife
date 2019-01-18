@@ -135,7 +135,7 @@ class Game extends JFrame {
 
 		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
-		player1 = new Player("Eric", 1200, 91, 444);
+		player1 = new Player("Eric", 1200, path.get(0).getX(), path.get(0).getY());
 		players.add(player1);
 		gameAreaPanel = new GameAreaPanel();
 		gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel, BoxLayout.Y_AXIS));
@@ -212,7 +212,7 @@ class Game extends JFrame {
 			setDoubleBuffered(true);
 			// System.out.println("HI");
 			g.drawImage(map, 0, 0, null);
-			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
+			g.drawImage(mango1, player1.getX() - 17, player1.getY() - 17, null);
 
 			// draw bottom game menu image
 			g.setFont(new Font("Arial",Font.PLAIN, 100));
