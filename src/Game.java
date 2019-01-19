@@ -102,9 +102,7 @@ class Game extends JFrame {
 		path.add(new PayDayTile((int) (scaleX * 490), (int) (scaleY * 350)));
 
 		path.add(new MoneyTile((int) (scaleX * 513), (int) (scaleY * 428), "a", 0));
-		
-
-		
+			
 		path.add(new MoneyTile((int) (scaleX * 164), (int) (scaleY * 516), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 166), (int) (scaleY * 576), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 171), (int) (scaleY * 642), "a", 0));
@@ -423,6 +421,7 @@ class Game extends JFrame {
 
 		this.setVisible(true);
 
+		player1.move(1, path);
 	} // End of Constructor
 
 	/**
