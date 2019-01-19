@@ -69,6 +69,7 @@ public class Player {
 
 	public void addMoney(int money) {
 		add += money;
+		//add money by different increments based on the amount that needs to be added or subtracted
 		new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int decrease = 0;
@@ -123,16 +124,18 @@ public class Player {
 					count--;
 					player.setTile(player.getTile() + 1);
 
+					//if land on a certain tile allow the player to choose career
 					if (player.getTile() == 2123) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new CareerPopUp(college, player);
+								new CareerPopUp(true, player);
 							}
 						});
 						t.start();
 						specialPopup = true;
 						count = 0;
-					} else if (player.getTile() == 2) {
+					} else if (player.getTile() == 122) {
+						//if land on this specific tile create house selections choices for user
 						Thread t = new Thread(new Runnable() {
 							public void run() {
 								new HouseSelectionPopUp(player);
@@ -142,17 +145,34 @@ public class Player {
 						specialPopup = true;
 						count = 0;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
+						//if player pass pay day tile add money to their bank balance
 						player.addMoney(career.getSalary());
 					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
+						//if the player lands on a choice tile end their turn immediately
 						count = 0;
 					}
 
+					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.getTile()) instanceof PayDayTile)) {
 						career.setSalary((int) (career.getSalary() * 1.05));
 					}
+					
+					if(count == 0 && player.getTile() == 2) {
+						Thread t = new Thread(new Runnable() {
+							public void run() {
+								new CareerPopUp(true, player);
+							}
+						});
+						t.start();
+						specialPopup = true;
+					}
+					
+					//create a pop up with instructions if no special pop ups have been made already
 					if (count == 0 && !specialPopup) {
 						new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
 					}
+					
+
 				}
 			}
 		}).start();

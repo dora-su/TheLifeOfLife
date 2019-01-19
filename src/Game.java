@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -30,9 +31,8 @@ class Game extends JFrame {
 	Player player1;
 	ImageIcon icon;
 
-
 	ArrayList<Player> players = new ArrayList<Player>();
-	ArrayList<ActionTile> path;
+	static ArrayList<ActionTile> path;
 	static ArrayList<Career> collegeCareers;
 	static ArrayList<Career> normalCareers;
 	static ArrayList<Property> properties;
@@ -47,8 +47,8 @@ class Game extends JFrame {
 	static Clock c = new Clock();
 	JButton close, spin, menu;
 	static JButton myCareer, myHouse;
-	
-	JFrame careerFrame,houseFrame;
+
+	JFrame careerFrame, houseFrame;
 	static JLabel careerLabel;
 	static JLabel houseLabel;
 
@@ -62,7 +62,6 @@ class Game extends JFrame {
 	static double scaleX = screenX / 1920.0;
 	static double scaleY = screenY / 1200.0;
 
-
 	// Constructor - this runs first
 	Game() {
 		super("My Game");
@@ -75,15 +74,64 @@ class Game extends JFrame {
 		System.out.println(screenX + " " + screenY);
 
 		//declaring initial arraylists
-		
-		
 
 		//adding location and function of every tile to scale
 		path = new ArrayList<ActionTile>();
 		path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
-		path.add(new MoneyTile((int) (scaleX * 165), (int) (scaleY * 447), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 232), (int) (scaleY * 449), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 313), (int) (scaleY * 433), "a", 0));
+		path.add(new ChoiceTile((int) (scaleX * 174), (int) (scaleY * 446), "Would You Like to Go to College", 19));
+		
+		 
+		path.add(new MoneyTile((int) (scaleX * 240), (int) (scaleY * 452), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 322), (int) (scaleY * 371), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 305), (int) (scaleY * 430), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 320), (int) (scaleY * 366)));
+
+		path.add(new MoneyTile((int) (scaleX * 242), (int) (scaleY * 267), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 189), (int) (scaleY * 217), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 144), (int) (scaleY * 170), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 313), (int) (scaleY * 433)));
+
+		path.add(new MoneyTile((int) (scaleX * 187), (int) (scaleY * 73), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 253), (int) (scaleY * 89), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 316), (int) (scaleY * 109), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 388), (int) (scaleY * 126)));
+
+		path.add(new MoneyTile((int) (scaleX * 439), (int) (scaleY * 126), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 458), (int) (scaleY * 232), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 472), (int) (scaleY * 309), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 490), (int) (scaleY * 350)));
+
+		path.add(new MoneyTile((int) (scaleX * 513), (int) (scaleY * 428), "a", 0));
+		
+
+		
+		path.add(new MoneyTile((int) (scaleX * 164), (int) (scaleY * 516), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 166), (int) (scaleY * 576), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 171), (int) (scaleY * 642), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 179), (int) (scaleY * 708), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 185), (int) (scaleY * 775), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 210), (int) (scaleY * 835), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 251), (int) (scaleY * 886), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 313), (int) (scaleY * 920), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 379), (int) (scaleY * 941), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 449), (int) (scaleY * 955), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 514), (int) (scaleY * 940), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 556), (int) (scaleY * 884), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 560), (int) (scaleY * 821), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 565), (int) (scaleY * 752), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 560), (int) (scaleY * 688), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 550), (int) (scaleY * 621), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 548), (int) (scaleY * 563), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 535), (int) (scaleY * 492), "a", 0));
+		path.add(new Tile((int) (scaleX * 499), (int) (scaleY * 423)));
+		
+		
+		
+		
+	
+		
+
+		System.out.println("num Tile " + path.size());
 
 		//creating images for non college careers
 		ImageIcon chef = new ImageIcon("graphics/careers/chef.png");
@@ -149,7 +197,7 @@ class Game extends JFrame {
 		//getting picture of the map and scaling it 
 		map = Toolkit.getDefaultToolkit().getImage("graphics/board.png");
 		map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
-		
+
 		//getting picture of player and scaling it
 		mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
 		mango1 = mango1.getScaledInstance((int) (45 * scaleX), (int) (45 * scaleY), Image.SCALE_DEFAULT);
@@ -166,19 +214,19 @@ class Game extends JFrame {
 		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
 		//getting picture for initial career holder and scaling it
-		careerPlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/careers/chef.png");
+		careerPlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/careers/career.png");
 		careerPlaceHolder = careerPlaceHolder.getScaledInstance((int) (114 * scaleX), (int) (184 * scaleY),
 				Image.SCALE_DEFAULT);
 
 		//getting picture for initial career holder and scaling it
-		housePlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/homes/farm.png");
+		housePlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/homes/home.png");
 		housePlaceHolder = housePlaceHolder.getScaledInstance((int) (114 * scaleX), (int) (184 * scaleY),
 				Image.SCALE_DEFAULT);
 
 		//declaring new players and setting their name and money 
 		player1 = new Player("Eric", 1200);
 		players.add(player1);
-		
+
 		//creating the game area panel
 		gameAreaPanel = new GameAreaPanel();
 		gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel, BoxLayout.Y_AXIS));
@@ -229,7 +277,7 @@ class Game extends JFrame {
 			}
 
 		});
-		
+
 		//adding menu and spin to the bottom panel
 		bottomPanel.add(menu);
 		bottomPanel.add(spin);
@@ -252,6 +300,8 @@ class Game extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				//	frame.setOpacity(0.5f);
+
+				//creating a new frame in the center of the scree
 				houseFrame = new JFrame();
 				houseFrame.setSize(250, 400);
 				houseFrame.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
@@ -259,6 +309,7 @@ class Game extends JFrame {
 				houseFrame.setResizable(false);
 
 				if (player1.getProperty().size() > 0) {
+					//if the player owns a property then enlarge the photo 
 					JLabel image = new JLabel(new ImageIcon(
 							"graphics/homes/" + player1.getProperty().get(0).getName().toLowerCase() + ".png"));
 					houseFrame.add(image);
@@ -270,7 +321,7 @@ class Game extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				System.out.println("exit");
+				//if not hovering over don't show the frame
 				houseFrame.dispose();
 				//frame.dispose();
 
@@ -290,9 +341,11 @@ class Game extends JFrame {
 
 		});
 
+		//adding the my houses to the bottom panel
 		bottomPanel.add(myHouse);
 		bottomPanel.add(Box.createHorizontalStrut((int) (scaleX * 0)));
 
+		//Jbutton in the bottom bar where player's carrer is shown
 		myCareer = new JButton(new ImageIcon(careerPlaceHolder));
 		myCareer.setContentAreaFilled(false);
 		myCareer.setBorderPainted(false);
@@ -315,6 +368,7 @@ class Game extends JFrame {
 				//				frame.setResizable(false);
 				//				frame.setVisible(true);
 				//frame.setOpacity(0.5f);
+				//if the player has been given a career and if the user hovers over it then enlarge the photo
 				careerFrame = new JFrame();
 				careerFrame.setSize(250, 400);
 				careerFrame.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
@@ -350,8 +404,10 @@ class Game extends JFrame {
 			}
 
 		});
+
+		//adding my carrer to the bottom panel
 		bottomPanel.add(myCareer);
-		bottomPanel.add(Box.createHorizontalStrut((int) (scaleX * 1225)));
+		bottomPanel.add(Box.createRigidArea(new Dimension((int) (scaleX * 1000), 0)));
 
 		close = new JButton("Close");
 		bottomPanel.add(close);
@@ -364,28 +420,10 @@ class Game extends JFrame {
 
 		});
 		close.setVerticalAlignment(JButton.CENTER);
-		
-		//revalidate();
-		
-		this.setVisible(true);
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				loop();
-			}
-		});
-		// t.start();
-	} // End of Constructor
 
-	private void loop() {
-		while (true) {
-			for (Player p : players) {
-				if (p.getTile() != p.getDestination()) {
-					p.move(p.getDestination() - p.getTile(), path);
-				}
-			}
-		}
-	}
+		this.setVisible(true);
+
+	} // End of Constructor
 
 	/**
 	 * --------- INNER CLASSES -------------
@@ -397,7 +435,8 @@ class Game extends JFrame {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			setDoubleBuffered(true);
-			// System.out.println("HI");
+
+			//drawing background map
 			g.drawImage(map, 0, 0, null);
 			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
 
@@ -405,6 +444,15 @@ class Game extends JFrame {
 			g.setFont(new Font("langdon", Font.PLAIN, 100));
 			g.drawString(Integer.toString(player1.getMoney()), 995, 1027);
 
+			//drawing player Icon
+
+			Image playerIcon = mango1;
+			//playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
+			g.drawImage(playerIcon, 1800, 980, null);
+
+			// draw player name on screen
+			g.setFont(new Font("Arial", Font.PLAIN, 35));
+			g.drawString(player1.getName(), (int) (1489 * scaleX), (int) (1090 * scaleY));
 			// spinner
 			BufferedImage image = null;
 			try {
@@ -434,14 +482,6 @@ class Game extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("X: " + e.getX() + " Y: " + e.getY());
-			// Thread t = new Thread(new Runnable() {
-			// public void run() {
-
-			// player1.move(1, path);
-
-			// }
-			// });
-			// t.start();
 
 		}
 
@@ -499,8 +539,8 @@ class Game extends JFrame {
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
 							// Thread t = new Thread(new Runnable() {
 							// public void run() {
-							// player1.move(j + 1, path);
-							player1.move(3, path);
+							player1.move(j + 1, path);
+							//player1.move(3, path);
 							// player1.(player1.getTile() + 2);
 							// }
 							// });
