@@ -9,14 +9,14 @@ public class Lobby extends JFrame {
 	private MyKeyListener keyListener;
 	private ImageIcon icon;
 
-//	public static void main(String [] args) {
-//	new Game();
+	public static void main(String [] args) {
+	new Game();
 ////	new Spinner();
 ////		Spinner.getRoll();
 //		//new MainMenu();
 //		//new Lobby();	`
 //		//new Rules();
-//	}
+	}
 	
 	JPanel lobbyPanel = new JPanel();
 	//add components + modify appearance of the frame

@@ -1,5 +1,8 @@
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -53,6 +56,12 @@ public class CareerPopUp extends JFrame {
 			image.setIcon(c.getImage());
 		}
 		
+		
+		ImageIcon pic = careers.get(index).getImage();
+		Image scaledImg = pic.getImage();
+		scaledImg = scaledImg.getScaledInstance((int) (114 * Game.scaleX), (int) (184 * Game.scaleY), java.awt.Image.SCALE_SMOOTH);
+					
+		Game.myCareer.setIcon(new ImageIcon(scaledImg));
 		
 		player.setCareer(careers.get(index));
 		
