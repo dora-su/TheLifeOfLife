@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 public class Player {
@@ -19,7 +21,7 @@ public class Player {
 
 	Player(String name, double balance) {
 		this.name = name;
-		tile = 0;
+		tile = 55;
 		property = new ArrayList<Property>();
 		this.player = this;
 		destination = 0;
@@ -124,13 +126,15 @@ public class Player {
 					count--;
 
 					//going on the next part of the map
-					if (player.tile == 18) {
-						player.setTile(36 + 1);
+					if (player.tile == 17) {
+						player.setTile(35 + 1);
+					} else if (player.tile == 66) {
+						player.setTile(75 + 1);
 					} else {
 						player.setTile(player.getTile() + 1);
 					}
 
-					if (player.getTile() == 36) {
+					if (player.getTile() == 35) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
 								new CareerSelection(true, player); //if land on a certain tile allow the player to choose career
@@ -151,6 +155,15 @@ public class Player {
 					} else if (player.tile == 42) {
 						new PopUp(player); //if land on this specific tile the user gets married
 						Game.family.add(1);
+						specialPopup = true;
+						count = 0;
+					} else if (player.tile == 75) {
+						Thread t = new Thread(new Runnable() {
+							public void run() {
+								new CareerSelection(true, player);
+							}
+						});
+						t.start();
 						specialPopup = true;
 						count = 0;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {

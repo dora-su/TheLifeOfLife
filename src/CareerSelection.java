@@ -13,9 +13,11 @@ public class CareerSelection extends JFrame {
 	CareerSelection(boolean college, Player player) {
 
 		//Images 
+		Game.gameFrame.setEnabled(false);
 		this.setSize(250, 400);
 		this.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
 		this.setUndecorated(true);
+		//this.setAlwaysOnTop(true);
 		this.setResizable(false);
 
 		
@@ -70,7 +72,8 @@ public class CareerSelection extends JFrame {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {}
 		careers.remove(index);
-		
+
+		Game.gameFrame.setEnabled(true);
 		dispose();
 	
 		

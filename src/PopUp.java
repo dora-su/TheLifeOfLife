@@ -18,10 +18,11 @@ public class PopUp {
 		Image popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
 		JFrame popUp = new JFrame();
-
+		
 		popUp.setUndecorated(true);
 		popUp.setResizable(true);
 		popUp.setAlwaysOnTop(true);
+		Game.gameFrame.setEnabled(false);
 		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 150));
 		popUp.setSize(400, 250);
 
@@ -43,7 +44,7 @@ public class PopUp {
 
 		JLabel messageLabel = new JLabel(message);
 		messageLabel.setSize(messageLabel.getPreferredSize());
-		messageLabel.setForeground(Color.white);
+		messageLabel.setForeground(Color.black);
 		messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 		popUp.setContentPane(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -68,7 +69,7 @@ public class PopUp {
 				public void actionPerformed(ActionEvent arg0) {
 					// go to certain index
 					player1.move(1, Game.path);
-					;
+					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
 				}
 
@@ -78,6 +79,7 @@ public class PopUp {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					// go to new index
+					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
 					player1.setTile(((ChoiceTile) tile).getIndex());
 				}
@@ -94,6 +96,7 @@ public class PopUp {
 			close.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
 
 				}
@@ -123,6 +126,7 @@ public class PopUp {
 		popUp.setUndecorated(true);
 		popUp.setResizable(true);
 		popUp.setAlwaysOnTop(true);
+		Game.gameFrame.setEnabled(false);
 		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 150));
 		popUp.setSize(400, 250);
 
@@ -156,6 +160,7 @@ public class PopUp {
 		close.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Game.gameFrame.setEnabled(true);
 				popUp.dispose();
 
 			}

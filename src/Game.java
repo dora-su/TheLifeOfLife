@@ -24,9 +24,9 @@ class Game extends JFrame {
 	//Declaring class Variables 
 
 	JPanel gameAreaPanel;
-
+	static JFrame gameFrame;
 	Image map, mango1, popWindow, menuPic;
-	Image careerPlaceHolder, housePlaceHolder;
+	static Image careerPlaceHolder, housePlaceHolder;
 	Image spinPic;
 	Player player1;
 	ImageIcon icon;
@@ -74,7 +74,7 @@ class Game extends JFrame {
 		icon = new ImageIcon("graphics/icon.png");
 		this.setIconImage(icon.getImage());
 		System.out.println(screenX + " " + screenY);
-
+		gameFrame = this;
 		//declaring initial arraylists
 
 		//adding location and function of every tile to scale
@@ -104,10 +104,7 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 440), (int) (scaleY * 178), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 464), (int) (scaleY * 234), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 480), (int) (scaleY * 298), "a", 0));
-		path.add(new PayDayTile((int) (scaleX * 496), (int) (scaleY * 364)));
-
-		//advance to tile 37 from this path
-		path.add(new MoneyTile((int) (scaleX * 513), (int) (scaleY * 433), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 496), (int) (scaleY * 364)));  //advance to tile 37 from this path
 
 		//good
 		path.add(new MoneyTile((int) (scaleX * 164), (int) (scaleY * 516), "a", 0));
@@ -128,37 +125,64 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 550), (int) (scaleY * 621), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 548), (int) (scaleY * 563), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 535), (int) (scaleY * 492), "a", 0));
-
+		path.add(new MoneyTile((int) (scaleX * 513), (int) (scaleY * 433), "a", 0));
+		
 		//start of new path(Tile 37)
 		path.add(new MoneyTile((int) (scaleX * 575), (int) (scaleY * 419), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 641), (int) (scaleY * 394)));
 		path.add(new MoneyTile((int) (scaleX * 669), (int) (scaleY * 336), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 680), (int) (scaleY * 270), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 678), (int) (scaleY * 209)));
-		path.add(new Tile((int)(scaleX*681), (int)(scaleY*140))); //tile to get married on (42)
-		
+		path.add(new Tile((int) (scaleX * 681), (int) (scaleY * 140))); //tile to get married on (42)
+
 		//tile after marriage 
 		path.add(new MoneyTile((int) (scaleX * 705), (int) (scaleY * 80), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 770), (int) (scaleY * 59), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 833), (int) (scaleY * 75)));
 
-		
 		path.add(new MoneyTile((int) (scaleX * 888), (int) (scaleY * 117), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 899), (int) (scaleY * 177), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 903), (int) (scaleY * 244), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 892), (int) (scaleY * 309)));
-		path.add(new Tile((int)(scaleX*849), (int)(scaleY*360))); //tile to buy house on (50)
-		
-		
+		path.add(new Tile((int) (scaleX * 849), (int) (scaleY * 360))); //tile to buy house on (50)
+
 		path.add(new MoneyTile((int) (scaleX * 850), (int) (scaleY * 426), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 899), (int) (scaleY * 470), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 939), (int) (scaleY * 526), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 927), (int) (scaleY * 591)));
 		path.add(new MoneyTile((int) (scaleX * 886), (int) (scaleY * 642), "a", 0));
 		
-		//new path
-		path.add(new ChoiceTile((int) (scaleX * 855), (int) (scaleY * 691), "a", 123123));
+		//new path (56)
+		path.add(new ChoiceTile((int) (scaleX * 855), (int) (scaleY * 691), "a", 67));
 		
+		path.add(new MoneyTile((int) (scaleX * 818), (int) (scaleY * 754), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 812), (int) (scaleY * 820)));
+		path.add(new MoneyTile((int) (scaleX * 855), (int) (scaleY * 868), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 917), (int) (scaleY * 900), "a", 0));	
+		path.add(new MoneyTile((int) (scaleX * 985), (int) (scaleY * 924), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1049), (int) (scaleY * 941)));
+
+		path.add(new MoneyTile((int) (scaleX * 1114), (int) (scaleY * 955), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1187), (int) (scaleY * 957), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1254), (int) (scaleY * 959), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1320), (int) (scaleY * 956)));
+				
+		//second path(67)
+		path.add(new MoneyTile((int) (scaleX * 907), (int) (scaleY * 733), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 966), (int) (scaleY * 750), "a", 0));	
+		path.add(new MoneyTile((int) (scaleX * 1038), (int) (scaleY * 744), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1098), (int) (scaleY * 735), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1171), (int) (scaleY * 740), "a", 0));	
+		path.add(new MoneyTile((int) (scaleX * 1230), (int) (scaleY * 761), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1291), (int) (scaleY * 793), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1338), (int) (scaleY * 826), "a", 0));
+		
+		//75
+		path.add(new Tile((int) (scaleX * 1381), (int) (scaleY * 882)));
+		path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 949), "a", 0)); 
+		
+		//path 77
+		path.add(new MoneyTile((int) (scaleX * 1460), (int) (scaleY * 925), "a", 0));
 		
 		
 		System.out.println("num Tile " + path.size());
@@ -218,7 +242,6 @@ class Game extends JFrame {
 		for (int i = 0; i < properties.size(); i++) {
 			Property p = properties.get(i);
 			ImageIcon pic = p.getImage();
-			String name = p.getName().toLowerCase();
 
 			Image image = pic.getImage();
 			image = image.getScaledInstance((int) (250 * scaleX), (int) (400 * scaleY), java.awt.Image.SCALE_SMOOTH);
@@ -278,7 +301,6 @@ class Game extends JFrame {
 
 		family = new ArrayList<Integer>();
 
-
 		//creating polygon for spinner 
 		p = new Polygon();
 		p.addPoint((int) (scaleX * 1514), (int) (scaleY * 300));
@@ -322,7 +344,6 @@ class Game extends JFrame {
 		myHouse.setFocusPainted(false);
 		myHouse.addMouseListener(new MouseListener() {
 			//JFrame houseFrame;
-			JFrame frame;
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -451,9 +472,6 @@ class Game extends JFrame {
 	 * --------- INNER CLASSES -------------
 	 **/
 	private class GameAreaPanel extends JPanel {
-		boolean first = true;
-		double dist = 75;
-
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			setDoubleBuffered(true);
@@ -474,10 +492,10 @@ class Game extends JFrame {
 			//showing family
 			if (family.size() != 0) {
 				g.setColor(Color.pink);
-				g.fillOval((int)(1490*scaleX), (int)(1100*scaleY), 40, 40);
+				g.fillOval((int) (1490 * scaleX), (int) (1100 * scaleY), 40, 40);
 				for (int i = 1; i < family.size(); i++) {
-					g.setColor(new Color(0,0,182,155));
-					g.fillOval((int)((1490*scaleX) + (i*60)), (int)(1100*scaleY), 40, 40);
+					g.setColor(new Color(0, 0, 182, 155));
+					g.fillOval((int) ((1490 * scaleX) + (i * 60)), (int) (1100 * scaleY), 40, 40);
 				}
 			}
 
@@ -538,7 +556,7 @@ class Game extends JFrame {
 	private class SpinnerListener implements ActionListener {
 
 		boolean running = false;
-		double dist, i = 0, vel, accel;
+		double dist, vel, accel;
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -560,7 +578,8 @@ class Game extends JFrame {
 						angle = 360 - angle;
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
 							System.out.println(j + 1);
-							player1.move(j + 1, path);
+							//player1.move(j + 1, path);
+							player1.move(1,path);
 						}
 					}
 					finished = true;

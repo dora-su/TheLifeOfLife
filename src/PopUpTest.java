@@ -18,8 +18,8 @@ public class PopUpTest {
         jFrame.setUndecorated(true);
         jPanel.setOpaque(false);
 
-        ImageIcon image =new ImageIcon("graphics/optionPane.png");
-        JLabel pic = new JLabel(image);
+        ImageIcon image123 =new ImageIcon("graphics/optionPane.png");
+        JLabel pic = new JLabel(image123);
         jPanel.add(pic);
         jFrame.add(jPanel);
 
@@ -29,11 +29,6 @@ public class PopUpTest {
         jFrame.setEnabled(false);
         //OPTION PANE FRAME
         jFrame.setAlwaysOnTop(true); // for the option pane
-
-
-
-
-
 
 
         JFrame frame = new JFrame("test");
@@ -48,8 +43,8 @@ public class PopUpTest {
 //        frame2.getContentPane().setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
         frame2.setBackground(new Color(1.0f,1.0f,1.0f,0.5f));
 
-        JPanel panel = new JPanel();       ImageIcon image =new ImageIcon("graphics/optionPane.png");
-        JLabel picLabel = new JLabel(image);
+        JPanel panel = new JPanel();       ImageIcon imag12e =new ImageIcon("graphics/optionPane.png");
+        JLabel picLabel = new JLabel(imag12e);
 
 
 
