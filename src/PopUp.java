@@ -42,6 +42,7 @@ public class PopUp {
         };
 
         JLabel messageLabel = new JLabel(message);
+        messageLabel.setSize(messageLabel.getPreferredSize());
         messageLabel.setForeground(Color.white);
         messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         popUp.setContentPane(panel);

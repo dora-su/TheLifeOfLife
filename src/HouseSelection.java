@@ -11,13 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class HouseSelectionPopUp extends JFrame {
+public class HouseSelection extends JFrame {
 
 	// public static void main(String[] args) {
 	// new HouseSelection();
 	// }
 
-	HouseSelectionPopUp(Player player) {
+	HouseSelection(Player player) {
 		this.setSize((int) (Game.scaleX * 1000), (int) (Game.scaleY * 800));
 		this.setResizable(false);
 		this.setUndecorated(true);

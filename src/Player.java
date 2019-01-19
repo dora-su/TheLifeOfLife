@@ -128,7 +128,7 @@ public class Player {
 					if (player.getTile() == 2123) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new CareerPopUp(true, player);
+								new CareerSelection(true, player);
 							}
 						});
 						t.start();
@@ -138,7 +138,7 @@ public class Player {
 						//if land on this specific tile create house selections choices for user
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new HouseSelectionPopUp(player);
+								new HouseSelection(player);
 							}
 						});
 						t.start();
@@ -160,7 +160,7 @@ public class Player {
 					if(count == 0 && player.getTile() == 2) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new CareerPopUp(true, player);
+								new CareerSelection(true, player);
 							}
 						});
 						t.start();
