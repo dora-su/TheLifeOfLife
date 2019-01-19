@@ -17,7 +17,7 @@ public class Player {
 	private int add;
 	private int count;
 
-	Player(String name, double balance, int x, int y) {
+	Player(String name, double balance) {
 		this.name = name;
 		tile = 0;
 		property = new ArrayList<Property>();
@@ -123,7 +123,7 @@ public class Player {
 					count--;
 					player.setTile(player.getTile() + 1);
 
-					if (player.getTile() == 122) {
+					if (player.getTile() == 2123) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
 								new CareerPopUp(college, player);

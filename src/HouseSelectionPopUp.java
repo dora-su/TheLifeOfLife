@@ -54,6 +54,13 @@ public class HouseSelectionPopUp extends JFrame {
 					}
 
 					player.addProperty(p);
+					
+					ImageIcon pic = p.getImage();
+					Image scaledImg = pic.getImage();
+					scaledImg = scaledImg.getScaledInstance((int) (114 * Game.scaleX), (int) (184 * Game.scaleY), java.awt.Image.SCALE_SMOOTH);
+								
+					Game.myHouse.setIcon(new ImageIcon(scaledImg));
+//					
 					player.removeMoney(p.getValue());
 					button.removeActionListener(this);
 

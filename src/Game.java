@@ -2,10 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Toolkit;
@@ -22,29 +20,37 @@ import java.util.Random;
 
 class Game extends JFrame {
 
-	// class variables
-	boolean spinText;
+	//Declaring class Variables 
 
 	JPanel gameAreaPanel;
 
 	Image map, mango1, popWindow, menuPic;
+	Image careerPlaceHolder, housePlaceHolder;
 	Image spinPic;
 	Player player1;
-	Image careerPlaceHolder;
-	Image housePlaceHolder;
+	ImageIcon icon;
+
+
 	ArrayList<Player> players = new ArrayList<Player>();
 	ArrayList<ActionTile> path;
 	static ArrayList<Career> collegeCareers;
 	static ArrayList<Career> normalCareers;
 	static ArrayList<Property> properties;
-	static int rotate;
+
+	//variables for spinner
 	static boolean finished = false;
+	boolean spinText;
+	static int rotate;
 	static int rollNum = -1;
 	static Random rand = new Random();
 	static JLabel rollText;
 	static Clock c = new Clock();
 	JButton close, spin, menu;
-	JButton myCareer, myHouse;
+	static JButton myCareer, myHouse;
+	
+	JFrame careerFrame,houseFrame;
+	static JLabel careerLabel;
+	static JLabel houseLabel;
 
 	Polygon p;
 
@@ -56,42 +62,44 @@ class Game extends JFrame {
 	static double scaleX = screenX / 1920.0;
 	static double scaleY = screenY / 1200.0;
 
-	private ImageIcon icon;
 
-	// Constructor - this runs first
 	// Constructor - this runs first
 	Game() {
 		super("My Game");
 		// Set the frame to full screen
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize((int) screenX, (int) screenY);
-
+		//setting icon
 		icon = new ImageIcon("graphics/icon.png");
 		this.setIconImage(icon.getImage());
 		System.out.println(screenX + " " + screenY);
 
-		// Declaring fonts
+		//declaring initial arraylists
+		
+		
 
+		//adding location and function of every tile to scale
 		path = new ArrayList<ActionTile>();
-		properties = new ArrayList<Property>();
-
 		path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
 		path.add(new MoneyTile((int) (scaleX * 165), (int) (scaleY * 447), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 232), (int) (scaleY * 449), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 313), (int) (scaleY * 433), "a", 0));
 
+		//creating images for non college careers
 		ImageIcon chef = new ImageIcon("graphics/careers/chef.png");
 		ImageIcon flightAttendant = new ImageIcon("graphics/careers/flightattendant.png");
 		ImageIcon uberDriver = new ImageIcon("graphics/careers/uberDriver.png");
 		ImageIcon stripper = new ImageIcon("graphics/careers/stripper.png");
 		ImageIcon roadWorker = new ImageIcon("graphics/careers/roadWorker.png");
 
+		//getting images for college careers
 		ImageIcon police = new ImageIcon("graphics/careers/police.png");
 		ImageIcon math = new ImageIcon("graphics/careers/math.png");
 		ImageIcon nurse = new ImageIcon("graphics/careers/nurse.png");
 		ImageIcon softwareEngineer = new ImageIcon("graphics/careers/softwareEngineer.png");
 		ImageIcon doctor = new ImageIcon("graphics/careers/doctor.png");
 
+		//adding non college careers and setting their salary,name and picture
 		normalCareers = new ArrayList<Career>();
 		normalCareers.add(new Career("Police", 10000, police));
 		normalCareers.add(new Career("Math", 10000, math));
@@ -99,6 +107,7 @@ class Game extends JFrame {
 		normalCareers.add(new Career("Doctor", 10000, doctor));
 		normalCareers.add(new Career("Software Enginner", 1000000, softwareEngineer));
 
+		//adding college careers and setting their salary name and picture
 		collegeCareers = new ArrayList<Career>();
 		collegeCareers.add(new Career("Chef", 1000, chef));
 		collegeCareers.add(new Career("FlightAttendant", 1000, flightAttendant));
@@ -106,6 +115,7 @@ class Game extends JFrame {
 		collegeCareers.add(new Career("Stripper", 1000, stripper));
 		collegeCareers.add(new Career("RoadWorker", 100000000, roadWorker));
 
+		//getting pictures for the properties in game
 		ImageIcon mansion = new ImageIcon("graphics/homes/mansion.png");
 		ImageIcon castle = new ImageIcon("graphics/homes/castle.png");
 		ImageIcon condo = new ImageIcon("graphics/homes/condo.png");
@@ -115,6 +125,8 @@ class Game extends JFrame {
 		ImageIcon bungalow = new ImageIcon("graphics/homes/bungalow.png");
 		ImageIcon farm = new ImageIcon("graphics/homes/farm.png");
 
+		//adding properties to its arraylist with its name, value and image
+		properties = new ArrayList<Property>();
 		properties.add(new Property("Mansion", 500, mansion));
 		properties.add(new Property("Castle", 500, castle));
 		properties.add(new Property("Condo", 500, condo));
@@ -124,7 +136,7 @@ class Game extends JFrame {
 		properties.add(new Property("Igloo", 500, igloo));
 		properties.add(new Property("bungalow", 500, bungalow));
 
-		// resizing the properties
+		// resizing the properties to size based off screen 
 		for (int i = 0; i < properties.size(); i++) {
 			Property p = properties.get(i);
 			ImageIcon pic = p.getImage();
@@ -134,46 +146,59 @@ class Game extends JFrame {
 			image = image.getScaledInstance((int) (250 * scaleX), (int) (400 * scaleY), java.awt.Image.SCALE_SMOOTH);
 			p.setImage(new ImageIcon(image));
 		}
-
+		//getting picture of the map and scaling it 
 		map = Toolkit.getDefaultToolkit().getImage("graphics/board.png");
 		map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
+		
+		//getting picture of player and scaling it
 		mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
 		mango1 = mango1.getScaledInstance((int) (45 * scaleX), (int) (45 * scaleY), Image.SCALE_DEFAULT);
 
+		//getting picture of spinner and scaling it 
 		spinPic = Toolkit.getDefaultToolkit().getImage("graphics/spin_button.png");
 		spinPic = spinPic.getScaledInstance((int) (149 * scaleX), (int) (149 * scaleY), Image.SCALE_DEFAULT);
 
+		//getting picture of menu bar and scalling it
 		menuPic = Toolkit.getDefaultToolkit().getImage("graphics/menu.png");
 		menuPic = menuPic.getScaledInstance((int) (154 * scaleX), (int) (130 * scaleY), Image.SCALE_DEFAULT);
 
+		//getting popup window picture 
 		popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
+		//getting picture for initial career holder and scaling it
 		careerPlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/careers/chef.png");
 		careerPlaceHolder = careerPlaceHolder.getScaledInstance((int) (114 * scaleX), (int) (184 * scaleY),
 				Image.SCALE_DEFAULT);
 
+		//getting picture for initial career holder and scaling it
 		housePlaceHolder = Toolkit.getDefaultToolkit().getImage("graphics/homes/farm.png");
 		housePlaceHolder = housePlaceHolder.getScaledInstance((int) (114 * scaleX), (int) (184 * scaleY),
 				Image.SCALE_DEFAULT);
 
-		player1 = new Player("Eric", 1200, 91, 444);
+		//declaring new players and setting their name and money 
+		player1 = new Player("Eric", 1200);
 		players.add(player1);
+		
+		//creating the game area panel
 		gameAreaPanel = new GameAreaPanel();
 		gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel, BoxLayout.Y_AXIS));
 
-		JPanel p1 = new JPanel();
-		p1.setLayout(new BoxLayout(p1, BoxLayout.X_AXIS));
-		p1.setOpaque(false);
+		//creating the interactive bottom panel on the screen
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+		bottomPanel.setOpaque(false);
 		gameAreaPanel.add(Box.createVerticalStrut((int) (1012 * scaleY)));
-		gameAreaPanel.add(p1);
-		this.setContentPane(gameAreaPanel);
+		gameAreaPanel.add(bottomPanel);
 
+		this.setContentPane(gameAreaPanel);
 		this.requestFocusInWindow();
 		this.setUndecorated(true);
 
+		//adding mouse listener for interactive features
 		MyMouseListener mouseListener = new MyMouseListener();
 		this.addMouseListener(mouseListener);
 
+		//creating polygon for spinner 
 		p = new Polygon();
 		p.addPoint((int) (scaleX * 1514), (int) (scaleY * 300));
 		p.addPoint((int) (scaleX * 1534), (int) (scaleY * 300));
@@ -181,6 +206,7 @@ class Game extends JFrame {
 		Timer timer = new Timer(1, new SpinnerListener());
 		timer.start();
 
+		//creating spin button to spin the spinner  
 		spin = new JButton(new ImageIcon(spinPic));
 		spin.setBackground(null);
 		spin.setContentAreaFilled(false);
@@ -189,6 +215,7 @@ class Game extends JFrame {
 		spin.addActionListener(new RollListener());
 		spin.setVerticalAlignment(JButton.CENTER);
 
+		//creating menu button for user
 		menu = new JButton(new ImageIcon(menuPic));
 		menu.setContentAreaFilled(false);
 		menu.setFocusPainted(false);
@@ -202,18 +229,20 @@ class Game extends JFrame {
 			}
 
 		});
-		p1.add(menu);
-
-		p1.add(spin);
-		p1.add(Box.createHorizontalStrut((int) (scaleX * 205)));
+		
+		//adding menu and spin to the bottom panel
+		bottomPanel.add(menu);
+		bottomPanel.add(spin);
+		bottomPanel.add(Box.createHorizontalStrut((int) (scaleX * 205)));
 
 		myHouse = new JButton(new ImageIcon(housePlaceHolder));
 		myHouse.setContentAreaFilled(false);
 		myHouse.setBorderPainted(false);
 		myHouse.setFocusPainted(false);
 		myHouse.addMouseListener(new MouseListener() {
-			JFrame houseFrame;
+			//JFrame houseFrame;
 			JFrame frame;
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -222,32 +251,28 @@ class Game extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				frame = new JFrame();
-				frame.setSize((int)screenX, (int)screenY);
-				frame.setUndecorated(true);
-				frame.setResizable(false);
-				frame.setVisible(true);
-				frame.setOpacity(0.5f);
+				//	frame.setOpacity(0.5f);
 				houseFrame = new JFrame();
 				houseFrame.setSize(250, 400);
 				houseFrame.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
 				houseFrame.setUndecorated(true);
 				houseFrame.setResizable(false);
 
-				if (player1.getProperty() != null) {
+				if (player1.getProperty().size() > 0) {
 					JLabel image = new JLabel(new ImageIcon(
 							"graphics/homes/" + player1.getProperty().get(0).getName().toLowerCase() + ".png"));
 					houseFrame.add(image);
 
 					houseFrame.setVisible(true);
 				}
-				houseFrame.setAlwaysOnTop(true);
+				//houseFrame.setAlwaysOnTop(true);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
+				System.out.println("exit");
 				houseFrame.dispose();
-				frame.dispose();
+				//frame.dispose();
 
 			}
 
@@ -265,16 +290,17 @@ class Game extends JFrame {
 
 		});
 
-		p1.add(myHouse);
-		p1.add(Box.createHorizontalStrut((int) (scaleX * 0)));
+		bottomPanel.add(myHouse);
+		bottomPanel.add(Box.createHorizontalStrut((int) (scaleX * 0)));
 
 		myCareer = new JButton(new ImageIcon(careerPlaceHolder));
 		myCareer.setContentAreaFilled(false);
 		myCareer.setBorderPainted(false);
 		myCareer.setFocusPainted(false);
 		myCareer.addMouseListener(new MouseListener() {
-			JFrame careerFrame;
-			JFrame frame;
+
+			//JFrame frame;
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -283,12 +309,12 @@ class Game extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				frame = new JFrame();
-				frame.setSize((int)screenX, (int)screenY);
-				frame.setUndecorated(true);
-				frame.setResizable(false);
-				frame.setVisible(true);
-				frame.setOpacity(0.5f);
+				//				frame = new JFrame();
+				//				frame.setSize((int)screenX, (int)screenY);
+				//				frame.setUndecorated(true);
+				//				frame.setResizable(false);
+				//				frame.setVisible(true);
+				//frame.setOpacity(0.5f);
 				careerFrame = new JFrame();
 				careerFrame.setSize(250, 400);
 				careerFrame.setLocation((int) (Game.screenX / 2) - 125, ((int) (Game.screenY / 2) - 200));
@@ -296,10 +322,10 @@ class Game extends JFrame {
 				careerFrame.setResizable(false);
 
 				if (player1.getCareer() != null) {
+
 					JLabel image = new JLabel(new ImageIcon(
 							"graphics/careers/" + player1.getCareer().getCareerName().toLowerCase() + ".png"));
 					careerFrame.add(image);
-
 					careerFrame.setVisible(true);
 				}
 				careerFrame.setAlwaysOnTop(true);
@@ -308,7 +334,7 @@ class Game extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				careerFrame.dispose();
-				frame.dispose();
+				//frame.dispose();
 			}
 
 			@Override
@@ -324,11 +350,11 @@ class Game extends JFrame {
 			}
 
 		});
-		p1.add(myCareer);
-		p1.add(Box.createHorizontalStrut((int) (scaleX * 1225)));
+		bottomPanel.add(myCareer);
+		bottomPanel.add(Box.createHorizontalStrut((int) (scaleX * 1225)));
 
 		close = new JButton("Close");
-		p1.add(close);
+		bottomPanel.add(close);
 		close.addActionListener(new ActionListener() {
 
 			@Override
@@ -338,7 +364,9 @@ class Game extends JFrame {
 
 		});
 		close.setVerticalAlignment(JButton.CENTER);
-		revalidate();
+		
+		//revalidate();
+		
 		this.setVisible(true);
 		Thread t = new Thread(new Runnable() {
 			@Override
