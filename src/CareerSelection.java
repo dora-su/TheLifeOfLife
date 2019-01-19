@@ -7,10 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class CareerPopUp extends JFrame {
+public class CareerSelection extends JFrame {
 	
 	ArrayList<Career> careers;
-	CareerPopUp(boolean college, Player player) {
+	CareerSelection(boolean college, Player player) {
 
 		//Images 
 		this.setSize(250, 400);
