@@ -62,6 +62,8 @@ class Game extends JFrame {
 	static double scaleX = screenX / 1920.0;
 	static double scaleY = screenY / 1200.0;
 
+	static ArrayList<Integer> family;
+
 	// Constructor - this runs first
 	Game() {
 		super("My Game");
@@ -250,6 +252,9 @@ class Game extends JFrame {
 		MyMouseListener mouseListener = new MyMouseListener();
 		this.addMouseListener(mouseListener);
 
+		family = new ArrayList<Integer>();
+
+
 		//creating polygon for spinner 
 		p = new Polygon();
 		p.addPoint((int) (scaleX * 1514), (int) (scaleY * 300));
@@ -297,8 +302,6 @@ class Game extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -333,14 +336,10 @@ class Game extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 		});
@@ -360,8 +359,6 @@ class Game extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -397,14 +394,10 @@ class Game extends JFrame {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 
 		});
@@ -449,13 +442,23 @@ class Game extends JFrame {
 			g.setFont(new Font("langdon", Font.PLAIN, 100));
 			g.drawString(Integer.toString(player1.getMoney()), 995, 1027);
 
-			//drawing player Icon
-
+			//drawing player icon
 			Image playerIcon = mango1;
 			//playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
 			g.drawImage(playerIcon, 1800, 980, null);
 
+			//showing family
+			if (family.size() != 0) {
+				g.setColor(Color.pink);
+				g.fillOval((int)(1490*scaleX), (int)(1100*scaleY), 40, 40);
+				for (int i = 1; i < family.size(); i++) {
+					g.setColor(new Color(0,0,182,155));
+					g.fillOval((int)((1490*scaleX) + (i*60)), (int)(1100*scaleY), 40, 40);
+				}
+			}
+
 			// draw player name on screen
+			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.PLAIN, 35));
 			g.drawString(player1.getName(), (int) (1489 * scaleX), (int) (1090 * scaleY));
 			// spinner
@@ -492,26 +495,18 @@ class Game extends JFrame {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 	}
@@ -523,12 +518,13 @@ class Game extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			gameAreaPanel.setEnabled(false);
 			// if currently spinning
 			if (running) {
-//				c.update();
+				//				c.update();
 				// checks if dist is over
 				if (vel > 0) {
-//					double deltad = vel * c.getElapsedTime();
+					//					double deltad = vel * c.getElapsedTime();
 					rotate -= vel;
 					// end dist
 				} else {
@@ -540,7 +536,7 @@ class Game extends JFrame {
 						angle = 360 - angle;
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
 							System.out.println(j + 1);
-//							player1.move(j + 1, path);
+							player1.move(j + 1, path);
 						}
 					}
 					finished = true;
@@ -557,10 +553,12 @@ class Game extends JFrame {
 				running = true;
 				vel = dist / 80.0;
 				accel = -dist / 10000.0;
+				gameAreaPanel.setEnabled(true);
 			}
 		}
 
 	}
+
 	class RollListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {

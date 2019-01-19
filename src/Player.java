@@ -155,6 +155,7 @@ public class Player {
 					}else if(player.tile == 48) {
 						//if land on this specific tile the user gets married
 						new PopUp(player);
+						Game.family.add(1);
 						specialPopup = true;
 						count = 0;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
