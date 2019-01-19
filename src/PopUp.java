@@ -66,7 +66,7 @@ public class PopUp {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     // go to certain index
-                	player1.setTile((player1.getTile() + 1));
+                	player1.move(1, Game.path);;
                     popUp.dispose();
                 }
 
