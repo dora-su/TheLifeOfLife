@@ -133,6 +133,7 @@ public class Player {
 					} else {
 						player.setTile(player.getTile() + 1);
 					}
+					
 
 					if (player.getTile() == 35) {
 						Thread t = new Thread(new Runnable() {
@@ -174,7 +175,6 @@ public class Player {
 
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.getTile()) instanceof PayDayTile)) {
-
 						career.setSalary((int) (career.getSalary() * 1.05));
 					}
 
@@ -198,11 +198,4 @@ public class Player {
 		}).start();
 	}
 
-	public int getDestination() {
-		return destination;
-	}
-
-	public void setDestination(int destination) {
-		this.destination = destination;
-	}
 }
