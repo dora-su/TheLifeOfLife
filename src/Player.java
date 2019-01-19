@@ -122,7 +122,14 @@ public class Player {
 				if (count > 0) {
 					boolean specialPopup = false;
 					count--;
-					player.setTile(player.getTile() + 1);
+					
+					//going on the next part of the map
+					if(player.tile == 18) {
+						player.setTile(36 + 1);
+					}else {
+						player.setTile(player.getTile() + 1);
+					}
+					
 
 					//if land on a certain tile allow the player to choose career
 					if (player.getTile() == 2123) {
@@ -150,8 +157,7 @@ public class Player {
 					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
 						//if the player lands on a choice tile end their turn immediately
 						count = 0;
-					}
-
+					} 
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.getTile()) instanceof PayDayTile)) {
 						career.setSalary((int) (career.getSalary() * 1.05));
