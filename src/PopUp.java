@@ -11,97 +11,148 @@ import javax.swing.*;
 
 public class PopUp {
 
-    private ImageIcon icon;
+	private ImageIcon icon;
 
-    PopUp(String message, ActionTile tile,Player player1) {
+	PopUp(String message, ActionTile tile, Player player1) {
 
-        Image popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
+		Image popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
-        JFrame popUp = new JFrame();
+		JFrame popUp = new JFrame();
 
-        popUp.setUndecorated(true);
-        popUp.setResizable(true);
-        popUp.setAlwaysOnTop(true);
-        popUp.setLocation((int)(Game.screenX/2) - 200, ((int)(Game.screenY/2) - 150));
-        popUp.setSize(400, 250);
+		popUp.setUndecorated(true);
+		popUp.setResizable(true);
+		popUp.setAlwaysOnTop(true);
+		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 150));
+		popUp.setSize(400, 250);
 
-        //set icon image
-        icon = new ImageIcon("graphics/icon.png");
-        popUp.setIconImage(icon.getImage());
+		//set icon image
+		icon = new ImageIcon("graphics/icon.png");
+		popUp.setIconImage(icon.getImage());
 
-        popUp.setVisible(true);
+		popUp.setVisible(true);
 
-        JPanel panel = new JPanel() {
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
+		JPanel panel = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
 
-                    g.drawImage(popWindow, 0, 0, null);
-                
-                repaint();
-            }
-        };
+				g.drawImage(popWindow, 0, 0, null);
 
-        JLabel messageLabel = new JLabel(message);
-        messageLabel.setSize(messageLabel.getPreferredSize());
-        messageLabel.setForeground(Color.white);
-        messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-        popUp.setContentPane(panel);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(Box.createRigidArea(new Dimension(0, 78)));
+				repaint();
+			}
+		};
 
-        panel.add(messageLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 96)));
-        JPanel options = new JPanel();
-        options.setOpaque(false);
-        ;
-        popUp.add(options);
+		JLabel messageLabel = new JLabel(message);
+		messageLabel.setSize(messageLabel.getPreferredSize());
+		messageLabel.setForeground(Color.white);
+		messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+		popUp.setContentPane(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(Box.createRigidArea(new Dimension(0, 78)));
 
-        if (tile instanceof ChoiceTile) {
-            JButton option1 = new JButton("Option 1");
-            JButton option2 = new JButton("Option 2");
-            option1.setFocusPainted(false);
-            option1.setFocusPainted(false);
+		panel.add(messageLabel);
+		panel.add(Box.createRigidArea(new Dimension(0, 96)));
+		JPanel options = new JPanel();
+		options.setOpaque(false);
+		;
+		popUp.add(options);
 
-            option1.addActionListener(new ActionListener() {
+		if (tile instanceof ChoiceTile) {
+			JButton option1 = new JButton("Option 1");
+			JButton option2 = new JButton("Option 2");
+			option1.setFocusPainted(false);
+			option1.setFocusPainted(false);
 
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    // go to certain index
-                	player1.move(1, Game.path);;
-                    popUp.dispose();
-                }
+			option1.addActionListener(new ActionListener() {
 
-            });
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// go to certain index
+					player1.move(1, Game.path);
+					;
+					popUp.dispose();
+				}
 
-            option2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    // go to new index
-                    popUp.dispose();
-                    player1.setTile(((ChoiceTile) tile).getIndex());
-                }
-            });
+			});
 
-            options.add(option1);
-            options.add(Box.createRigidArea(new Dimension(50, 0)));
-            options.add(option2);
+			option2.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// go to new index
+					popUp.dispose();
+					player1.setTile(((ChoiceTile) tile).getIndex());
+				}
+			});
 
-        } else {
-            // adding a close button after the message is displayed
-            JButton close = new JButton("Close");
-            close.setFocusPainted(false);
-            close.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    popUp.dispose();
+			options.add(option1);
+			options.add(Box.createRigidArea(new Dimension(50, 0)));
+			options.add(option2);
 
-                }
-            });
+		} else {
+			// adding a close button after the message is displayed
+			JButton close = new JButton("Close");
+			close.setFocusPainted(false);
+			close.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					popUp.dispose();
 
-            close.setAlignmentX(JButton.CENTER_ALIGNMENT);
-            options.add(close);
-        }
+				}
+			});
 
-    }
+			close.setAlignmentX(JButton.CENTER_ALIGNMENT);
+			options.add(close);
+		}
+
+	}
+
+	PopUp(Player player) {
+		Image popWindow = Toolkit.getDefaultToolkit().getImage("graphics/marriage.png");
+
+		JFrame popUp = new JFrame();
+
+		popUp.setUndecorated(true);
+		popUp.setResizable(true);
+		popUp.setAlwaysOnTop(true);
+		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 150));
+		popUp.setSize(400, 250);
+
+		//set icon image
+		icon = new ImageIcon("graphics/icon.png");
+		popUp.setIconImage(icon.getImage());
+
+		popUp.setVisible(true);
+
+		JPanel panel = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+
+				g.drawImage(popWindow, 0, 0, null);
+
+				repaint();
+			}
+		};
+
+		popUp.setContentPane(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+		panel.add(Box.createRigidArea(new Dimension(0, 217)));
+		JPanel options = new JPanel();
+		options.setOpaque(false);
+
+		popUp.add(options);
+
+		JButton close = new JButton("Close");
+		close.setFocusPainted(false);
+		close.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				popUp.dispose();
+
+			}
+		});
+
+		close.setAlignmentX(JButton.CENTER_ALIGNMENT);
+		options.add(close);
+	}
 
 }

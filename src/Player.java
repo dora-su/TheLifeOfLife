@@ -130,11 +130,11 @@ public class Player {
 						player.setTile(player.getTile() + 1);
 					}
 					
-
-					//if land on a certain tile allow the player to choose career
-					if (player.getTile() == 2123) {
+				
+					if (player.getTile() == 36) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
+								//if land on a certain tile allow the player to choose career
 								new CareerSelection(true, player);
 							}
 						});
@@ -142,24 +142,33 @@ public class Player {
 						specialPopup = true;
 						count = 0;
 					} else if (player.getTile() == 122) {
-						//if land on this specific tile create house selections choices for user
+						
 						Thread t = new Thread(new Runnable() {
 							public void run() {
+								//if land on this specific tile create house selections choices for user
 								new HouseSelection(player);
 							}
 						});
 						t.start();
 						specialPopup = true;
 						count = 0;
+					}else if(player.tile == 48) {
+						//if land on this specific tile the user gets married
+						new PopUp(player);
+						specialPopup = true;
+						count = 0;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
-						//if player pass pay day tile add money to their bank balance
+						
+					    //if player pass pay day tile add money to their bank balance
 						player.addMoney(career.getSalary());
-					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
+					} else if (path.get(player.getTile()) instanceof ChoiceTile) {					
 						//if the player lands on a choice tile end their turn immediately
 						count = 0;
 					} 
+					
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.getTile()) instanceof PayDayTile)) {
+						
 						career.setSalary((int) (career.getSalary() * 1.05));
 					}
 					
@@ -178,7 +187,8 @@ public class Player {
 						new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
 					}
 					
-
+					
+					
 				}
 			}
 		}).start();

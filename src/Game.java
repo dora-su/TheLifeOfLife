@@ -79,30 +79,35 @@ class Game extends JFrame {
 		path = new ArrayList<ActionTile>();
 		path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
 		path.add(new ChoiceTile((int) (scaleX * 174), (int) (scaleY * 446), "Would You Like to Go to College", 19));
-		
-		 
+
+		//good
 		path.add(new MoneyTile((int) (scaleX * 240), (int) (scaleY * 452), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 322), (int) (scaleY * 371), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 305), (int) (scaleY * 430), "a", 0));
-		path.add(new PayDayTile((int) (scaleX * 320), (int) (scaleY * 366)));
+		path.add(new MoneyTile((int) (scaleX * 303), (int) (scaleY * 431), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 321), (int) (scaleY * 371), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 284), (int) (scaleY * 314)));
 
-		path.add(new MoneyTile((int) (scaleX * 242), (int) (scaleY * 267), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 189), (int) (scaleY * 217), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 144), (int) (scaleY * 170), "a", 0));
-		path.add(new PayDayTile((int) (scaleX * 313), (int) (scaleY * 433)));
+		//good
+		path.add(new MoneyTile((int) (scaleX * 248), (int) (scaleY * 269), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 192), (int) (scaleY * 218), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 144), (int) (scaleY * 176), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 129), (int) (scaleY * 104)));
 
-		path.add(new MoneyTile((int) (scaleX * 187), (int) (scaleY * 73), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 253), (int) (scaleY * 89), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 316), (int) (scaleY * 109), "a", 0));
-		path.add(new PayDayTile((int) (scaleX * 388), (int) (scaleY * 126)));
+		//good
+		path.add(new MoneyTile((int) (scaleX * 188), (int) (scaleY * 72), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 255), (int) (scaleY * 85), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 318), (int) (scaleY * 110), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 389), (int) (scaleY * 134)));
 
-		path.add(new MoneyTile((int) (scaleX * 439), (int) (scaleY * 126), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 458), (int) (scaleY * 232), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 472), (int) (scaleY * 309), "a", 0));
-		path.add(new PayDayTile((int) (scaleX * 490), (int) (scaleY * 350)));
+		//good
+		path.add(new MoneyTile((int) (scaleX * 440), (int) (scaleY * 178), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 464), (int) (scaleY * 234), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 480), (int) (scaleY * 298), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 496), (int) (scaleY * 364)));
 
-		path.add(new MoneyTile((int) (scaleX * 513), (int) (scaleY * 428), "a", 0));
-			
+		//advance to tile 37 from this path
+		path.add(new MoneyTile((int) (scaleX * 513), (int) (scaleY * 433), "a", 0));
+
+		//good
 		path.add(new MoneyTile((int) (scaleX * 164), (int) (scaleY * 516), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 166), (int) (scaleY * 576), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 171), (int) (scaleY * 642), "a", 0));
@@ -121,13 +126,14 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 550), (int) (scaleY * 621), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 548), (int) (scaleY * 563), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 535), (int) (scaleY * 492), "a", 0));
-		path.add(new Tile((int) (scaleX * 499), (int) (scaleY * 423)));
-		
-		
-		
-		
-	
-		
+
+		//start of new path(Tile 37)
+		path.add(new MoneyTile((int) (scaleX * 575), (int) (scaleY * 419), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 641), (int) (scaleY * 394)));
+		path.add(new MoneyTile((int) (scaleX * 669), (int) (scaleY * 336), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 680), (int) (scaleY * 270), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 678), (int) (scaleY * 209)));
+		path.add(new Tile(681, 140));
 
 		System.out.println("num Tile " + path.size());
 
@@ -513,61 +519,48 @@ class Game extends JFrame {
 	private class SpinnerListener implements ActionListener {
 
 		boolean running = false;
-		int j;
 		double dist, i = 0, vel, accel;
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// if currently spinning
 			if (running) {
-				c.update();
+//				c.update();
 				// checks if dist is over
 				if (vel > 0) {
-					double deltad = vel * c.getElapsedTime();
-					rotate -= deltad;
-					i += deltad;
-
+//					double deltad = vel * c.getElapsedTime();
+					rotate -= vel;
 					// end dist
 				} else {
-					for (j = 0; j < 5; j++) {
+					for (int j = 0; j < 5; j++) {
 						int angle = rotate % 360;
 						if (angle < 0) {
 							angle += 360;
 						}
 						angle = 360 - angle;
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
-							// Thread t = new Thread(new Runnable() {
-							// public void run() {
-							player1.move(j + 1, path);
-							//player1.move(3, path);
-							// player1.(player1.getTile() + 2);
-							// }
-							// });
-							// t.start();
+							System.out.println(j + 1);
+//							player1.move(j + 1, path);
 						}
 					}
 					finished = true;
 					running = false;
-
 					spinText = false;
 				}
-
 				// delay vel each time
 				// so the spinner slows down
-				vel += accel * c.getElapsedTime();
+				vel += accel;
 				// if not running, start running
 			} else if (spinText) {
 				finished = false;
 				dist = rand.nextInt(360) + 5000;
 				running = true;
-				i = 0;
-				vel = dist / 2.0;
-				accel = -dist / 8.0;
+				vel = dist / 80.0;
+				accel = -dist / 10000.0;
 			}
 		}
 
 	}
-
 	class RollListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
