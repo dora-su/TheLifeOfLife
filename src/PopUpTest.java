@@ -9,6 +9,33 @@ import java.io.IOException;
 
 public class PopUpTest {
     public static void main(String[] args) throws IOException {
+        //Basically to make image thing have a transparent bg for option pane
+        JFrame jFrame = new JFrame();
+        JPanel jPanel = new JPanel();
+
+        //most important code
+        jFrame.setBackground(new Color(1.0f,1.0f,1.0f,0.5f)); // the last value, a: is the transparency , 0.0 = full transparency, 1.0 = full opacity
+        jFrame.setUndecorated(true);
+        jPanel.setOpaque(false);
+
+        ImageIcon image =new ImageIcon("graphics/optionPane.png");
+        JLabel pic = new JLabel(image);
+        jPanel.add(pic);
+        jFrame.add(jPanel);
+
+
+        //To make a frame disabled when u have option pane on top:
+        //PARENT FRAME
+        jFrame.setEnabled(false);
+        //OPTION PANE FRAME
+        jFrame.setAlwaysOnTop(true); // for the option pane
+
+
+
+
+
+
+
         JFrame frame = new JFrame("test");
         frame.setSize(500,500);
         frame.getContentPane().setBackground(new Color(0,0,0));
@@ -34,7 +61,7 @@ public class PopUpTest {
 //        panel.revalidate();
 //        panel.repaint();
 //panel.setBackground(new Color(80,255,255,0));
-panel.setOpaque(false);
+//panel.setOpaque(false);
         panel.setVisible(true);
         frame2.setUndecorated(true);
         frame2.add(panel);
