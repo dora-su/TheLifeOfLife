@@ -98,13 +98,23 @@ public class PopUp {
 
 				}
 			});
-
+			
+			
+			if(tile instanceof LifeTile) {
+				int moneyToRemove = 0; 
+				player1.removeMoney(moneyToRemove);
+			}else if(tile instanceof MoneyTile){
+				player1.removeMoney((((MoneyTile) tile).getMoney()));
+			}
+			
+			
 			close.setAlignmentX(JButton.CENTER_ALIGNMENT);
 			options.add(close);
 		}
 
 	}
 
+	//pop up for marriage
 	PopUp(Player player) {
 		Image popWindow = Toolkit.getDefaultToolkit().getImage("graphics/marriage.png");
 
@@ -154,5 +164,4 @@ public class PopUp {
 		close.setAlignmentX(JButton.CENTER_ALIGNMENT);
 		options.add(close);
 	}
-
 }

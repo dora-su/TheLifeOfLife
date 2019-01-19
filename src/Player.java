@@ -75,7 +75,7 @@ public class Player {
 				int decrease = 0;
 				if (Math.abs(add) < 250) {
 					decrease = 1;
-				} else if (Math.abs(add) < 500){
+				} else if (Math.abs(add) < 500) {
 					decrease = 5;
 				} else if (Math.abs(add) < 1000) {
 					decrease = 10;
@@ -122,58 +122,50 @@ public class Player {
 				if (count > 0) {
 					boolean specialPopup = false;
 					count--;
-					
+
 					//going on the next part of the map
-					if(player.tile == 18) {
+					if (player.tile == 18) {
 						player.setTile(36 + 1);
-					}else {
+					} else {
 						player.setTile(player.getTile() + 1);
 					}
-					
-				
+
 					if (player.getTile() == 36) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								//if land on a certain tile allow the player to choose career
-								new CareerSelection(true, player);
+								new CareerSelection(true, player); //if land on a certain tile allow the player to choose career
 							}
 						});
 						t.start();
 						specialPopup = true;
 						count = 0;
-					} else if (player.getTile() == 122) {
-						
+					} else if (player.getTile() == 50) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								//if land on this specific tile create house selections choices for user
-								new HouseSelection(player);
+								new HouseSelection(player); //if land on this specific tile create house selections choices for user
 							}
 						});
 						t.start();
 						specialPopup = true;
 						count = 0;
-					}else if(player.tile == 48) {
-						//if land on this specific tile the user gets married
-						new PopUp(player);
+					} else if (player.tile == 42) {
+						new PopUp(player); //if land on this specific tile the user gets married
 						Game.family.add(1);
 						specialPopup = true;
 						count = 0;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
-						
-					    //if player pass pay day tile add money to their bank balance
-						player.addMoney(career.getSalary());
-					} else if (path.get(player.getTile()) instanceof ChoiceTile) {					
-						//if the player lands on a choice tile end their turn immediately
-						count = 0;
-					} 
-					
+						player.addMoney(career.getSalary()); //if player pass pay day tile add money to their bank balance
+					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
+						count = 0; //if the player lands on a choice tile end their turn immediately
+					}
+
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.getTile()) instanceof PayDayTile)) {
-						
+
 						career.setSalary((int) (career.getSalary() * 1.05));
 					}
-					
-					if(count == 0 && player.getTile() == 2) {
+
+					if (count == 0 && player.getTile() == 2) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
 								new CareerSelection(true, player);
@@ -182,14 +174,12 @@ public class Player {
 						t.start();
 						specialPopup = true;
 					}
-					
+
 					//create a pop up with instructions if no special pop ups have been made already
 					if (count == 0 && !specialPopup) {
 						new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
 					}
-					
-					
-					
+
 				}
 			}
 		}).start();

@@ -135,8 +135,32 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 669), (int) (scaleY * 336), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 680), (int) (scaleY * 270), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 678), (int) (scaleY * 209)));
-		path.add(new Tile(681, 140));
+		path.add(new Tile((int)(scaleX*681), (int)(scaleY*140))); //tile to get married on (42)
+		
+		//tile after marriage 
+		path.add(new MoneyTile((int) (scaleX * 705), (int) (scaleY * 80), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 770), (int) (scaleY * 59), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 833), (int) (scaleY * 75)));
 
+		
+		path.add(new MoneyTile((int) (scaleX * 888), (int) (scaleY * 117), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 899), (int) (scaleY * 177), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 903), (int) (scaleY * 244), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 892), (int) (scaleY * 309)));
+		path.add(new Tile((int)(scaleX*849), (int)(scaleY*360))); //tile to buy house on (50)
+		
+		
+		path.add(new MoneyTile((int) (scaleX * 850), (int) (scaleY * 426), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 899), (int) (scaleY * 470), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 939), (int) (scaleY * 526), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 927), (int) (scaleY * 591)));
+		path.add(new MoneyTile((int) (scaleX * 886), (int) (scaleY * 642), "a", 0));
+		
+		//new path
+		path.add(new ChoiceTile((int) (scaleX * 855), (int) (scaleY * 691), "a", 123123));
+		
+		
+		
 		System.out.println("num Tile " + path.size());
 
 		//creating images for non college careers
