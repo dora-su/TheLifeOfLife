@@ -34,12 +34,12 @@ public class Client {
     private JTextArea msgArea;
     private Socket mySocket; // socket for connection
     private BufferedReader input; // reader for network stream
-    private PrintWriter output; // printwriter for network output
+    public PrintWriter output; // printwriter for network output
     private boolean running; // thread status via boolean
-    private String userName;
+    public String userName;
     private String admin;
     private Lobby l;
-    private JFrame window1;
+    public JFrame window1;
     private JLabel label;
     private ArrayList<JLabel> listData;
     private ArrayList<String> blockedUsers;
@@ -60,7 +60,7 @@ public class Client {
      * login
      * Allows the user to choose userName, server IP and the port number
      */
-    private void login() {
+    public void login() {
         //getting user userName
         String userName = JOptionPane.showInputDialog("Please enter your username (Without spaces)");
         if (userName == null) {
@@ -507,6 +507,7 @@ public class Client {
             //login();
         }
     }
+
     // EnterListener - Send message
     class EnterListener implements ActionListener {
         @Override

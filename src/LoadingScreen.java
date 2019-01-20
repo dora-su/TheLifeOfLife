@@ -1,12 +1,15 @@
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+/**
+ * Name: LoadingScreen.java
+ * Version: 1.0
+ * Authors: Chris, Dora, Eric, Jason
+ * Date: January 2, 2019
+ */
 import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoadingScreen extends JFrame {
 	static JProgressBar loadingBar;

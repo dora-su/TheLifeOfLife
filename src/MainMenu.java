@@ -50,7 +50,7 @@ public class MainMenu extends JFrame {
 
 		this.setVisible(true);
 	}
-	
+
 	private class SinglePlayerListener implements ActionListener {
 
 		@Override
@@ -72,7 +72,7 @@ public class MainMenu extends JFrame {
 			dispose();
 		}
 	}
-	
+
 	private class MultiPlayerListener implements ActionListener {
 
 		@Override
