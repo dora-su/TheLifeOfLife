@@ -153,20 +153,20 @@ public class MainMenu extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			Thread t1 = new Thread(new Runnable() {
-				public void run() {
+			//Thread t1 = new Thread(new Runnable() {
+				//public void run() {
 					//new Server().go();
 					new Server();
-				}
-			});
+				//}
+			//});
 			Thread t2 = new Thread(new Runnable() {
 				public void run() {
 					//new Client().login();
 				}
 			});
-			t1.setPriority(5);
+			//t1.setPriority(5);
 			t2.setPriority(10);
-			t1.start();
+			//t1.start();
 			t2.start();
 			dispose();
 			

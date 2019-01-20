@@ -59,7 +59,13 @@ class Server extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				go(port.getText());
+				Thread t1 = new Thread(new Runnable() {
+					public void run() {
+						//new Server().go();
+						go(port.getText());
+					}
+				});
+				t1.start();
 				
 			}
 			
