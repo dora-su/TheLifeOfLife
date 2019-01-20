@@ -19,7 +19,8 @@ public class Player {
 	private boolean college;
 	private int add;
 	private int count;
-
+	int family;
+	Client c;
 	Player(String name) {
 		this.name = name;
 		tile = 0;
@@ -28,8 +29,11 @@ public class Player {
 		add = 0;
 		count = 0;
 		money = 1000000;
+		family = 0;
 	}
-
+	public void setClient(Client c) {
+		this.c = c;
+	}
 	public String getName() {
 		return name;
 	}
@@ -90,10 +94,15 @@ public class Player {
 				if (add > 0) {
 					add -= decrease;
 					player.setMoney(player.money + decrease);
+					
 				} else if (add < 0) {
 					add += decrease;
 					player.setMoney(player.getMoney() - decrease);
+					
 				}
+				c.output.println(c.userName);
+				c.output.println("/status " + (player.money));
+				c.output.flush();
 			}
 		}).start();
 	}
@@ -118,7 +127,7 @@ public class Player {
 		return college;
 	}
 
-	public void move(int spin, ArrayList<ActionTile> path) {
+	public void move(Game g, int spin, ArrayList<ActionTile> path, boolean popUp) {
 		count += spin;
 		new Timer(500, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -133,38 +142,44 @@ public class Player {
 						player.setTile(75 + 1);
 					} else if(player.tile == 89){
 						player.tile = 106;
-					}else {
+					} else {
 						player.setTile(player.getTile() + 1);
 					}
 					
-
+					
 					if (player.getTile() == 35) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new CareerSelection(false, player); //if land on a certain tile allow the player to choose career
+								if (popUp) new CareerSelection(false, player); //if land on a certain tile allow the player to choose career
+								g.turn++;
 							}
 						});
 						t.start();
 						specialPopup = true;
 						count = 0;
 					} else if (player.getTile() == 50) {
-						Thread t = new Thread(new Runnable() {
-							public void run() {
-								new HouseSelection(player); //if land on this specific tile create house selections choices for user
-							}
-						});
-						t.start();
+							Thread t = new Thread(new Runnable() {
+								public void run() {
+									if (popUp)new HouseSelection(player); //if land on this specific tile create house selections choices for user
+									g.turn++;
+								}
+							});
+							t.start();
+						
 						specialPopup = true;
 						count = 0;
 					} else if (player.tile == 42) {
-						new PopUp(player); //if land on this specific tile the user gets married
-						Game.family.add(1);
+						if (popUp) {
+							new PopUp(player); //if land on this specific tile the user gets married
+							family++;
+						}
 						specialPopup = true;
 						count = 0;
 					} else if (player.tile == 75) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new CareerSelection(true, player);
+								if (popUp) new CareerSelection(true, player);
+								g.turn++;
 							}
 						});
 						t.start();
@@ -184,7 +199,8 @@ public class Player {
 					if (count == 0 && player.getTile() == 2) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new CareerSelection(true, player);
+								if (popUp) new CareerSelection(true, player);
+								g.turn++;
 							}
 						});
 						t.start();

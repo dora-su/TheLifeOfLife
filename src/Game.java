@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 class Game extends JFrame {
 
@@ -32,15 +33,16 @@ class Game extends JFrame {
 	static Image careerPlaceHolder, housePlaceHolder;
 	Image spinPic, hoverSpinPic;
 	Image chatPic, hoverChatPic;
-	Player player1;
 	ImageIcon icon;
+	int turn;
 
 	ArrayList<Player> players = new ArrayList<Player>();
 	static ArrayList<ActionTile> path;
 	static ArrayList<Career> collegeCareers;
 	static ArrayList<Career> normalCareers;
 	static ArrayList<Property> properties;
-
+	static boolean[] soldProperties;
+	
 	//variables for spinner
 	static boolean finished = false;
 	boolean spinText;
@@ -48,15 +50,15 @@ class Game extends JFrame {
 	static int rollNum = -1;
 	static Random rand = new Random();
 	static JLabel rollText;
-	static Clock c = new Clock();
+	static Client c;
 	JButton chat, menu;
 	static JButton spin;
 	static JButton myCareer, myHouse;
-
+	Player player;
 	JFrame careerFrame, houseFrame;
 	static JLabel careerLabel;
 	static JLabel houseLabel;
-
+	Game g;
 	Polygon p;
 
 	static double screenX = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -67,15 +69,24 @@ class Game extends JFrame {
 	static double scaleX = screenX / 1920.0;
 	static double scaleY = screenY / 1200.0;
 
-	static ArrayList<Integer> family;
-
 	DecimalFormat myFormatter;
 
 	Font font1, font2;
 
 	// Constructor - this runs first
-	Game() {
+	Game(Client c, Set<String> set, String pl) {
 		super("My Game");
+		this.c = c;
+		turn = 0;
+		for (String S : set) {
+			if (S.equals(pl)) {
+				this.player = new Player(S);
+				player.setClient(c);
+				players.add(this.player);
+			} else {
+				players.add(new Player(S));
+			}
+		}
 		// Set the frame to full screen
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize((int) screenX, (int) screenY);
@@ -309,6 +320,8 @@ class Game extends JFrame {
 		properties.add(new Property("Igloo", 500, igloo));
 		properties.add(new Property("bungalow", 500, bungalow));
 
+		soldProperties = new boolean[properties.size()];
+		
 		// resizing the properties to size based off screen 
 		for (int i = 0; i < properties.size(); i++) {
 			Property p = properties.get(i);
@@ -357,10 +370,6 @@ class Game extends JFrame {
 		housePlaceHolder = housePlaceHolder.getScaledInstance((int) (114 * scaleX), (int) (184 * scaleY),
 				Image.SCALE_DEFAULT);
 
-		//declaring new players and setting their name and money 
-		player1 = new Player("Eric");
-		players.add(player1);
-
 		//creating the game area panel
 		gameAreaPanel = new GameAreaPanel();
 		gameAreaPanel.setLayout(new BoxLayout(gameAreaPanel, BoxLayout.Y_AXIS));
@@ -374,13 +383,11 @@ class Game extends JFrame {
 
 		this.setContentPane(gameAreaPanel);
 		this.requestFocusInWindow();
-		this.setUndecorated(true);
+//		this.setUndecorated(true);
 
 		//adding mouse listener for interactive features
 		MyMouseListener mouseListener = new MyMouseListener();
 		this.addMouseListener(mouseListener);
-
-		family = new ArrayList<Integer>();
 
 		//creating polygon for spinner 
 		p = new Polygon();
@@ -463,10 +470,10 @@ class Game extends JFrame {
 				houseFrame.setUndecorated(true);
 				houseFrame.setResizable(false);
 
-				if (player1.getProperty().size() > 0) {
+				if (player.getProperty().size() > 0) {
 					//if the player owns a property then enlarge the photo 
 					JLabel image = new JLabel(new ImageIcon(
-							"graphics/homes/" + player1.getProperty().get(0).getName().toLowerCase() + ".png"));
+							"graphics/homes/" + player.getProperty().get(0).getName().toLowerCase() + ".png"));
 					houseFrame.add(image);
 
 					houseFrame.setVisible(true);
@@ -524,10 +531,10 @@ class Game extends JFrame {
 				careerFrame.setUndecorated(true);
 				careerFrame.setResizable(false);
 
-				if (player1.getCareer() != null) {
+				if (player.getCareer() != null) {
 
 					JLabel image = new JLabel(new ImageIcon(
-							"graphics/careers/" + player1.getCareer().getCareerName().toLowerCase() + ".png"));
+							"graphics/careers/" + player.getCareer().getCareerName().toLowerCase() + ".png"));
 					careerFrame.add(image);
 					careerFrame.setVisible(true);
 				}
@@ -585,7 +592,7 @@ class Game extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				c.window1.setVisible(!c.window1.isVisible());
 			}
 
 		});
@@ -621,14 +628,15 @@ class Game extends JFrame {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			setDoubleBuffered(true);
-
+			
 			//drawing background map
 			g.drawImage(map, 0, 0, null);
-			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
-
+			for (Player p : players) {
+				g.drawImage(mango1, path.get(player.getTile()).getX() - 17, path.get(player.getTile()).getY() - 17, null);
+			}
 			// draw bottom game menu image
 			g.setFont(font1);
-			String money = myFormatter.format(player1.getMoney());
+			String money = myFormatter.format(player.getMoney());
 			g.drawString(money, 995, 1027);
 
 			//drawing player icon
@@ -637,10 +645,10 @@ class Game extends JFrame {
 			g.drawImage(playerIcon, (int) (1570 * scaleX), (int) (1050 * scaleY), null);
 
 			//showing family
-			if (family.size() != 0) {
+			if (player.family != 0) {
 				g.setColor(Color.pink);
 				g.fillOval((int) (1490 * scaleX), (int) (1100 * scaleY), 40, 40);
-				for (int i = 1; i < family.size(); i++) {
+				for (int i = 1; i < player.family; i++) {
 					g.setColor(new Color(0, 0, 182, 155));
 					g.fillOval((int) ((1490 * scaleX) + (i * 60)), (int) (1100 * scaleY), 40, 40);
 				}
@@ -649,7 +657,7 @@ class Game extends JFrame {
 			// draw player name on screen
 			g.setColor(Color.BLACK);
 			g.setFont(font2);
-			g.drawString(player1.getName(), (int) (1489 * scaleX), (int) (1090 * scaleY));
+			g.drawString(player.getName(), (int) (1489 * scaleX), (int) (1090 * scaleY));
 			// spinner
 			BufferedImage image = null;
 			try {
@@ -669,7 +677,6 @@ class Game extends JFrame {
 				// Thread.sleep(100);
 			} catch (Exception e) {
 			}
-
 			repaint();
 		}
 
@@ -700,11 +707,16 @@ class Game extends JFrame {
 		}
 
 	}
-
+	static double vel, accel, distance;
+	static void spin(double dist) {
+		distance = dist;
+		vel = dist / 80.0;
+		accel = -dist / 10000.0;
+		System.out.println("SPIN");
+	}
 	private class SpinnerListener implements ActionListener {
 
 		boolean running = false;
-		double dist, vel, accel;
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -716,6 +728,7 @@ class Game extends JFrame {
 				if (vel > 0) {
 					//					double deltad = vel * c.getElapsedTime();
 					rotate -= vel;
+					distance = 0;
 					// end dist
 				} else {
 					for (int j = 0; j < 5; j++) {
@@ -725,8 +738,8 @@ class Game extends JFrame {
 						}
 						angle = 360 - angle;
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
-							System.out.println(j + 1);
-							player1.move(j + 1, path);
+							players.get(turn % players.size()).move(g, j + 1, path, players.get(turn % players.size()).equals(player));
+							turn++;
 							//player1.move(1,path);
 						}
 					}
@@ -738,12 +751,9 @@ class Game extends JFrame {
 				// so the spinner slows down
 				vel += accel;
 				// if not running, start running
-			} else if (spinText) {
+			} else if (distance > 0) {
 				finished = false;
-				dist = rand.nextInt(360) + 5000;
 				running = true;
-				vel = dist / 80.0;
-				accel = -dist / 10000.0;
 				gameAreaPanel.setEnabled(true);
 			}
 		}
@@ -753,7 +763,11 @@ class Game extends JFrame {
 	class RollListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			spinText = true;
+			if (players.get(turn % players.size()).equals(player)) {
+				c.output.println(player.getName());
+				c.output.println("/spin " + (rand.nextInt(360) + 5000));
+				c.output.flush();
+			}
 		}
 	}
 

@@ -71,7 +71,13 @@ public class CareerSelection extends JFrame {
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {}
-		careers.remove(index);
+		player.c.output.println(player.c.userName);
+		if (college) {
+			player.c.output.println("/removecc " + index);
+		} else {
+			player.c.output.println("/removec " + index);
+		}
+		player.c.output.flush();
 
 		Game.gameFrame.setEnabled(true);
 		dispose();

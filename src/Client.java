@@ -24,6 +24,7 @@ class Client {
 	private ArrayList<JLabel> listData;
 	private ArrayList<String> blockedUsers;
 	private HashMap<String, String> map;
+	Game g;
 
 	/**
 	 * Main
@@ -179,7 +180,7 @@ class Client {
 			output.flush();
 			
 			//setting status of user to active
-			label = new JLabel(userName + " - Active");
+			label = new JLabel(userName + " - $10000000");
 			listData.add(label);
 			status.add(label);
 			status.revalidate();
@@ -206,27 +207,18 @@ class Client {
 					break;
 				}
 				//get the status that the user would like to change to
-				int statusNum = Integer.parseInt(input.readLine());
-				String statusStr = "";
+				String money = input.readLine();
+
 				//Changed user status based on the user's command
-				if (statusNum == 1) {
-					statusStr = "Active";
-				} else if (statusNum == 2) {
-					statusStr = "Offline";
-				} else if (statusNum == 3) {
-					statusStr = "Do not disturb";
-				}
 				// checks for valid status
-				if (statusStr.equals("")) {
-					continue;
-				}
+				
 				//updating the user's new status
-				label = new JLabel(userName + " - " + statusStr);
+				label = new JLabel(userName + " - $" + money);
 				listData.add(label);
 				status.add(label);
 				status.revalidate();
 				status.repaint();
-				map.put(userName, statusStr);
+				map.put(userName, money);
 			}
 		} catch (IOException e) { // connection error occurred
 			//Show that connection to server failed 
@@ -261,6 +253,7 @@ class Client {
 					if ((!blockedUsers.contains(user) && !blockedUsers.contains(privateMessage))|| user.equals("admin")) {
 						
 						// admin command
+						System.out.println(msg );
 						if (user.equals(admin) && msg.startsWith("/")) {
 							
 							// user is banned
@@ -322,52 +315,45 @@ class Client {
 								System.exit(-1);
 							} else if (msg.equals("/start")) {
 								l.dispose();
-								new Game();
+								g = new Game(this,map.keySet(),userName);
 							}
 						}
-						
-						// user disconnects
 						if (msg.equals("")) {
 							msgArea.append(user + " disconnected.\n");
 							
 							// update status
 						} else if (msg.startsWith("/status")) {
-							int statusNum = Integer.parseInt(msg.split(" ")[1]);
-							String statusStr = "";
-							if (statusNum == 1) {
-								statusStr = "Active";
-							} else if (statusNum == 2) {
-								statusStr = "Offline";
-							} else if (statusNum == 3) {
-								statusStr = "Do not disturb";
-							}
-							
-							// check for invalid status
-							if (statusStr.equals("")) {
-								break;
-							}
+							String money = msg.split(" ")[1];
 							
 							// new user joining
 							if (!map.containsKey(user)) {
-								label = new JLabel(user + " - " + statusStr);
+								label = new JLabel(user + " - $" + money);
 								listData.add(label);
 								status.add(label);
 								status.revalidate();
 								status.repaint();
 								msgArea.append(user + " joined the chat.\n");
-								map.put(user, statusStr);
+								map.put(user, money);
 							} else {
-									
 								// update status and not new
 								for (int i = 0; i < listData.size(); i++) {
 									if (listData.get(i).getText().startsWith(user + " ")) {
-										listData.get(i).setText(user + " - " + statusStr);
+										listData.get(i).setText(user + " - " + money);
 										status.revalidate();
 										status.repaint();
-										map.put(user, statusStr);
+										map.put(user, money);
 									}
 								}
 							}
+						} else if (msg.startsWith("/spin")) {
+							System.out.println("SI");
+							Game.spin(Double.parseDouble(msg.split(" ")[1]));
+						} else if (msg.startsWith("/removep")) {
+							g.soldProperties[Integer.parseInt(msg.split(" ")[1])] = true;
+						} else if (msg.startsWith("/removecc")) {
+							g.collegeCareers.remove(Integer.parseInt(msg.split(" ")[1]));
+						} else if (msg.startsWith("/removec")) {
+							g.normalCareers.remove(Integer.parseInt(msg.split(" ")[1]));
 						} else {
 							// regular user message
 							msgArea.append(user + ": " + msg + "\n");
@@ -411,8 +397,6 @@ class Client {
 					msgArea.append("/kick userName - kicks user from server\n");
 					msgArea.append("/block userName - ignores all message from user\n");
 					msgArea.append("/msg userName message - sends a private message to user\n");
-					msgArea.append("/status - sets your status");
-					msgArea.append("1 for active, 2 for offline, 3 for do not disturb\n");
 				
 				// stops server
 				} else if (msg.startsWith("/stop")) {
@@ -470,14 +454,6 @@ class Client {
 				} else if (msg.startsWith("/msg")) {
 					output.println(userName);
 					output.println(msg);
-				} else if (msg.startsWith("/status")) {
-					String[] split = msg.split(" ");
-					if (split.length == 2 && split[1].matches("[1-3]")) {
-						output.println(userName);
-						output.println(msg);
-					} else {
-						msgArea.append("Invalid status!\n");
-					}
 				} else {
 					msgArea.append("Invalid command!\n");
 				}
@@ -499,10 +475,6 @@ class Client {
 	// QuitButtonListener - Quit the program
 	class QuitButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			// reports user as offline
-			output.println(userName);
-			output.println("/status 2");
-			output.flush();
 			
 			// tells everyone user has disconnected
 			output.println(userName);
@@ -531,8 +503,6 @@ class Client {
 					msgArea.append("/kick userName - kicks user from server\n");
 					msgArea.append("/block userName - ignores all message from user\n");
 					msgArea.append("/msg userName message - sends a private message to user\n");
-					msgArea.append("/status - sets your status");
-					msgArea.append("1 for active, 2 for offline, 3 for do not disturb\n");
 				
 				// stops server
 				} else if (msg.startsWith("/stop")) {
@@ -590,14 +560,6 @@ class Client {
 				} else if (msg.startsWith("/msg")) {
 					output.println(userName);
 					output.println(msg);
-				} else if (msg.startsWith("/status")) {
-					String[] split = msg.split(" ");
-					if (split.length == 2 && split[1].matches("[1-3]")) {
-						output.println(userName);
-						output.println(msg);
-					} else {
-						msgArea.append("Invalid status!\n");
-					}
 				} else {
 					msgArea.append("Invalid command!\n");
 				}

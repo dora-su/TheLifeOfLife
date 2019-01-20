@@ -93,9 +93,9 @@ class Server {
 				//add the client to the client list and set as active
 				for (Client c : clientList) {
 					pw.println(c.user);
-					pw.println(c.status);
+					pw.println(c.status = 1000000);
 					c.output.println(userName);
-					c.output.println("/status 1");
+					c.output.println("/status 1000000");
 					c.output.flush();
 				}
 
@@ -158,6 +158,7 @@ class Server {
 					if (input.ready()) { // check for an incoming messge
 						username = input.readLine(); //get userName from client
 						msg = input.readLine(); // get a message from the client
+						System.out.println(msg);
 						//check if the message is a command 
 						if (msg.startsWith("/")) {
 							if (msg.startsWith("/stop")) {
@@ -190,7 +191,7 @@ class Server {
 									clientList.remove(banned);
 									for (Client c : clientList) {
 										c.output.println(banned.user);
-										c.output.println("/status 2");
+										c.output.println("/status -999999999");
 										c.output.flush();
 									}
 								}
@@ -212,7 +213,7 @@ class Server {
 									clientList.remove(kicked);
 									for (Client c : clientList) {
 										c.output.println(kicked.user);
-										c.output.println("/status 2");
+										c.output.println("/status -999999999");
 										c.output.flush();
 									}
 								}
@@ -277,6 +278,12 @@ class Server {
 								}
 							} else if (msg.equals("/unready")) {
 								ready--;
+							} else if (msg.startsWith("/spin") || msg.startsWith("/remove")) {
+								for (Client c : clientList) {
+									c.output.println(username);
+									c.output.println(msg);
+									c.output.flush();
+								}
 							}
 						} else {
 							//if not special command send message to everyone 
