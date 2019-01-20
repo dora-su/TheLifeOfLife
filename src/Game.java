@@ -3,8 +3,10 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Toolkit;
@@ -16,6 +18,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -63,7 +66,10 @@ class Game extends JFrame {
 	static double scaleY = screenY / 1200.0;
 
 	static ArrayList<Integer> family;
+	
+	DecimalFormat myFormatter;
 
+	Font font1,font2;
 	// Constructor - this runs first
 	Game() {
 		super("My Game");
@@ -75,7 +81,8 @@ class Game extends JFrame {
 		this.setIconImage(icon.getImage());
 		System.out.println(screenX + " " + screenY);
 		gameFrame = this;
-		//declaring initial arraylists
+
+		myFormatter = new DecimalFormat("###,###.###");
 
 		//adding location and function of every tile to scale
 		path = new ArrayList<ActionTile>();
@@ -340,7 +347,7 @@ class Game extends JFrame {
 				Image.SCALE_DEFAULT);
 
 		//declaring new players and setting their name and money 
-		player1 = new Player("Eric", 1200);
+		player1 = new Player("Eric");
 		players.add(player1);
 
 		//creating the game area panel
@@ -512,9 +519,12 @@ class Game extends JFrame {
 
 		//adding my carrer to the bottom panel
 		bottomPanel.add(myCareer);
-		bottomPanel.add(Box.createRigidArea(new Dimension((int) (scaleX * 1000), 0)));
+		bottomPanel.add(Box.createRigidArea(new Dimension((int) (scaleX * 900), 0)));
 
-		close = new JButton("Close");
+		close = new JButton(new ImageIcon("graphics/chat.png"));
+		close.setContentAreaFilled(false);
+		close.setBorderPainted(false);
+		close.setFocusPainted(false);
 		bottomPanel.add(close);
 		close.addActionListener(new ActionListener() {
 
@@ -528,7 +538,26 @@ class Game extends JFrame {
 
 		this.setVisible(true);
 
-		player1.move(1, path);
+		try {
+			font1 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf")).deriveFont(80f);
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(font1);
+		} catch (FontFormatException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	
+		try{
+            font2 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")));
+        }catch(IOException | FontFormatException e){
+            e.printStackTrace();
+        }
+		
+		
+	//	player1.move(1, path);
 	} // End of Constructor
 
 	/**
@@ -544,13 +573,13 @@ class Game extends JFrame {
 			g.drawImage(mango1, path.get(player1.getTile()).getX() - 17, path.get(player1.getTile()).getY() - 17, null);
 
 			// draw bottom game menu image
-			g.setFont(new Font("langdon", Font.PLAIN, 100));
-			g.drawString(Integer.toString(player1.getMoney()), 995, 1027);
+			g.setFont(font1);
+			g.drawString(myFormatter.format(player1.getMoney()), 995, 1027);
 
 			//drawing player icon
 			Image playerIcon = mango1;
 			//playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
-			g.drawImage(playerIcon, 1800, 980, null);
+			g.drawImage(playerIcon, (int)(1570*scaleX), (int)(1050 * scaleY), null);
 
 			//showing family
 			if (family.size() != 0) {
@@ -564,7 +593,7 @@ class Game extends JFrame {
 
 			// draw player name on screen
 			g.setColor(Color.BLACK);
-			g.setFont(new Font("Arial", Font.PLAIN, 35));
+			g.setFont(font2);
 			g.drawString(player1.getName(), (int) (1489 * scaleX), (int) (1090 * scaleY));
 			// spinner
 			BufferedImage image = null;
@@ -588,6 +617,7 @@ class Game extends JFrame {
 
 			repaint();
 		}
+		
 	}
 
 	private class MyMouseListener implements MouseListener {

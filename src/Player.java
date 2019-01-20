@@ -15,20 +15,19 @@ public class Player {
 	private int child;
 	private int tile;
 	private int money;
-	private int destination;
 	private Player player;
 	private boolean college;
 	private int add;
 	private int count;
 
-	Player(String name, double balance) {
+	Player(String name) {
 		this.name = name;
 		tile = 0;
 		property = new ArrayList<Property>();
 		this.player = this;
-		destination = 0;
 		add = 0;
 		count = 0;
+		money = 1000000;
 	}
 
 	public String getName() {
@@ -142,7 +141,7 @@ public class Player {
 					if (player.getTile() == 35) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								new CareerSelection(true, player); //if land on a certain tile allow the player to choose career
+								new CareerSelection(false, player); //if land on a certain tile allow the player to choose career
 							}
 						});
 						t.start();

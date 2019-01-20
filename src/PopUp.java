@@ -18,13 +18,13 @@ public class PopUp {
 		Image popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
 		JFrame popUp = new JFrame();
-		
+
 		popUp.setUndecorated(true);
 		popUp.setResizable(true);
 		popUp.setAlwaysOnTop(true);
 		Game.gameFrame.setEnabled(false);
-		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 150));
-		popUp.setSize(400, 250);
+		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 159));
+		popUp.setSize(400, 317);
 
 		//set icon image
 		icon = new ImageIcon("graphics/icon.png");
@@ -51,15 +51,15 @@ public class PopUp {
 		panel.add(Box.createRigidArea(new Dimension(0, 78)));
 
 		panel.add(messageLabel);
-		panel.add(Box.createRigidArea(new Dimension(0, 96)));
+		panel.add(Box.createRigidArea(new Dimension(0, 163)));
 		JPanel options = new JPanel();
 		options.setOpaque(false);
-		;
+		
 		popUp.add(options);
 
 		if (tile instanceof ChoiceTile) {
-			JButton option1 = new JButton("Option 1");
-			JButton option2 = new JButton("Option 2");
+			JButton option1 = new JButton("No");
+			JButton option2 = new JButton("Yes");
 			option1.setFocusPainted(false);
 			option1.setFocusPainted(false);
 
@@ -89,6 +89,19 @@ public class PopUp {
 			options.add(Box.createRigidArea(new Dimension(50, 0)));
 			options.add(option2);
 
+		} else if (tile instanceof SpinToWinTile) {
+			JButton spin = new JButton("Spin");
+			spin.setFocusPainted(false);
+			spin.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Game.gameFrame.setEnabled(true);
+					popUp.dispose();
+
+				}
+			});
+			
+			
 		} else {
 			// adding a close button after the message is displayed
 			JButton close = new JButton("Close");
@@ -101,16 +114,14 @@ public class PopUp {
 
 				}
 			});
-			
-			
-			if(tile instanceof LifeTile) {
-				int moneyToRemove = 0; 
+
+			if (tile instanceof LifeTile) {
+				int moneyToRemove = 0;
 				player1.removeMoney(moneyToRemove);
-			}else if(tile instanceof MoneyTile){
+			} else if (tile instanceof MoneyTile) {
 				player1.removeMoney((((MoneyTile) tile).getMoney()));
 			}
-			
-			
+
 			close.setAlignmentX(JButton.CENTER_ALIGNMENT);
 			options.add(close);
 		}
