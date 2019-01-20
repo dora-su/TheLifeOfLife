@@ -90,6 +90,7 @@ class Game extends JFrame {
 		// Set the frame to full screen
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize((int) screenX, (int) screenY);
+		this.setUndecorated(true);
 		//setting icon
 		icon = new ImageIcon("graphics/icon.png");
 		this.setIconImage(icon.getImage());

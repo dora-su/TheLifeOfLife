@@ -85,7 +85,7 @@ public class PopUp {
 				public void actionPerformed(ActionEvent arg0) {
 					// go to new index
 
-					player1.move(1, Game.path);
+					Game.spin.doClick();
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
 				}
