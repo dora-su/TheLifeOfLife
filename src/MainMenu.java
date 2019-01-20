@@ -44,7 +44,6 @@ public class MainMenu extends JFrame {
 		options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
 		options.setOpaque(false);
 		options.setAlignmentX(LEFT_ALIGNMENT);
-		options.setSize(this.size());
 		JButton host = new JButton(new ImageIcon("graphics/host.png"));
 		host.setContentAreaFilled(false);
 		host.setFocusPainted(false);
@@ -153,14 +152,16 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			
 			Thread t1 = new Thread(new Runnable() {
 				public void run() {
-					new Server().go();
+					//new Server().go();
+					new Server();
 				}
 			});
 			Thread t2 = new Thread(new Runnable() {
 				public void run() {
-					new Client().login();
+					//new Client().login();
 				}
 			});
 			t1.setPriority(5);
@@ -168,6 +169,8 @@ public class MainMenu extends JFrame {
 			t1.start();
 			t2.start();
 			dispose();
+			
+			
 		}
 	}
 

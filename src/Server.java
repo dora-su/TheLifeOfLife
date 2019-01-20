@@ -1,12 +1,24 @@
 //imports for network communication
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-class Server {
+class Server extends JFrame {
 
 	//Declaring variables
 	ServerSocket serverSock;// server socket for connection
@@ -16,7 +28,9 @@ class Server {
 	static ArrayList<InetAddress> bannedIps = new ArrayList<InetAddress>();
 	static HashMap<String, Client> map = new HashMap<String, Client>();
 	static int ready;
+	JFrame frame;
 
+	Image background;
 	/**
 	 * Main
 	 * Runs the server
@@ -26,19 +40,60 @@ class Server {
 //		new ChatServer().go(); // start the server
 //	}
 
+	Server(){
+		
+		frame = this;
+		JPanel panel = new Panel();
+		JTextArea port = new JTextArea("5000");
+		
+		this.setSize(911, 561);
+		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
+		port.setSize(200,30);
+		port.setLocation(500, 50);
+		panel.setLayout(null);
+		
+		
+		JButton start = new JButton("Start");
+		start.setBounds(500, 300,120,30);
+		start.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				go(port.getText());
+				
+			}
+			
+		});
+		
+		panel.add(Box.createRigidArea(new Dimension(500, 0)));
+		panel.add(start);
+		panel.add(port);
+		
+		
+		this.setResizable(false);
+		this.setContentPane(panel);
+		this.setVisible(true);
+		
+	
+		background = Toolkit.getDefaultToolkit().getImage("graphics/mainmenu.png");
+		
+		
+		
+	}
 	/**
 	 * Go 
 	 * Starts the server
 	 */
-	public void go() {
+	public void go(String portNum) {
 		
 		//allowing the user to choose the port to connect to 
-		String portNum = "";
-		while (!portNum.matches("[0-9]+")) {
-			portNum = JOptionPane.showInputDialog("Please enter the port number");
-			System.out.println("Server started on port " + portNum);
-		}
-
+		//String portNum = "";
+//		while (!portNum.matches("[0-9]+")) {
+//			portNum = JOptionPane.showInputDialog("Please enter the port number");
+//			System.out.println("Server started on port " + portNum);
+//		}
+		
+	
 		//displaying the server Ip for clients to connect to
 		Thread t1 = new Thread(new displayServer());
 		t1.start();
@@ -358,6 +413,16 @@ class Server {
 				JOptionPane.showMessageDialog(null, "Error receiving Ip Address");
 			}
 			return;
+		}
+	}
+	
+	private class Panel extends JPanel{
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g); // required
+			this.setDoubleBuffered(true);
+			g.drawImage(background, 0, 0, null);
+			repaint();
+
 		}
 	}
 } // end of Class
