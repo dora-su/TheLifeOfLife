@@ -88,9 +88,10 @@ class Game extends JFrame {
 		//adding location and function of every tile to scale
 		path = new ArrayList<ActionTile>();
 		path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
-		path.add(new ChoiceTile((int) (scaleX * 174), (int) (scaleY * 446), "Would You Like to Go to College", 19));
+		path.add(new ChoiceTile((int) (scaleX * 174), (int) (scaleY * 446), "Would You Like to Go to College", 18));
 
 		//good
+		//path.add(new MoneyTile((int) (scaleX * 165), (int) (scaleY * 515), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 240), (int) (scaleY * 452), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 303), (int) (scaleY * 431), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 321), (int) (scaleY * 371), "a", 0));
