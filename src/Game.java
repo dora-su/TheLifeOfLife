@@ -644,7 +644,7 @@ class Game extends JFrame {
             // draw bottom game menu image
             g.setFont(font1);
             String money = myFormatter.format(player.getMoney());
-            g.drawString(money, 995, 1027);
+            g.drawString(money, (int) (995 * scaleX), (int) (1027 * scaleY));
 
             //drawing player icon
             Image playerIcon = mango1;
