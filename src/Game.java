@@ -66,10 +66,11 @@ class Game extends JFrame {
 	static double scaleY = screenY / 1200.0;
 
 	static ArrayList<Integer> family;
-	
+
 	DecimalFormat myFormatter;
 
-	Font font1,font2;
+	Font font1, font2;
+
 	// Constructor - this runs first
 	Game() {
 		super("My Game");
@@ -521,7 +522,10 @@ class Game extends JFrame {
 		bottomPanel.add(myCareer);
 		bottomPanel.add(Box.createRigidArea(new Dimension((int) (scaleX * 900), 0)));
 
-		close = new JButton(new ImageIcon("graphics/chat.png"));
+		Image chat = Toolkit.getDefaultToolkit().getImage("graphics/chat.png");
+		chat = chat.getScaledInstance((int) (128 * scaleX), (int) (128 * scaleY), Image.SCALE_DEFAULT);
+		
+		close = new JButton(new ImageIcon(chat));
 		close.setContentAreaFilled(false);
 		close.setBorderPainted(false);
 		close.setFocusPainted(false);
@@ -579,7 +583,7 @@ class Game extends JFrame {
 			//drawing player icon
 			Image playerIcon = mango1;
 			//playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
-			g.drawImage(playerIcon, (int)(1570*scaleX), (int)(1050 * scaleY), null);
+			g.drawImage(playerIcon, (int) (1570 * scaleX), (int) (1050 * scaleY), null);
 
 			//showing family
 			if (family.size() != 0) {
@@ -617,7 +621,7 @@ class Game extends JFrame {
 
 			repaint();
 		}
-		
+
 	}
 
 	private class MyMouseListener implements MouseListener {
