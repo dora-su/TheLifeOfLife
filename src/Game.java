@@ -182,8 +182,71 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 949), "a", 0)); 
 		
 		//path 77
-		path.add(new MoneyTile((int) (scaleX * 1460), (int) (scaleY * 925), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1464), (int) (scaleY * 931), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1525), (int) (scaleY * 915), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1577), (int) (scaleY * 874)));
 		
+		path.add(new MoneyTile((int) (scaleX * 1604), (int) (scaleY * 813), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1595), (int) (scaleY * 749), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1526), (int) (scaleY * 717), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1465), (int) (scaleY * 697)));
+		
+		path.add(new MoneyTile((int) (scaleX * 1128), (int) (scaleY * 612), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1148), (int) (scaleY * 549), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1193), (int) (scaleY * 503), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1239), (int) (scaleY * 449)));
+		
+		path.add(new MoneyTile((int) (scaleX * 1244), (int) (scaleY * 393), "a", 0));
+		
+		//decision point (89)
+		path.add(new ChoiceTile((int) (scaleX * 1214), (int) (scaleY * 326), "a", 99));
+		
+		//path 1
+		path.add(new MoneyTile((int) (scaleX * 1183), (int) (scaleY * 276), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1155), (int) (scaleY * 212)));
+		path.add(new MoneyTile((int) (scaleX * 1142), (int) (scaleY * 152), "a", 0));
+		
+		path.add(new MoneyTile((int) (scaleX * 1183), (int) (scaleY * 103), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1245), (int) (scaleY * 89), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1305), (int) (scaleY * 79)));
+		
+		path.add(new MoneyTile((int) (scaleX * 1386), (int) (scaleY * 84), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1446), (int) (scaleY * 98), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1516), (int) (scaleY * 134), "a", 0));
+		
+		//path 2 (99)
+		path.add(new MoneyTile((int) (scaleX * 1271), (int) (scaleY * 299), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 266), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 246), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1459), (int) (scaleY * 261), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1524), (int) (scaleY * 267), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1585), (int) (scaleY * 233), "a", 0));
+		
+		//new stop sign 
+		path.add(new Tile((int) (scaleX * 1601), (int) (scaleY * 167)));
+		path.add(new PayDayTile((int) (scaleX * 1572), (int) (scaleY * 111)));
+		
+		
+		path.add(new MoneyTile((int) (scaleX * 1645), (int) (scaleY * 89), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1702), (int) (scaleY * 77), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1780), (int) (scaleY * 85), "a", 0));
+		path.add(new PayDayTile((int) (scaleX * 1821), (int) (scaleY * 131)));
+
+		//stop
+		path.add(new Tile((int) (scaleX * 1818), (int) (scaleY * 143)));
+		
+		
+		path.add(new MoneyTile((int) (scaleX * 1810), (int) (scaleY * 270), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1802), (int) (scaleY * 337), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1788), (int) (scaleY * 399), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1775), (int) (scaleY * 459), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1767), (int) (scaleY * 530), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1766), (int) (scaleY * 593), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1769), (int) (scaleY * 657), "a", 0));
+		path.add(new MoneyTile((int) (scaleX * 1778), (int) (scaleY * 723), "a", 0));
+		
+		//final stop 
+		path.add(new Tile((int) (scaleX * 1790), (int) (scaleY * 786)));
 		
 		System.out.println("num Tile " + path.size());
 
@@ -578,8 +641,8 @@ class Game extends JFrame {
 						angle = 360 - angle;
 						if (angle >= j * 72 && angle < (j + 1) * 72) {
 							System.out.println(j + 1);
-							//player1.move(j + 1, path);
-							player1.move(1,path);
+							player1.move(j + 1, path);
+							//player1.move(1,path);
 						}
 					}
 					finished = true;

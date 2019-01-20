@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
+import com.sun.media.jfxmedia.events.PlayerTimeListener;
+
 public class Player {
 
 	private String name;
@@ -21,7 +23,7 @@ public class Player {
 
 	Player(String name, double balance) {
 		this.name = name;
-		tile = 55;
+		tile = 0;
 		property = new ArrayList<Property>();
 		this.player = this;
 		destination = 0;
@@ -130,7 +132,9 @@ public class Player {
 						player.setTile(35 + 1);
 					} else if (player.tile == 66) {
 						player.setTile(75 + 1);
-					} else {
+					} else if(player.tile == 89){
+						player.tile = 106;
+					}else {
 						player.setTile(player.getTile() + 1);
 					}
 					

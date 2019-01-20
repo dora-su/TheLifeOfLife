@@ -1,40 +1,54 @@
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.Timer;
+import javax.swing.SwingUtilities;
 
-public class LoadingScreen extends JFrame {
-	static JProgressBar loadingBar;
-	static DefaultBoundedRangeModel model;
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new LoadingScreen(5000);
-	}
-	
-	LoadingScreen(int time) {
-		setSize(500,300);
-		this.setLocation((int)(Game.screenX/2) - 250, ((int)(Game.screenY/2) - 150));
-		model = new DefaultBoundedRangeModel(0,time,0,time);
-		loadingBar = new JProgressBar(model);
-		add(loadingBar);
-		setVisible(true);
-		Timer timer = new Timer(1,new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (model.getValue() >= time) {
-					dispose();
-				}
-				model.setValue(model.getValue()+1);
-				
-			}
-		});
-		timer.start();
-	}
+public class LoadingScreen extends JPanel {
+
+  JProgressBar pbar;
+
+  static final int MY_MINIMUM = 0;
+
+  static final int MY_MAXIMUM = 1000;
+
+  public LoadingScreen() {
+    // initialize Progress Bar
+    pbar = new JProgressBar();
+    pbar.setMinimum(MY_MINIMUM);
+    pbar.setMaximum(MY_MAXIMUM);
+    pbar.setSize(100, 1000);
+    pbar.setLocation(500,500);
+    // add to JPanel
+   add(pbar);
+  }
+
+  public void updateBar(int newValue) {
+    pbar.setValue(newValue);
+  }
+
+  public static void main(String args[]) {
+
+    final LoadingScreen it = new LoadingScreen();
+
+    JFrame frame = new JFrame("Progress Bar Example");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setContentPane(it);
+    frame.pack();
+    frame.setVisible(true);
+
+    // run a loop to demonstrate raising
+    for (int i = MY_MINIMUM; i <= MY_MAXIMUM; i++) {
+      final int percent = i;
+      try {
+        SwingUtilities.invokeLater(new Runnable() {
+          public void run() {
+            it.updateBar(percent);
+          }
+        });
+        java.lang.Thread.sleep(100);
+      } catch (InterruptedException e) {
+        ;
+      }
+    }
+  }
 }
