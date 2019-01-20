@@ -19,6 +19,7 @@ public class MainMenu extends JFrame {
 		super("Main Menu");
 
 		this.setSize(911, 561);
+		this.setLocationRelativeTo(null);
 		this.setUndecorated(true);
 		this.setResizable(false);
 		this.requestFocusInWindow();
@@ -85,7 +86,7 @@ public class MainMenu extends JFrame {
 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				client.setIcon(new ImageIcon("graphics/join_hover.jpg"));
+				client.setIcon(new ImageIcon("graphics/join_hover.png"));
 			}
 
 			@Override
@@ -102,8 +103,7 @@ public class MainMenu extends JFrame {
 			}
 
 		});
-		host.addActionListener(new HostButtonListener());
-		client.addActionListener(new ClientButtonListener());
+
 
 		JButton rules = new JButton(new ImageIcon("graphics/rules.png"));
 		rules.addMouseListener(new MouseListener() {
@@ -130,6 +130,9 @@ public class MainMenu extends JFrame {
 			}
 		});
 
+		host.addActionListener(new HostButtonListener());
+		client.addActionListener(new ClientButtonListener());
+		rules.addActionListener(new RulesListener());
 		rules.setContentAreaFilled(false);
 		rules.setFocusPainted(false);
 		rules.setBorderPainted(false);
@@ -185,7 +188,15 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			//g.drawImage(rules,0,0,null)
+			JFrame rules = new JFrame();
+			rules.setSize(609, 832);
+			rules.setLocationRelativeTo(null);
+			//rules.setUndecorated(true);
+			JLabel label = new JLabel(new ImageIcon("graphics/rule.png"));
+			rules.add(label);
+			rules.setVisible(true);
+			
+			
 
 		}
 
