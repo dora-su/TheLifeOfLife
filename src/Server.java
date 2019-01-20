@@ -61,9 +61,9 @@ class Server extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
-						//new Server().go();
-						go(port.getText());
 						frame.dispose();
+						go(port.getText());
+						
 					}
 				});
 				t1.start();

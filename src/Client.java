@@ -102,8 +102,9 @@ public class Client extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
+						frame.dispose();
 						go(userName.getText(), ip.getText(), Integer.parseInt(port.getText()));
-						dispose();
+						
 					}
 				});
 				t1.start();
