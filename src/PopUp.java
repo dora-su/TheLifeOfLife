@@ -23,8 +23,10 @@ public class PopUp {
 		popUp.setResizable(true);
 		popUp.setAlwaysOnTop(true);
 		Game.gameFrame.setEnabled(false);
-		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 159));
+		popUp.setBackground(new Color(1.0f,1.0f,1.0f,0.5f)); // the last value, a: is the transparency , 0.0 = full transparency, 1.0 = full opacity
+//		popUp.setLocation((int) (Game.screenX / 2) - 200, ((int) (Game.screenY / 2) - 159));
 		popUp.setSize(400, 317);
+		popUp.setLocationRelativeTo(null);
 
 		//set icon image
 		icon = new ImageIcon("graphics/icon.png");
@@ -41,6 +43,7 @@ public class PopUp {
 				repaint();
 			}
 		};
+		panel.setOpaque(false);
 
 		//JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html");
 		JTextArea messageLabel = new JTextArea(message);
@@ -51,9 +54,11 @@ public class PopUp {
 		messageLabel.setSize(400,250);
 		messageLabel.setForeground(Color.black);
 		messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+		messageLabel.setOpaque(false);
 		popUp.setContentPane(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 78)));
+
 
 		panel.add(messageLabel);
 		panel.add(Box.createRigidArea(new Dimension(0, 163)));
@@ -152,7 +157,6 @@ public class PopUp {
 		icon = new ImageIcon("graphics/icon.png");
 		popUp.setIconImage(icon.getImage());
 
-		popUp.setVisible(true);
 
 		JPanel panel = new JPanel() {
 			protected void paintComponent(Graphics g) {
@@ -171,6 +175,7 @@ public class PopUp {
 		JPanel options = new JPanel();
 		options.setOpaque(false);
 
+
 		popUp.add(options);
 
 		JButton close = new JButton("Close");
@@ -186,5 +191,9 @@ public class PopUp {
 
 		close.setAlignmentX(JButton.CENTER_ALIGNMENT);
 		options.add(close);
+		options.setOpaque(false);
+
+		popUp.setVisible(true);
+
 	}
 }
