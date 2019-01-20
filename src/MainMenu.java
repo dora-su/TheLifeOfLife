@@ -32,16 +32,16 @@ public class MainMenu extends JFrame {
 		title.setFont(new Font("Arial", Font.BOLD, 50));
 
 		JPanel options = new JPanel();
-		JButton singlePlayer = new JButton("Single Player");
-		JButton multiPlayer = new JButton("MultiPlayer");
-		singlePlayer.addActionListener(new SinglePlayerListener());
-		multiPlayer.addActionListener( new MultiPlayerListener());
+		JButton host = new JButton("Host Server");
+		JButton client = new JButton("Join Server");
+		host.addActionListener(new SinglePlayerListener());
+		client.addActionListener( new MultiPlayerListener());
 
-		options.add(singlePlayer);
+		options.add(host);
 		options.add(Box.createRigidArea(new Dimension(60, 0)));
-		options.add(multiPlayer);
-		singlePlayer.setFont(new Font("Arial", Font.PLAIN, 40));
-		multiPlayer.setFont(new Font("Arial", Font.PLAIN, 40));
+		options.add(client);
+		client.setFont(new Font("Arial", Font.PLAIN, 40));
+		host.setFont(new Font("Arial", Font.PLAIN, 40));
 
 		mainPanel.add(title);
 		mainPanel.add(Box.createRigidArea(new Dimension(0, 500)));
@@ -55,8 +55,16 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			new SinglePlayerMenu();
-			dispose();
+			new Thread(new Runnable() {
+				public void run() {
+					new Server().go();
+				}
+			}).start();
+			new Thread(new Runnable() {
+				public void run() {
+					new Client().login();
+				}
+			}).start();
 		}
 	}
 	
@@ -64,8 +72,7 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			new MultiPlayerMenu();
-			dispose();
+			new Client().login();
 		}
 	}
 }
