@@ -30,7 +30,8 @@ class Game extends JFrame {
 	static JFrame gameFrame;
 	Image map, mango1, popWindow, menuPic;
 	static Image careerPlaceHolder, housePlaceHolder;
-	Image spinPic;
+	Image spinPic, hoverSpinPic;
+	Image chatPic, hoverChatPic;
 	Player player1;
 	ImageIcon icon;
 
@@ -48,7 +49,7 @@ class Game extends JFrame {
 	static Random rand = new Random();
 	static JLabel rollText;
 	static Clock c = new Clock();
-	JButton close, spin, menu;
+	JButton chat, spin, menu;
 	static JButton myCareer, myHouse;
 
 	JFrame careerFrame, houseFrame;
@@ -91,7 +92,6 @@ class Game extends JFrame {
 		path.add(new ChoiceTile((int) (scaleX * 174), (int) (scaleY * 446), "Would You Like to Go to College", 18));
 
 		//good
-		//path.add(new MoneyTile((int) (scaleX * 165), (int) (scaleY * 515), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 240), (int) (scaleY * 452), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 303), (int) (scaleY * 431), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 321), (int) (scaleY * 371), "a", 0));
@@ -113,7 +113,7 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 440), (int) (scaleY * 178), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 464), (int) (scaleY * 234), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 480), (int) (scaleY * 298), "a", 0));
-		path.add(new PayDayTile((int) (scaleX * 496), (int) (scaleY * 364)));  //advance to tile 37 from this path
+		path.add(new PayDayTile((int) (scaleX * 496), (int) (scaleY * 364))); //advance to tile 37 from this path
 
 		//good
 		path.add(new MoneyTile((int) (scaleX * 164), (int) (scaleY * 516), "a", 0));
@@ -135,7 +135,7 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 548), (int) (scaleY * 563), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 535), (int) (scaleY * 492), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 513), (int) (scaleY * 433), "a", 0));
-		
+
 		//start of new path(Tile 37)
 		path.add(new MoneyTile((int) (scaleX * 575), (int) (scaleY * 419), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 641), (int) (scaleY * 394)));
@@ -160,14 +160,14 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 939), (int) (scaleY * 526), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 927), (int) (scaleY * 591)));
 		path.add(new MoneyTile((int) (scaleX * 886), (int) (scaleY * 642), "a", 0));
-		
+
 		//new path (56)
 		path.add(new ChoiceTile((int) (scaleX * 855), (int) (scaleY * 691), "a", 67));
-		
+
 		path.add(new MoneyTile((int) (scaleX * 818), (int) (scaleY * 754), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 812), (int) (scaleY * 820)));
 		path.add(new MoneyTile((int) (scaleX * 855), (int) (scaleY * 868), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 917), (int) (scaleY * 900), "a", 0));	
+		path.add(new MoneyTile((int) (scaleX * 917), (int) (scaleY * 900), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 985), (int) (scaleY * 924), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 1049), (int) (scaleY * 941)));
 
@@ -175,54 +175,54 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 1187), (int) (scaleY * 957), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1254), (int) (scaleY * 959), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 1320), (int) (scaleY * 956)));
-				
+
 		//second path(67)
 		path.add(new MoneyTile((int) (scaleX * 907), (int) (scaleY * 733), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 966), (int) (scaleY * 750), "a", 0));	
+		path.add(new MoneyTile((int) (scaleX * 966), (int) (scaleY * 750), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1038), (int) (scaleY * 744), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1098), (int) (scaleY * 735), "a", 0));
-		path.add(new MoneyTile((int) (scaleX * 1171), (int) (scaleY * 740), "a", 0));	
+		path.add(new MoneyTile((int) (scaleX * 1171), (int) (scaleY * 740), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1230), (int) (scaleY * 761), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1291), (int) (scaleY * 793), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1338), (int) (scaleY * 826), "a", 0));
-		
+
 		//75
 		path.add(new Tile((int) (scaleX * 1381), (int) (scaleY * 882)));
-		path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 949), "a", 0)); 
-		
+		path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 949), "a", 0));
+
 		//path 77
 		path.add(new MoneyTile((int) (scaleX * 1464), (int) (scaleY * 931), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1525), (int) (scaleY * 915), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 1577), (int) (scaleY * 874)));
-		
+
 		path.add(new MoneyTile((int) (scaleX * 1604), (int) (scaleY * 813), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1595), (int) (scaleY * 749), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1526), (int) (scaleY * 717), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 1465), (int) (scaleY * 697)));
-		
+
 		path.add(new MoneyTile((int) (scaleX * 1128), (int) (scaleY * 612), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1148), (int) (scaleY * 549), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1193), (int) (scaleY * 503), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 1239), (int) (scaleY * 449)));
-		
+
 		path.add(new MoneyTile((int) (scaleX * 1244), (int) (scaleY * 393), "a", 0));
-		
+
 		//decision point (89)
 		path.add(new ChoiceTile((int) (scaleX * 1214), (int) (scaleY * 326), "a", 99));
-		
+
 		//path 1
 		path.add(new MoneyTile((int) (scaleX * 1183), (int) (scaleY * 276), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 1155), (int) (scaleY * 212)));
 		path.add(new MoneyTile((int) (scaleX * 1142), (int) (scaleY * 152), "a", 0));
-		
+
 		path.add(new MoneyTile((int) (scaleX * 1183), (int) (scaleY * 103), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1245), (int) (scaleY * 89), "a", 0));
 		path.add(new PayDayTile((int) (scaleX * 1305), (int) (scaleY * 79)));
-		
+
 		path.add(new MoneyTile((int) (scaleX * 1386), (int) (scaleY * 84), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1446), (int) (scaleY * 98), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1516), (int) (scaleY * 134), "a", 0));
-		
+
 		//path 2 (99)
 		path.add(new MoneyTile((int) (scaleX * 1271), (int) (scaleY * 299), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 266), "a", 0));
@@ -230,12 +230,11 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 1459), (int) (scaleY * 261), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1524), (int) (scaleY * 267), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1585), (int) (scaleY * 233), "a", 0));
-		
+
 		//new stop sign 
 		path.add(new Tile((int) (scaleX * 1601), (int) (scaleY * 167)));
 		path.add(new PayDayTile((int) (scaleX * 1572), (int) (scaleY * 111)));
-		
-		
+
 		path.add(new MoneyTile((int) (scaleX * 1645), (int) (scaleY * 89), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1702), (int) (scaleY * 77), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1780), (int) (scaleY * 85), "a", 0));
@@ -243,8 +242,7 @@ class Game extends JFrame {
 
 		//stop
 		path.add(new Tile((int) (scaleX * 1818), (int) (scaleY * 143)));
-		
-		
+
 		path.add(new MoneyTile((int) (scaleX * 1810), (int) (scaleY * 270), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1802), (int) (scaleY * 337), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1788), (int) (scaleY * 399), "a", 0));
@@ -253,10 +251,10 @@ class Game extends JFrame {
 		path.add(new MoneyTile((int) (scaleX * 1766), (int) (scaleY * 593), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1769), (int) (scaleY * 657), "a", 0));
 		path.add(new MoneyTile((int) (scaleX * 1778), (int) (scaleY * 723), "a", 0));
-		
+
 		//final stop 
 		path.add(new Tile((int) (scaleX * 1790), (int) (scaleY * 786)));
-		
+
 		System.out.println("num Tile " + path.size());
 
 		//creating images for non college careers
@@ -331,7 +329,17 @@ class Game extends JFrame {
 		spinPic = Toolkit.getDefaultToolkit().getImage("graphics/spin_button.png");
 		spinPic = spinPic.getScaledInstance((int) (149 * scaleX), (int) (149 * scaleY), Image.SCALE_DEFAULT);
 
-		//getting picture of menu bar and scalling it
+		hoverSpinPic = Toolkit.getDefaultToolkit().getImage("graphics/spin_hover.png");
+		hoverSpinPic = hoverSpinPic.getScaledInstance((int) (149 * scaleX), (int) (149 * scaleY), Image.SCALE_DEFAULT);
+
+		//getting picture of chat and scaling it
+		chatPic = Toolkit.getDefaultToolkit().getImage("graphics/chat.png");
+		chatPic = chatPic.getScaledInstance((int) (128 * scaleX), (int) (128 * scaleY), Image.SCALE_DEFAULT);
+
+		hoverChatPic = Toolkit.getDefaultToolkit().getImage("graphics/chat_Hover.png");
+		hoverChatPic = hoverChatPic.getScaledInstance((int) (128 * scaleX), (int) (128 * scaleY), Image.SCALE_DEFAULT);
+
+		//getting picture of menu bar and scaling it
 		menuPic = Toolkit.getDefaultToolkit().getImage("graphics/menu.png");
 		menuPic = menuPic.getScaledInstance((int) (154 * scaleX), (int) (130 * scaleY), Image.SCALE_DEFAULT);
 
@@ -387,6 +395,28 @@ class Game extends JFrame {
 		spin.setContentAreaFilled(false);
 		spin.setBorderPainted(false);
 		spin.setFocusPainted(false);
+		spin.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				spin.setIcon(new ImageIcon(hoverSpinPic));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				spin.setIcon(new ImageIcon(spinPic));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+			
+		});
 		spin.addActionListener(new RollListener());
 		spin.setVerticalAlignment(JButton.CENTER);
 
@@ -523,15 +553,34 @@ class Game extends JFrame {
 		bottomPanel.add(myCareer);
 		bottomPanel.add(Box.createRigidArea(new Dimension((int) (scaleX * 900), 0)));
 
-		Image chat = Toolkit.getDefaultToolkit().getImage("graphics/chat.png");
-		chat = chat.getScaledInstance((int) (128 * scaleX), (int) (128 * scaleY), Image.SCALE_DEFAULT);
-		
-		close = new JButton(new ImageIcon(chat));
-		close.setContentAreaFilled(false);
-		close.setBorderPainted(false);
-		close.setFocusPainted(false);
-		bottomPanel.add(close);
-		close.addActionListener(new ActionListener() {
+		chat = new JButton(new ImageIcon(chatPic));
+		chat.setContentAreaFilled(false);
+		chat.setBorderPainted(false);
+		chat.setFocusPainted(false);
+		chat.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				chat.setIcon(new ImageIcon(hoverChatPic));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				chat.setIcon(new ImageIcon(chatPic));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+		});
+		bottomPanel.add(chat);
+		chat.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -539,7 +588,7 @@ class Game extends JFrame {
 			}
 
 		});
-		close.setVerticalAlignment(JButton.CENTER);
+		chat.setVerticalAlignment(JButton.CENTER);
 
 		this.setVisible(true);
 
@@ -552,17 +601,16 @@ class Game extends JFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-	
-		try{
-            font2 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")).deriveFont(40f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")));
-        }catch(IOException | FontFormatException e){
-            e.printStackTrace();
-        }
-		
-		
-	//	player1.move(1, path);
+
+		try {
+			font2 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")).deriveFont(40f);
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")));
+		} catch (IOException | FontFormatException e) {
+			e.printStackTrace();
+		}
+
+		//	player1.move(1, path);
 	} // End of Constructor
 
 	/**
@@ -579,7 +627,8 @@ class Game extends JFrame {
 
 			// draw bottom game menu image
 			g.setFont(font1);
-			g.drawString(myFormatter.format(player1.getMoney()), 995, 1027);
+			String money = myFormatter.format(player1.getMoney());
+			g.drawString(money, 995, 1027);
 
 			//drawing player icon
 			Image playerIcon = mango1;

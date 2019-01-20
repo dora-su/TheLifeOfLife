@@ -42,8 +42,13 @@ public class PopUp {
 			}
 		};
 
-		JLabel messageLabel = new JLabel(message);
+		//JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html");
+		JTextArea messageLabel = new JTextArea(message);
+		messageLabel.setEditable(false);
 		messageLabel.setSize(messageLabel.getPreferredSize());
+		messageLabel.setLineWrap(true);
+		messageLabel.setBackground(null);
+		messageLabel.setSize(400,250);
 		messageLabel.setForeground(Color.black);
 		messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 		popUp.setContentPane(panel);
