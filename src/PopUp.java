@@ -42,9 +42,9 @@ public class PopUp {
 			}
 		};
 
-		JLabel messageLabel = new JLabel(message);
-		messageLabel.setSize(messageLabel.getPreferredSize());
-		messageLabel.setText(String.format("<html><div WIDTH=%d>%s</div><html>", 400, message));
+		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html");
+		messageLabel.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+		messageLabel.setSize(400,250);
 		//JLabel messageLabel = new JLabel(message);
 		messageLabel.setSize(messageLabel.getPreferredSize());
 		//messageLabel.setSize(400,250);
@@ -55,7 +55,7 @@ public class PopUp {
 		panel.add(Box.createRigidArea(new Dimension(0, 78)));
 
 		panel.add(messageLabel);
-		panel.add(Box.createRigidArea(new Dimension(0, 163)));
+		panel.add(Box.createRigidArea(new Dimension(0, 135)));
 		JPanel options = new JPanel();
 		options.setOpaque(false);
 
