@@ -58,8 +58,8 @@ public class PopUp {
 		popUp.add(options);
 
 		if (tile instanceof ChoiceTile) {
-			JButton option1 = new JButton("No");
-			JButton option2 = new JButton("Yes");
+			JButton option1 = new JButton("Yes");
+			JButton option2 = new JButton("No");
 			option1.setFocusPainted(false);
 			option1.setFocusPainted(false);
 
@@ -68,9 +68,10 @@ public class PopUp {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					// go to certain index
-					player1.move(1, Game.path);
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
+					player1.setTile(((ChoiceTile) tile).getIndex());
+					
 				}
 
 			});
@@ -79,9 +80,10 @@ public class PopUp {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					// go to new index
+
+					player1.move(1, Game.path);
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
-					player1.setTile(((ChoiceTile) tile).getIndex());
 				}
 			});
 
