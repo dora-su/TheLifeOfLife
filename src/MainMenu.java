@@ -103,7 +103,6 @@ public class MainMenu extends JFrame {
 
 		});
 
-
 		JButton rules = new JButton(new ImageIcon("graphics/rules.png"));
 		rules.addMouseListener(new MouseListener() {
 			@Override
@@ -152,25 +151,26 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 			//Thread t1 = new Thread(new Runnable() {
-				//public void run() {
-					//new Server().go();
-					new Server();
-				//}
+			//public void run() {
+			//new Server().go();
+			new Client();
+			new Server();
+
+			//}
 			//});
-			Thread t2 = new Thread(new Runnable() {
-				public void run() {
-					//new Client().login();
-				}
-			});
-			//t1.setPriority(5);
-			t2.setPriority(10);
-			//t1.start();
-			t2.start();
-			dispose();
-			
-			
+			//			Thread t2 = new Thread(new Runnable() {
+			//				public void run() {
+			//					//new Client().login();
+			//				}
+			//			});
+			//			//t1.setPriority(5);
+			//			t2.setPriority(10);
+			//			//t1.start();
+			//			t2.start();
+			//			dispose();
+
 		}
 	}
 
@@ -198,8 +198,6 @@ public class MainMenu extends JFrame {
 			JLabel label = new JLabel(new ImageIcon("graphics/rule.png"));
 			rules.add(label);
 			rules.setVisible(true);
-			
-			
 
 		}
 

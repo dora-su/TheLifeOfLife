@@ -63,6 +63,7 @@ class Server extends JFrame {
 					public void run() {
 						//new Server().go();
 						go(port.getText());
+						frame.dispose();
 					}
 				});
 				t1.start();

@@ -16,9 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import Server.Panel;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -71,15 +68,15 @@ public class Client extends JFrame {
 
 		frame = this;
 		JPanel panel = new Panel();
-		JTextArea userName = new JTextArea("Enter your username");
+		JTextArea userName = new JTextArea("jason");
 		userName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userName.setFont(new Font("Arial", Font.PLAIN, 20));
 
-		JTextArea port = new JTextArea("");
+		JTextArea port = new JTextArea("5000");
 		port.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userName.setFont(new Font("Arial", Font.PLAIN, 20));
 
-		JTextArea ip = new JTextArea("");
+		JTextArea ip = new JTextArea("localhost");
 		ip.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		ip.setFont(new Font("Arial", Font.PLAIN, 20));
 
@@ -106,6 +103,7 @@ public class Client extends JFrame {
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
 						go(userName.getText(), ip.getText(), Integer.parseInt(port.getText()));
+						dispose();
 					}
 				});
 				t1.start();

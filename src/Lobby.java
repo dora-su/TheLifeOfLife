@@ -67,7 +67,7 @@ public class Lobby extends JFrame {
         lobby = Toolkit.getDefaultToolkit().getImage("graphics/lobby.png");
 
         JPanel mainPanel = new MainPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setLayout(null);
         mainPanel.setSize(this.getSize());
         this.setContentPane(mainPanel);
 
@@ -80,12 +80,14 @@ public class Lobby extends JFrame {
         players.setOpaque(false);
         players.setAlignmentX(CENTER_ALIGNMENT);
         players.setSize(this.size());
+        players.setLocation(500,90);
 
         JPanel options = new JPanel();
         options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
         options.setOpaque(false);
         options.setAlignmentX(LEFT_ALIGNMENT);
         options.setSize(this.size());
+        options.setLocation(450, 200);
 
         JButton imready = new JButton(new ImageIcon("graphics/ready.png"));
         imready.setContentAreaFilled(false);
