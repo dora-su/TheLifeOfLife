@@ -1,4 +1,6 @@
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -8,20 +10,11 @@ public class Lobby extends JFrame {
 
 	private MyKeyListener keyListener;
 	private ImageIcon icon;
-
-	public static void main(String [] args) {
-	new Game();
-////	new Spinner();
-////		Spinner.getRoll();
-//		//new MainMenu();
-//		//new Lobby();	`
-//		//new Rules();
-	}
 	
 	JPanel lobbyPanel = new JPanel();
 	//add components + modify appearance of the frame
 	
-	Lobby(){
+	Lobby(Client c){
 		super("Lobby");
 		
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -33,7 +26,28 @@ public class Lobby extends JFrame {
 		//set icon image
 		icon = new ImageIcon("graphics/icon.png");
 		this.setIconImage(icon.getImage());
-
+		JButton chat = new JButton("Chat");
+		chat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.window1.setVisible(!c.window1.isVisible());
+			}
+		});
+		
+		JCheckBox ready = new JCheckBox("Ready");
+		ready.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.output.println(c.userName);
+				if (ready.isSelected()) {
+					c.output.println("/ready");
+				} else {
+					c.output.println("/unready");
+				}
+				c.output.flush();
+			}
+		});
+		
+		lobbyPanel.add(ready);
+		lobbyPanel.add(chat);
 		this.setVisible(true);
 		this.add(lobbyPanel);
 	}

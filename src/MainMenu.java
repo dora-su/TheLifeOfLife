@@ -12,7 +12,7 @@ public class MainMenu extends JFrame {
 	MainMenu() {
 		super("Main Menu");
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1200, 1200);
 
 		this.requestFocusInWindow();
@@ -55,16 +55,21 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			new Thread(new Runnable() {
+			Thread t1 = new Thread(new Runnable() {
 				public void run() {
 					new Server().go();
 				}
-			}).start();
-			new Thread(new Runnable() {
+			});
+			Thread t2 = new Thread(new Runnable() {
 				public void run() {
 					new Client().login();
 				}
-			}).start();
+			});
+			t1.setPriority(5);
+			t2.setPriority(10);
+			t1.start();
+			t2.start();
+			dispose();
 		}
 	}
 	
@@ -72,7 +77,12 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			new Client().login();
+			new Thread(new Runnable() {
+				public void run() {
+					new Client().login();
+				}
+			}).start();
+			dispose();
 		}
 	}
 }
