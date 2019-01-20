@@ -49,7 +49,8 @@ class Game extends JFrame {
 	static Random rand = new Random();
 	static JLabel rollText;
 	static Clock c = new Clock();
-	JButton chat, spin, menu;
+	JButton chat, menu;
+	static JButton spin;
 	static JButton myCareer, myHouse;
 
 	JFrame careerFrame, houseFrame;
