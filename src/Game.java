@@ -29,7 +29,8 @@ class Game extends JFrame {
 
     JPanel gameAreaPanel;
     static JFrame gameFrame;
-    Image map, mango1, popWindow, menuPic;
+    Image map, popWindow, menuPic;
+    Image[] mangoes;
     static Image careerPlaceHolder, housePlaceHolder;
     Image spinPic, hoverSpinPic;
     Image chatPic, hoverChatPic;
@@ -337,9 +338,11 @@ class Game extends JFrame {
         map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
 
         //getting picture of player and scaling it
-        mango1 = Toolkit.getDefaultToolkit().getImage("graphics/mango1.png");
-        mango1 = mango1.getScaledInstance((int) (45 * scaleX), (int) (45 * scaleY), Image.SCALE_DEFAULT);
-
+        mangoes = new Image[players.size()];
+        for (int i = 0; i < players.size(); i++) {
+        	mangoes[i] = Toolkit.getDefaultToolkit().getImage("graphics/mango"+(i+1)+".png");
+        	mangoes[i] = mangoes[i].getScaledInstance((int) (45 * scaleX), (int) (45 * scaleY), Image.SCALE_DEFAULT);
+        }
         //getting picture of spinner and scaling it
         spinPic = Toolkit.getDefaultToolkit().getImage("graphics/spin_button.png");
         spinPic = spinPic.getScaledInstance((int) (149 * scaleX), (int) (149 * scaleY), Image.SCALE_DEFAULT);
@@ -639,7 +642,7 @@ class Game extends JFrame {
             //drawing background map
             g.drawImage(map, 0, 0, null);
             for (Player p : players) {
-                g.drawImage(mango1, path.get(player.getTile()).getX() - 17, path.get(player.getTile()).getY() - 17, null);
+                g.drawImage(mangoes[players.indexOf(p)], path.get(player.getTile()).getX() - 17, path.get(player.getTile()).getY() - 17, null);
             }
             // draw bottom game menu image
             g.setFont(font1);
@@ -647,7 +650,7 @@ class Game extends JFrame {
             g.drawString(money, (int) (995 * scaleX), (int) (1145 * scaleY));
 
             //drawing player icon
-            Image playerIcon = mango1;
+            Image playerIcon = mangoes[players.indexOf(player)];
             //playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
             g.drawImage(playerIcon, (int) (1590 * scaleX), (int) (1045 * scaleY), null);
 

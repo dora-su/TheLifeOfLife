@@ -35,7 +35,8 @@ public class Lobby extends JFrame {
     Image lobby;
     private Client c;
     private boolean ready = false;
-    private JLabel[] playerList;
+    private String[] playerList;
+    private int playerCount;
     //add components + modify appearance of the frame
 
     /**
@@ -45,6 +46,7 @@ public class Lobby extends JFrame {
      */
     Lobby(Client c) {
         super("Lobby");
+        playerCount = 0;
         this.c = c;
         this.setSize(911, 561);
         this.setUndecorated(true);
@@ -59,10 +61,9 @@ public class Lobby extends JFrame {
         icon = new ImageIcon("graphics/icon.png");
         this.setIconImage(icon.getImage());
         // ready box
-        playerList = new JLabel[6];
+        playerList = new String[6];
         for (int i = 0; i < 6; i++) {
-            playerList[i] = new JLabel("<html><div style='text-align: center;'>player</div></html");
-            playerList[i].setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+            playerList[i] = "player";
         }
         lobby = Toolkit.getDefaultToolkit().getImage("graphics/lobby.png");
 
@@ -133,9 +134,9 @@ public class Lobby extends JFrame {
         });
 
         imready.addActionListener(new ReadyButtonListener());
-        for (int i = 0; i < 6; i++) {
-            players.add(playerList[i]);
-        }
+//        for (int i = 0; i < 6; i++) {
+//            players.add(playerList[i]);
+//        }
         options.add(Box.createRigidArea(new Dimension(0, 170)));
         options.add(imready);
 
@@ -148,7 +149,10 @@ public class Lobby extends JFrame {
     }
 
     public void addUser(String user) {
-
+    	System.out.println(user + " added!");
+    	playerList[playerCount] = user;
+        System.out.println(playerCount);
+    	playerCount++;
     }
 
     /**
@@ -183,7 +187,7 @@ public class Lobby extends JFrame {
             g.drawImage(lobby, 0, 0, null);
             
             for (int i = 0; i < playerList.length; i++) {
-                g.drawString(playerList[i].getText(), 0, 0);
+                g.drawString(playerList[i], 500, 90 + 20 * i);
             }
             repaint();
         }

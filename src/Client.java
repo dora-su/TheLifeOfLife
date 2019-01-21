@@ -277,11 +277,12 @@ public class Client extends JFrame {
 		window1.setSize(600, 400);
 		//		window1.setVisible(true);
 		// call a method that connects to the server
+		l = new Lobby(this);
 		connect(ip, port);
 		running = true;
 		// after connecting loop and keep appending[.append()] to the JTextArea
 		window1.revalidate();
-		l = new Lobby(this);
+		
 		readMessagesFromServer();
 	}
 
@@ -727,6 +728,7 @@ public class Client extends JFrame {
 
 		InformationActionListener(String S) {
 			user = S;
+			l.addUser(S);
 		}
 
 		public void actionPerformed(ActionEvent e) {
