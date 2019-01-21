@@ -11,8 +11,17 @@ public class Tile extends ActionTile {
      * @param x the x coordinate
      * @param y the y coordinate
      */
+    Tile(int x, int y, String message) {
+        super(x, y, message);
+    }
+
+    /**
+     * Constructor
+     *
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
     Tile(int x, int y) {
         super(x, y, "");
     }
-
 }

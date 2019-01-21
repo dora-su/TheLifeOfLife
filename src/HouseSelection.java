@@ -49,7 +49,7 @@ public class HouseSelection extends JFrame {
                     public void actionPerformed(ActionEvent arg0) {
                         player.addProperty(p);
                         // setImage to bought
-                    
+
                         String[] options = new String[]{"Confirm", "Back"};
                         int confirm = JOptionPane.showOptionDialog(null,
                                 "Are you sure you want to purchase " + p.getName() + " for $" + p.getValue(),
