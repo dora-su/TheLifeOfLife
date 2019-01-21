@@ -266,7 +266,7 @@ class Server extends JFrame {
                     if (input.ready()) { // check for an incoming messge
                         username = input.readLine(); //get userName from client
                         msg = input.readLine(); // get a message from the client
-                        System.out.println(msg);
+//                        System.out.println(msg);
                         //check if the message is a command
                         if (msg.startsWith("/")) {
                             if (msg.startsWith("/stop")) {
@@ -299,7 +299,7 @@ class Server extends JFrame {
                                     clientList.remove(banned);
                                     for (Client c : clientList) {
                                         c.output.println(banned.user);
-                                        c.output.println("/status -999999999");
+                                        c.output.println("/status -999999999 0");
                                         c.output.flush();
                                     }
                                 }
@@ -321,7 +321,7 @@ class Server extends JFrame {
                                     clientList.remove(kicked);
                                     for (Client c : clientList) {
                                         c.output.println(kicked.user);
-                                        c.output.println("/status -999999999");
+                                        c.output.println("/status -999999999 0");
                                         c.output.flush();
                                     }
                                 }
