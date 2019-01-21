@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -63,7 +64,7 @@ public class PopUp {
 			}
 		};
 
-		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html");
+		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html", SwingConstants.CENTER);
 		messageLabel.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 		messageLabel.setSize(400, 250);
 		//JLabel messageLabel = new JLabel(message);

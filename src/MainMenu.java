@@ -8,12 +8,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class MainMenu extends JFrame {
 
 	private ImageIcon icon;
 	Image mainMenu;
+
 
 	MainMenu() {
 		super("Main Menu");
@@ -193,16 +200,18 @@ public class MainMenu extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			JFrame rules = new JFrame();
-			rules.setSize(609, 832);
+			 JFrame rules = new JFrame("How to Play");
+			 int page = 1;
+			rules.setSize(1000, 740);
 			rules.setLocationRelativeTo(null);
-			//rules.setUndecorated(true);
-			JLabel label = new JLabel(new ImageIcon("graphics/rule.png"));
+			rules.setUndecorated(false);
+			JLabel label = new JLabel(new ImageIcon("graphics/rules/"+page+".png"));
+			JButton next = new JButton("graphics/rules/next.png");
+			JButton back = new JButton("graphics/rules/back.png");
 			rules.add(label);
 			rules.setVisible(true);
 
 		}
-
 	}
 
 	private class MainPanel extends JPanel {
