@@ -638,7 +638,7 @@ class Game extends JFrame {
             //drawing background map
             g.drawImage(map, 0, 0, null);
             for (Player p : c.players) {
-                g.drawImage(mangoes[c.players.indexOf(p)], path.get(player.getTile()).getX() - 17, path.get(player.getTile()).getY() - 17, null);
+                g.drawImage(mangoes[c.players.indexOf(p)], path.get(p.getTile()).getX() - 17, path.get(p.getTile()).getY() - 17, null);
             }
             // draw bottom game menu image
             g.setFont(font1);

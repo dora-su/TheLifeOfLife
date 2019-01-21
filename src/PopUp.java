@@ -105,7 +105,7 @@ public class PopUp {
                 public void actionPerformed(ActionEvent arg0) {
                     // go to new index
 
-                    Game.spin.doClick();
+                    player1.setTile(player1.getTile() + 1);
                     Game.gameFrame.setEnabled(true);
                     popUp.dispose();
                 }
