@@ -58,6 +58,7 @@ class Server extends JFrame {
 		port.setForeground(new Color(169, 169, 169));
 		this.setSize(911, 561);
 		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
+		this.setAlwaysOnTop(true);
 		port.setSize(348, 82);
 		port.setLocation(495, 285);
 		panel.setLayout(null);
@@ -117,7 +118,7 @@ class Server extends JFrame {
 		//			}
 		//
 		//		});
-		
+
 		InetAddress ipAddress = null;
 		try {
 			ipAddress = InetAddress.getLocalHost();
@@ -126,10 +127,12 @@ class Server extends JFrame {
 			e.printStackTrace();
 		}
 
-		JLabel label = new JLabel("Server Ip " + ipAddress);
-		label.setFont(new Font("Arial", Font.PLAIN, 50));
+		JLabel label = new JLabel("" + ipAddress);
+		label.setFont(new Font("Arial", Font.PLAIN, 35));
+		label.setForeground(new Color(169, 169, 169));
+		label.setSize(400, 145);
 
-		label.setLocation(0, 0);
+		label.setLocation(495, 127);
 
 		panel.add(Box.createRigidArea(new Dimension(500, 0)));
 		panel.add(start);

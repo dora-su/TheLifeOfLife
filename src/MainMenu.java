@@ -155,8 +155,9 @@ public class MainMenu extends JFrame {
 			//Thread t1 = new Thread(new Runnable() {
 			//public void run() {
 			//new Server().go();
-			new Client();
 			new Server();
+			new Client();
+			
 
 			//}
 			//});

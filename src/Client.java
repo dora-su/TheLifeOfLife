@@ -8,6 +8,7 @@
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -25,6 +27,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -73,36 +77,45 @@ public class Client extends JFrame {
 		JPanel panel = new Panel();
 		JTextArea userName = new JTextArea("jason");
 		userName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
-		userName.setFont(new Font("Arial", Font.PLAIN, 20));
+		userName.setFont(new Font("Arial", Font.PLAIN, 50));
+		userName.setSize(339, 80);
+		userName.setOpaque(false);
+		userName.setForeground(new Color(169, 169, 169));
 
 		JTextArea port = new JTextArea("5000");
 		port.getDocument().putProperty("filterNewlines", Boolean.TRUE);
-		userName.setFont(new Font("Arial", Font.PLAIN, 20));
+		port.setFont(new Font("Arial", Font.PLAIN, 50));
+		port.setSize(339, 80);
+		port.setOpaque(false);
+		port.setForeground(new Color(169, 169, 169));
 
 		JTextArea ip = new JTextArea("localhost");
 		ip.getDocument().putProperty("filterNewlines", Boolean.TRUE);
-		ip.setFont(new Font("Arial", Font.PLAIN, 20));
+		ip.setFont(new Font("Arial", Font.PLAIN, 50));
+		ip.setSize(339, 80);
+		ip.setOpaque(false);
+		ip.setForeground(new Color(169, 169, 169));
 
 		this.setSize(911, 561);
 		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
-		userName.setSize(200, 30);
-		port.setSize(200, 30);
-		ip.setSize(200, 30);
 
-		userName.setLocation(500, 50);
+		ip.setLocation(494, 85);
 
-		ip.setLocation(500, 100);
+		port.setLocation(494, 195);
 
-		port.setLocation(500, 150);
+		userName.setLocation(494, 305);
 
 		panel.setLayout(null);
 
-		JButton start = new JButton("Join");
-		start.setBounds(500, 300, 120, 30);
-		start.addActionListener(new ActionListener() {
+		JButton start = new JButton(new ImageIcon("graphics/join_server.png"));
+		start.setContentAreaFilled(false);
+		start.setFocusable(false);
+		start.setBorderPainted(false);
+		start.setBounds(450, 380, 400, 145);
+		start.addMouseListener(new MouseListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void mouseClicked(MouseEvent e) {
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
 						frame.dispose();
@@ -111,6 +124,32 @@ public class Client extends JFrame {
 					}
 				});
 				t1.start();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				start.setIcon(new ImageIcon("graphics/join_server_hover.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				start.setIcon(new ImageIcon("graphics/join_server.png"));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+		});
+		start.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
 			}
 
 		});
@@ -125,7 +164,7 @@ public class Client extends JFrame {
 		this.setContentPane(panel);
 		this.setVisible(true);
 
-		background = Toolkit.getDefaultToolkit().getImage("graphics/mainmenu.png");
+		background = Toolkit.getDefaultToolkit().getImage("graphics/client_menu.png");
 
 	}
 
@@ -725,7 +764,7 @@ class Panel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g); // required
 		this.setDoubleBuffered(true);
-		g.drawImage(Toolkit.getDefaultToolkit().getImage("graphics/mainmenu.png"), 0, 0, null);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("graphics/client_menu.png"), 0, 0, null);
 		repaint();
 
 	}
