@@ -321,6 +321,7 @@ public class Client extends JFrame {
             label = new JLabel(userName);
             panel.add(label);
             p = new Player(userName);
+            p.setClient(this);
             //players.add(p);
             map.put(userName, p);
             button = new JButton("Details");
