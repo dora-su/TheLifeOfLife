@@ -145,7 +145,7 @@ class Player {
                         player.setTile(35 + 1);
                     } else if (player.tile == 66) {
                         player.setTile(75 + 1);
-                    } else if (player.tile == 89) {
+                    } else if (player.tile == 93) {
                         player.tile = 106;
                     } else {
                         player.setTile(player.getTile() + 1);

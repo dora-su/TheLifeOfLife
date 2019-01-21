@@ -63,6 +63,7 @@ public class Client extends JFrame {
     Image background;
     ArrayList<Player> players = new ArrayList<Player>();
     private Player p;
+    private int idx;
 
     /**
      * Main
@@ -340,7 +341,7 @@ public class Client extends JFrame {
                 return null;
             }
             admin = S.split(" ")[0];
-            int size = Integer.parseInt(S.split(" ")[1]);
+            idx = Integer.parseInt(S.split(" ")[1]);
             // updates status of everyone else on the server
             //            while (true) {
             //
@@ -458,8 +459,8 @@ public class Client extends JFrame {
                                 running = false;
                                 System.exit(-1);
                             } else if (msg.equals("/start")) {
-                                players.add(p);
-                                for(int i = 0; i < players.size(); i++) {
+                                players.add(idx, p);
+                                for (int i = 0; i < players.size(); i++) {
                                     System.out.println(players.get(i).getName());
                                 }
                                 l.dispose();
