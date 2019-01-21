@@ -1,3 +1,9 @@
+/**
+ * Name: Rules.java
+ * Version: 1.0
+ * Authors: Chris, Dora, Eric, Jason
+ * Date: January 10, 2019
+ */
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +17,9 @@ public class Rules extends JFrame {
     private JPanel rulePanel;
     Image background;
 
+    /**
+     * Constructor
+     */
     Rules() {
         super("Rules");
         this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
