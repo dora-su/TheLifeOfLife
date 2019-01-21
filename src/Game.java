@@ -238,9 +238,9 @@ class Game extends JFrame {
 
         //path 2 (99)
         path.add(new MoneyTile((int) (scaleX * 1271), (int) (scaleY * 299), "Pay for incorporation fees.", -200));
-        path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 266), "Win the international bubble tea drinking competition with a total of 400 drinks drank.",200000));
+        path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 266), "Win the international bubble tea drinking competition with a total of 400 drinks drank.", 200000));
 
-        path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 246), "Received a $50000 grant from the government",50000));//don tthink this is rigith
+        path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 246), "Received a $50000 grant from the government", 50000));//don tthink this is rigith
         path.add(new MoneyTile((int) (scaleX * 1459), (int) (scaleY * 261), "You accidentally set part of your house on fire. Pay for repairs.", -30000));
         path.add(new MoneyTile((int) (scaleX * 1524), (int) (scaleY * 267), "Received a small no-need-for-return loan of $20000 from Donald Trump.", 20000));
         path.add(new MoneyTile((int) (scaleX * 1585), (int) (scaleY * 233), "Congrats on opening up your startup and having 10 employees.", 0));
@@ -263,7 +263,7 @@ class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 1775), (int) (scaleY * 459), "Buy a yacht.", -1000000));
         path.add(new MoneyTile((int) (scaleX * 1767), (int) (scaleY * 530), "Hold a garage sale.", 4000));
         path.add(new MoneyTile((int) (scaleX * 1766), (int) (scaleY * 593), "You received a lot of money from your long-term investment.", 500000));
-        path.add(new MoneyTile((int) (scaleX * 1769), (int) (scaleY * 657), "You have stomach cancer. Pay your medical bills.",30000));
+        path.add(new MoneyTile((int) (scaleX * 1769), (int) (scaleY * 657), "You have stomach cancer. Pay your medical bills.", 30000));
         path.add(new MoneyTile((int) (scaleX * 1778), (int) (scaleY * 723), "Throw yourself a birthday party. You have received a lot of gifts from friends!", 2000));
 
         //final stop
