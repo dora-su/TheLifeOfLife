@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-class Player {
+class Player implements Comparable<Player>{
 	private String name;
 	private Career career;
 	private Property property;
@@ -22,7 +22,7 @@ class Player {
 	private boolean college;
 	private int add;
 	private int count;
-	int family;
+	int family, startup;
 	Client c;
 
 	Player(String name) {
@@ -33,8 +33,12 @@ class Player {
 		count = 0;
 		money = 1000000;
 		family = 0;
+		startup = 0;
 	}
-
+	
+	public int compareTo(Player p) {
+		return (p.getMoney() + (p.getProperty() != null ? 0 : p.getProperty().getValue()) + p.getChild() * 10000 + p.startup) - (money + (property == null ? 0 : property.getValue()) + child * 10000 + startup);  
+	}
 	public void setClient(Client c) {
 		this.c = c;
 	}
@@ -141,7 +145,9 @@ class Player {
 					count--;
 
 					//going on the next part of the map
-					if (player.tile == 17) {
+					if (player.tile == 124) {
+						new FinalScreen(player);
+					} else if (player.tile == 17) {
 						player.setTile(35 + 1);
 					} else if (player.tile == 66) {
 						player.setTile(75 + 1);
@@ -156,6 +162,7 @@ class Player {
 							public void run() {
 								if (popUp)
 									new CareerSelection(false, player); //if land on a certain tile allow the player to choose career
+								g.turn++;
 							}
 						});
 						t.start();
@@ -166,7 +173,7 @@ class Player {
 							public void run() {
 								if (popUp)
 									new HouseSelection(player); //if land on this specific tile create house selections choices for user
-
+								g.turn++;
 							}
 						});
 						t2.start();
@@ -185,7 +192,7 @@ class Player {
 							public void run() {
 								if (popUp)
 									new CareerSelection(true, player);
-
+								g.turn++;
 							}
 						});
 						t.start();
@@ -200,7 +207,7 @@ class Player {
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.tile) instanceof PayDayTile)) {
 						career.setSalary((int) (career.getSalary() * 1.05));
-
+						g.turn++;
 					}
 
 					if (count == 0 && (path.get(player.tile) instanceof MoneyTile)) {
@@ -218,6 +225,7 @@ class Player {
 							public void run() {
 								if (popUp)
 									new CareerSelection(true, player);
+								g.turn++;
 							}
 						});
 						t.start();
