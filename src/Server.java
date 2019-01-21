@@ -117,6 +117,7 @@ class Server extends JFrame {
 		//			}
 		//
 		//		});
+		
 		InetAddress ipAddress = null;
 		try {
 			ipAddress = InetAddress.getLocalHost();

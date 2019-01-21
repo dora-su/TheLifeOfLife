@@ -474,10 +474,10 @@ class Game extends JFrame {
                 houseFrame.setUndecorated(true);
                 houseFrame.setResizable(false);
 
-                if (player.getProperty().size() > 0) {
+                if (player.getProperty() != null) {
                     //if the player owns a property then enlarge the photo
                     JLabel image = new JLabel(new ImageIcon(
-                            "graphics/homes/" + player.getProperty().get(0).getName().toLowerCase() + ".png"));
+                            "graphics/homes/" + player.getProperty().getName().toLowerCase() + ".png"));
                     houseFrame.add(image);
 
                     houseFrame.setVisible(true);

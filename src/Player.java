@@ -203,7 +203,7 @@ class Player {
 						career.setSalary((int) (career.getSalary() * 1.05));
 					}
 
-					if (count == 0 && player.getTile() == 2) {
+					if (count == 0 && player.tile == 2) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
 								if (popUp)
