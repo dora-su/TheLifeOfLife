@@ -1,10 +1,15 @@
+
 //imports for network communication
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -12,8 +17,10 @@ import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -31,76 +38,125 @@ class Server extends JFrame {
 	JFrame frame;
 
 	Image background;
+
 	/**
 	 * Main
 	 * Runs the server
 	 * @param args parameters from command line
 	 */
-//	public static void main(String[] args) {
-//		new ChatServer().go(); // start the server
-//	}
+	//	public static void main(String[] args) {
+	//		new ChatServer().go(); // start the server
+	//	}
 
-	Server(){
-		
+	Server() {
+
 		frame = this;
 		JPanel panel = new Panel();
 		JTextArea port = new JTextArea("5000");
-		
+		port.setOpaque(false);
+		port.setFont(new Font("Arial", Font.PLAIN, 50));
+		port.setForeground(new Color(169, 169, 169));
 		this.setSize(911, 561);
 		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
-		port.setSize(200,30);
-		port.setLocation(500, 50);
+		port.setSize(348, 82);
+		port.setLocation(495, 285);
 		panel.setLayout(null);
-		
-		
-		JButton start = new JButton("Start");
-		start.setBounds(500, 300,120,30);
-		start.addActionListener(new ActionListener() {
+
+		JButton start = new JButton(new ImageIcon("graphics/server.png"));
+		start.setContentAreaFilled(false);
+		start.setFocusable(false);
+		start.setBorderPainted(false);
+		start.setBounds(450, 380, 400, 145);
+		start.addMouseListener(new MouseListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void mouseClicked(MouseEvent arg0) {
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
 						frame.dispose();
 						go(port.getText());
-						
+
 					}
 				});
 				t1.start();
-				
+
 			}
-			
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				start.setIcon(new ImageIcon("graphics/server_hover.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				start.setIcon(new ImageIcon("graphics/server.png"));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+
 		});
+		//		start.addActionListener(new ActionListener() {
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent arg0) {
+		//				Thread t1 = new Thread(new Runnable() {
+		//					public void run() {
+		//						frame.dispose();
+		//						go(port.getText());
+		//
+		//					}
+		//				});
+		//				t1.start();
+		//
+		//			}
+		//
+		//		});
 		
+		InetAddress ipAddress = null;
+		try {
+			ipAddress = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		JLabel label = new JLabel("Server Ip " + ipAddress);
+		label.setFont(new Font("Arial", Font.PLAIN, 50));
+
+		label.setLocation(0, 0);
+
 		panel.add(Box.createRigidArea(new Dimension(500, 0)));
 		panel.add(start);
 		panel.add(port);
-		
-		
+		panel.add(label);
+
 		this.setResizable(false);
 		this.setContentPane(panel);
 		this.setVisible(true);
-		
-	
-		background = Toolkit.getDefaultToolkit().getImage("graphics/mainmenu.png");
-		
-		
-		
+
+		background = Toolkit.getDefaultToolkit().getImage("graphics/server_menu.png");
+
 	}
+
 	/**
 	 * Go 
 	 * Starts the server
 	 */
 	public void go(String portNum) {
-		
+
 		//allowing the user to choose the port to connect to 
 		//String portNum = "";
-//		while (!portNum.matches("[0-9]+")) {
-//			portNum = JOptionPane.showInputDialog("Please enter the port number");
-//			System.out.println("Server started on port " + portNum);
-//		}
-		
-	
+		//		while (!portNum.matches("[0-9]+")) {
+		//			portNum = JOptionPane.showInputDialog("Please enter the port number");
+		//			System.out.println("Server started on port " + portNum);
+		//		}
+
 		//displaying the server Ip for clients to connect to
 		Thread t1 = new Thread(new displayServer());
 		t1.start();
@@ -116,7 +172,7 @@ class Server extends JFrame {
 
 			while (running) { // this loops to accept multiple clients
 				client = serverSock.accept(); // wait for connection
-				
+
 				//if the user is on the banned list, refuse the connection
 				System.out.println("Client connected");
 				if (bannedIps.contains(client.getInetAddress())) {
@@ -149,22 +205,23 @@ class Server extends JFrame {
 					pw.println(admin);
 					pw.flush();
 				}
-				
+
 				System.out.println(userName + " joined.");
 
 				//add the client to the client list and set as active
 				for (Client c : clientList) {
 					pw.println(c.user);
-					pw.println(c.status = 1000000);
+					pw.println("/status 1000000 0");
+					pw.flush();
 					c.output.println(userName);
-					c.output.println("/status 1000000");
+					c.output.println("/status 1000000 0");
 					c.output.flush();
 				}
 
 				//add the client to the client list
 				clientList.add(new Client(client, userName));
-				pw.println("");
-				pw.flush();
+				//				pw.println("");
+				//				pw.flush();
 
 				Thread t = new Thread(new ConnectionHandler(client)); // create a thread for the new client and pass in
 																		// the socket
@@ -182,7 +239,7 @@ class Server extends JFrame {
 		}
 	}
 
-	// ***** Inner class - thread for client connection
+	// *** Inner class - thread for client connection
 	class ConnectionHandler implements Runnable {
 		private PrintWriter output; // assign printwriter to network stream
 		private BufferedReader input; // Stream for network input
@@ -205,7 +262,7 @@ class Server extends JFrame {
 			}
 			running = true;
 		} // end of constructor
-		
+
 		/**
 		 * run 
 		 * executed on start of thread
@@ -266,7 +323,7 @@ class Server extends JFrame {
 									if (kicked == null) {
 										continue;
 									}
-									System.out.println("Kicked " + kicked.user) ;
+									System.out.println("Kicked " + kicked.user);
 									// tells kicked client that they have been kicked
 									kicked.output.println(admin);
 									kicked.output.println("/kick");
@@ -295,34 +352,28 @@ class Server extends JFrame {
 								}
 								// if there is a message
 								if (!tmp.equals("")) {
-									
+
 									// makes sure messaged client is valid
 									Client messaged = map.get(user);
 									if (messaged == null) {
 										continue;
 									}
 									Client sent = map.get(username);
-									
+
 									// sends message
 									messaged.output.println("FROM " + username);
 									messaged.output.println(tmp);
 									messaged.output.flush();
-									
+
 									// records sent message
 									sent.output.println("TO " + user);
 									sent.output.println(tmp);
 									sent.output.flush();
-									
+
 									System.out.println("Message from " + username + " to " + user + " : " + tmp);
 								}
 							} else if (msg.startsWith("/status")) { //change user status
-								String[] read = msg.split(" ");
-								Client current = map.get(username);
-								
-								// gets status and updates it
-								current.status = Integer.parseInt(read[1]);
-								
-								System.out.println(username + " status updated to " + current.status);
+
 								// tells all the clients that the user updated their status
 								for (Client c : clientList) {
 									c.output.println(username);
@@ -364,7 +415,6 @@ class Server extends JFrame {
 				}
 			}
 
-
 			// close the socket
 			try {
 				input.close();
@@ -381,7 +431,6 @@ class Server extends JFrame {
 		private PrintWriter output;
 		private BufferedReader input;
 		String user;
-		int status;
 		// 1 active
 		// 2 offline
 		// 3 do not disturb
@@ -394,7 +443,6 @@ class Server extends JFrame {
 		Client(Socket s, String userName) {
 			user = userName;
 			map.put(user, this); // adds user to map
-			status = 1; // intially status is active
 			client = s; // constructor assigns client to this
 			try { // assign all connections to client
 				output = new PrintWriter(client.getOutputStream());
@@ -407,7 +455,7 @@ class Server extends JFrame {
 		} // end of constructor
 
 	}
-	
+
 	// displays the ip
 	public class displayServer implements Runnable {
 		public void run() {
@@ -422,8 +470,8 @@ class Server extends JFrame {
 			return;
 		}
 	}
-	
-	private class Panel extends JPanel{
+
+	private class Panel extends JPanel {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			this.setDoubleBuffered(true);

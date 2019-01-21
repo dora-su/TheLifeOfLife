@@ -36,6 +36,7 @@ import java.util.HashMap;
 public class Client extends JFrame {
 
 	//declaring variables
+	//declaring variables
 	private JTextField typeField;
 	private JTextArea msgArea;
 	private Socket mySocket; // socket for connection
@@ -46,14 +47,16 @@ public class Client extends JFrame {
 	private String admin;
 	private Lobby l;
 	public JFrame window1;
+	private JPanel panel;
 	private JLabel label;
-	private ArrayList<JLabel> listData;
+	private JButton button;
+	private ArrayList<JPanel> listData;
 	private ArrayList<String> blockedUsers;
-	private HashMap<String, String> map;
+	HashMap<String, Player> map;
 	private Game g;
 	private JPanel status;
 	private JFrame frame;
-	private Image background;
+	Image background;
 
 	/**
 	 * Main
@@ -104,7 +107,7 @@ public class Client extends JFrame {
 					public void run() {
 						frame.dispose();
 						go(userName.getText(), ip.getText(), Integer.parseInt(port.getText()));
-						
+
 					}
 				});
 				t1.start();
@@ -182,18 +185,18 @@ public class Client extends JFrame {
 	}
 
 	/**
-	 * go
-	 * Runs the chat client UI
-	 *
-	 * @param username1, the userName of the user
-	 * @param ip,        the server Ip address the the client wants to connect to
-	 * @param port,      the port that client wants to make a connection on
-	 */
+	* go
+	* Runs the chat client UI
+	*
+	* @param username1, the userName of the user
+	* @param ip,        the server Ip address the the client wants to connect to
+	* @param port,      the port that client wants to make a connection on
+	*/
 	public void go(String username1, String ip, int port) {
 		//Creating the chat client UI
 		blockedUsers = new ArrayList<String>();
-		map = new HashMap<String, String>();
-		listData = new ArrayList<JLabel>();
+		map = new HashMap<String, Player>();
+		listData = new ArrayList<JPanel>();
 		window1 = new JFrame("Chat Client");
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new GridLayout(2, 0));
@@ -270,12 +273,17 @@ public class Client extends JFrame {
 			output.flush();
 
 			//setting status of user to active
-			label = new JLabel(userName + " - $10000000");
-			listData.add(label);
-			status.add(label);
+			panel = new JPanel();
+			label = new JLabel(userName);
+			panel.add(label);
+			map.put(userName, new Player(userName));
+			button = new JButton("Details");
+			button.addActionListener(new InformationActionListener(userName));
+			panel.add(button);
+			listData.add(panel);
+			status.add(panel);
 			status.revalidate();
 			status.repaint();
-			map.put(userName, "Active");
 			String S = input.readLine();
 
 			// duplicate user
@@ -288,28 +296,28 @@ public class Client extends JFrame {
 			}
 			admin = S;
 			// updates status of everyone else on the server
-			while (true) {
-
-				// get username
-				String userName = input.readLine();
-
-				if (userName == null || userName.equals("")) {
-					break;
-				}
-				//get the status that the user would like to change to
-				String money = input.readLine();
-
-				//Changed user status based on the user's command
-				// checks for valid status
-
-				//updating the user's new status
-				label = new JLabel(userName + " - $" + money);
-				listData.add(label);
-				status.add(label);
-				status.revalidate();
-				status.repaint();
-				map.put(userName, money);
-			}
+			//            while (true) {
+			//
+			//                // get username
+			//                String userName = input.readLine();
+			//
+			//                if (userName == null || userName.equals("")) {
+			//                    break;
+			//                }
+			//                //get the status that the user would like to change to
+			//                String money = input.readLine();
+			//
+			//                //Changed user status based on the user's command
+			//                // checks for valid status
+			//
+			//                //updating the user's new status
+			//                label = new JLabel(userName);
+			////                listData.add(label);
+			//                status.add(label);
+			//                status.revalidate();
+			//                status.repaint();
+			////                map.put(userName, money);
+			//            }
 		} catch (IOException e) { // connection error occurred
 			//Show that connection to server failed
 			System.out.println("Connection to Server Failed");
@@ -414,35 +422,43 @@ public class Client extends JFrame {
 							// update status
 						} else if (msg.startsWith("/status")) {
 							String money = msg.split(" ")[1];
+							String salary = msg.split(" ")[2];
 
 							// new user joining
 							if (!map.containsKey(user)) {
-								label = new JLabel(user + " - $" + money);
-								listData.add(label);
-								status.add(label);
+								label = new JLabel(user);
+								Player p = new Player(user);
+								p.setMoney(Integer.parseInt(money));
+								//                                p.setSalary(Integer.parseInt(salary));
+								map.put(user, p);
+								panel = new JPanel();
+								panel.add(label);
+								button = new JButton("Details");
+								button.addActionListener(new InformationActionListener(user));
+								panel.add(button);
+								listData.add(panel);
+								status.add(panel);
 								status.revalidate();
 								status.repaint();
 								msgArea.append(user + " joined the chat.\n");
-								map.put(user, money);
 							} else {
 								// update status and not new
-								for (int i = 0; i < listData.size(); i++) {
-									if (listData.get(i).getText().startsWith(user + " ")) {
-										listData.get(i).setText(user + " - " + money);
-										status.revalidate();
-										status.repaint();
-										map.put(user, money);
-									}
+								Player p = map.get(user);
+								p.setMoney(Integer.parseInt(money));
+								if (!salary.equals("0")) {
+									p.getCareer().setSalary((int) (p.getCareer().getSalary() * 1.05));
 								}
 							}
 						} else if (msg.startsWith("/spin")) {
-							System.out.println("SI");
 							Game.spin(Double.parseDouble(msg.split(" ")[1]));
 						} else if (msg.startsWith("/removep")) {
+							map.get(user).addProperty(g.properties.get(Integer.parseInt(msg.split(" ")[1])));
 							g.soldProperties[Integer.parseInt(msg.split(" ")[1])] = true;
 						} else if (msg.startsWith("/removecc")) {
+							map.get(user).setCareer(g.collegeCareers.get(Integer.parseInt(msg.split(" ")[1])));
 							g.collegeCareers.remove(Integer.parseInt(msg.split(" ")[1]));
 						} else if (msg.startsWith("/removec")) {
+							map.get(user).setCareer(g.normalCareers.get(Integer.parseInt(msg.split(" ")[1])));
 							g.normalCareers.remove(Integer.parseInt(msg.split(" ")[1]));
 						} else {
 							// regular user message
@@ -467,7 +483,7 @@ public class Client extends JFrame {
 		}
 
 	}
-	// ****** Inner Classes for Action Listeners ****
+	// **** Inner Classes for Action Listeners **
 
 	// send - send msg to server (also flush), then clear the JTextField
 	class SendButtonListener implements ActionListener {
@@ -667,13 +683,50 @@ public class Client extends JFrame {
 		}
 	}
 
-	private class Panel extends JPanel {
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g); // required
-			this.setDoubleBuffered(true);
-			g.drawImage(background, 0, 0, null);
-			repaint();
+	private class InformationActionListener implements ActionListener {
+		String user;
 
+		InformationActionListener(String S) {
+			user = S;
 		}
+
+		public void actionPerformed(ActionEvent e) {
+			Player p = map.get(user);
+			JFrame frame = new JFrame();
+			frame.setSize(300, 500);
+			JLabel name = new JLabel("Name: " + p.getName());
+			JLabel family = new JLabel("Family Size: " + p.family);
+			JLabel money = new JLabel("Money: " + p.getMoney());
+			JLabel career = new JLabel("Career: " + (p.getCareer() == null ? "NA" : p.getCareer().getCareerName()));
+			JLabel salary = new JLabel("Salary: " + (p.getCareer() == null ? "NA" : p.getCareer().getSalary()));
+			JLabel house = new JLabel("Property: " + (p.getProperty() == null ? "NA" : p.getProperty().getName()));
+			JButton exit = new JButton("Exit");
+			exit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					frame.dispose();
+				}
+			});
+			JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.add(name);
+			panel.add(family);
+			panel.add(money);
+			panel.add(career);
+			panel.add(salary);
+			panel.add(house);
+			panel.add(exit);
+			frame.setContentPane(panel);
+			frame.setVisible(true);
+		}
+	}
+}
+
+class Panel extends JPanel {
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g); // required
+		this.setDoubleBuffered(true);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage("graphics/mainmenu.png"), 0, 0, null);
+		repaint();
+
 	}
 }
