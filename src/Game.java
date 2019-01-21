@@ -1,5 +1,12 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -211,7 +218,7 @@ class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 1193), (int) (scaleY * 503), "Donate to a Mango Charity", -300000));
         path.add(new PayDayTile((int) (scaleX * 1239), (int) (scaleY * 449)));
 
-        path.add(new MoneyTile((int) (scaleX * 1244), (int) (scaleY * 393), "Receive apology money from Richmond Hill High School", 30000));
+        path.add(new MoneyTile((int) (scaleX * 1244), (int) (scaleY * 393), "Receive apology money from Richmond Hill High School.", 30000));
 
         //decision point (89)
         path.add(new Tile((int) (scaleX * 1214), (int) (scaleY * 326), "You went over your credit limit! Thankfully your bank doesn’t have a fee for that."));
@@ -250,7 +257,7 @@ class Game extends JFrame {
         //stop
         path.add(new Tile((int) (scaleX * 1818), (int) (scaleY * 143)));
 
-        path.add(new MoneyTile((int) (scaleX * 1810), (int) (scaleY * 270), "Pay for your brother's funeral", -8000));
+        path.add(new MoneyTile((int) (scaleX * 1810), (int) (scaleY * 270), "Pay for your brother's funeral.", -8000));
         path.add(new MoneyTile((int) (scaleX * 1802), (int) (scaleY * 337), "Congrats on your game show win!", 30000));
         path.add(new MoneyTile((int) (scaleX * 1788), (int) (scaleY * 399), "Remodel your home.", -20000));
         path.add(new MoneyTile((int) (scaleX * 1775), (int) (scaleY * 459), "Buy a yacht.", -1000000));
@@ -283,19 +290,19 @@ class Game extends JFrame {
 
         //adding non college careers and setting their salary,name and picture
         normalCareers = new ArrayList<Career>();
-        normalCareers.add(new Career("Police", 10000, police));
-        normalCareers.add(new Career("Math", 10000, math));
-        normalCareers.add(new Career("Nurse", 10000, nurse));
-        normalCareers.add(new Career("Doctor", 10000, doctor));
-        normalCareers.add(new Career("Software Enginner", 1000000, softwareEngineer));
+        normalCareers.add(new Career("Police", 125000, police));
+        normalCareers.add(new Career("Math", 115000, math));
+        normalCareers.add(new Career("Nurse", 105000, nurse));
+        normalCareers.add(new Career("Doctor", 180000, doctor));
+        normalCareers.add(new Career("Software Engineer", 300000, softwareEngineer));
 
         //adding college careers and setting their salary name and picture
         collegeCareers = new ArrayList<Career>();
-        collegeCareers.add(new Career("Chef", 1000, chef));
-        collegeCareers.add(new Career("FlightAttendant", 1000, flightAttendant));
-        collegeCareers.add(new Career("UberDriver", 1000, uberDriver));
-        collegeCareers.add(new Career("Stripper", 1000, stripper));
-        collegeCareers.add(new Career("RoadWorker", 1000, roadWorker));
+        collegeCareers.add(new Career("Chef", 48000, chef));
+        collegeCareers.add(new Career("Flight Attendant", 50000, flightAttendant));
+        collegeCareers.add(new Career("Uber Driver", 72000, uberDriver));
+        collegeCareers.add(new Career("Stripper", 70000, stripper));
+        collegeCareers.add(new Career("Road Worker", 40000, roadWorker));
 
         //getting pictures for the properties in game
         ImageIcon mansion = new ImageIcon("graphics/homes/mansion.png");
@@ -309,14 +316,14 @@ class Game extends JFrame {
 
         //adding properties to its arraylist with its name, value and image
         properties = new ArrayList<Property>();
-        properties.add(new Property("Mansion", 500, mansion));
-        properties.add(new Property("Castle", 500, castle));
-        properties.add(new Property("Condo", 500, condo));
-        properties.add(new Property("Detached", 500, detached));
-        properties.add(new Property("Farm", 500, farm));
-        properties.add(new Property("Hut", 500, hut));
-        properties.add(new Property("Igloo", 500, igloo));
-        properties.add(new Property("bungalow", 500, bungalow));
+        properties.add(new Property("Mansion", 2200000, mansion));
+        properties.add(new Property("Castle", 4200000, castle));
+        properties.add(new Property("Condo", 550000, condo));
+        properties.add(new Property("Detached", 1400000, detached));
+        properties.add(new Property("Farm", 850000, farm));
+        properties.add(new Property("Hut", 150000, hut));
+        properties.add(new Property("Igloo", 200000, igloo));
+        properties.add(new Property("Bungalow", 1000000, bungalow));
 
         soldProperties = new boolean[properties.size()];
 

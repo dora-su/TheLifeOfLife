@@ -24,7 +24,6 @@ public class CareerSelection extends JFrame {
      * @param player  the player
      */
     CareerSelection(boolean college, Player player) {
-
         //Images
         Game.gameFrame.setEnabled(false);
         this.setSize(250, 400);
