@@ -155,8 +155,9 @@ public class MainMenu extends JFrame {
 			//Thread t1 = new Thread(new Runnable() {
 			//public void run() {
 			//new Server().go();
-			new Server();
 			new Client();
+			new Server();
+			
 			
 
 			//}
@@ -181,7 +182,7 @@ public class MainMenu extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			new Thread(new Runnable() {
 				public void run() {
-					new Client().login();
+					new Client();
 				}
 			}).start();
 			dispose();

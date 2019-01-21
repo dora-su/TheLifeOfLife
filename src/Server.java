@@ -60,7 +60,6 @@ class Server extends JFrame {
         port.setForeground(new Color(169, 169, 169));
         this.setSize(911, 561);
         this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
-        this.setAlwaysOnTop(true);
         port.setSize(348, 82);
         port.setLocation(495, 285);
         panel.setLayout(null);
@@ -75,7 +74,7 @@ class Server extends JFrame {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 if (!port.getText().matches("[0-9]+")) {
-                    JOptionPane.showMessageDialog(null, "Please check your inputs");
+                    JOptionPane.showMessageDialog(null, "Port must be a number!");
                     return;
 
                 }
@@ -109,22 +108,6 @@ class Server extends JFrame {
             }
 
         });
-        //		start.addActionListener(new ActionListener() {
-        //
-        //			@Override
-        //			public void actionPerformed(ActionEvent arg0) {
-        //				Thread t1 = new Thread(new Runnable() {
-        //					public void run() {
-        //						frame.dispose();
-        //						go(port.getText());
-        //
-        //					}
-        //				});
-        //				t1.start();
-        //
-        //			}
-        //
-        //		});
 
         InetAddress ipAddress = null;
         try {
