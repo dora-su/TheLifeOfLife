@@ -72,6 +72,11 @@ class Server extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				if (!port.getText().matches("[0-9]+")) {
+					JOptionPane.showMessageDialog(null, "Please check your inputs");
+					return;
+					
+				}
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
 						frame.dispose();
