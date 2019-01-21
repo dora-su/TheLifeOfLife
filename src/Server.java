@@ -1,5 +1,6 @@
 
 //imports for network communication
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,446 +28,447 @@ import javax.swing.JTextArea;
 
 class Server extends JFrame {
 
-	//Declaring variables
-	ServerSocket serverSock;// server socket for connection
-	String admin;
-	static Boolean running = true; // controls if the server is accepting clients
-	public static ArrayList<Client> clientList = new ArrayList<Client>();
-	static ArrayList<InetAddress> bannedIps = new ArrayList<InetAddress>();
-	static HashMap<String, Client> map = new HashMap<String, Client>();
-	static int ready;
-	JFrame frame;
+    //Declaring variables
+    ServerSocket serverSock;// server socket for connection
+    String admin;
+    static Boolean running = true; // controls if the server is accepting clients
+    public static ArrayList<Client> clientList = new ArrayList<Client>();
+    static ArrayList<InetAddress> bannedIps = new ArrayList<InetAddress>();
+    static HashMap<String, Client> map = new HashMap<String, Client>();
+    static int ready;
+    JFrame frame;
 
-	Image background;
+    Image background;
 
-	/**
-	 * Main
-	 * Runs the server
-	 * @param args parameters from command line
-	 */
-	//	public static void main(String[] args) {
-	//		new ChatServer().go(); // start the server
-	//	}
+    /**
+     * Main
+     * Runs the server
+     *
+     * @param args parameters from command line
+     */
+    //	public static void main(String[] args) {
+    //		new ChatServer().go(); // start the server
+    //	}
 
-	Server() {
+    Server() {
 
-		frame = this;
-		JPanel panel = new Panel();
-		JTextArea port = new JTextArea("5000");
-		port.setOpaque(false);
-		port.setFont(new Font("Arial", Font.PLAIN, 50));
-		port.setForeground(new Color(169, 169, 169));
-		this.setSize(911, 561);
-		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
-		this.setAlwaysOnTop(true);
-		port.setSize(348, 82);
-		port.setLocation(495, 285);
-		panel.setLayout(null);
+        frame = this;
+        JPanel panel = new Panel();
+        JTextArea port = new JTextArea("5000");
+        port.setOpaque(false);
+        port.setFont(new Font("Arial", Font.PLAIN, 50));
+        port.setForeground(new Color(169, 169, 169));
+        this.setSize(911, 561);
+        this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
+        this.setAlwaysOnTop(true);
+        port.setSize(348, 82);
+        port.setLocation(495, 285);
+        panel.setLayout(null);
 
-		JButton start = new JButton(new ImageIcon("graphics/server.png"));
-		start.setContentAreaFilled(false);
-		start.setFocusable(false);
-		start.setBorderPainted(false);
-		start.setBounds(450, 380, 400, 145);
-		start.addMouseListener(new MouseListener() {
+        JButton start = new JButton(new ImageIcon("graphics/server.png"));
+        start.setContentAreaFilled(false);
+        start.setFocusable(false);
+        start.setBorderPainted(false);
+        start.setBounds(450, 380, 400, 145);
+        start.addMouseListener(new MouseListener() {
 
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (!port.getText().matches("[0-9]+")) {
-					JOptionPane.showMessageDialog(null, "Please check your inputs");
-					return;
-					
-				}
-				Thread t1 = new Thread(new Runnable() {
-					public void run() {
-						frame.dispose();
-						go(port.getText());
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                if (!port.getText().matches("[0-9]+")) {
+                    JOptionPane.showMessageDialog(null, "Please check your inputs");
+                    return;
 
-					}
-				});
-				t1.start();
+                }
+                Thread t1 = new Thread(new Runnable() {
+                    public void run() {
+                        frame.dispose();
+                        go(port.getText());
 
-			}
+                    }
+                });
+                t1.start();
 
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				start.setIcon(new ImageIcon("graphics/server_hover.png"));
-			}
+            }
 
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				start.setIcon(new ImageIcon("graphics/server.png"));
-			}
+            @Override
+            public void mouseEntered(MouseEvent arg0) {
+                start.setIcon(new ImageIcon("graphics/server_hover.png"));
+            }
 
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-			}
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+                start.setIcon(new ImageIcon("graphics/server.png"));
+            }
 
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
+            @Override
+            public void mousePressed(MouseEvent arg0) {
+            }
 
-		});
-		//		start.addActionListener(new ActionListener() {
-		//
-		//			@Override
-		//			public void actionPerformed(ActionEvent arg0) {
-		//				Thread t1 = new Thread(new Runnable() {
-		//					public void run() {
-		//						frame.dispose();
-		//						go(port.getText());
-		//
-		//					}
-		//				});
-		//				t1.start();
-		//
-		//			}
-		//
-		//		});
+            @Override
+            public void mouseReleased(MouseEvent arg0) {
+            }
 
-		InetAddress ipAddress = null;
-		try {
-			ipAddress = InetAddress.getLocalHost();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        });
+        //		start.addActionListener(new ActionListener() {
+        //
+        //			@Override
+        //			public void actionPerformed(ActionEvent arg0) {
+        //				Thread t1 = new Thread(new Runnable() {
+        //					public void run() {
+        //						frame.dispose();
+        //						go(port.getText());
+        //
+        //					}
+        //				});
+        //				t1.start();
+        //
+        //			}
+        //
+        //		});
 
-		JLabel label = new JLabel("" + ipAddress);
-		label.setFont(new Font("Arial", Font.PLAIN, 35));
-		label.setForeground(new Color(169, 169, 169));
-		label.setSize(400, 145);
+        InetAddress ipAddress = null;
+        try {
+            ipAddress = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-		label.setLocation(495, 127);
+        JLabel label = new JLabel("" + ipAddress);
+        label.setFont(new Font("Arial", Font.PLAIN, 35));
+        label.setForeground(new Color(169, 169, 169));
+        label.setSize(400, 145);
 
-		panel.add(Box.createRigidArea(new Dimension(500, 0)));
-		panel.add(start);
-		panel.add(port);
-		panel.add(label);
+        label.setLocation(495, 127);
 
-		this.setResizable(false);
-		this.setContentPane(panel);
-		this.setVisible(true);
+        panel.add(Box.createRigidArea(new Dimension(500, 0)));
+        panel.add(start);
+        panel.add(port);
+        panel.add(label);
 
-		background = Toolkit.getDefaultToolkit().getImage("graphics/server_menu.png");
+        this.setResizable(false);
+        this.setContentPane(panel);
+        this.setVisible(true);
 
-	}
+        background = Toolkit.getDefaultToolkit().getImage("graphics/server_menu.png");
 
-	/**
-	 * Go 
-	 * Starts the server
-	 */
-	public void go(String portNum) {
+    }
 
-		//allowing the user to choose the port to connect to 
-		//String portNum = "";
-		//		while (!portNum.matches("[0-9]+")) {
-		//			portNum = JOptionPane.showInputDialog("Please enter the port number");
-		//			System.out.println("Server started on port " + portNum);
-		//		}
+    /**
+     * Go
+     * Starts the server
+     */
+    public void go(String portNum) {
 
-		System.out.println("Waiting for a client connection..");
-		// hold the client connection
-		Socket client = null;
+        //allowing the user to choose the port to connect to
+        //String portNum = "";
+        //		while (!portNum.matches("[0-9]+")) {
+        //			portNum = JOptionPane.showInputDialog("Please enter the port number");
+        //			System.out.println("Server started on port " + portNum);
+        //		}
 
-		try {
-			// assigns an port to the server
-			serverSock = new ServerSocket(Integer.parseInt(portNum));
-			//serverSock.setSoTimeout(30000); // 15 second timeout
+        System.out.println("Waiting for a client connection..");
+        // hold the client connection
+        Socket client = null;
 
-			while (running) { // this loops to accept multiple clients
-				client = serverSock.accept(); // wait for connection
+        try {
+            // assigns an port to the server
+            serverSock = new ServerSocket(Integer.parseInt(portNum));
+            //serverSock.setSoTimeout(30000); // 15 second timeout
 
-				//if the user is on the banned list, refuse the connection
-				System.out.println("Client connected");
-				if (bannedIps.contains(client.getInetAddress())) {
-					System.out.println("Banned ip tried to connect");
-					client.close();
-					continue;
-				}
-				if (clientList.size() == 6) {
-					System.out.println("Full Game");
-					client.close();
-					continue;
-				}
-				//establishing input streams 
-				BufferedReader br;
-				InputStreamReader stream = new InputStreamReader(client.getInputStream());
-				br = new BufferedReader(stream);
-				String userName = br.readLine();
-				PrintWriter pw = new PrintWriter(client.getOutputStream());
-				//if the userName is already in use close client 
-				if (map.containsKey(userName)) {
-					System.out.println("User with same name as another user tried to connect.");
-					pw.println("Username exists!");
-					pw.flush();
-					client.close();
-					continue;
-				} else {
-					if (clientList.isEmpty()) {
-						admin = userName;
-					}
-					pw.println(admin);
-					pw.flush();
-				}
+            while (running) { // this loops to accept multiple clients
+                client = serverSock.accept(); // wait for connection
 
-				System.out.println(userName + " joined.");
+                //if the user is on the banned list, refuse the connection
+                System.out.println("Client connected");
+                if (bannedIps.contains(client.getInetAddress())) {
+                    System.out.println("Banned ip tried to connect");
+                    client.close();
+                    continue;
+                }
+                if (clientList.size() == 6) {
+                    System.out.println("Full Game");
+                    client.close();
+                    continue;
+                }
+                //establishing input streams
+                BufferedReader br;
+                InputStreamReader stream = new InputStreamReader(client.getInputStream());
+                br = new BufferedReader(stream);
+                String userName = br.readLine();
+                PrintWriter pw = new PrintWriter(client.getOutputStream());
+                //if the userName is already in use close client
+                if (map.containsKey(userName)) {
+                    System.out.println("User with same name as another user tried to connect.");
+                    pw.println("Username exists!");
+                    pw.flush();
+                    client.close();
+                    continue;
+                } else {
+                    if (clientList.isEmpty()) {
+                        admin = userName;
+                    }
+                    pw.println(admin + " " + clientList.size());
+                    pw.flush();
+                }
 
-				//add the client to the client list and set as active
-				for (Client c : clientList) {
-					pw.println(c.user);
-					pw.println("/status 1000000 0");
-					pw.flush();
-					c.output.println(userName);
-					c.output.println("/status 1000000 0");
-					c.output.flush();
-				}
+                System.out.println(userName + " joined.");
 
-				//add the client to the client list
-				clientList.add(new Client(client, userName));
-				//				pw.println("");
-				//				pw.flush();
+                //add the client to the client list and set as active
+                for (Client c : clientList) {
+                    pw.println(c.user);
+                    pw.println("/status 1000000 0");
+                    pw.flush();
+                    c.output.println(userName);
+                    c.output.println("/status 1000000 0");
+                    c.output.flush();
+                }
 
-				Thread t = new Thread(new ConnectionHandler(client)); // create a thread for the new client and pass in
-																		// the socket
-				t.start(); // start the new thread
-			}
-		} catch (Exception e) {
-			// System.out.println("Error accepting connection");
-			// close all and quit
-			try {
-				client.close();
-			} catch (Exception e1) {
-				System.out.println("Failed to close socket");
-			}
-			System.exit(-1);
-		}
-	}
+                //add the client to the client list
+                clientList.add(new Client(client, userName));
+                //				pw.println("");
+                //				pw.flush();
 
-	// *** Inner class - thread for client connection
-	class ConnectionHandler implements Runnable {
-		private PrintWriter output; // assign printwriter to network stream
-		private BufferedReader input; // Stream for network input
-		private Socket client; // keeps track of the client socket
-		private boolean running;
+                Thread t = new Thread(new ConnectionHandler(client)); // create a thread for the new client and pass in
+                // the socket
+                t.start(); // start the new thread
+            }
+        } catch (Exception e) {
+            // System.out.println("Error accepting connection");
+            // close all and quit
+            try {
+                client.close();
+            } catch (Exception e1) {
+                System.out.println("Failed to close socket");
+            }
+            System.exit(-1);
+        }
+    }
 
-		/**
-		 * ConnectionHandler Constructor
-		 * 
-		 * @param the socket belonging to this client connection
-		 */
-		ConnectionHandler(Socket s) {
-			this.client = s; // constructor assigns client to this
-			try { // assign all connections to client
-				this.output = new PrintWriter(client.getOutputStream());
-				InputStreamReader stream = new InputStreamReader(client.getInputStream());
-				this.input = new BufferedReader(stream);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			running = true;
-		} // end of constructor
+    // *** Inner class - thread for client connection
+    class ConnectionHandler implements Runnable {
+        private PrintWriter output; // assign printwriter to network stream
+        private BufferedReader input; // Stream for network input
+        private Socket client; // keeps track of the client socket
+        private boolean running;
 
-		/**
-		 * run 
-		 * executed on start of thread
-		 */
-		public void run() {
-			// Get a message from the client
-			String msg, username;
-			// Get a message from the client
-			while (running) {
-				// loop unit a message is received
-				try {
-					if (input.ready()) { // check for an incoming messge
-						username = input.readLine(); //get userName from client
-						msg = input.readLine(); // get a message from the client
-						System.out.println(msg);
-						//check if the message is a command 
-						if (msg.startsWith("/")) {
-							if (msg.startsWith("/stop")) {
-								// tells all clients that the server is closing, only admin can close
-								for (Client c : clientList) {
-									c.output.println(admin);
-									c.output.println(msg);
-									c.output.flush();
-								}
-								System.out.println("Server stopped");
-								// close server
-								serverSock.close();
-							} else if (msg.startsWith("/ban")) { //ban the user
-								// can ban multiple clients at the same time
-								String[] bannedClients = msg.trim().split(" ");
-								for (int i = 1; i < bannedClients.length; i++) {
-									Client banned = map.get(bannedClients[i]);
-									// client name is not a real client
-									if (banned == null) {
-										continue;
-									}
-									// put in ip list
-									bannedIps.add(banned.client.getInetAddress());
-									System.out.println("Banned " + banned.user + ":" + banned.client.getInetAddress());
-									// tell banned client that they have been banned
-									banned.output.println(admin);
-									banned.output.println("/ban");
-									banned.output.flush();
-									banned.client.close();
-									clientList.remove(banned);
-									for (Client c : clientList) {
-										c.output.println(banned.user);
-										c.output.println("/status -999999999");
-										c.output.flush();
-									}
-								}
-							} else if (msg.startsWith("/kick")) { //kick the user
-								// Multiple clients can be banned
-								String[] kickedClients = msg.trim().split(" ");
-								for (int i = 1; i < kickedClients.length; i++) {
-									Client kicked = map.get(kickedClients[i]);
-									// client name is not a real client
-									if (kicked == null) {
-										continue;
-									}
-									System.out.println("Kicked " + kicked.user);
-									// tells kicked client that they have been kicked
-									kicked.output.println(admin);
-									kicked.output.println("/kick");
-									kicked.output.flush();
-									kicked.client.close();
-									clientList.remove(kicked);
-									for (Client c : clientList) {
-										c.output.println(kicked.user);
-										c.output.println("/status -999999999");
-										c.output.flush();
-									}
-								}
-							} else if (msg.startsWith("/msg")) { //send private message to a user
-								String tmp = msg;
-								// Seperates /msg and the rest of the command
-								if (tmp.indexOf(" ") >= 0) {
-									tmp = tmp.substring(tmp.indexOf(" ") + 1);
-								} else {
-									return;
-								}
-								// seperates receiver and msg
-								String user = "";
-								if (tmp.indexOf(" ") >= 0) {
-									user = tmp.substring(0, tmp.indexOf(" "));
-									tmp = tmp.substring(tmp.indexOf(" ") + 1);
-								}
-								// if there is a message
-								if (!tmp.equals("")) {
+        /**
+         * ConnectionHandler Constructor
+         *
+         * @param the socket belonging to this client connection
+         */
+        ConnectionHandler(Socket s) {
+            this.client = s; // constructor assigns client to this
+            try { // assign all connections to client
+                this.output = new PrintWriter(client.getOutputStream());
+                InputStreamReader stream = new InputStreamReader(client.getInputStream());
+                this.input = new BufferedReader(stream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            running = true;
+        } // end of constructor
 
-									// makes sure messaged client is valid
-									Client messaged = map.get(user);
-									if (messaged == null) {
-										continue;
-									}
-									Client sent = map.get(username);
+        /**
+         * run
+         * executed on start of thread
+         */
+        public void run() {
+            // Get a message from the client
+            String msg, username;
+            // Get a message from the client
+            while (running) {
+                // loop unit a message is received
+                try {
+                    if (input.ready()) { // check for an incoming messge
+                        username = input.readLine(); //get userName from client
+                        msg = input.readLine(); // get a message from the client
+                        System.out.println(msg);
+                        //check if the message is a command
+                        if (msg.startsWith("/")) {
+                            if (msg.startsWith("/stop")) {
+                                // tells all clients that the server is closing, only admin can close
+                                for (Client c : clientList) {
+                                    c.output.println(admin);
+                                    c.output.println(msg);
+                                    c.output.flush();
+                                }
+                                System.out.println("Server stopped");
+                                // close server
+                                serverSock.close();
+                            } else if (msg.startsWith("/ban")) { //ban the user
+                                // can ban multiple clients at the same time
+                                String[] bannedClients = msg.trim().split(" ");
+                                for (int i = 1; i < bannedClients.length; i++) {
+                                    Client banned = map.get(bannedClients[i]);
+                                    // client name is not a real client
+                                    if (banned == null) {
+                                        continue;
+                                    }
+                                    // put in ip list
+                                    bannedIps.add(banned.client.getInetAddress());
+                                    System.out.println("Banned " + banned.user + ":" + banned.client.getInetAddress());
+                                    // tell banned client that they have been banned
+                                    banned.output.println(admin);
+                                    banned.output.println("/ban");
+                                    banned.output.flush();
+                                    banned.client.close();
+                                    clientList.remove(banned);
+                                    for (Client c : clientList) {
+                                        c.output.println(banned.user);
+                                        c.output.println("/status -999999999");
+                                        c.output.flush();
+                                    }
+                                }
+                            } else if (msg.startsWith("/kick")) { //kick the user
+                                // Multiple clients can be banned
+                                String[] kickedClients = msg.trim().split(" ");
+                                for (int i = 1; i < kickedClients.length; i++) {
+                                    Client kicked = map.get(kickedClients[i]);
+                                    // client name is not a real client
+                                    if (kicked == null) {
+                                        continue;
+                                    }
+                                    System.out.println("Kicked " + kicked.user);
+                                    // tells kicked client that they have been kicked
+                                    kicked.output.println(admin);
+                                    kicked.output.println("/kick");
+                                    kicked.output.flush();
+                                    kicked.client.close();
+                                    clientList.remove(kicked);
+                                    for (Client c : clientList) {
+                                        c.output.println(kicked.user);
+                                        c.output.println("/status -999999999");
+                                        c.output.flush();
+                                    }
+                                }
+                            } else if (msg.startsWith("/msg")) { //send private message to a user
+                                String tmp = msg;
+                                // Seperates /msg and the rest of the command
+                                if (tmp.indexOf(" ") >= 0) {
+                                    tmp = tmp.substring(tmp.indexOf(" ") + 1);
+                                } else {
+                                    return;
+                                }
+                                // seperates receiver and msg
+                                String user = "";
+                                if (tmp.indexOf(" ") >= 0) {
+                                    user = tmp.substring(0, tmp.indexOf(" "));
+                                    tmp = tmp.substring(tmp.indexOf(" ") + 1);
+                                }
+                                // if there is a message
+                                if (!tmp.equals("")) {
 
-									// sends message
-									messaged.output.println("FROM " + username);
-									messaged.output.println(tmp);
-									messaged.output.flush();
+                                    // makes sure messaged client is valid
+                                    Client messaged = map.get(user);
+                                    if (messaged == null) {
+                                        continue;
+                                    }
+                                    Client sent = map.get(username);
 
-									// records sent message
-									sent.output.println("TO " + user);
-									sent.output.println(tmp);
-									sent.output.flush();
+                                    // sends message
+                                    messaged.output.println("FROM " + username);
+                                    messaged.output.println(tmp);
+                                    messaged.output.flush();
 
-									System.out.println("Message from " + username + " to " + user + " : " + tmp);
-								}
-							} else if (msg.startsWith("/status")) { //change user status
+                                    // records sent message
+                                    sent.output.println("TO " + user);
+                                    sent.output.println(tmp);
+                                    sent.output.flush();
 
-								// tells all the clients that the user updated their status
-								for (Client c : clientList) {
-									c.output.println(username);
-									c.output.println(msg);
-									c.output.flush();
-								}
-							} else if (msg.equals("/ready")) {
-								ready++;
-								if (ready == clientList.size()) {
-									for (Client c : clientList) {
-										c.output.println(admin);
-										c.output.println("/start");
-										c.output.flush();
-									}
-								}
-							} else if (msg.equals("/unready")) {
-								ready--;
-							} else if (msg.startsWith("/spin") || msg.startsWith("/remove")) {
-								for (Client c : clientList) {
-									c.output.println(username);
-									c.output.println(msg);
-									c.output.flush();
-								}
-							}
-						} else {
-							//if not special command send message to everyone 
-							for (Client c : clientList) {
-								//output to be received by the client
-								c.output.println(username);
-								c.output.println(msg);
-								c.output.flush();
-							}
-							System.out.println(username + " : " + msg);
-						}
-					}
-				} catch (IOException e) {
-					System.out.println("Failed to receive msg from the client");
-					e.printStackTrace();
-				}
-			}
+                                    System.out.println("Message from " + username + " to " + user + " : " + tmp);
+                                }
+                            } else if (msg.startsWith("/status")) { //change user status
 
-			// close the socket
-			try {
-				input.close();
-				output.close();
-				client.close();
-			} catch (Exception e) {
-				System.out.println("Failed to close socket");
-			}
-		} // end of run()
-	} // end of inner class
+                                // tells all the clients that the user updated their status
+                                for (Client c : clientList) {
+                                    c.output.println(username);
+                                    c.output.println(msg);
+                                    c.output.flush();
+                                }
+                            } else if (msg.equals("/ready")) {
+                                ready++;
+                                if (ready == clientList.size()) {
+                                    for (Client c : clientList) {
+                                        c.output.println(admin);
+                                        c.output.println("/start");
+                                        c.output.flush();
+                                    }
+                                }
+                            } else if (msg.equals("/unready")) {
+                                ready--;
+                            } else if (msg.startsWith("/spin") || msg.startsWith("/remove")) {
+                                for (Client c : clientList) {
+                                    c.output.println(username);
+                                    c.output.println(msg);
+                                    c.output.flush();
+                                }
+                            }
+                        } else {
+                            //if not special command send message to everyone
+                            for (Client c : clientList) {
+                                //output to be received by the client
+                                c.output.println(username);
+                                c.output.println(msg);
+                                c.output.flush();
+                            }
+                            System.out.println(username + " : " + msg);
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("Failed to receive msg from the client");
+                    e.printStackTrace();
+                }
+            }
 
-	public class Client {
-		Socket client;
-		private PrintWriter output;
-		private BufferedReader input;
-		String user;
-		// 1 active
-		// 2 offline
-		// 3 do not disturb
+            // close the socket
+            try {
+                input.close();
+                output.close();
+                client.close();
+            } catch (Exception e) {
+                System.out.println("Failed to close socket");
+            }
+        } // end of run()
+    } // end of inner class
 
-		/**
-		 * ConnectionHandler Constructor
-		 * 
-		 * @param the socket belonging to this client connection
-		 */
-		Client(Socket s, String userName) {
-			user = userName;
-			map.put(user, this); // adds user to map
-			client = s; // constructor assigns client to this
-			try { // assign all connections to client
-				output = new PrintWriter(client.getOutputStream());
-				InputStreamReader stream = new InputStreamReader(client.getInputStream());
-				input = new BufferedReader(stream);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			running = true;
-		} // end of constructor
+    public class Client {
+        Socket client;
+        private PrintWriter output;
+        private BufferedReader input;
+        String user;
+        // 1 active
+        // 2 offline
+        // 3 do not disturb
 
-	}
+        /**
+         * ConnectionHandler Constructor
+         *
+         * @param the socket belonging to this client connection
+         */
+        Client(Socket s, String userName) {
+            user = userName;
+            map.put(user, this); // adds user to map
+            client = s; // constructor assigns client to this
+            try { // assign all connections to client
+                output = new PrintWriter(client.getOutputStream());
+                InputStreamReader stream = new InputStreamReader(client.getInputStream());
+                input = new BufferedReader(stream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            running = true;
+        } // end of constructor
 
-	private class Panel extends JPanel {
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g); // required
-			this.setDoubleBuffered(true);
-			g.drawImage(background, 0, 0, null);
-			repaint();
+    }
 
-		}
-	}
+    private class Panel extends JPanel {
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g); // required
+            this.setDoubleBuffered(true);
+            g.drawImage(background, 0, 0, null);
+            repaint();
+
+        }
+    }
 } // end of Class

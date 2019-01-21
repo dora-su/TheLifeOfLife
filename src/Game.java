@@ -771,6 +771,7 @@ class Game extends JFrame {
     class RollListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
+            System.out.println("spinning " + turn + " " + c.players.size());
             if (c.players.get(turn % c.players.size()).equals(player)) {
                 c.output.println(player.getName());
                 c.output.println("/spin " + (rand.nextInt(360) + 5000));

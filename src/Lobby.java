@@ -59,6 +59,7 @@ public class Lobby extends JFrame {
 
         //set icon image
         icon = new ImageIcon("graphics/icon.png");
+        icon = new ImageIcon("graphics/icon.png");
         this.setIconImage(icon.getImage());
         // ready box
         playerList = new String[6];
@@ -81,7 +82,7 @@ public class Lobby extends JFrame {
         players.setOpaque(false);
         players.setAlignmentX(CENTER_ALIGNMENT);
         players.setSize(this.size());
-        players.setLocation(500,90);
+        players.setLocation(500, 90);
 
         JPanel options = new JPanel();
         options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
@@ -149,10 +150,22 @@ public class Lobby extends JFrame {
     }
 
     public void addUser(String user) {
-    	System.out.println(user + " added!");
-    	playerList[playerCount] = user;
-        System.out.println(playerCount);
-    	playerCount++;
+        System.out.println(user + " added!");
+        for (int i = 0; i < playerList.length; i++) {
+            if (playerList[i].equals("")) {
+                playerList[i] = user;
+                return;
+            }
+        }
+    }
+
+    public void removeUser(String user) {
+        for (int i = 0; i < playerList.length; i++) {
+            if (playerList[i].equals(user)) {
+                playerList[i] = "";
+                return;
+            }
+        }
     }
 
     /**
@@ -185,7 +198,7 @@ public class Lobby extends JFrame {
             super.paintComponent(g); // required
             this.setDoubleBuffered(true);
             g.drawImage(lobby, 0, 0, null);
-            
+
             for (int i = 0; i < playerList.length; i++) {
                 g.drawString(playerList[i], 500, 90 + 20 * i);
             }
