@@ -318,8 +318,9 @@ public class Client extends JFrame {
             panel = new JPanel();
             label = new JLabel(userName);
             panel.add(label);
-            players.add(new Player(userName));
-            map.put(userName, new Player(userName));
+            Player p = new Player(userName);
+            players.add(p);
+            map.put(userName, p);
             button = new JButton("Details");
             button.addActionListener(new InformationActionListener(userName));
             panel.add(button);

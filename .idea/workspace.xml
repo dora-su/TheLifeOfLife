@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="78fc583c-b5ae-4150-811e-17597a3280ec" name="Default Changelist" comment="Merge branch 'master' of https://github.com/dora-su/TheLifeOfLife&#10;&#10;# Conflicts:&#10;#&#9;src/Game.java&#10;#&#9;src/LoadingScreen.java&#10;#&#9;src/Player.java">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HouseSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HouseSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
-    </list>
+    <list default="true" id="78fc583c-b5ae-4150-811e-17597a3280ec" name="Default Changelist" comment="Merge branch 'master' of https://github.com/dora-su/TheLifeOfLife&#10;&#10;# Conflicts:&#10;#&#9;src/Game.java&#10;#&#9;src/LoadingScreen.java&#10;#&#9;src/Player.java" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,8 +66,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="475" column="47" lean-forward="true" selection-start-line="475" selection-start-column="47" selection-end-line="475" selection-end-column="47" />
+            <state relative-caret-position="207">
+              <caret line="472" column="60" lean-forward="true" selection-start-line="472" selection-start-column="60" selection-end-line="472" selection-end-column="60" />
               <folding>
                 <element signature="e#1810#1818#0" expanded="true" />
                 <element signature="e#4131#4132#0" expanded="true" />
@@ -109,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="640" column="13" lean-forward="true" selection-start-line="640" selection-start-column="13" selection-end-line="640" selection-end-column="13" />
+            <state relative-caret-position="322">
+              <caret line="624" column="40" selection-start-line="624" selection-start-column="40" selection-end-line="624" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -236,7 +228,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548040422877" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548040727833" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -313,7 +305,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28795000" />
+    <option name="totallyTimeSpent" value="29108000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1477" height="837" extended-state="6" />
@@ -653,8 +645,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="640" column="13" lean-forward="true" selection-start-line="640" selection-start-column="13" selection-end-line="640" selection-end-column="13" />
+        <state relative-caret-position="322">
+          <caret line="624" column="40" selection-start-line="624" selection-start-column="40" selection-end-line="624" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -663,8 +655,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="475" column="47" lean-forward="true" selection-start-line="475" selection-start-column="47" selection-end-line="475" selection-end-column="47" />
+        <state relative-caret-position="207">
+          <caret line="472" column="60" lean-forward="true" selection-start-line="472" selection-start-column="60" selection-end-line="472" selection-end-column="60" />
           <folding>
             <element signature="e#1810#1818#0" expanded="true" />
             <element signature="e#4131#4132#0" expanded="true" />
