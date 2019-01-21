@@ -76,7 +76,7 @@ public class PopUp {
 		panel.add(Box.createRigidArea(new Dimension(0, 78)));
 
 		panel.add(messageLabel);
-		panel.add(Box.createRigidArea(new Dimension(0, 135)));
+		panel.add(Box.createRigidArea(new Dimension(0, 50)));
 		JPanel options = new JPanel();
 		options.setOpaque(false);
 
@@ -170,12 +170,6 @@ public class PopUp {
 				}
 			});
 
-			if (tile instanceof LifeTile) {
-				int moneyToRemove = 0;
-				player1.removeMoney(moneyToRemove);
-			} else if (tile instanceof MoneyTile) {
-				player1.removeMoney((((MoneyTile) tile).getMoney()));
-			}
 
 			close.setAlignmentX(JButton.CENTER_ALIGNMENT);
 			options.add(close);

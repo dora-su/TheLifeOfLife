@@ -78,13 +78,21 @@ class Player implements Comparable<Player>{
 	public int getMoney() {
 		return money;
 	}
-
+	
 	public void setMoney(int money) {
+		if (c != null) {
+			c.output.println(name);
+			c.output.println("/status " + money + " 0");
+			c.output.flush();
+		}
 		this.money = money;
 	}
 
 	public void addMoney(int money) {
 		add += money;
+		c.output.println(c.userName);
+		c.output.println("/status " + (player.money+ add) + " 0");
+		c.output.flush();
 		//add money by different increments based on the amount that needs to be added or subtracted
 		new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,8 +105,8 @@ class Player implements Comparable<Player>{
 					decrease = 10;
 				} else if (Math.abs(add) < 10000) {
 					decrease = 100;
-				} else if (Math.abs(add) < 100000) {
-					decrease = 100000;
+				} else {
+					decrease = 10000;
 				}
 				if (add > 0) {
 					add -= decrease;
@@ -109,9 +117,7 @@ class Player implements Comparable<Player>{
 					player.setMoney(player.getMoney() - decrease);
 
 				}
-				c.output.println(c.userName);
-				c.output.println("/status " + (player.money));
-				c.output.flush();
+
 			}
 		}).start();
 	}
@@ -192,13 +198,13 @@ class Player implements Comparable<Player>{
 							public void run() {
 								if (popUp)
 									new CareerSelection(true, player);
-								g.turn++;
 							}
 						});
 						t.start();
 						specialPopup = true;
 						count = 0;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
+						System.out.println(career.getSalary());
 						player.addMoney(career.getSalary()); //if player pass pay day tile add money to their bank balance
 					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
 						count = 0; //if the player lands on a choice tile end their turn immediately
@@ -207,7 +213,6 @@ class Player implements Comparable<Player>{
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.tile) instanceof PayDayTile)) {
 						career.setSalary((int) (career.getSalary() * 1.05));
-						g.turn++;
 					}
 
 					if (count == 0 && (path.get(player.tile) instanceof MoneyTile)) {
@@ -215,7 +220,8 @@ class Player implements Comparable<Player>{
 						if (money > 0) {
 							player.addMoney(money);
 						} else if (money < 0) {
-							player.removeMoney(money * -1);
+							System.out.println(money);
+							player.addMoney(money);
 						}
 					}
 

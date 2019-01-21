@@ -293,9 +293,9 @@ class Game extends JFrame {
         collegeCareers = new ArrayList<Career>();
         collegeCareers.add(new Career("Chef", 1000, chef));
         collegeCareers.add(new Career("FlightAttendant", 1000, flightAttendant));
-        collegeCareers.add(new Career("UberDriver", 100000000, uberDriver));
+        collegeCareers.add(new Career("UberDriver", 1000, uberDriver));
         collegeCareers.add(new Career("Stripper", 1000, stripper));
-        collegeCareers.add(new Career("RoadWorker", 100000000, roadWorker));
+        collegeCareers.add(new Career("RoadWorker", 1000, roadWorker));
 
         //getting pictures for the properties in game
         ImageIcon mansion = new ImageIcon("graphics/homes/mansion.png");
@@ -773,6 +773,7 @@ class Game extends JFrame {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             System.out.println("spinning " + turn + " " + c.players.size());
+            System.out.println(c.players.get(turn % c.players.size()).equals(player));
             if (c.players.get(turn % c.players.size()).equals(player)) {
                 c.output.println(player.getName());
                 c.output.println("/spin " + (rand.nextInt(360) + 5000));
