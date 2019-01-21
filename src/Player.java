@@ -27,7 +27,7 @@ class Player implements Comparable<Player>{
 
 	Player(String name) {
 		this.name = name;
-		tile = 0;
+		tile = 115;
 		this.player = this;
 		add = 0;
 		count = 0;
@@ -146,8 +146,10 @@ class Player implements Comparable<Player>{
 					count--;
 
 					//going on the next part of the map
-					if (player.tile == 124) {
+					if (player.tile == 120) {
 						new FinalScreen(player);
+						System.out.println("FINAL SCREEN");
+						return;
 					} else if (player.tile == 17) {
 						player.setTile(35 + 1);
 					} else if (player.tile == 66) {
@@ -192,7 +194,7 @@ class Player implements Comparable<Player>{
 						Thread t = new Thread(new Runnable() {
 							public void run() {
 								if (popUp)
-									new CareerSelection(true, player);
+									new CareerSelection(false, player);
 							}
 						});
 						t.start();

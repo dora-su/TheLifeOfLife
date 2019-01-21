@@ -41,13 +41,13 @@ public class FinalScreen extends JFrame {
 		kids.setSize(345, 81);
 		kids.setLocation(43, 120);
 
-		JLabel house = new JLabel(myFormatter.format(p.getProperty().getValue()));
+		JLabel house = new JLabel(myFormatter.format((p.getProperty() == null ? 0 : p.getProperty().getValue())));
 		house.setFont(new Font("Arial", Font.PLAIN, 50));
 		house.setForeground(Color.gray);
 		house.setSize(345, 81);
 		house.setLocation(43, 225);
 
-		JLabel startUp = new JLabel(myFormatter.format(5000));
+		JLabel startUp = new JLabel(myFormatter.format(p.startup));
 		startUp.setFont(new Font("Arial", Font.PLAIN, 50));
 		startUp.setForeground(Color.gray);
 		startUp.setSize(345, 81);
