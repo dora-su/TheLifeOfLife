@@ -55,7 +55,7 @@ class Server extends JFrame {
 		JTextArea port = new JTextArea("5000");
 		port.setOpaque(false);
 		port.setFont(new Font("Arial", Font.PLAIN, 50));
-		port.setForeground(Color.LIGHT_GRAY);
+		port.setForeground(new Color(169, 169, 169));
 		this.setSize(911, 561);
 		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
 		port.setSize(348, 82);
@@ -101,22 +101,22 @@ class Server extends JFrame {
 			}
 
 		});
-//		start.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				Thread t1 = new Thread(new Runnable() {
-//					public void run() {
-//						frame.dispose();
-//						go(port.getText());
-//
-//					}
-//				});
-//				t1.start();
-//
-//			}
-//
-//		});
+		//		start.addActionListener(new ActionListener() {
+		//
+		//			@Override
+		//			public void actionPerformed(ActionEvent arg0) {
+		//				Thread t1 = new Thread(new Runnable() {
+		//					public void run() {
+		//						frame.dispose();
+		//						go(port.getText());
+		//
+		//					}
+		//				});
+		//				t1.start();
+		//
+		//			}
+		//
+		//		});
 		InetAddress ipAddress = null;
 		try {
 			ipAddress = InetAddress.getLocalHost();
