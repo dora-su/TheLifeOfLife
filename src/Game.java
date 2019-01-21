@@ -644,12 +644,12 @@ class Game extends JFrame {
             // draw bottom game menu image
             g.setFont(font1);
             String money = myFormatter.format(player.getMoney());
-            g.drawString(money, 995, 1027);
+            g.drawString(money, (int) (995 * scaleX), (int) (1145 * scaleY));
 
             //drawing player icon
             Image playerIcon = mango1;
             //playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
-            g.drawImage(playerIcon, (int) (1570 * scaleX), (int) (1050 * scaleY), null);
+            g.drawImage(playerIcon, (int) (1590 * scaleX), (int) (1045 * scaleY), null);
 
             //showing family
             if (player.family != 0) {

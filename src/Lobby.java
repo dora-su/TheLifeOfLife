@@ -5,16 +5,26 @@
  * Date: January 6, 2019
  */
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Lobby extends JFrame {
 
@@ -22,6 +32,10 @@ public class Lobby extends JFrame {
     private ImageIcon icon;
 
     private JPanel lobbyPanel = new JPanel();
+    Image lobby;
+    private Client c;
+    private boolean ready = false;
+    private JLabel[] playerList;
     //add components + modify appearance of the frame
 
     /**
@@ -31,9 +45,12 @@ public class Lobby extends JFrame {
      */
     Lobby(Client c) {
         super("Lobby");
-
-        this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        this.c = c;
+        this.setSize(911, 561);
+        this.setUndecorated(true);
         this.setResizable(false);
+        this.requestFocusInWindow();
+        this.setLocationRelativeTo(null);
         //this.setUndecorated(true);
         keyListener = new MyKeyListener();
         this.addKeyListener(keyListener); //adds the keylistener
@@ -41,30 +58,97 @@ public class Lobby extends JFrame {
         //set icon image
         icon = new ImageIcon("graphics/icon.png");
         this.setIconImage(icon.getImage());
-        JButton chat = new JButton("Chat");
-        chat.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                c.window1.setVisible(!c.window1.isVisible());
-            }
-        });
         // ready box
-        JCheckBox ready = new JCheckBox("Ready");
-        ready.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                c.output.println(c.userName);
-                if (ready.isSelected()) {
-                    c.output.println("/ready");
+        playerList = new JLabel[6];
+        for (int i = 0; i < 6; i++) {
+            playerList[i] = new JLabel("<html><div style='text-align: center;'>player</div></html");
+            playerList[i].setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+        }
+        lobby = Toolkit.getDefaultToolkit().getImage("graphics/lobby.png");
+
+        JPanel mainPanel = new MainPanel();
+        mainPanel.setLayout(null);
+        mainPanel.setSize(this.getSize());
+        this.setContentPane(mainPanel);
+
+        //		JLabel title = new JLabel("Life of Life");
+        //		title.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+        //		title.setHorizontalAlignment(JLabel.CENTER);
+        //		title.setFont(new Font("Arial", Font.BOLD, 50));
+        JPanel players = new JPanel();
+        players.setLayout(new BoxLayout(players, BoxLayout.Y_AXIS));
+        players.setOpaque(false);
+        players.setAlignmentX(CENTER_ALIGNMENT);
+        players.setSize(this.size());
+        players.setLocation(500,90);
+
+        JPanel options = new JPanel();
+        options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
+        options.setOpaque(false);
+        options.setAlignmentX(LEFT_ALIGNMENT);
+        options.setSize(this.size());
+        options.setLocation(450, 200);
+
+        JButton imready = new JButton(new ImageIcon("graphics/ready.png"));
+        imready.setContentAreaFilled(false);
+        imready.setFocusPainted(false);
+        imready.setBorderPainted(false);
+        imready.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                if (ready) {
+                    imready.setIcon(new ImageIcon("graphics/ready_hover.png"));
                 } else {
-                    c.output.println("/unready");
+                    imready.setIcon(new ImageIcon("graphics/ready.png"));
                 }
-                c.output.flush();
             }
+
+            @Override
+            public void mouseEntered(MouseEvent arg0) {
+                if (!ready) {
+                    imready.setIcon(new ImageIcon("graphics/ready_hover.png"));
+                } else {
+                    imready.setIcon(new ImageIcon("graphics/ready.png"));
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent arg0) {
+                if (ready) {
+                    imready.setIcon(new ImageIcon("graphics/ready_hover.png"));
+                } else {
+                    imready.setIcon(new ImageIcon("graphics/ready.png"));
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent arg0) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent arg0) {
+            }
+
         });
 
-        lobbyPanel.add(ready);
-        lobbyPanel.add(chat);
+        imready.addActionListener(new ReadyButtonListener());
+        for (int i = 0; i < 6; i++) {
+            players.add(playerList[i]);
+        }
+        options.add(Box.createRigidArea(new Dimension(0, 170)));
+        options.add(imready);
+
+        mainPanel.add(Box.createRigidArea(new Dimension(900, 100)));
+        mainPanel.add(players);
+        mainPanel.add(options);
+
         this.setVisible(true);
         this.add(lobbyPanel);
+    }
+
+    public void addUser(String user) {
+
     }
 
     /**
@@ -89,6 +173,34 @@ public class Lobby extends JFrame {
 
         @Override
         public void keyReleased(KeyEvent e) {
+        }
+    }
+
+    private class MainPanel extends JPanel {
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g); // required
+            this.setDoubleBuffered(true);
+            g.drawImage(lobby, 0, 0, null);
+            
+            for (int i = 0; i < playerList.length; i++) {
+                g.drawString(playerList[i].getText(), 0, 0);
+            }
+            repaint();
+        }
+    }
+
+    private class ReadyButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            c.output.println(c.userName);
+            ready = !ready;
+            if (ready) {
+                c.output.println("/ready");
+            } else {
+                c.output.println("/unready");
+            }
+            c.output.flush();
         }
     }
 
