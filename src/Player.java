@@ -200,10 +200,11 @@ class Player {
                     }
 
                     //if the tile the player lands on is a pay day tile, increase their salary
-                    if (count == 0 && (path.get(player.getTile()) instanceof PayDayTile)) {
+                    if (count == 0 && (path.get(player.tile) instanceof PayDayTile)) {
                         career.setSalary((int) (career.getSalary() * 1.05));
-                    }
-
+                        g.turn++;
+                    }               
+                    
                     if (count == 0 && player.tile == 2) {
                         Thread t = new Thread(new Runnable() {
                             public void run() {
