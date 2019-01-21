@@ -96,6 +96,7 @@ public class PopUp {
 					// go to certain index
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
+					
 					player1.setTile(((ChoiceTile) tile).getIndex());
 
 				}

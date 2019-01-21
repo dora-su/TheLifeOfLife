@@ -22,6 +22,7 @@ class Player implements Comparable<Player>{
 	private boolean college;
 	private int add;
 	private int count;
+	int newTile;s
 	int family, startup;
 	Client c;
 
@@ -37,8 +38,11 @@ class Player implements Comparable<Player>{
 	}
 	
 	public int compareTo(Player p) {
+
+		
 		return (p.getMoney() + (p.getProperty() != null ? 0 : p.getProperty().getValue()) + p.getChild() * 10000 + p.startup) - (money + (property == null ? 0 : property.getValue()) + child * 10000 + startup);  
 	}
+	
 	public void setClient(Client c) {
 		this.c = c;
 	}
@@ -72,6 +76,11 @@ class Player implements Comparable<Player>{
 	}
 
 	public void setTile(int tile) {
+		if (c != null) {
+			c.output.println(name);
+			c.output.println("/tile " + tile);
+			c.output.flush();
+		}
 		this.tile = tile;
 	}
 
@@ -88,6 +97,7 @@ class Player implements Comparable<Player>{
 		c.output.println(c.userName);
 		c.output.println("/status " + (player.money+ add) + " 0");
 		c.output.flush();
+		add /= 2;
 		//add money by different increments based on the amount that needs to be added or subtracted
 		new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -165,7 +175,6 @@ class Player implements Comparable<Player>{
 							public void run() {
 								if (popUp)
 									new CareerSelection(false, player); //if land on a certain tile allow the player to choose career
-								g.turn++;
 							}
 						});
 						t.start();
@@ -244,7 +253,7 @@ class Player implements Comparable<Player>{
 
 					//System.out.println("Speical Pop pup" + specialPopup);
 					//create a pop up with instructions if no special pop ups have been made already
-					if (count == 0 && !specialPopup && popUp) {
+					if (count == 0 && !specialPopup) {
 						new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
 					}
 
