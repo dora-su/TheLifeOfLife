@@ -72,6 +72,11 @@ class Server extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				if (!port.getText().matches("[0-9]+")) {
+					JOptionPane.showMessageDialog(null, "Please check your inputs");
+					return;
+					
+				}
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
 						frame.dispose();
@@ -159,10 +164,6 @@ class Server extends JFrame {
 		//			portNum = JOptionPane.showInputDialog("Please enter the port number");
 		//			System.out.println("Server started on port " + portNum);
 		//		}
-
-		//displaying the server Ip for clients to connect to
-		Thread t1 = new Thread(new displayServer());
-		t1.start();
 
 		System.out.println("Waiting for a client connection..");
 		// hold the client connection
@@ -457,21 +458,6 @@ class Server extends JFrame {
 			running = true;
 		} // end of constructor
 
-	}
-
-	// displays the ip
-	public class displayServer implements Runnable {
-		public void run() {
-			try {
-				// get ip and display
-				InetAddress ip = InetAddress.getLocalHost();
-				JOptionPane.showMessageDialog(null, "Server IP: " + ip);
-			} catch (UnknownHostException e2) {
-				// problem with getting ip
-				JOptionPane.showMessageDialog(null, "Error receiving Ip Address");
-			}
-			return;
-		}
 	}
 
 	private class Panel extends JPanel {
