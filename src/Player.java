@@ -156,7 +156,6 @@ class Player {
 							public void run() {
 								if (popUp)
 									new CareerSelection(false, player); //if land on a certain tile allow the player to choose career
-								g.turn++;
 							}
 						});
 						t.start();
@@ -167,7 +166,7 @@ class Player {
 							public void run() {
 								if (popUp)
 									new HouseSelection(player); //if land on this specific tile create house selections choices for user
-								g.turn++;
+
 							}
 						});
 						t2.start();
@@ -186,7 +185,7 @@ class Player {
 							public void run() {
 								if (popUp)
 									new CareerSelection(true, player);
-								g.turn++;
+
 							}
 						});
 						t.start();
@@ -201,7 +200,7 @@ class Player {
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.tile) instanceof PayDayTile)) {
 						career.setSalary((int) (career.getSalary() * 1.05));
-						g.turn++;
+
 					}
 
 					if (count == 0 && (path.get(player.tile) instanceof MoneyTile)) {
@@ -219,7 +218,6 @@ class Player {
 							public void run() {
 								if (popUp)
 									new CareerSelection(true, player);
-								g.turn++;
 							}
 						});
 						t.start();
