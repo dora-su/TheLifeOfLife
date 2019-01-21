@@ -399,7 +399,7 @@ public class Client extends JFrame {
                             || user.equals("admin")) {
 
                         // admin command
-                        System.out.println(msg);
+//                        System.out.println(msg);
                         if (user.equals(admin) && msg.startsWith("/")) {
 
                             // user is banned

@@ -80,11 +80,6 @@ class Player implements Comparable<Player>{
 	}
 	
 	public void setMoney(int money) {
-		if (c != null) {
-			c.output.println(name);
-			c.output.println("/status " + money + " 0");
-			c.output.flush();
-		}
 		this.money = money;
 	}
 
