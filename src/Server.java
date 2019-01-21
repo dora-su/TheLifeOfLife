@@ -1,11 +1,15 @@
 
 //imports for network communication
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -13,8 +17,10 @@ import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -47,19 +53,24 @@ class Server extends JFrame {
 		frame = this;
 		JPanel panel = new Panel();
 		JTextArea port = new JTextArea("5000");
-
+		port.setOpaque(false);
+		port.setFont(new Font("Arial", Font.PLAIN, 50));
+		port.setForeground(Color.LIGHT_GRAY);
 		this.setSize(911, 561);
 		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
-		port.setSize(200, 30);
-		port.setLocation(500, 50);
+		port.setSize(348, 82);
+		port.setLocation(495, 285);
 		panel.setLayout(null);
 
-		JButton start = new JButton("Start");
-		start.setBounds(500, 300, 120, 30);
-		start.addActionListener(new ActionListener() {
+		JButton start = new JButton(new ImageIcon("graphics/server.png"));
+		start.setContentAreaFilled(false);
+		start.setFocusable(false);
+		start.setBorderPainted(false);
+		start.setBounds(450, 380, 400, 145);
+		start.addMouseListener(new MouseListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void mouseClicked(MouseEvent arg0) {
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
 						frame.dispose();
@@ -71,17 +82,64 @@ class Server extends JFrame {
 
 			}
 
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				start.setIcon(new ImageIcon("graphics/server_hover.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				start.setIcon(new ImageIcon("graphics/server.png"));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+
 		});
+//		start.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				Thread t1 = new Thread(new Runnable() {
+//					public void run() {
+//						frame.dispose();
+//						go(port.getText());
+//
+//					}
+//				});
+//				t1.start();
+//
+//			}
+//
+//		});
+		InetAddress ipAddress = null;
+		try {
+			ipAddress = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		JLabel label = new JLabel("Server Ip " + ipAddress);
+		label.setFont(new Font("Arial", Font.PLAIN, 50));
+
+		label.setLocation(0, 0);
 
 		panel.add(Box.createRigidArea(new Dimension(500, 0)));
 		panel.add(start);
 		panel.add(port);
+		panel.add(label);
 
 		this.setResizable(false);
 		this.setContentPane(panel);
 		this.setVisible(true);
 
-		background = Toolkit.getDefaultToolkit().getImage("graphics/mainmenu.png");
+		background = Toolkit.getDefaultToolkit().getImage("graphics/server_menu.png");
 
 	}
 
