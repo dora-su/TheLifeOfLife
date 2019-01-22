@@ -10,6 +10,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 class Player implements Comparable<Player> {
 	private String name;
@@ -275,7 +276,7 @@ class Player implements Comparable<Player> {
 						player.setTile(35 + 1);
 					} else if (player.tile == 66) {
 						player.setTile(75 + 1);
-					} else if (player.tile == 93) {
+					} else if (player.tile == 98) {
 						player.tile = 106;
 					} else {
 						player.setTile(player.getTile() + 1);
@@ -321,12 +322,30 @@ class Player implements Comparable<Player> {
 						t.start();
 						specialPopup = true;
 						count = 0;
-					} else if (player.tile == 11) { //last stop sign
-						System.out.println("HI");
+					} else if (player.tile == 111) { //last stop sign
+						if(player.getCareer().getCareerName().equals("Start Up")) {
+							Random rand = new Random();
+							int win =rand.nextInt(3);
+							if(win == 1) {
+								new PopUp("Successful", path.get(player.getTile()), player);
+								player.addMoney(1500000);
+								player.startup = 1500000;
+							}else {
+								new PopUp("Your Start Up Failed", path.get(player.getTile()), player);
+								player.addMoney(-800000);
+								player.startup = -800000;
+							}
+							
+						}else {
+							new PopUp("Nothing to see here, move along", path.get(player.getTile()), player);
+						}
+						
 						count = 0;
+						specialPopup = true; 
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
-						if (popUp)
+						if (popUp) {
 							player.addMoney(career.getSalary()); //if player pass pay day tile add money to their bank balance
+						}
 					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
 						count = 0; //if the player lands on a choice tile end their turn immediately
 					}
@@ -338,15 +357,17 @@ class Player implements Comparable<Player> {
 
 					if (count == 0 && (path.get(player.tile) instanceof MoneyTile)) {
 						int money = ((MoneyTile) (path.get(player.tile))).getMoney();
-						if (popUp)
+						if (popUp) {
 							player.addMoney(money);
+						}
 					}
 
 					if (count == 0 && player.tile == 2) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
-								if (popUp)
+								if (popUp) {
 									new CareerSelection(true, player);
+								}
 							}
 						});
 						t.start();
@@ -361,7 +382,6 @@ class Player implements Comparable<Player> {
 						}
 					}
 
-					//System.out.println("Speical Pop pup" + specialPopup);
 					//create a pop up with instructions if no special pop ups have been made already
 					if (count == 0 && !specialPopup) {
 						if (popUp) {

@@ -49,6 +49,7 @@ public class Game extends JFrame {
 	private static Image careerPlaceHolder, housePlaceHolder;
 	private Image spinPic, hoverSpinPic;
 	private Image chatPic, hoverChatPic;
+	static Image startUpPic;
 	private ImageIcon icon;
 	int turn;
 
@@ -56,6 +57,7 @@ public class Game extends JFrame {
 	static ArrayList<Career> collegeCareers;
 	static ArrayList<Career> normalCareers;
 	static ArrayList<Property> properties;
+	static Career startUp;
 	static boolean[] soldProperties;
 
 	//variables for spinner
@@ -362,6 +364,11 @@ public class Game extends JFrame {
 		collegeCareers.add(new Career("Stripper", 70000, stripper));
 		collegeCareers.add(new Career("Road Worker", 40000, roadWorker));
 
+		startUpPic = Toolkit.getDefaultToolkit().getImage("graphics/careers/startup.png");
+		startUpPic = startUpPic.getScaledInstance((int) (250 * scaleX), (int) (400 * scaleY), Image.SCALE_DEFAULT);
+		
+		startUp = new Career("Start Up", 0, new ImageIcon(startUpPic) );
+		
 		//getting pictures for the properties in game
 		ImageIcon mansion = new ImageIcon("graphics/homes/mansion.png");
 		ImageIcon castle = new ImageIcon("graphics/homes/castle.png");
@@ -597,8 +604,14 @@ public class Game extends JFrame {
 
 				if (player.getCareer() != null) {
 
+					String name =  player.getCareer().getCareerName().trim();
+					
+					if(name.indexOf(" ") > 0) {
+						int index = name.indexOf(" ");
+						name = name.substring(0, index) + name.substring(index+1);
+					}
 					JLabel image = new JLabel(new ImageIcon(
-							"graphics/careers/" + player.getCareer().getCareerName().toLowerCase() + ".png"));
+							"graphics/careers/" + name.toLowerCase()  + ".png"));
 					careerFrame.add(image);
 					careerFrame.setVisible(true);
 				}

@@ -96,6 +96,10 @@ public class PopUp {
 				public void actionPerformed(ActionEvent arg0) {
 					if(player1.getTile() == 89) {
 						player1.setOwnStartUp(true);
+						player1.setCareer(Game.startUp);
+						Image pic = Toolkit.getDefaultToolkit().getImage("graphics/careers/startup.png");
+						pic = pic.getScaledInstance((int) (114 * Game.scaleX), (int) (184 * Game.scaleY), java.awt.Image.SCALE_SMOOTH);
+						Game.myCareer.setIcon(new ImageIcon(pic));
 					}
 					// go to certain index
 					Game.gameFrame.setEnabled(true);
