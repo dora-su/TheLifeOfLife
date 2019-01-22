@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 public class Game extends JFrame {
 
@@ -95,7 +96,6 @@ public class Game extends JFrame {
     Game(Client c, String pl) {
         super("My Game");
         this.c = c;
-        g = this;
         turn = 0;
         player = c.map.get(pl);
         // Set the frame to full screen

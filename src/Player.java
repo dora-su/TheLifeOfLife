@@ -265,8 +265,6 @@ class Player implements Comparable<Player> {
                     //going on the next part of the map
                     if (player.tile == 120) {
                         new FinalScreen(player);
-                        g.dispose();
-                        count = 0;
                         System.out.println("FINAL SCREEN");
                         return;
                     } else if (player.tile == 17) {

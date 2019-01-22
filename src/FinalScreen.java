@@ -2,23 +2,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class FinalScreen extends JFrame {
 
+	public static void main(String[] args) {
+//		new FinalScreen();
+	}
 	Player p;
 	FinalScreen(Player p) {
 		super("Life");
@@ -63,53 +61,13 @@ public class FinalScreen extends JFrame {
 //		rankings.add(new JLabel("1"));
 //		rankings.add(Box.createRigidArea(new Dimension(0, 50)));
 //		rankings.add(new JLabel("2"));
-		Image mainMenu = Toolkit.getDefaultToolkit().getImage("graphics/mainmenu_button.png");
-		Image mainMenuHover = Toolkit.getDefaultToolkit().getImage("graphics/mainmenu_button_hover.png");
-		JButton quit = new JButton(new ImageIcon(mainMenu));
-		quit.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				dispose();
-				new MainMenu();
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				quit.setIcon(new ImageIcon(mainMenuHover));
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				quit.setIcon(new ImageIcon(mainMenu));
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
-		quit.setLocation(550,450);
-		quit.setSize(250,100);
-		quit.setContentAreaFilled(false);
-		quit.setBorderPainted(false);
-		quit.setFocusPainted(false);
+		
+		
 		panel.add(cash);
 		panel.add(kids);
 		panel.add(house);
 		panel.add(startUp);
-		panel.add(quit);
+//		panel.add(rankings);
 
 		this.setContentPane(panel);
 
@@ -120,12 +78,13 @@ public class FinalScreen extends JFrame {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			this.setDoubleBuffered(true);
-			Object[] A = p.c.players.toArray();
+			Player[] A = (Player[]) p.c.players.toArray();
 			Arrays.sort(A);
-			g.drawImage(Toolkit.getDefaultToolkit().getImage("graphics/end.png"), 0, 0, null);
 			for (int i = 0; i < A.length; i++) {
-				g.drawString((i + 1) + ". " + ((Player)A[i]).getName(), 500, 100 + i * 40);
+				// Change
+				g.drawString((i + 1) + ". " + A[i].getName(), 100, 200 + i * 50);
 			}
+			g.drawImage(Toolkit.getDefaultToolkit().getImage("graphics/end.png"), 0, 0, null);
 			repaint();
 
 		}
