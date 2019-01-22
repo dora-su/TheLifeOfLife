@@ -89,7 +89,7 @@ public class Client extends JFrame {
         //set the font size
         font = font.deriveFont(Font.PLAIN,50);
 
-		JTextArea userName = new JTextArea("jason");
+		JTextArea userName = new JTextArea("");
 		userName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userName.setFont(font);
 		userName.setSize(339, 80);

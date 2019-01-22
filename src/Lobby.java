@@ -12,18 +12,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
 public class Lobby extends JFrame {
 
@@ -36,7 +33,7 @@ public class Lobby extends JFrame {
     private boolean ready = false;
     private String[] playerList;
     private int playerCount;
-    //add components + modify appearance of the frame
+    private Font font;
 
     /**
      * Constructor
@@ -58,8 +55,8 @@ public class Lobby extends JFrame {
 
         //set icon image
         icon = new ImageIcon("graphics/icon.png");
-        icon = new ImageIcon("graphics/icon.png");
         this.setIconImage(icon.getImage());
+
         // ready box
         playerList = new String[6];
         for (int i = 0; i < 6; i++) {
@@ -71,12 +68,6 @@ public class Lobby extends JFrame {
         mainPanel.setLayout(null);
         mainPanel.setSize(this.getSize());
         this.setContentPane(mainPanel);
-
-        //		JLabel title = new JLabel("Life of Life");
-        //		title.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
-        //		title.setHorizontalAlignment(JLabel.CENTER);
-        //		title.setFont(new Font("Arial", Font.BOLD, 50));
-
 
         JPanel options = new JPanel();
         options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
@@ -205,9 +196,27 @@ public class Lobby extends JFrame {
             this.setDoubleBuffered(true);
             g.drawImage(lobby, 0, 0, null);
             g.setColor(new Color(169,169,169));
-            g.setFont(new Font("Arial",Font.PLAIN,25));
+
+            //get the font
+            try {
+                font = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf"));
+            } catch (FontFormatException e) {
+                System.out.println("Font format is incorrect.");
+                e.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("Font file not found.");
+                e.printStackTrace();
+            }
+
+            //set the font size
+            font = font.deriveFont(Font.PLAIN,20);
+            //set the font for use in graphics g
+            g.setFont(font);
+
+            //set text color
+            g.setColor(new Color(130,130,130));
             for (int i = 0; i < playerList.length; i++) {
-            	
+
                 g.drawString(playerList[i], 500, 110 + 20 * i);
             }
             repaint();

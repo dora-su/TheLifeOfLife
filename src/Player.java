@@ -36,7 +36,7 @@ class Player implements Comparable<Player> {
 	 */
 	Player(String name) {
 		this.name = name;
-		tile = 88;
+		tile = 0;
 		this.player = this;
 		add = 0;
 		count = 0;
