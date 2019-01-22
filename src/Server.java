@@ -1,20 +1,10 @@
-
+/**
+ * Name: Server.java
+ * Version: 1.0
+ * Authors: Chris, Dora, Eric, Jason
+ * Date: January 10, 2019
+ */
 //imports for network communication
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -24,6 +14,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 class Server extends JFrame {
 
@@ -40,15 +48,8 @@ class Server extends JFrame {
     Image background;
 
     /**
-     * Main
-     * Runs the server
-     *
-     * @param args parameters from command line
+     * Constructor
      */
-    //	public static void main(String[] args) {
-    //		new ChatServer().go(); // start the server
-    //	}
-
     Server() {
 
         frame = this;
@@ -137,8 +138,9 @@ class Server extends JFrame {
     }
 
     /**
-     * Go
      * Starts the server
+     *
+     * @param portNum the port number
      */
     public void go(String portNum) {
 
@@ -237,7 +239,7 @@ class Server extends JFrame {
         /**
          * ConnectionHandler Constructor
          *
-         * @param the socket belonging to this client connection
+         * @param s socket belonging to this client connection
          */
         ConnectionHandler(Socket s) {
             this.client = s; // constructor assigns client to this
@@ -426,7 +428,7 @@ class Server extends JFrame {
         /**
          * ConnectionHandler Constructor
          *
-         * @param the socket belonging to this client connection
+         * @param s,username socket belonging to this client connection
          */
         Client(Socket s, String userName) {
             user = userName;

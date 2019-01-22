@@ -1,3 +1,10 @@
+/**
+ * Name: Game.java
+ * Version: 2.0
+ * Authors: Chris, Dora, Eric, Jason
+ * Date: January 6, 2019
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -30,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
-class Game extends JFrame {
+public class Game extends JFrame {
 
     //Declaring class Variables
 
@@ -80,8 +87,13 @@ class Game extends JFrame {
 
     Font font1, font2;
 
-    // Constructor - this runs first
-    Game(Client c, Set<String> set, String pl) {
+    /**
+     * Constructor
+     *
+     * @param c  the client
+     * @param pl the player username
+     */
+    Game(Client c, String pl) {
         super("My Game");
         this.c = c;
         turn = 0;
@@ -645,10 +657,10 @@ class Game extends JFrame {
             //drawing background map
             g.drawImage(map, 0, 0, null);
             for (Player p : c.players) {
-            	if (!p.isMoving && p.newTile > p.getTile()) { 
-            		p.setTile(p.newTile);
-            		p.moved = true;
-            	}
+                if (!p.isMoving && p.newTile > p.getTile()) {
+                    p.setTile(p.newTile);
+                    p.moved = true;
+                }
                 g.drawImage(mangoes[c.players.indexOf(p)], path.get(p.getTile()).getX() - 17, path.get(p.getTile()).getY() - 17, null);
             }
             // draw bottom game menu image
@@ -699,6 +711,9 @@ class Game extends JFrame {
 
     }
 
+    /**
+     * MyMouseListener
+     */
     private class MyMouseListener implements MouseListener {
 
         @Override
@@ -728,6 +743,11 @@ class Game extends JFrame {
     static double vel, accel, distance;
     static boolean move;
 
+    /**
+     * Spins the wheel
+     * @param dist the distance to be spun
+     * @param b if it is the players move
+     */
     static void spin(double dist, boolean b) {
         distance = dist;
         vel = dist / 80.0;
@@ -736,6 +756,9 @@ class Game extends JFrame {
         System.out.println("SPIN");
     }
 
+    /**
+     * SpinnerListener
+     */
     private class SpinnerListener implements ActionListener {
 
         boolean running = false;
@@ -761,9 +784,9 @@ class Game extends JFrame {
                         angle = 360 - angle;
                         if (angle >= j * 72 && angle < (j + 1) * 72) {
                             if (!c.players.get(turn % c.players.size()).moved) {
-                            	c.players.get(turn % c.players.size()).move(g, j + 1, path, c.players.get(turn % c.players.size()).equals(player));
+                                c.players.get(turn % c.players.size()).move(g, j + 1, path, c.players.get(turn % c.players.size()).equals(player));
                             } else {
-                            	c.players.get(turn % c.players.size()).moved = false;
+                                c.players.get(turn % c.players.size()).moved = false;
                             }
                             turn++;
                             //player1.move(1,path);
@@ -786,6 +809,9 @@ class Game extends JFrame {
 
     }
 
+    /**
+     * RollListener
+     */
     class RollListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {

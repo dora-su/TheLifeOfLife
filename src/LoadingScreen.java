@@ -7,14 +7,19 @@
 
 import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoadingScreen extends JFrame {
     static JProgressBar loadingBar;
     static DefaultBoundedRangeModel model;
+    private Image test = Toolkit.getDefaultToolkit().getImage("graphics/icon.png");
     private boolean loaded = false;
 
     /**
@@ -23,11 +28,13 @@ public class LoadingScreen extends JFrame {
      * @param time the time to load
      */
     LoadingScreen(int time) {
-        setSize(500, 10);
-        this.setLocation((int) (Game.screenX / 2) - 250, ((int) (Game.screenY / 2) - 150));
+        setSize(720, 720);
+        this.setLocation((int) (Game.screenX / 2) - 360, ((int) (Game.screenY / 2) - 360));
         this.setUndecorated(true);
         model = new DefaultBoundedRangeModel(0, time, 0, time);
         loadingBar = new JProgressBar(model);
+        JPanel mainPanel = new MainPanel();
+        this.setContentPane(mainPanel);
         add(loadingBar);
         setVisible(true);
         Timer timer = new Timer(1, new ActionListener() {
@@ -60,5 +67,14 @@ public class LoadingScreen extends JFrame {
      */
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
+    }
+
+    private class MainPanel extends JPanel {
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g); // required
+            this.setDoubleBuffered(true);
+            g.drawImage(test, 0, 0, null);
+            repaint();
+        }
     }
 }

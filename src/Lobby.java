@@ -145,6 +145,11 @@ public class Lobby extends JFrame {
         this.add(lobbyPanel);
     }
 
+    /**
+     * Adds a user
+     *
+     * @param user the username
+     */
     public void addUser(String user) {
         System.out.println(user + " added!");
         for (int i = 0; i < playerList.length; i++) {
@@ -155,6 +160,11 @@ public class Lobby extends JFrame {
         }
     }
 
+    /**
+     * Removes a user
+     *
+     * @param user the username
+     */
     public void removeUser(String user) {
         for (int i = 0; i < playerList.length; i++) {
             if (playerList[i].equals(user)) {
@@ -189,6 +199,9 @@ public class Lobby extends JFrame {
         }
     }
 
+    /**
+     * MainPanel
+     */
     private class MainPanel extends JPanel {
         public void paintComponent(Graphics g) {
             super.paintComponent(g); // required
@@ -202,6 +215,9 @@ public class Lobby extends JFrame {
         }
     }
 
+    /**
+     * ReadyButtonListener
+     */
     private class ReadyButtonListener implements ActionListener {
 
         @Override

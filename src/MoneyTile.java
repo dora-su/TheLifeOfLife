@@ -28,6 +28,11 @@ public class MoneyTile extends ActionTile {
         return money;
     }
 
+    /**
+     * Sets the amount of money
+     *
+     * @param money the amount of money
+     */
     public void setMoney(int money) {
         this.money = money;
     }

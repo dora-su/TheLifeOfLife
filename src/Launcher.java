@@ -1,19 +1,17 @@
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
-
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
 /**
  * Name: Launcher.java
  * Version: 1.0
  * Authors: Chris, Dora, Eric, Jason
  * Date: January 8, 2019
  */
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import java.io.File;
+
+
 public class Launcher {
     /**
      * Main method
