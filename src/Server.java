@@ -138,11 +138,13 @@ class Server extends JFrame {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        String ip = ipAddress.toString();
 
+        ip = ip.substring(ip.indexOf(("/") + 1);
         //set the font size
         font = font.deriveFont(Font.PLAIN,35);
 
-        JLabel label = new JLabel("" + ipAddress);
+        JLabel label = new JLabel("" + ip);
         label.setFont(font);
         label.setForeground(new Color(169, 169, 169));
         label.setSize(400, 145);
