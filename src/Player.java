@@ -323,25 +323,25 @@ class Player implements Comparable<Player> {
 						specialPopup = true;
 						count = 0;
 					} else if (player.tile == 111) { //last stop sign
-						if(player.getCareer().getCareerName().equals("Start Up")) {
+						if (player.getCareer().getCareerName().equals("Start Up")) {
 							Random rand = new Random();
-							int win =rand.nextInt(3);
-							if(win == 1) {
+							int win = rand.nextInt(3);
+							if (win == 1) {
 								new PopUp("Successful", path.get(player.getTile()), player);
 								player.addMoney(1500000);
 								player.startup = 1500000;
-							}else {
+							} else {
 								new PopUp("Your Start Up Failed", path.get(player.getTile()), player);
 								player.addMoney(-800000);
 								player.startup = -800000;
 							}
-							
-						}else {
+
+						} else {
 							new PopUp("Nothing to see here, move along", path.get(player.getTile()), player);
 						}
-						
+
 						count = 0;
-						specialPopup = true; 
+						specialPopup = true;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
 						if (popUp) {
 							player.addMoney(career.getSalary()); //if player pass pay day tile add money to their bank balance
@@ -388,8 +388,9 @@ class Player implements Comparable<Player> {
 							new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
 						}
 					}
-					if (count == 0)
+					if (count == 0) {
 						isMoving = false;
+					}
 				}
 			}
 		}).start();
