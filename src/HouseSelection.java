@@ -27,6 +27,7 @@ public class HouseSelection extends JFrame {
      * @param player the player
      */
     HouseSelection(Player player) {
+    	//setting screen size and settings
         this.setSize((int) (Game.scaleX * 1000), (int) (Game.scaleY * 800));
         this.setResizable(false);
         this.setUndecorated(true);
@@ -43,8 +44,8 @@ public class HouseSelection extends JFrame {
         ArrayList<JButton> buttons = new ArrayList<JButton>();
 
         for (Property p : Game.properties) {
-            // Property p = Game.properties.get(i);
-            //getting property images
+
+        	 // setImage to bought
             JButton button = new JButton(p.getImage());
             soldImg = Toolkit.getDefaultToolkit()
                     .getImage("graphics/homes/" + p.getName().toLowerCase() + "SOLD.png");
@@ -56,7 +57,7 @@ public class HouseSelection extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent arg0) {
                         player.addProperty(p);
-                        // setImage to bought
+                       
                         // confirm house purchase
                         String[] options = new String[]{"Confirm", "Back"};
                         int confirm = JOptionPane.showOptionDialog(null,
@@ -91,6 +92,7 @@ public class HouseSelection extends JFrame {
 
                 });
             } else {
+            	//set button icon 
                 button.setIcon(new ImageIcon(soldImg));
             }
             // add buttons

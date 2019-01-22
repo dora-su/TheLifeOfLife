@@ -5,19 +5,27 @@
  * Date: January 3, 2019
  */
 
-import javax.swing.*;
-import java.awt.*;
+
+import java.awt.Dialog;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 
 public class CareerSelection extends JFrame {
 
     private ArrayList<Career> careers;
     private int result;
     /**
-     * Constructor
+     * Constructor	
      *
      * @param college if the player has gone through college
      * @param player  the player
@@ -69,6 +77,7 @@ public class CareerSelection extends JFrame {
         }
 
 
+       //scaling and displaying the career icon in the bottom bar 
         ImageIcon pic = careers.get(index).getImage();
         Image scaledImg = pic.getImage();
         scaledImg = scaledImg.getScaledInstance((int) (114 * Game.scaleX), (int) (184 * Game.scaleY), Image.SCALE_SMOOTH);
@@ -85,6 +94,7 @@ public class CareerSelection extends JFrame {
         ok.setBorderPainted(false);
         ok.setContentAreaFilled(false);
 
+        //dialog informing you of the job you received
         final JDialog dialog = new JDialog((Dialog) null, "Career", true);
 
         final JOptionPane optionPane = new JOptionPane();
@@ -131,6 +141,7 @@ public class CareerSelection extends JFrame {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //send career info to server
         player.c.output.println(player.c.userName);
         if (college) {
             player.c.output.println("/removecc " + index);

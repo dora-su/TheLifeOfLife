@@ -6,6 +6,7 @@
  * Date: January 14, 2019
  */
 
+// Swing imports
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -17,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+// Graphics
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,59 +29,66 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+
+// Events
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
+
+// IO
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+
+// net
 import java.net.Socket;
+
+// data structures
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Client extends JFrame {
     // declaring variables
-    // declaring variables
-    private JTextField typeField;
-    private JTextArea msgArea;
+    private JTextField typeField; // where you type your message
+    private JTextArea msgArea; // where messages are declared
     private Socket mySocket; // socket for connection
     private BufferedReader input; // reader for network stream
     public PrintWriter output; // printwriter for network output
     private boolean running; // thread status via boolean
-    public String userName;
-    private String admin;
-    private Lobby l;
-    public JFrame window1;
-    private JPanel panel;
-    private JLabel label;
-    private JButton button;
-    private ArrayList<JPanel> listData;
-    private ArrayList<String> blockedUsers;
-    HashMap<String, Player> map;
-    private Game g;
-    private JPanel status;
-    private JFrame frame;
-    Image background;
-    ArrayList<Player> players = new ArrayList<Player>();
-    private Player p;
-    private int idx;
-
-    private ImageIcon icon;
-    private Font font;
+    public String userName; // clients username
+    private String admin; // admin username
+    private Lobby l; // lobby reference
+    public JFrame window1; // chat client window
+    private JPanel panel; // panel for status of user
+    private JLabel label; // username label
+    private JButton button; // details  buton
+    private ArrayList<JPanel> listData; // arraylist of panels with user data
+    private ArrayList<String> blockedUsers; // blocked users
+    HashMap<String, Player> map; // used to find player objects by their username
+    private Game g; // game reference
+    private JPanel status; // panel that contains list of object
+    private JFrame frame; // frame with 
+    private Image background; // background image
+    ArrayList<Player> players = new ArrayList<Player>(); // list of all players
+    private Player p; // reference to current player
+    private int idx; // index of the player in the arraylist
+    private ImageIcon icon; // icon for the frame
+    private Font font; // font for text
 
     /**
      * Constructor
      */
     Client() {
+    	// create reference to current frame
         frame = this;
 
         // set icon image
         icon = new ImageIcon("graphics/icon.png");
         this.setIconImage(icon.getImage());
-
+        
         JPanel panel = new Panel();
 
         // get the font
@@ -94,45 +104,48 @@ public class Client extends JFrame {
 
         // set the font size
         font = font.deriveFont(Font.PLAIN, 50);
-        // username
+        // username text area
         JTextArea userName = new JTextArea("");
         userName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
         userName.setFont(font);
         userName.setSize(339, 80);
         userName.setOpaque(false);
         userName.setForeground(new Color(169, 169, 169));
-        // port
+        
+        // port text area
         JTextArea port = new JTextArea("5000");
         port.getDocument().putProperty("filterNewlines", Boolean.TRUE);
         port.setFont(font);
         port.setSize(339, 80);
         port.setOpaque(false);
         port.setForeground(new Color(169, 169, 169));
-        // ip address
+        
+        // ip address text area
         JTextArea ip = new JTextArea("localhost");
         ip.getDocument().putProperty("filterNewlines", Boolean.TRUE);
         ip.setFont(font);
         ip.setSize(339, 80);
         ip.setOpaque(false);
         ip.setForeground(new Color(169, 169, 169));
+        
         // set window size
         this.setSize(911, 561);
         this.setLocationRelativeTo(null);
         this.setUndecorated(true);
         // set locations in window
         ip.setLocation(494, 90);
-
         port.setLocation(494, 205);
-
         userName.setLocation(494, 310);
 
         panel.setLayout(null);
+        
         // button to join server
         JButton start = new JButton(new ImageIcon("graphics/join_server.png"));
         start.setContentAreaFilled(false);
         start.setFocusable(false);
         start.setBorderPainted(false);
         start.setBounds(450, 380, 400, 145);
+        
         // mouse listener
         start.addMouseListener(new MouseListener() {
 
@@ -140,33 +153,40 @@ public class Client extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 Thread t1 = new Thread(new Runnable() {
                     public void run() {
-
+                    	
+                    	// makes sure username is not blank and contains numbers or letters
                         if (!userName.getText().matches("[a-zA-Z0-9]+") || userName.getText() == null) {
                             JOptionPane.showMessageDialog(null, "Please enter a valid username");
                             return;
                         }
+                        
+                        // when ip is localhost it is automatically changed to 127.0.0.1
                         String ipA = "";
                         if (ip.getText().equals("localhost")) {
                             ipA = "127.0.0.1";
                         } else {
                             ipA = ip.getText();
                         }
-
+                        
+                        // Checks for valid ip address
                         if (!ipA.matches("[0-9.]+")) {
                             JOptionPane.showMessageDialog(null, "IP must only contain digits and periods!");
                             return;
                         }
 
+                        // port must be a number
                         if (!port.getText().matches("[0-9]+")) {
                             JOptionPane.showMessageDialog(null, "Port must be a number!");
                             return;
                         }
-
+                        
+                        // close frame and run the client
                         frame.dispose();
                         go(userName.getText(), ipA, Integer.parseInt(port.getText()));
 
                     }
                 });
+                // start thread
                 t1.start();
             }
 
