@@ -95,6 +95,7 @@ public class Game extends JFrame {
 	 */
 	Game(Client c, String pl) {
 		super("My Game");
+		g = this;
 		this.c = c;
 		turn = 0;
 		player = c.map.get(pl);
