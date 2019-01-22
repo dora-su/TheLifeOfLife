@@ -15,18 +15,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class PopUp {
-
+	private Font font;
 	private ImageIcon icon;
+	private JFrame popUp;
 
 	/**
 	 * Constructor
@@ -36,11 +34,9 @@ public class PopUp {
 	 * @param player1 the player
 	 */
 	PopUp(String message, ActionTile tile, Player player1) {
-
 		Image popWindow = Toolkit.getDefaultToolkit().getImage("graphics/optionPane.png");
 
-		JFrame popUp = new JFrame();
-
+		popUp = new JFrame();
 		popUp.setUndecorated(true);
 		popUp.setResizable(true);
 		popUp.setAlwaysOnTop(true);
@@ -64,6 +60,20 @@ public class PopUp {
 			}
 		};
 
+		//get the font
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf"));
+		} catch (FontFormatException e) {
+			System.out.println("Font format is incorrect.");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Font file not found.");
+			e.printStackTrace();
+		}
+
+		//set the message font size
+		font = font.deriveFont(Font.PLAIN,28);
+
 		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html",
 				SwingConstants.CENTER);
 		messageLabel.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
@@ -72,10 +82,10 @@ public class PopUp {
 		messageLabel.setSize(messageLabel.getPreferredSize());
 		//messageLabel.setSize(400,250);
 		messageLabel.setForeground(Color.black);
-		messageLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+		messageLabel.setFont(font);
 		popUp.setContentPane(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.add(Box.createRigidArea(new Dimension(0, 78)));
+		panel.add(Box.createRigidArea(new Dimension(0, 100)));
 
 		panel.add(messageLabel);
 		panel.add(Box.createRigidArea(new Dimension(0, 50)));

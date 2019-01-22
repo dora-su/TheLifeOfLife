@@ -20,17 +20,16 @@ public class Launcher {
      */
     public static void main(String[] args) {
         try {
-            File audioFile = new File("graphics/music.wav");
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-            DataLine.Info info = new DataLine.Info(Clip.class, audioStream.getFormat());
-            Clip clip = (Clip) AudioSystem.getLine(info);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("graphics/music.wav"));
+            Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("Sound could not be loaded.");
         }
+
         LoadingScreen l = new LoadingScreen(2000);
         while (true) {
             try {
