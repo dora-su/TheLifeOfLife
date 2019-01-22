@@ -60,6 +60,7 @@ class Server extends JFrame {
         port.setForeground(new Color(169, 169, 169));
         this.setSize(911, 561);
         this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
+        this.setUndecorated(true);
         port.setSize(348, 82);
         port.setLocation(495, 285);
         panel.setLayout(null);
@@ -171,7 +172,7 @@ class Server extends JFrame {
                     continue;
                 }
                 if (clientList.size() == 6) {
-                    System.out.println("Full Game");
+                   	JOptionPane.showMessageDialog(null, "Full Game!");
                     client.close();
                     continue;
                 }
@@ -195,8 +196,6 @@ class Server extends JFrame {
                     pw.println(admin + " " + clientList.size());
                     pw.flush();
                 }
-
-                System.out.println(userName + " joined.");
 
                 //add the client to the client list and set as active
                 for (Client c : clientList) {
@@ -291,7 +290,7 @@ class Server extends JFrame {
                                     }
                                     // put in ip list
                                     bannedIps.add(banned.client.getInetAddress());
-                                    System.out.println("Banned " + banned.user + ":" + banned.client.getInetAddress());
+                                  
                                     // tell banned client that they have been banned
                                     banned.output.println(admin);
                                     banned.output.println("/ban");
@@ -313,7 +312,6 @@ class Server extends JFrame {
                                     if (kicked == null) {
                                         continue;
                                     }
-                                    System.out.println("Kicked " + kicked.user);
                                     // tells kicked client that they have been kicked
                                     kicked.output.println(admin);
                                     kicked.output.println("/kick");
@@ -360,7 +358,7 @@ class Server extends JFrame {
                                     sent.output.println(tmp);
                                     sent.output.flush();
 
-                                    System.out.println("Message from " + username + " to " + user + " : " + tmp);
+          
                                 }
                             } else if (msg.startsWith("/status")) { //change user status
 

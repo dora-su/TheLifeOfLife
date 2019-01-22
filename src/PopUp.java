@@ -57,14 +57,15 @@ public class PopUp {
 		JPanel panel = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
-				
+
 				g.drawImage(popWindow, 0, 0, null);
-				
+
 				repaint();
 			}
 		};
 
-		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html", SwingConstants.CENTER);
+		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html",
+				SwingConstants.CENTER);
 		messageLabel.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 		messageLabel.setSize(400, 250);
 		//JLabel messageLabel = new JLabel(message);
@@ -93,10 +94,13 @@ public class PopUp {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
+					if(player1.getTile() == 89) {
+						player1.setOwnStartUp(true);
+					}
 					// go to certain index
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
-					System.out.println(player1.getName() + " set to " + ((ChoiceTile)tile).getIndex());
+					System.out.println(player1.getName() + " set to " + ((ChoiceTile) tile).getIndex());
 					player1.c.output.println(player1.getName());
 					player1.c.output.println("/tile " + ((ChoiceTile) tile).getIndex());
 					player1.c.output.flush();
@@ -134,40 +138,6 @@ public class PopUp {
 			options.add(Box.createRigidArea(new Dimension(50, 0)));
 			options.add(option2);
 
-		} else if (tile instanceof SpinToWinTile || tile instanceof RollAgainTile) {
-			JButton spin = new JButton("Spin");
-			spin.setFocusPainted(false);
-
-			//spin and add the money accordingly
-			if (tile instanceof SpinToWinTile) {
-//				spin.addActionListener(new ActionListener() {
-//					@Override
-//					public void actionPerformed(ActionEvent e) {
-//						player1.c.output.println(player1.getName());
-//		                player1.c.output.println("/spin " + (new Random().nextInt(360) + 5000));
-//		                player1.c.output.flush();
-//						Game.gameFrame.setEnabled(true);
-//						popUp.dispose();
-//
-//					}
-//				});
-			} else {
-				//re spin
-				spin.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						Game.spin.doClick();
-						Game.gameFrame.setEnabled(true);
-						popUp.dispose();
-
-					}
-				});
-			}
-
-			options.add(spin)
-
-			;
-
 		} else {
 			// adding a close button after the message is displayed
 			JButton close = new JButton("Close");
@@ -180,7 +150,6 @@ public class PopUp {
 
 				}
 			});
-
 
 			close.setAlignmentX(JButton.CENTER_ALIGNMENT);
 			options.add(close);

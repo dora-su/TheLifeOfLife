@@ -11,7 +11,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -73,12 +76,7 @@ public class Lobby extends JFrame {
         //		title.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
         //		title.setHorizontalAlignment(JLabel.CENTER);
         //		title.setFont(new Font("Arial", Font.BOLD, 50));
-        JPanel players = new JPanel();
-        players.setLayout(new BoxLayout(players, BoxLayout.Y_AXIS));
-        players.setOpaque(false);
-        players.setAlignmentX(CENTER_ALIGNMENT);
-        players.setSize(this.size());
-        players.setLocation(500, 90);
+
 
         JPanel options = new JPanel();
         options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
@@ -138,7 +136,6 @@ public class Lobby extends JFrame {
         options.add(imready);
 
         mainPanel.add(Box.createRigidArea(new Dimension(900, 100)));
-        mainPanel.add(players);
         mainPanel.add(options);
 
         this.setVisible(true);
@@ -207,9 +204,11 @@ public class Lobby extends JFrame {
             super.paintComponent(g); // required
             this.setDoubleBuffered(true);
             g.drawImage(lobby, 0, 0, null);
-
+            g.setColor(new Color(169,169,169));
+            g.setFont(new Font("Arial",Font.PLAIN,25));
             for (int i = 0; i < playerList.length; i++) {
-                g.drawString(playerList[i], 500, 90 + 20 * i);
+            	
+                g.drawString(playerList[i], 500, 110 + 20 * i);
             }
             repaint();
         }
