@@ -17,22 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +54,8 @@ public class Client extends JFrame {
 	private Player p;
 	private int idx;
 
+	private ImageIcon icon;
+	private Font font;
 	/**
 	 * Main
 	 * Runs the client interface
@@ -75,39 +67,58 @@ public class Client extends JFrame {
 	//	}
 
 	Client() {
-
 		frame = this;
+
+        //set icon image
+        icon = new ImageIcon("graphics/icon.png");
+        this.setIconImage(icon.getImage());
+
 		JPanel panel = new Panel();
+
+		//get the font
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf"));
+        } catch (FontFormatException e) {
+            System.out.println("Font format is incorrect.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Font file not found.");
+            e.printStackTrace();
+        }
+
+        //set the font size
+        font = font.deriveFont(Font.PLAIN,50);
+
 		JTextArea userName = new JTextArea("jason");
 		userName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
-		userName.setFont(new Font("Arial", Font.PLAIN, 50));
+		userName.setFont(font);
 		userName.setSize(339, 80);
 		userName.setOpaque(false);
 		userName.setForeground(new Color(169, 169, 169));
 
 		JTextArea port = new JTextArea("5000");
 		port.getDocument().putProperty("filterNewlines", Boolean.TRUE);
-		port.setFont(new Font("Arial", Font.PLAIN, 50));
+		port.setFont(font);
 		port.setSize(339, 80);
 		port.setOpaque(false);
 		port.setForeground(new Color(169, 169, 169));
 
 		JTextArea ip = new JTextArea("localhost");
 		ip.getDocument().putProperty("filterNewlines", Boolean.TRUE);
-		ip.setFont(new Font("Arial", Font.PLAIN, 50));
+		ip.setFont(font);
 		ip.setSize(339, 80);
 		ip.setOpaque(false);
 		ip.setForeground(new Color(169, 169, 169));
 
 		this.setSize(911, 561);
-		this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
+		this.setLocationRelativeTo(null);
 		this.setUndecorated(true);
 
-		ip.setLocation(494, 85);
+		ip.setLocation(494, 90);
 
-		port.setLocation(494, 195);
+		port.setLocation(494, 205);
 
-		userName.setLocation(494, 305);
+		userName.setLocation(494, 310);
 
 		panel.setLayout(null);
 

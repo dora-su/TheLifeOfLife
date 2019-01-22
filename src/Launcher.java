@@ -29,8 +29,8 @@ public class Launcher {
             System.out.println(e);
             System.out.println("Sound could not be loaded.");
         }
-
-        LoadingScreen l = new LoadingScreen(2000);
+new Server();
+        LoadingScreen l = new LoadingScreen(00);
         while (true) {
             try {
                 Thread.sleep(1);
@@ -41,6 +41,7 @@ public class Launcher {
                 break;
             }
         }
-        new MainMenu();
+      new Client();
+        //  new MainMenu();
     }
 }

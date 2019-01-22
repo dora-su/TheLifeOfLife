@@ -14,18 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -47,20 +39,44 @@ class Server extends JFrame {
 
     Image background;
 
+    private ImageIcon icon;
+    private Font font;
+
     /**
      * Constructor
      */
     Server() {
-
         frame = this;
+
+        //set icon image
+        icon = new ImageIcon("graphics/icon.png");
+        this.setIconImage(icon.getImage());
+
+        this.setSize(911, 561);
+        this.setLocationRelativeTo(null);
+        this.setUndecorated(true);
+
         JPanel panel = new Panel();
+
+        //get the font
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf"));
+        } catch (FontFormatException e) {
+            System.out.println("Font format is incorrect.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Font file not found.");
+            e.printStackTrace();
+        }
+
+        //set the font size
+        font = font.deriveFont(Font.PLAIN,50);
+
         JTextArea port = new JTextArea("5000");
         port.setOpaque(false);
-        port.setFont(new Font("Arial", Font.PLAIN, 50));
+        port.setFont(font);
         port.setForeground(new Color(169, 169, 169));
-        this.setSize(911, 561);
-        this.setLocation((int) (Game.screenX / 2) - 476, ((int) (Game.screenY / 2) - 281));
-        this.setUndecorated(true);
+
         port.setSize(348, 82);
         port.setLocation(495, 285);
         panel.setLayout(null);
@@ -118,8 +134,11 @@ class Server extends JFrame {
             e.printStackTrace();
         }
 
+        //set the font size
+        font = font.deriveFont(Font.PLAIN,35);
+
         JLabel label = new JLabel("" + ipAddress);
-        label.setFont(new Font("Arial", Font.PLAIN, 35));
+        label.setFont(font);
         label.setForeground(new Color(169, 169, 169));
         label.setSize(400, 145);
 

@@ -18,6 +18,8 @@ import javax.swing.SwingConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -95,15 +97,22 @@ public class PopUp {
 		popUp.add(options);
 
 		if (tile instanceof ChoiceTile) {
-			JButton option1 = new JButton("Yes");
-			JButton option2 = new JButton("No");
-			option1.setFocusPainted(false);
-			option1.setFocusPainted(false);
+			JButton option1 = new JButton(new ImageIcon("graphics/yes.png"));
+			JButton option2 = new JButton(new ImageIcon("graphics/no.png"));
 
-			option1.addActionListener(new ActionListener() {
+			option1.setFocusPainted(false);
+			option1.setOpaque(false);
+			option1.setBorderPainted(false);
+			option1.setContentAreaFilled(false);
 
+			option2.setFocusPainted(false);
+			option2.setOpaque(false);
+			option2.setBorderPainted(false);
+			option2.setContentAreaFilled(false);
+
+			option1.addMouseListener(new MouseListener() {
 				@Override
-				public void actionPerformed(ActionEvent arg0) {
+				public void mouseClicked(MouseEvent e) {
 					if(player1.getTile() == 89) {
 						player1.setOwnStartUp(true);
 					}
@@ -118,13 +127,32 @@ public class PopUp {
 
 				}
 
+				@Override
+				public void mousePressed(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					option1.setIcon(new ImageIcon("graphics/yes_hover.png"));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					option1.setIcon(new ImageIcon("graphics/yes.png"));
+				}
 			});
 
-			option2.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					// go to new index
+			option2.addMouseListener(new MouseListener() {
 
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
 					if (player1.getTile() == 1) {
 						Thread t = new Thread(new Runnable() {
 							public void run() {
@@ -142,6 +170,26 @@ public class PopUp {
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
 				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					option2.setIcon(new ImageIcon("graphics/no_hover.png"));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					option2.setIcon(new ImageIcon("graphics/no.png"));
+				}
 			});
 
 			options.add(option1);
@@ -150,14 +198,38 @@ public class PopUp {
 
 		} else {
 			// adding a close button after the message is displayed
-			JButton close = new JButton("Close");
+			JButton close = new JButton(new ImageIcon("graphics/no.png"));
 			close.setFocusPainted(false);
-			close.addActionListener(new ActionListener() {
+			close.setOpaque(false);
+			close.setBorderPainted(false);
+			close.setContentAreaFilled(false);
+
+			close.addMouseListener(new MouseListener() {
+
 				@Override
-				public void actionPerformed(ActionEvent e) {
+				public void mouseClicked(MouseEvent e) {
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
+				}
 
+				@Override
+				public void mousePressed(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					close.setIcon(new ImageIcon("graphics/no_hover.png"));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					close.setIcon(new ImageIcon("graphics/no.png"));
 				}
 			});
 
@@ -203,20 +275,44 @@ public class PopUp {
 		popUp.setContentPane(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-		panel.add(Box.createRigidArea(new Dimension(0, 217)));
+		panel.add(Box.createRigidArea(new Dimension(0, 120)));
 		JPanel options = new JPanel();
 		options.setOpaque(false);
 
 		popUp.add(options);
 
-		JButton close = new JButton("Close");
+		JButton close = new JButton(new ImageIcon("graphics/no.png"));
 		close.setFocusPainted(false);
-		close.addActionListener(new ActionListener() {
+		close.setOpaque(false);
+		close.setBorderPainted(false);
+		close.setContentAreaFilled(false);
+
+		close.addMouseListener(new MouseListener() {
+
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				Game.gameFrame.setEnabled(true);
 				popUp.dispose();
+			}
 
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				close.setIcon(new ImageIcon("graphics/no_hover.png"));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				close.setIcon(new ImageIcon("graphics/no.png"));
 			}
 		});
 
