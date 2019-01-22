@@ -400,7 +400,6 @@ public class Client extends JFrame {
                             || user.equals("admin")) {
 
                         // admin command
-//                        System.out.println(msg);
                         if (user.equals(admin) && msg.startsWith("/")) {
 
                             // user is banned
@@ -466,7 +465,7 @@ public class Client extends JFrame {
                                     System.out.println(players.get(i).getName());
                                 }
                                 l.dispose();
-                                g = new Game(this, map.keySet(), userName);
+                                g = new Game(this, userName);
                             }
                         }
                         if (!msg.startsWith("/start")) {
