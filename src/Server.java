@@ -14,10 +14,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -70,17 +80,17 @@ class Server extends JFrame {
         }
 
         //set the font size
-        font = font.deriveFont(Font.PLAIN,50);
+        font = font.deriveFont(Font.PLAIN, 50);
 
         JTextArea port = new JTextArea("5000");
         port.setOpaque(false);
         port.setFont(font);
         port.setForeground(new Color(169, 169, 169));
-
+        // set size
         port.setSize(348, 82);
         port.setLocation(495, 285);
         panel.setLayout(null);
-
+        // start server
         JButton start = new JButton(new ImageIcon("graphics/server.png"));
         start.setContentAreaFilled(false);
         start.setFocusable(false);
@@ -90,6 +100,7 @@ class Server extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
+                // valid port
                 if (!port.getText().matches("[0-9]+")) {
                     JOptionPane.showMessageDialog(null, "Port must be a number!");
                     return;
@@ -97,11 +108,11 @@ class Server extends JFrame {
                 }
                 Thread t1 = new Thread(new Runnable() {
                     public void run() {
-                       
+
                         if (!port.getText().matches("[0-9]+")) {
-							JOptionPane.showMessageDialog(null, "Port must be a number!");
-							return;
-						}
+                            JOptionPane.showMessageDialog(null, "Port must be a number!");
+                            return;
+                        }
                         frame.dispose();
                         go(port.getText());
 
@@ -130,7 +141,7 @@ class Server extends JFrame {
             }
 
         });
-
+        // ip address
         InetAddress ipAddress = null;
         try {
             ipAddress = InetAddress.getLocalHost();
@@ -138,20 +149,21 @@ class Server extends JFrame {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        // ip address
         String ip = ipAddress.toString();
 
         ip = ip.substring(ip.indexOf(("/")) + 1);
         System.out.println(ip);
         //set the font size
-        font = font.deriveFont(Font.PLAIN,35);
-
+        font = font.deriveFont(Font.PLAIN, 35);
+        // ip label
         JLabel label = new JLabel("" + ip);
         label.setFont(font);
         label.setForeground(new Color(169, 169, 169));
         label.setSize(400, 145);
-
+        // set label location
         label.setLocation(495, 127);
-
+        // add items to panel
         panel.add(Box.createRigidArea(new Dimension(500, 0)));
         panel.add(start);
         panel.add(port);
@@ -160,7 +172,7 @@ class Server extends JFrame {
         this.setResizable(false);
         this.setContentPane(panel);
         this.setVisible(true);
-
+        // background image
         background = Toolkit.getDefaultToolkit().getImage("graphics/server_menu.png");
 
     }
@@ -171,13 +183,6 @@ class Server extends JFrame {
      * @param portNum the port number
      */
     public void go(String portNum) {
-
-        //allowing the user to choose the port to connect to
-        //String portNum = "";
-        //		while (!portNum.matches("[0-9]+")) {
-        //			portNum = JOptionPane.showInputDialog("Please enter the port number");
-        //			System.out.println("Server started on port " + portNum);
-        //		}
 
         System.out.println("Waiting for a client connection..");
         // hold the client connection
@@ -198,8 +203,9 @@ class Server extends JFrame {
                     client.close();
                     continue;
                 }
+                // full game
                 if (clientList.size() == 6) {
-                   	JOptionPane.showMessageDialog(null, "Full Game!");
+                    JOptionPane.showMessageDialog(null, "Full Game!");
                     client.close();
                     continue;
                 }
@@ -317,12 +323,13 @@ class Server extends JFrame {
                                     }
                                     // put in ip list
                                     bannedIps.add(banned.client.getInetAddress());
-                                  
+
                                     // tell banned client that they have been banned
                                     banned.output.println(admin);
                                     banned.output.println("/ban");
                                     banned.output.flush();
                                     banned.client.close();
+                                    // ban user
                                     clientList.remove(banned);
                                     for (Client c : clientList) {
                                         c.output.println(banned.user);
@@ -385,7 +392,7 @@ class Server extends JFrame {
                                     sent.output.println(tmp);
                                     sent.output.flush();
 
-          
+
                                 }
                             } else if (msg.startsWith("/status")) { //change user status
 
@@ -396,6 +403,7 @@ class Server extends JFrame {
                                     c.output.flush();
                                 }
                             } else if (msg.equals("/ready")) {
+                                // make player ready
                                 ready++;
                                 if (ready == clientList.size()) {
                                     for (Client c : clientList) {
@@ -405,8 +413,10 @@ class Server extends JFrame {
                                     }
                                 }
                             } else if (msg.equals("/unready")) {
+                                // unready user
                                 ready--;
                             } else if (msg.startsWith("/spin") || msg.startsWith("/remove") || msg.startsWith("/tile")) {
+                                // print username and message to clients
                                 for (Client c : clientList) {
                                     c.output.println(username);
                                     c.output.println(msg);
@@ -421,7 +431,6 @@ class Server extends JFrame {
                                 c.output.println(msg);
                                 c.output.flush();
                             }
-                            System.out.println(username + " : " + msg);
                         }
                     }
                 } catch (IOException e) {
