@@ -5,7 +5,12 @@
  * Date: January 9, 2019
  */
 
-import javax.swing.*;
+import javax.swing.DefaultBoundedRangeModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -25,22 +30,29 @@ public class LoadingScreen extends JFrame {
      * @param time the time to load
      */
     LoadingScreen(int time) {
+        // set window size to image size
         this.setSize(720, 720);
+        // center in the middle of screen
         this.setLocation((int) (Game.screenX / 2) - 360, ((int) (Game.screenY / 2) - 360));
         this.setUndecorated(true);
         icon = new ImageIcon("graphics/icon.png");
         this.setIconImage(icon.getImage());
-
+        // initialize variables
         model = new DefaultBoundedRangeModel(0, time, 0, time);
         loadingBar = new JProgressBar(model);
+        // create main panel
         JPanel mainPanel = new MainPanel();
         this.setContentPane(mainPanel);
+        // add loading bar
         add(loadingBar);
         setVisible(true);
+        // start timer for loading bar
         Timer timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (model.getValue() >= time) {
+                    // done loading
                     loaded = true;
+                    // close window
                     dispose();
                 }
                 model.setValue(model.getValue() + 1);

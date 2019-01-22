@@ -22,7 +22,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.Toolkit;
@@ -62,11 +61,8 @@ public class Game extends JFrame {
 
     //variables for spinner
     private static boolean finished = false;
-    private boolean spinText;
     private static int rotate;
-    private static int rollNum = -1;
     private static Random rand = new Random();
-    private static JLabel rollText;
     private static Client c;
     private JButton chat, exit;
     private static JButton spin;
@@ -98,7 +94,7 @@ public class Game extends JFrame {
     Game(Client c, String pl) {
         super("My Game");
         g = this;
-        this.c = c;
+        Game.c = c;
         turn = 0;
         player = c.map.get(pl);
         // Set the frame to full screen
@@ -112,8 +108,8 @@ public class Game extends JFrame {
         gameFrame = this;
 
         myFormatter = new DecimalFormat("###,###.###");
+        
         // hard coded values for tile coordinates
-
         path = new ArrayList<ActionTile>();
         path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
         path.add(new ChoiceTile((int) (scaleX * 174), (int) (scaleY * 446), "Would You Like to Go to College", 18));
@@ -166,7 +162,6 @@ public class Game extends JFrame {
         path.add(new Tile((int) (scaleX * 535), (int) (scaleY * 492)));
         path.add(new Tile((int) (scaleX * 513), (int) (scaleY * 433),
                 "Oh no you showed up late to work. Better be earlier next time!"));
-
         //start of new path(Tile 37)
         path.add(new MoneyTile((int) (scaleX * 575), (int) (scaleY * 419), "Buy christmas gifts for all your friends",
                 400));
@@ -175,20 +170,16 @@ public class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 680), (int) (scaleY * 270), "Pay for wedding venue fees!", -10000));
         path.add(new PayDayTile((int) (scaleX * 678), (int) (scaleY * 209)));
         path.add(new Tile((int) (scaleX * 681), (int) (scaleY * 140))); //tile to get married on (42)
-
         //tile after marriage
         path.add(new MoneyTile((int) (scaleX * 705), (int) (scaleY * 80),
                 "Fall off a cruise ship. Thankfully you’re still alive, gotta pay those medical bills.", -10000));
-
         path.add(new Tile((int) (scaleX * 770), (int) (scaleY * 59), "Congratulations on your new child!"));
         path.add(new PayDayTile((int) (scaleX * 833), (int) (scaleY * 75)));
-
         path.add(new MoneyTile((int) (scaleX * 888), (int) (scaleY * 117), "Buy sailboat", -30000));
         path.add(new MoneyTile((int) (scaleX * 899), (int) (scaleY * 177), "Go skydiving", -1000));
         path.add(new MoneyTile((int) (scaleX * 903), (int) (scaleY * 244), "Adopt a cat", -400));
         path.add(new PayDayTile((int) (scaleX * 892), (int) (scaleY * 309)));
         path.add(new Tile((int) (scaleX * 849), (int) (scaleY * 360))); //tile to buy house on (50)
-        //good
         path.add(new MoneyTile((int) (scaleX * 850), (int) (scaleY * 426), "Pay property taxes!", -2000));
         path.add(new MoneyTile((int) (scaleX * 899), (int) (scaleY * 470), "Pay your broker commission.", -30000));
         path.add(new Tile((int) (scaleX * 939), (int) (scaleY * 526),
@@ -197,7 +188,6 @@ public class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 886), (int) (scaleY * 642),
                 "You fell into the lake and nearly drowned. You decided to take swimming lessons to prevent this again.",
                 -500));
-
         //new path (56)
         path.add(new ChoiceTile((int) (scaleX * 855), (int) (scaleY * 691), "Would you like to go to night school?",
                 67));
@@ -238,7 +228,6 @@ public class Game extends JFrame {
         path.add(new Tile((int) (scaleX * 1391), (int) (scaleY * 949), "Congratulations on your new child!"));
         //correct coords up to here
 
-
         //path 77
         path.add(new MoneyTile((int) (scaleX * 1464), (int) (scaleY * 931),
                 "Chop down the tree on your front lawn. Fined by the city", -30000));
@@ -252,15 +241,12 @@ public class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 1523), (int) (scaleY * 704),
                 "Acccidently forgot to show up to work.", -3000));
         path.add(new PayDayTile((int) (scaleX * 1460), (int) (scaleY * 700)));
-
-
         path.add(new Tile((int) (scaleX * 1393), (int) (scaleY * 686),
                 "Oh no! You and your spouse are having a lot of arguments"));
         path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 678), "Buy 1500 Junior Chickens", -300));
         path.add(new MoneyTile((int) (scaleX * 1257), (int) (scaleY * 666),
                 "Accidentally whipped the Wii remote at TV. Buy a new TV.", -3000));
         path.add(new PayDayTile((int) (scaleX * 1193), (int) (scaleY * 650)));
-        //correct up to here
         path.add(new MoneyTile((int) (scaleX * 1136), (int) (scaleY * 613), "Win the lottery", 100000));
         path.add(new MoneyTile((int) (scaleX * 1151), (int) (scaleY * 549), "Invent a new programming language",
                 190000));
@@ -269,7 +255,6 @@ public class Game extends JFrame {
 
         path.add(new MoneyTile((int) (scaleX * 1244), (int) (scaleY * 393),
                 "Receive apology money from Richmond Hill High School.", 30000));
-        // correct
         //stop tile
         path.add(new ChoiceTile((int) (scaleX * 1214), (int) (scaleY * 326), "Would you like to have your own start up",
                 99));
@@ -282,7 +267,6 @@ public class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 1183), (int) (scaleY * 103), "", 103)); // INSERT MESSAGE HERE
         path.add(new Tile((int) (scaleX * 1245), (int) (scaleY * 89), "Organize a hackathon!"));
         path.add(new PayDayTile((int) (scaleX * 1305), (int) (scaleY * 79)));
-
         //96
         path.add(new Tile((int) (scaleX * 1386), (int) (scaleY * 84), "Congratulations on your new child!"));
         path.add(new MoneyTile((int) (scaleX * 1446), (int) (scaleY * 98),
@@ -294,22 +278,17 @@ public class Game extends JFrame {
         path.add(new PayDayTile((int) (scaleX * 1271), (int) (scaleY * 299)));
         path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 266),
                 "Win the international bubble tea drinking competition with a total of 400 drinks drank.", 200000));
-        //correct up to here
         path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 246),
                 "Received a $50000 grant from the government", 50000));//don tthink this is rigith
         path.add(new MoneyTile((int) (scaleX * 1459), (int) (scaleY * 261),
                 "You accidentally set part of your house on fire. Pay for repairs.", -30000));
-
-        // correct up to here
         path.add(new MoneyTile((int) (scaleX * 1524), (int) (scaleY * 267),
                 "Received a small no-need-for-return loan of $20000 from Donald Trump.", 20000));
         path.add(new MoneyTile((int) (scaleX * 1585), (int) (scaleY * 233),
                 "Congrats on opening up your startup and having 10 employees.", 0));
-        //correct up to here
         //new stop sign
         path.add(new Tile((int) (scaleX * 1601), (int) (scaleY * 167)));
         path.add(new PayDayTile((int) (scaleX * 1572), (int) (scaleY * 111)));
-        //correct up to here
         path.add(new MoneyTile((int) (scaleX * 1645), (int) (scaleY * 89), "Win the Nobel Prize for creating TLAP",
                 200000));
         path.add(new MoneyTile((int) (scaleX * 1702), (int) (scaleY * 77),
@@ -317,7 +296,6 @@ public class Game extends JFrame {
 
         path.add(new MoneyTile((int) (scaleX * 1780), (int) (scaleY * 85), "You wrote an award-winning haiku!", 2000));
         path.add(new PayDayTile((int) (scaleX * 1821), (int) (scaleY * 131)));
-        //correct up to here
         //stop
         path.add(new Tile((int) (scaleX * 1818), (int) (scaleY * 209)));
 
@@ -366,6 +344,7 @@ public class Game extends JFrame {
         collegeCareers.add(new Career("Stripper", 70000, stripper));
         collegeCareers.add(new Career("Road Worker", 40000, roadWorker));
 
+        //adding the start up special career
         startUpPic = Toolkit.getDefaultToolkit().getImage("graphics/careers/startup.png");
         startUpPic = startUpPic.getScaledInstance((int) (250 * scaleX), (int) (400 * scaleY), Image.SCALE_DEFAULT);
 
@@ -678,6 +657,7 @@ public class Game extends JFrame {
 
         this.setVisible(true);
 
+        //importing the custom fonts 
         try {
             font1 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf")).deriveFont((float) (scale * 80));
         } catch (FontFormatException e1) {
@@ -787,33 +767,37 @@ public class Game extends JFrame {
      * SpinnerListener
      */
     private class SpinnerListener implements ActionListener {
-
+    	
         boolean running = false;
-
+        
         @Override
         public void actionPerformed(ActionEvent arg0) {
             gameAreaPanel.setEnabled(false);
             // if currently spinning
             if (running) {
-                //				c.update();
                 // checks if dist is over
                 if (vel > 0) {
-                    //					double deltad = vel * c.getElapsedTime();
                     rotate -= vel;
                     distance = 0;
                     // end dist
                 } else {
+                	// velocity is 0 and spinner has stopped
                     for (int j = 0; j < 5; j++) {
+                    	// get angle of spinner
                         int angle = rotate % 360;
+                        // checks for negative angle
                         if (angle < 0) {
                             angle += 360;
                         }
                         angle = 360 - angle;
+                        // checks if spinner has landed on the current angle
                         if (angle >= j * 72 && angle < (j + 1) * 72) {
+                        	// if player has not been moved, move the player
                             if (!c.players.get(turn % c.players.size()).moved) {
                                 c.players.get(turn % c.players.size()).move(g, j + 1, path,
                                         c.players.get(turn % c.players.size()).equals(player));
                             } else {
+                            	// reset the current players moved boolean
                                 c.players.get(turn % c.players.size()).moved = false;
                             }
                             turn++;
@@ -843,7 +827,9 @@ public class Game extends JFrame {
     class RollListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
+        	// check if it is the player's turn
             if (c.players.get(turn % c.players.size()).equals(player)) {
+            	// tell server that the player is spinning
                 c.output.println(player.getName());
                 c.output.println("/spin " + (rand.nextInt(360) + 5000));
                 c.output.flush();
