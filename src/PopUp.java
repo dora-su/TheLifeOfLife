@@ -74,17 +74,16 @@ public class PopUp {
 		}
 
 		//set the message font size
-		font = font.deriveFont(Font.PLAIN,28);
+		Font messageFont = font.deriveFont(Font.PLAIN,26);
 
-		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html",
+		JLabel messageLabel = new JLabel(message,
 				SwingConstants.CENTER);
 		messageLabel.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 		messageLabel.setSize(400, 250);
-		//JLabel messageLabel = new JLabel(message);
+		messageLabel.setFont(messageFont);
 		messageLabel.setSize(messageLabel.getPreferredSize());
 		//messageLabel.setSize(400,250);
 		messageLabel.setForeground(Color.black);
-		messageLabel.setFont(font);
 		popUp.setContentPane(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(Box.createRigidArea(new Dimension(0, 100)));
