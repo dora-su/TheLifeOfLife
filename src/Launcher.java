@@ -8,7 +8,6 @@
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
 import java.io.File;
 
 
@@ -19,6 +18,7 @@ public class Launcher {
      * @param args command line arguments
      */
     public static void main(String[] args) {
+    	// Start music
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("graphics/music.wav"));
             Clip clip = AudioSystem.getClip();
@@ -29,6 +29,8 @@ public class Launcher {
             System.out.println(e);
             System.out.println("Sound could not be loaded.");
         }
+        
+        // Start loading Screen
         LoadingScreen l = new LoadingScreen(2000);
         while (true) {
             try {
@@ -40,6 +42,7 @@ public class Launcher {
                 break;
             }
         }
+        // start main menu
         new MainMenu();
     }
 }

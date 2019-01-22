@@ -102,6 +102,7 @@ public class FinalScreen extends JFrame {
             }
 
         });
+        //setting location of the quit button
         quit.setLocation(550, 450);
         quit.setSize(250, 100);
         quit.setContentAreaFilled(false);
@@ -119,6 +120,7 @@ public class FinalScreen extends JFrame {
         this.setVisible(true);
     }
 
+    //inner panel
     private class Panel extends JPanel {
         public void paintComponent(Graphics g) {
             super.paintComponent(g); // required

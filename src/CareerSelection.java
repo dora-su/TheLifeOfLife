@@ -5,24 +5,35 @@
  * Date: January 3, 2019
  */
 
+<<<<<<< HEAD
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+=======
+
+>>>>>>> 98a30285afedaad13e56cd6d8ac30b9cc84096cc
 import java.awt.Dialog;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 
 public class CareerSelection extends JFrame {
 
     private ArrayList<Career> careers;
     /**
-     * Constructor
+     * Constructor	
      *
      * @param college if the player has gone through college then true, otherwise false
      * @param player  the player
@@ -78,7 +89,12 @@ public class CareerSelection extends JFrame {
             image.setIcon(c.getImage());
         }
 
+<<<<<<< HEAD
         //Show the career card on the bottom bar
+=======
+
+       //scaling and displaying the career icon in the bottom bar 
+>>>>>>> 98a30285afedaad13e56cd6d8ac30b9cc84096cc
         ImageIcon pic = careers.get(index).getImage();
         Image scaledImg = pic.getImage();
         //scale the image to fit the bottom bar
@@ -98,7 +114,11 @@ public class CareerSelection extends JFrame {
         ok.setBorderPainted(false);
         ok.setContentAreaFilled(false);
 
+<<<<<<< HEAD
         //Create dialog window to notice players of their new career
+=======
+        //dialog informing you of the job you received
+>>>>>>> 98a30285afedaad13e56cd6d8ac30b9cc84096cc
         final JDialog dialog = new JDialog((Dialog) null, "Career", true);
 
         //Add a mouselistener to the "ok" button
@@ -150,6 +170,7 @@ public class CareerSelection extends JFrame {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //send career info to server
         player.c.output.println(player.c.userName);
         if (college) {
             player.c.output.println("/removecc " + index);
