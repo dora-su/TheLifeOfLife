@@ -806,7 +806,6 @@ public class Game extends JFrame {
                     }
                     finished = true;
                     running = false;
-                    spinText = false;
                 }
                 // delay vel each time
                 // so the spinner slows down
