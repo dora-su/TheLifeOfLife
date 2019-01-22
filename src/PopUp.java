@@ -120,6 +120,10 @@ public class PopUp {
 						pic = pic.getScaledInstance((int) (114 * Game.scaleX), (int) (184 * Game.scaleY), java.awt.Image.SCALE_SMOOTH);
 						Game.myCareer.setIcon(new ImageIcon(pic));
 					}
+					if (player1.getTile() == 1 || player1.getTile() == 75) {
+						player1.addMoney(50000);
+					}
+					
 					// go to certain index
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();

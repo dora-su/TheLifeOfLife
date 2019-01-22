@@ -236,6 +236,8 @@ public class Game extends JFrame {
 		path.add(new Tile((int) (scaleX * 1391), (int) (scaleY * 949), "Congratulations on your new child!"));
 		//correct coords up to here
 
+
+			
 		//path 77
 		path.add(new MoneyTile((int) (scaleX * 1464), (int) (scaleY * 931),
 				"Chop down the tree on your front lawn. Fined by the city", -30000));
@@ -243,6 +245,14 @@ public class Game extends JFrame {
 				"Take a nice hike in Algonquin Park with your family!"));
 		path.add(new PayDayTile((int) (scaleX * 1577), (int) (scaleY * 874)));
 
+		path.add(new Tile((int) (scaleX * 1600), (int) (scaleY * 807),
+				"Oh no! You and your spouse are having a lot of arguments"));
+		path.add(new MoneyTile((int) (scaleX * 1590), (int) (scaleY * 751), "Buy 1500 Junior Chickens", -300));
+		path.add(new MoneyTile((int) (scaleX * 1523), (int) (scaleY * 704),
+				"Accidentally whipped the Wii remote at TV. Buy a new TV.", -3000));
+		path.add(new PayDayTile((int) (scaleX * 1460), (int) (scaleY * 700)));
+		
+		
 		path.add(new Tile((int) (scaleX * 1393), (int) (scaleY * 686),
 				"Oh no! You and your spouse are having a lot of arguments"));
 		path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 678), "Buy 1500 Junior Chickens", -300));
@@ -501,7 +511,8 @@ public class Game extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// new exit()
+				dispose();
+				System.exit(-1);
 
 			}
 
@@ -674,7 +685,7 @@ public class Game extends JFrame {
 		this.setVisible(true);
 
 		try {
-			font1 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf")).deriveFont(80f);
+			font1 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf")).deriveFont((float)(scale * 80));
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(font1);
 		} catch (FontFormatException e1) {
@@ -684,7 +695,7 @@ public class Game extends JFrame {
 		}
 
 		try {
-			font2 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")).deriveFont(40f);
+			font2 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")).deriveFont((float)(scale * 40));
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")));
 		} catch (IOException | FontFormatException e) {

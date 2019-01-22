@@ -36,7 +36,7 @@ class Player implements Comparable<Player> {
 	 */
 	Player(String name) {
 		this.name = name;
-		tile = 0;
+		tile = 73;
 		this.player = this;
 		add = 0;
 		count = 0;
@@ -267,7 +267,7 @@ class Player implements Comparable<Player> {
 					count--;
 
 					//going on the next part of the map
-					if (player.tile == 120) {
+					if (player.tile == 124) {
 						g.dispose();
 						new FinalScreen(player);
 						System.out.println("FINAL SCREEN");
@@ -276,8 +276,8 @@ class Player implements Comparable<Player> {
 						player.setTile(35 + 1);
 					} else if (player.tile == 66) {
 						player.setTile(75 + 1);
-					} else if (player.tile == 98) {
-						player.tile = 106;
+					} else if (player.tile == 102) {
+						player.tile = 110;
 					} else {
 						player.setTile(player.getTile() + 1);
 					}
@@ -322,7 +322,7 @@ class Player implements Comparable<Player> {
 						t.start();
 						specialPopup = true;
 						count = 0;
-					} else if (player.tile == 111) { //last stop sign
+					} else if (player.tile == 115) { //last stop sign
 						if (player.getCareer().getCareerName().equals("Start Up")) {
 							Random rand = new Random();
 							int win = rand.nextInt(3);
@@ -374,7 +374,7 @@ class Player implements Comparable<Player> {
 						specialPopup = true;
 					}
 
-					if (player.getTile() == 44 || player.getTile() == 76 || player.getTile() == 96
+					if (player.getTile() == 44 || player.getTile() == 76 || player.getTile() == 100
 							|| player.getTile() == 61) {
 						if (count == 0) {
 							player.setChild(player.getChild() + 1);
