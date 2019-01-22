@@ -246,10 +246,10 @@ public class Game extends JFrame {
 		path.add(new PayDayTile((int) (scaleX * 1577), (int) (scaleY * 874)));
 
 		path.add(new Tile((int) (scaleX * 1600), (int) (scaleY * 807),
-				"Oh no! You and your spouse are having a lot of arguments"));
-		path.add(new MoneyTile((int) (scaleX * 1590), (int) (scaleY * 751), "Buy 1500 Junior Chickens", -300));
+				"You Failed The CCC"));
+		path.add(new MoneyTile((int) (scaleX * 1590), (int) (scaleY * 751), "Your lost you waller", -300));
 		path.add(new MoneyTile((int) (scaleX * 1523), (int) (scaleY * 704),
-				"Accidentally whipped the Wii remote at TV. Buy a new TV.", -3000));
+				"Acccidently forgot to show up to work.", -3000));
 		path.add(new PayDayTile((int) (scaleX * 1460), (int) (scaleY * 700)));
 		
 		
