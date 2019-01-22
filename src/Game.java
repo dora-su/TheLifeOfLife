@@ -99,7 +99,6 @@ class Game extends JFrame {
         myFormatter = new DecimalFormat("###,###.###");
 
 
-        //adding location and function of every tile to scale
         path = new ArrayList<ActionTile>();
         path.add(new MoneyTile((int) (scaleX * 90), (int) (scaleY * 444), null, 0));
         path.add(new ChoiceTile((int) (scaleX * 174), (int) (scaleY * 446), "Would You Like to Go to College", 18));
@@ -167,7 +166,7 @@ class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 903), (int) (scaleY * 244), "Adopt a cat", -400));
         path.add(new PayDayTile((int) (scaleX * 892), (int) (scaleY * 309)));
         path.add(new Tile((int) (scaleX * 849), (int) (scaleY * 360))); //tile to buy house on (50)
-
+        //good
         path.add(new MoneyTile((int) (scaleX * 850), (int) (scaleY * 426), "Pay property taxes!", -2000));
         path.add(new MoneyTile((int) (scaleX * 899), (int) (scaleY * 470), "Pay your broker commission.", -30000));
         path.add(new Tile((int) (scaleX * 939), (int) (scaleY * 526), "You wasted 600 sheets of paper making snowflakes. Be more environmentally friendly!"));
@@ -183,7 +182,7 @@ class Game extends JFrame {
         path.add(new Tile((int) (scaleX * 917), (int) (scaleY * 900), "You went to a party and had too much redbull. Please don’t pass out next time."));
         path.add(new Tile((int) (scaleX * 985), (int) (scaleY * 924), "Congratulations on your new child!"));
         path.add(new PayDayTile((int) (scaleX * 1049), (int) (scaleY * 941)));
-
+        //good
         path.add(new MoneyTile((int) (scaleX * 1114), (int) (scaleY * 955), "Send your child to Olympiads.", -1000));
         path.add(new MoneyTile((int) (scaleX * 1187), (int) (scaleY * 957), "Forget to pay taxes.", -200000));
         path.add(new MoneyTile((int) (scaleX * 1254), (int) (scaleY * 959), "Caught for using your phone when driving", -20000));
@@ -202,60 +201,64 @@ class Game extends JFrame {
         //75
         path.add(new Tile((int) (scaleX * 1381), (int) (scaleY * 882)));
         path.add(new Tile((int) (scaleX * 1391), (int) (scaleY * 949), "Congratulations on your new child!"));
+        //correct coords up to here
 
         //path 77
         path.add(new MoneyTile((int) (scaleX * 1464), (int) (scaleY * 931), "Chop down the tree on your front lawn. Fined by the city", -30000));
         path.add(new Tile((int) (scaleX * 1525), (int) (scaleY * 915), "Take a nice hike in Algonquin Park with your family!"));
         path.add(new PayDayTile((int) (scaleX * 1577), (int) (scaleY * 874)));
 
-        path.add(new Tile((int) (scaleX * 1604), (int) (scaleY * 813), "Oh no! You and your spouse are having a lot of arguments…"));
-        path.add(new MoneyTile((int) (scaleX * 1595), (int) (scaleY * 749), "Buy 1500 Junior Chickens", -300));
-        path.add(new MoneyTile((int) (scaleX * 1526), (int) (scaleY * 717), "Accidentally whipped the Wii remote at TV. Buy a new TV.", -3000));
-        path.add(new PayDayTile((int) (scaleX * 1465), (int) (scaleY * 697)));
-
-        path.add(new MoneyTile((int) (scaleX * 1128), (int) (scaleY * 612), "Win the lottery", 100000));
-        path.add(new MoneyTile((int) (scaleX * 1148), (int) (scaleY * 549), "Invent a new programming language", 190000));
+        path.add(new Tile((int) (scaleX * 1393), (int) (scaleY * 686), "Oh no! You and your spouse are having a lot of arguments…"));
+        path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 678), "Buy 1500 Junior Chickens", -300));
+        path.add(new MoneyTile((int) (scaleX * 1257), (int) (scaleY * 666), "Accidentally whipped the Wii remote at TV. Buy a new TV.", -3000));
+        path.add(new PayDayTile((int) (scaleX * 1193), (int) (scaleY * 650)));
+        //correct up to here
+        path.add(new MoneyTile((int) (scaleX * 1136), (int) (scaleY * 613), "Win the lottery", 100000));
+        path.add(new MoneyTile((int) (scaleX * 1151), (int) (scaleY * 549), "Invent a new programming language", 190000));
         path.add(new MoneyTile((int) (scaleX * 1193), (int) (scaleY * 503), "Donate to a Mango Charity", -300000));
         path.add(new PayDayTile((int) (scaleX * 1239), (int) (scaleY * 449)));
 
         path.add(new MoneyTile((int) (scaleX * 1244), (int) (scaleY * 393), "Receive apology money from Richmond Hill High School.", 30000));
-
-        //decision point (89)
+// correct
+        //stop tile
         path.add(new Tile((int) (scaleX * 1214), (int) (scaleY * 326), "You went over your credit limit! Thankfully your bank doesn’t have a fee for that."));
 
-        //path 1
         path.add(new Tile((int) (scaleX * 1183), (int) (scaleY * 276), "You got drunk partying with friends. Thankfully your liver didn’t fail (yet)."));
         path.add(new PayDayTile((int) (scaleX * 1155), (int) (scaleY * 212)));
         path.add(new MoneyTile((int) (scaleX * 1142), (int) (scaleY * 152), "Win a table flipping tournament", 6000));
-
-        path.add(new ChoiceTile((int) (scaleX * 1183), (int) (scaleY * 103), "Would you like to start a startup?", 0));
+        //correct up to here
+        path.add(new MoneyTile((int) (scaleX * 1183), (int) (scaleY * 103), "", 103)); // INSERT MESSAGE HERE
         path.add(new Tile((int) (scaleX * 1245), (int) (scaleY * 89), "Organize a hackathon!"));
         path.add(new PayDayTile((int) (scaleX * 1305), (int) (scaleY * 79)));
-
+        //96
+        //correct up to here
         path.add(new Tile((int) (scaleX * 1386), (int) (scaleY * 84), "Congratulations on your new child!"));
         path.add(new MoneyTile((int) (scaleX * 1446), (int) (scaleY * 98), "Participate in the annual sadposting conference.", 0));
         path.add(new MoneyTile((int) (scaleX * 1516), (int) (scaleY * 134), "Burn your Grade 11 English homework in a literature burning riot.", 0));
 
-        //path 2 (99)
-        path.add(new MoneyTile((int) (scaleX * 1271), (int) (scaleY * 299), "Pay for incorporation fees.", -200));
+        //path 2
+        path.add(new PayDayTile((int) (scaleX * 1271), (int) (scaleY * 299)));
         path.add(new MoneyTile((int) (scaleX * 1325), (int) (scaleY * 266), "Win the international bubble tea drinking competition with a total of 400 drinks drank.", 200000));
-
+        //correct up to here
         path.add(new MoneyTile((int) (scaleX * 1391), (int) (scaleY * 246), "Received a $50000 grant from the government", 50000));//don tthink this is rigith
         path.add(new MoneyTile((int) (scaleX * 1459), (int) (scaleY * 261), "You accidentally set part of your house on fire. Pay for repairs.", -30000));
+
+        // correct up to here
         path.add(new MoneyTile((int) (scaleX * 1524), (int) (scaleY * 267), "Received a small no-need-for-return loan of $20000 from Donald Trump.", 20000));
         path.add(new MoneyTile((int) (scaleX * 1585), (int) (scaleY * 233), "Congrats on opening up your startup and having 10 employees.", 0));
-
+        //correct up to here
         //new stop sign
         path.add(new Tile((int) (scaleX * 1601), (int) (scaleY * 167)));
         path.add(new PayDayTile((int) (scaleX * 1572), (int) (scaleY * 111)));
-
+        //correct up to here
         path.add(new MoneyTile((int) (scaleX * 1645), (int) (scaleY * 89), "Win the Nobel Prize for creating TLAP", 200000));
-        path.add(new Tile((int) (scaleX * 1702), (int) (scaleY * 77), "Congratulations on your new child!"));
+        path.add(new MoneyTile((int) (scaleX * 1702), (int) (scaleY * 77), "You got drunk and bought bubble tea for everyone you saw.", -150000));
+
         path.add(new MoneyTile((int) (scaleX * 1780), (int) (scaleY * 85), "You wrote an award-winning haiku!", 2000));
         path.add(new PayDayTile((int) (scaleX * 1821), (int) (scaleY * 131)));
-
+        //correct up to here
         //stop
-        path.add(new Tile((int) (scaleX * 1818), (int) (scaleY * 143)));
+        path.add(new Tile((int) (scaleX * 1818), (int) (scaleY * 209)));
 
         path.add(new MoneyTile((int) (scaleX * 1810), (int) (scaleY * 270), "Pay for your brother's funeral.", -8000));
         path.add(new MoneyTile((int) (scaleX * 1802), (int) (scaleY * 337), "Congrats on your game show win!", 30000));
@@ -265,9 +268,6 @@ class Game extends JFrame {
         path.add(new MoneyTile((int) (scaleX * 1766), (int) (scaleY * 593), "You received a lot of money from your long-term investment.", 500000));
         path.add(new MoneyTile((int) (scaleX * 1769), (int) (scaleY * 657), "You have stomach cancer. Pay your medical bills.", 30000));
         path.add(new MoneyTile((int) (scaleX * 1778), (int) (scaleY * 723), "Throw yourself a birthday party. You have received a lot of gifts from friends!", 2000));
-
-        //final stop
-        path.add(new Tile((int) (scaleX * 1790), (int) (scaleY * 786)));
 
         //final stop
         path.add(new Tile((int) (scaleX * 1790), (int) (scaleY * 786)));
@@ -723,6 +723,7 @@ class Game extends JFrame {
 
     static double vel, accel, distance;
     static boolean move;
+
     static void spin(double dist, boolean b) {
         distance = dist;
         vel = dist / 80.0;
@@ -783,9 +784,9 @@ class Game extends JFrame {
             System.out.println("spinning " + turn + " " + c.players.size());
             System.out.println(c.players.get(turn % c.players.size()).equals(player));
             if (c.players.get(turn % c.players.size()).equals(player)) {
-            	c.output.println(player.getName());
-            	c.output.println("/prio");
-            	c.output.flush();
+                c.output.println(player.getName());
+                c.output.println("/prio");
+                c.output.flush();
                 c.output.println(player.getName());
                 c.output.println("/spin " + (rand.nextInt(360) + 5000));
                 c.output.flush();
