@@ -469,7 +469,7 @@ public class Client extends JFrame {
                                 g = new Game(this, map.keySet(), userName);
                             }
                         }
-                        if (!msg.equals("/start")) {
+                        if (!msg.startsWith("/start")) {
 	                        if (msg.equals("")) {
 	                            msgArea.append(user + " disconnected.\n");
 	                            l.removeUser(user);
@@ -511,6 +511,7 @@ public class Client extends JFrame {
 	                        	if (!players.get(g.turn % players.size()).equals(map.get(user))) {
 	                        		g.turn--;
 	                        	}
+	                        	System.out.println(user + " " + msg.split(" ")[1]);
 	                            Game.spin(Double.parseDouble(msg.split(" ")[1]),true);
 	                        } else if (msg.startsWith("/removep")) {
 	                            map.get(user).addProperty(g.properties.get(Integer.parseInt(msg.split(" ")[1])));

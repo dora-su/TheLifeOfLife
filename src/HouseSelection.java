@@ -72,7 +72,7 @@ public class HouseSelection extends JFrame {
                         button.removeActionListener(this);
 
                         player.c.output.println(player.c.userName);
-                        player.c.output.println("/remove " + Game.properties.indexOf(p));
+                        player.c.output.println("/removep " + Game.properties.indexOf(p));
                         player.c.output.flush();
                         Image soldImg = Toolkit.getDefaultToolkit()
                                 .getImage("graphics/homes/" + p.getName().toLowerCase() + "SOLD.png");

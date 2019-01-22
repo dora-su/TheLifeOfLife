@@ -23,7 +23,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 public class PopUp {
 
@@ -141,17 +140,17 @@ public class PopUp {
 
 			//spin and add the money accordingly
 			if (tile instanceof SpinToWinTile) {
-				spin.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						player1.c.output.println(player1.getName());
-		                player1.c.output.println("/spin " + (new Random().nextInt(360) + 5000));
-		                player1.c.output.flush();
-						Game.gameFrame.setEnabled(true);
-						popUp.dispose();
-
-					}
-				});
+//				spin.addActionListener(new ActionListener() {
+//					@Override
+//					public void actionPerformed(ActionEvent e) {
+//						player1.c.output.println(player1.getName());
+//		                player1.c.output.println("/spin " + (new Random().nextInt(360) + 5000));
+//		                player1.c.output.flush();
+//						Game.gameFrame.setEnabled(true);
+//						popUp.dispose();
+//
+//					}
+//				});
 			} else {
 				//re spin
 				spin.addActionListener(new ActionListener() {

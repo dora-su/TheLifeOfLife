@@ -645,6 +645,10 @@ class Game extends JFrame {
             //drawing background map
             g.drawImage(map, 0, 0, null);
             for (Player p : c.players) {
+            	if (!p.isMoving && p.newTile > p.getTile()) { 
+            		p.setTile(p.newTile);
+            		p.moved = true;
+            	}
                 g.drawImage(mangoes[c.players.indexOf(p)], path.get(p.getTile()).getX() - 17, path.get(p.getTile()).getY() - 17, null);
             }
             // draw bottom game menu image
@@ -756,7 +760,11 @@ class Game extends JFrame {
                         }
                         angle = 360 - angle;
                         if (angle >= j * 72 && angle < (j + 1) * 72) {
-                            c.players.get(turn % c.players.size()).move(g, j + 1, path, c.players.get(turn % c.players.size()).equals(player));
+                            if (!c.players.get(turn % c.players.size()).moved) {
+                            	c.players.get(turn % c.players.size()).move(g, j + 1, path, c.players.get(turn % c.players.size()).equals(player));
+                            } else {
+                            	c.players.get(turn % c.players.size()).moved = false;
+                            }
                             turn++;
                             //player1.move(1,path);
                         }
@@ -784,9 +792,6 @@ class Game extends JFrame {
             System.out.println("spinning " + turn + " " + c.players.size());
             System.out.println(c.players.get(turn % c.players.size()).equals(player));
             if (c.players.get(turn % c.players.size()).equals(player)) {
-                c.output.println(player.getName());
-                c.output.println("/prio");
-                c.output.flush();
                 c.output.println(player.getName());
                 c.output.println("/spin " + (rand.nextInt(360) + 5000));
                 c.output.flush();

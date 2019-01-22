@@ -1,4 +1,3 @@
-
 /**
  * Name: Player.java
  * Version: 2.0
@@ -25,7 +24,7 @@ class Player implements Comparable<Player>{
 	int newTile;
 	int family, startup;
 	Client c;
-
+	boolean isMoving, moved;
 	Player(String name) {
 		this.name = name;
 		tile = 0;
@@ -35,6 +34,8 @@ class Player implements Comparable<Player>{
 		money = 1000000;
 		family = 0;
 		startup = 0;
+		isMoving = false;
+		moved = false;
 	}
 	
 	public int compareTo(Player p) {
@@ -94,9 +95,11 @@ class Player implements Comparable<Player>{
 
 	public void addMoney(int money) {
 		add += money;
-		c.output.println(c.userName);
-		c.output.println("/status " + (player.money+ add) + " 0");
-		c.output.flush();
+		if (c != null) {
+			c.output.println(c.userName);
+			c.output.println("/status " + (player.money+ add) + " 0");
+			c.output.flush();
+		}
 		add /= 2;
 		//add money by different increments based on the amount that needs to be added or subtracted
 		new Timer(1, new ActionListener() {
@@ -149,6 +152,7 @@ class Player implements Comparable<Player>{
 
 	public void move(Game g, int spin, ArrayList<ActionTile> path, boolean popUp) {
 		count += spin;
+		isMoving = true;
 		new Timer(500, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (count > 0) {
@@ -185,7 +189,6 @@ class Player implements Comparable<Player>{
 							public void run() {
 								if (popUp)
 									new HouseSelection(player); //if land on this specific tile create house selections choices for user
-								g.turn++;
 							}
 						});
 						t2.start();
@@ -210,8 +213,7 @@ class Player implements Comparable<Player>{
 						specialPopup = true;
 						count = 0;
 					} else if (path.get(player.getTile()) instanceof PayDayTile) {
-						System.out.println(career.getSalary());
-						player.addMoney(career.getSalary()); //if player pass pay day tile add money to their bank balance
+						if (popUp) player.addMoney(career.getSalary()); //if player pass pay day tile add money to their bank balance
 					} else if (path.get(player.getTile()) instanceof ChoiceTile) {
 						count = 0; //if the player lands on a choice tile end their turn immediately
 					}
@@ -223,12 +225,7 @@ class Player implements Comparable<Player>{
 
 					if (count == 0 && (path.get(player.tile) instanceof MoneyTile)) {
 						int money = ((MoneyTile) (path.get(player.tile))).getMoney();
-						if (money > 0) {
-							player.addMoney(money);
-						} else if (money < 0) {
-							System.out.println(money);
-							player.addMoney(money);
-						}
+						if (popUp) player.addMoney(money);
 					}
 
 					System.out.println("player Tile " + player.tile);
@@ -237,7 +234,6 @@ class Player implements Comparable<Player>{
 							public void run() {
 								if (popUp)
 									new CareerSelection(true, player);
-								g.turn++;
 							}
 						});
 						t.start();
@@ -256,15 +252,11 @@ class Player implements Comparable<Player>{
 					if (count == 0 && !specialPopup) {
 						if (popUp) {
 							new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
-						} else {
-							System.out.println(name + " set to " + newTile);
-							player.setTile(newTile);
 						}
 					}
-
+					if (count == 0) isMoving = false;
 				}
 			}
 		}).start();
 	}
-
 }
