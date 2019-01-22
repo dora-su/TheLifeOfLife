@@ -463,7 +463,7 @@ public class Client extends JFrame {
                                     Player pl = map.get(user);
                                     if (!pl.equals(this.p)) {
                                         pl.setMoney(Integer.parseInt(money));
-                                        if (!salary.equals("0")) {
+                                        if (!salary.equals("0") && pl.getCareer() != null && p.getCareer() != null) {
                                             pl.getCareer().setSalary((int) (p.getCareer().getSalary() * 1.05));
                                         }
                                     }
