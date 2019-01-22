@@ -75,8 +75,8 @@ public class PopUp {
 
 		//set the message font size
 		Font messageFont = font.deriveFont(Font.PLAIN,26);
-
-		JLabel messageLabel = new JLabel(message,
+		GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(messageFont);
+		JLabel messageLabel = new JLabel("<html><div style='text-align: center;'>" + message + "</div></html>",
 				SwingConstants.CENTER);
 		messageLabel.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
 		messageLabel.setSize(400, 250);

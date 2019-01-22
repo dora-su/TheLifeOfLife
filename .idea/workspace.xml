@@ -16,15 +16,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PopUp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-473">
-              <caret line="277" column="26" lean-forward="true" selection-start-line="277" selection-start-column="26" selection-end-line="277" selection-end-column="26" />
+            <state relative-caret-position="108">
+              <caret line="78" column="109" selection-start-line="78" selection-start-column="109" selection-end-line="78" selection-end-column="109" />
               <folding>
                 <element signature="e#4300#4301#0" expanded="true" />
                 <element signature="e#4369#4370#0" expanded="true" />
                 <element signature="e#4428#4429#0" expanded="true" />
                 <element signature="e#4491#4492#0" expanded="true" />
-                <element signature="e#7177#7333#0" expanded="true" />
-                <element signature="e#7332#7333#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,14 +40,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Rules.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+            <state relative-caret-position="187">
+              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="imports" expanded="true" />
+                <element signature="e#3527#3528#0" expanded="true" />
+                <element signature="e#3568#3569#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CareerSelection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#2864#2865#0" expanded="true" />
+                <element signature="e#2912#2913#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,7 +113,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-816">
@@ -117,20 +130,6 @@
                 <element signature="e#32550#32551#0" expanded="true" />
                 <element signature="e#32912#32913#0" expanded="true" />
                 <element signature="e#32988#32989#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CareerSelection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#2864#2865#0" expanded="true" />
-                <element signature="e#2912#2913#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -159,7 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>player p</find>
       <find>Player p</find>
       <find>add</find>
       <find>/start</find>
@@ -182,13 +180,14 @@
       <find>username</find>
       <find>ok</find>
       <find>icon</find>
-      <find>font</find>
       <find>option1</find>
       <find>dialog</find>
       <find>imageicon</find>
-      <find>setsize</find>
       <find>player.m</find>
       <find>spinner</find>
+      <find>graphicsenv</find>
+      <find>setsize</find>
+      <find>font</find>
     </findStrings>
     <replaceStrings>
       <replace>Game</replace>
@@ -216,16 +215,16 @@
         <option value="$PROJECT_DIR$/src/Lobby.java" />
         <option value="$PROJECT_DIR$/src/MoneyTile.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
-        <option value="$PROJECT_DIR$/src/Rules.java" />
         <option value="$PROJECT_DIR$/src/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/Server.java" />
         <option value="$PROJECT_DIR$/src/Launcher.java" />
         <option value="$PROJECT_DIR$/src/HouseSelection.java" />
-        <option value="$PROJECT_DIR$/src/PopUp.java" />
         <option value="$PROJECT_DIR$/src/CareerSelection.java" />
         <option value="$PROJECT_DIR$/src/FinalScreen.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/PopUp.java" />
+        <option value="$PROJECT_DIR$/src/Rules.java" />
       </list>
     </option>
   </component>
@@ -277,7 +276,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548172488416" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548173919192" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -365,7 +364,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57574000" />
+    <option name="totallyTimeSpent" value="58990000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -610,17 +609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rules.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
@@ -660,33 +648,6 @@
           <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PopUp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-473">
-          <caret line="277" column="26" lean-forward="true" selection-start-line="277" selection-start-column="26" selection-end-line="277" selection-end-column="26" />
-          <folding>
-            <element signature="e#4300#4301#0" expanded="true" />
-            <element signature="e#4369#4370#0" expanded="true" />
-            <element signature="e#4428#4429#0" expanded="true" />
-            <element signature="e#4491#4492#0" expanded="true" />
-            <element signature="e#7177#7333#0" expanded="true" />
-            <element signature="e#7332#7333#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CareerSelection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#2864#2865#0" expanded="true" />
-            <element signature="e#2912#2913#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -732,6 +693,43 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CareerSelection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#2864#2865#0" expanded="true" />
+            <element signature="e#2912#2913#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PopUp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="78" column="109" selection-start-line="78" selection-start-column="109" selection-end-line="78" selection-end-column="109" />
+          <folding>
+            <element signature="e#4300#4301#0" expanded="true" />
+            <element signature="e#4369#4370#0" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+            <element signature="e#4491#4492#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rules.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#3527#3528#0" expanded="true" />
+            <element signature="e#3568#3569#0" expanded="true" />
           </folding>
         </state>
       </provider>
