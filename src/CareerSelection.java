@@ -122,7 +122,7 @@ public class CareerSelection extends JFrame {
                 options,
                 options[0]));
 
-       dialog.setSize(200,100);
+       dialog.setSize(200,170);
        dialog.setLocationRelativeTo(null);
        dialog.setVisible(true);
 

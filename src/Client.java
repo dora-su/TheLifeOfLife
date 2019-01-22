@@ -139,7 +139,7 @@ public class Client extends JFrame {
 							return;
 						}
 						String ipA = "";
-						if (ip.getText() == "localhost") {
+						if (ip.getText().equals("localhost")) {
 							ipA = "127.0.0.1";
 						} else {
 							ipA = ip.getText();
