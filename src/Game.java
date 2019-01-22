@@ -680,21 +680,23 @@ public class Game extends JFrame {
 
         try {
             font1 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf")).deriveFont((float) (scale * 80));
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(font1);
         } catch (FontFormatException e1) {
             e1.printStackTrace();
+            System.out.println("Font format incorrect.");
         } catch (IOException e1) {
+        	System.out.println("Font file not found.");
             e1.printStackTrace();
         }
 
         try {
             font2 = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")).deriveFont((float) (scale * 40));
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/langdon.ttf")));
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
+        } catch (FontFormatException e1) {
+			e1.printStackTrace();
+			System.out.println("Font format incorrect.");
+		} catch (IOException e1) {
+			System.out.println("Font file not found.");
+			e1.printStackTrace();
+		}
 
     } // End of Constructor
 
@@ -702,65 +704,66 @@ public class Game extends JFrame {
      * --------- INNER CLASSES -------------
      **/
     private class GameAreaPanel extends JPanel {
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g); // required
-            setDoubleBuffered(true);
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g); // required
+			setDoubleBuffered(true);
 
-            //drawing background map
-            g.drawImage(map, 0, 0, null);
-            for (Player p : c.players) {
-                if (!p.isMoving && p.newTile > p.getTile()) {
-                    p.setTile(p.newTile);
-                    p.moved = true;
-                }
-                g.drawImage(mangoes[c.players.indexOf(p)], path.get(p.getTile()).getX() - 17,
-                        path.get(p.getTile()).getY() - 17, null);
-            }
-            // draw bottom game exit image
-            g.setFont(font1);
-            String money = myFormatter.format(player.getMoney());
-            g.drawString(money, (int) (995 * scaleX), (int) (1145 * scaleY));
+			//drawing background map
+			g.drawImage(map, 0, 0, null);
+			for (Player p : c.players) {
+				if (!p.isMoving && p.newTile > p.getTile()) {
+					p.setTile(p.newTile);
+					p.moved = true;
+				}
+				g.drawImage(mangoes[c.players.indexOf(p)], path.get(p.getTile()).getX() - 17,
+						path.get(p.getTile()).getY() - 17, null);
+			}
+			// draw bottom game exit image
+			g.setFont(font1);
+			String money = myFormatter.format(player.getMoney());
+			g.drawString(money, (int) (995 * scaleX), (int) (1135 * scaleY));
 
-            //drawing player icon
-            Image playerIcon = mangoes[c.players.indexOf(player)];
-            //playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
-            g.drawImage(playerIcon, (int) (1590 * scaleX), (int) (1045 * scaleY), null);
+			//drawing player icon
+			Image playerIcon = mangoes[c.players.indexOf(player)];
+			//playerIcon = playerIcon.getScaledInstance(2*(int) (45 * scaleX), 2*(int) (45 * scaleY), Image.SCALE_DEFAULT);
+			g.drawImage(playerIcon, (int) (1590 * scaleX), (int) (1045 * scaleY), null);
 
-            //showing family
-            if (player.family != 0) {
-                g.setColor(Color.pink);
-                g.fillOval((int) (1490 * scaleX), (int) (1100 * scaleY), 40, 40);
-                for (int i = 1; i < player.family; i++) {
-                    g.setColor(new Color(0, 0, 182, 155));
-                    g.fillOval((int) ((1490 * scaleX) + (i * 60)), (int) (1100 * scaleY), 40, 40);
-                }
-            }
+			//showing family
+			if (player.family != 0) {
+				g.setColor(Color.pink);
+				g.fillOval((int) (1490 * scaleX), (int) (1100 * scaleY), 40, 40);
+				for (int i = 1; i < player.family; i++) {
+					g.setColor(new Color(0, 0, 182, 155));
+					g.fillOval((int) ((1490 * scaleX) + (i * 60)), (int) (1100 * scaleY), 40, 40);
+				}
+			}
 
-            // draw player name on screen
-            g.setColor(Color.BLACK);
-            g.setFont(font2);
-            g.drawString(player.getName(), (int) (1489 * scaleX), (int) (1090 * scaleY));
-            // spinner
-            BufferedImage image = null;
-            try {
-                image = ImageIO.read(new File("graphics/tempSpinner.png"));
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            AffineTransform at = AffineTransform.getTranslateInstance(scaleX * 1362, scaleY * 323);
-            at.scale(scaleX, scaleY);
-            at.rotate(Math.toRadians(rotate), image.getWidth() / 2, image.getHeight() / 2);
-            ((Graphics2D) g).drawImage(image, at, null);
+			// draw player name on screen
+			g.setColor(Color.BLACK);
+			g.setFont(font2);
+			g.drawString(player.getName(), (int) (1470 * scaleX), (int) (1082 * scaleY));
 
-            // adds pointer
-            g.setColor(Color.WHITE);
-            g.fillPolygon(p);
-            try {
-                // Thread.sleep(100);
-            } catch (Exception e) {
-            }
-            repaint();
-        }
+			// spinner
+			BufferedImage image = null;
+			try {
+				image = ImageIO.read(new File("graphics/tempSpinner.png"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			AffineTransform at = AffineTransform.getTranslateInstance(scaleX * 1362, scaleY * 323);
+			at.scale(scaleX, scaleY);
+			at.rotate(Math.toRadians(rotate), image.getWidth() / 2, image.getHeight() / 2);
+			((Graphics2D) g).drawImage(image, at, null);
+
+			// adds pointer
+			g.setColor(Color.WHITE);
+			g.fillPolygon(p);
+			try {
+				// Thread.sleep(100);
+			} catch (Exception e) {
+			}
+			repaint();
+		}
 
     }
 
