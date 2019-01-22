@@ -120,7 +120,7 @@ public class FinalScreen extends JFrame {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g); // required
 			this.setDoubleBuffered(true);
-			Player[] A = (Player[]) p.c.players.toArray();
+			Object[] A = p.c.players.toArray();
 			Arrays.sort(A);
 			g.drawImage(Toolkit.getDefaultToolkit().getImage("graphics/end.png"), 0, 0, null);
 			for (int i = 0; i < A.length; i++) {
