@@ -5,11 +5,7 @@
  * Date: January 9, 2019
  */
 
-import javax.swing.DefaultBoundedRangeModel;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,6 +17,7 @@ public class LoadingScreen extends JFrame {
     static DefaultBoundedRangeModel model;
     private Image test = Toolkit.getDefaultToolkit().getImage("graphics/icon.png");
     private boolean loaded = false;
+    private ImageIcon icon;
 
     /**
      * Constructor
@@ -28,9 +25,12 @@ public class LoadingScreen extends JFrame {
      * @param time the time to load
      */
     LoadingScreen(int time) {
-        setSize(720, 720);
+        this.setSize(720, 720);
         this.setLocation((int) (Game.screenX / 2) - 360, ((int) (Game.screenY / 2) - 360));
         this.setUndecorated(true);
+        icon = new ImageIcon("graphics/icon.png");
+        this.setIconImage(icon.getImage());
+
         model = new DefaultBoundedRangeModel(0, time, 0, time);
         loadingBar = new JProgressBar(model);
         JPanel mainPanel = new MainPanel();

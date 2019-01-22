@@ -65,8 +65,8 @@ public class Rules extends JFrame {
         back.setOpaque(false);
         back.setBorderPainted(false);
         back.setContentAreaFilled(false);
-        back.setSize(120, 120);
         back.setFocusPainted(false);
+        back.setSize(128, 128);
         back.setLocation(40, 532);
 
         this.add(exit);
