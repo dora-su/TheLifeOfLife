@@ -7,14 +7,7 @@
  */
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -102,7 +95,7 @@ public class Game extends JFrame {
 		turn = 0;
 		player = c.map.get(pl);
 		// Set the frame to full screen
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setSize((int) screenX, (int) screenY);
 		this.setUndecorated(true);
 		//setting icon

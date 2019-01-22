@@ -5,18 +5,17 @@
  * Date: January 3, 2019
  */
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class CareerSelection extends JFrame {
 
     private ArrayList<Career> careers;
-
+    private int result;
     /**
      * Constructor
      *
@@ -72,13 +71,61 @@ public class CareerSelection extends JFrame {
 
         ImageIcon pic = careers.get(index).getImage();
         Image scaledImg = pic.getImage();
-        scaledImg = scaledImg.getScaledInstance((int) (114 * Game.scaleX), (int) (184 * Game.scaleY), java.awt.Image.SCALE_SMOOTH);
+        scaledImg = scaledImg.getScaledInstance((int) (114 * Game.scaleX), (int) (184 * Game.scaleY), Image.SCALE_SMOOTH);
 
         Game.myCareer.setIcon(new ImageIcon(scaledImg));
         // set career
         player.setCareer(careers.get(index));
 
-        JOptionPane.showMessageDialog(null, "You got the job " + careers.get(index).getCareerName());
+        //sets ok button for option pane to an image
+        final JButton ok = new JButton(new ImageIcon("graphics/yes.png"));
+
+        ok.setFocusPainted(false);
+        ok.setOpaque(false);
+        ok.setBorderPainted(false);
+        ok.setContentAreaFilled(false);
+
+        final JDialog dialog = new JDialog((Dialog) null, "Career", true);
+
+        final JOptionPane optionPane = new JOptionPane();
+        ok.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dialog.dispose();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ok.setIcon(new ImageIcon("graphics/yes_hover.png"));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ok.setIcon(new ImageIcon("graphics/yes.png"));
+            }
+        });
+
+        Object[] options = {ok};//object array of the joption pane
+
+        //display joption pane
+       dialog.getContentPane().add(new JOptionPane("You got the job " + careers.get(index).getCareerName(), JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_OPTION,null,
+                options,
+                options[0]));
+
+       dialog.setSize(200,100);
+       dialog.setLocationRelativeTo(null);
+       dialog.setVisible(true);
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

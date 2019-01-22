@@ -54,7 +54,7 @@ public class HouseSelection extends JFrame {
 						String[] options = new String[] { "Confirm", "Back" };
 						int confirm = JOptionPane.showOptionDialog(null,
 								"Are you sure you want to purchase " + p.getName() + " for $" + p.getValue(),
-								"CONFIRM YOUR PURCHASE", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+								"Confirm Your Purchase", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
 								options, options[0]);
 
 						if (confirm != 0) {
