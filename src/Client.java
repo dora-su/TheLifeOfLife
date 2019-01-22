@@ -336,6 +336,7 @@ public class Client extends JFrame {
             // duplicate user
             if (S.equals("Username exists!")) {
                 JOptionPane.showMessageDialog(null, "Username already exists");
+                l.dispose();
                 window1.dispose();
                 login();
                 running = false;
@@ -468,57 +469,65 @@ public class Client extends JFrame {
                                 g = new Game(this, map.keySet(), userName);
                             }
                         }
-                        if (msg.equals("")) {
-                            msgArea.append(user + " disconnected.\n");
-                            l.removeUser(user);
-                            System.out.println("removed");
-                            // update status
-                        } else if (msg.startsWith("/status")) {
-                            String money = msg.split(" ")[1];
-                            String salary = msg.split(" ")[2];
-
-                            // new user joining
-                            if (!map.containsKey(user)) {
-                                label = new JLabel(user);
-                                Player p = new Player(user);
-                                p.setMoney(Integer.parseInt(money));
-                                //                                p.setSalary(Integer.parseInt(salary));
-                                players.add(p);
-                                map.put(user, p);
-                                panel = new JPanel();
-                                panel.add(label);
-                                button = new JButton("Details");
-                                button.addActionListener(new InformationActionListener(user));
-                                panel.add(button);
-                                listData.add(panel);
-                                status.add(panel);
-                                status.revalidate();
-                                status.repaint();
-                                msgArea.append(user + " joined the chat.\n");
-                            } else {
-                                // update status and not new
-                                Player p = map.get(user);
-                                p.setMoney(Integer.parseInt(money));
-                                if (!salary.equals("0")) {
-                                    p.getCareer().setSalary((int) (p.getCareer().getSalary() * 1.05));
-                                }
-                            }
-                        } else if (msg.startsWith("/spin")) {
-                            Game.spin(Double.parseDouble(msg.split(" ")[1]));
-                        } else if (msg.startsWith("/removep")) {
-                            map.get(user).addProperty(g.properties.get(Integer.parseInt(msg.split(" ")[1])));
-                            g.soldProperties[Integer.parseInt(msg.split(" ")[1])] = true;
-                        } else if (msg.startsWith("/removecc")) {
-                            map.get(user).setCareer(g.collegeCareers.get(Integer.parseInt(msg.split(" ")[1])));
-                            g.collegeCareers.remove(Integer.parseInt(msg.split(" ")[1]));
-                        } else if (msg.startsWith("/removec")) {
-                            map.get(user).setCareer(g.normalCareers.get(Integer.parseInt(msg.split(" ")[1])));
-                            g.normalCareers.remove(Integer.parseInt(msg.split(" ")[1]));
-                        } else {
-                            // regular user message
-                            msgArea.append(user + ": " + msg + "\n");
+                        if (!msg.equals("/start")) {
+	                        if (msg.equals("")) {
+	                            msgArea.append(user + " disconnected.\n");
+	                            l.removeUser(user);
+	                            System.out.println("removed");
+	                            // update status
+	                        } else if (msg.startsWith("/status")) {
+	                            String money = msg.split(" ")[1];
+	                            String salary = msg.split(" ")[2];
+	
+	                            // new user joining
+	                            if (!map.containsKey(user)) {
+	                            	System.out.println("ADDING " + user);
+	                                label = new JLabel(user);
+	                                Player p = new Player(user);
+	                                p.setMoney(Integer.parseInt(money));
+	                                //                                p.setSalary(Integer.parseInt(salary));
+	                                players.add(p);
+	                                map.put(user, p);
+	                                panel = new JPanel();
+	                                panel.add(label);
+	                                button = new JButton("Details");
+	                                button.addActionListener(new InformationActionListener(user));
+	                                panel.add(button);
+	                                listData.add(panel);
+	                                status.add(panel);
+	                                status.revalidate();
+	                                status.repaint();
+	                                msgArea.append(user + " joined the chat.\n");
+	                            } else {
+	                                // update status and not new
+	                                Player p = map.get(user);
+	                                p.setMoney(Integer.parseInt(money));
+	                                if (!salary.equals("0")) {
+	                                    p.getCareer().setSalary((int) (p.getCareer().getSalary() * 1.05));
+	                                }
+	                            }
+	                        } else if (msg.startsWith("/spin")) {
+	                        	// spinning again
+	                        	if (!players.get(g.turn % players.size()).equals(map.get(user))) {
+	                        		g.turn--;
+	                        	}
+	                            Game.spin(Double.parseDouble(msg.split(" ")[1]),true);
+	                        } else if (msg.startsWith("/removep")) {
+	                            map.get(user).addProperty(g.properties.get(Integer.parseInt(msg.split(" ")[1])));
+	                            g.soldProperties[Integer.parseInt(msg.split(" ")[1])] = true;
+	                        } else if (msg.startsWith("/removecc")) {
+	                            map.get(user).setCareer(g.collegeCareers.get(Integer.parseInt(msg.split(" ")[1])));
+	                            g.collegeCareers.remove(Integer.parseInt(msg.split(" ")[1]));
+	                        } else if (msg.startsWith("/removec")) {
+	                            map.get(user).setCareer(g.normalCareers.get(Integer.parseInt(msg.split(" ")[1])));
+	                            g.normalCareers.remove(Integer.parseInt(msg.split(" ")[1]));
+	                        } else if (msg.startsWith("/tile")) {
+	                        	map.get(user).newTile = Integer.parseInt(msg.split(" ")[1]);
+	                        } else {
+	                            // regular user message
+	                            msgArea.append(user + ": " + msg + "\n");
+	                        }
                         }
-
                     }
                 }
 

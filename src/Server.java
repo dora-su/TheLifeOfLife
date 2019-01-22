@@ -33,6 +33,7 @@ class Server extends JFrame {
     String admin;
     static Boolean running = true; // controls if the server is accepting clients
     public static ArrayList<Client> clientList = new ArrayList<Client>();
+    static ArrayList<Thread> threadList = new ArrayList<Thread>();
     static ArrayList<InetAddress> bannedIps = new ArrayList<InetAddress>();
     static HashMap<String, Client> map = new HashMap<String, Client>();
     static int ready;
@@ -215,6 +216,7 @@ class Server extends JFrame {
                 Thread t = new Thread(new ConnectionHandler(client)); // create a thread for the new client and pass in
                 // the socket
                 t.start(); // start the new thread
+                threadList.add(t);
             }
         } catch (Exception e) {
             // System.out.println("Error accepting connection");
@@ -380,12 +382,20 @@ class Server extends JFrame {
                                 }
                             } else if (msg.equals("/unready")) {
                                 ready--;
-                            } else if (msg.startsWith("/spin") || msg.startsWith("/remove")) {
+                            } else if (msg.startsWith("/spin") || msg.startsWith("/remove") || msg.startsWith("/tile")) {
                                 for (Client c : clientList) {
                                     c.output.println(username);
                                     c.output.println(msg);
                                     c.output.flush();
                                 }
+                            } else if (msg.equals("/prio")) {
+                            	for (Client c : clientList) {
+                            		if (c.user.equals(username)) {
+                            			threadList.get(clientList.indexOf(c)).setPriority(10);
+                            		} else {
+                            			threadList.get(clientList.indexOf(c)).setPriority(1);
+                            		}
+                            	}
                             }
                         } else {
                             //if not special command send message to everyone

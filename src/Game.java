@@ -341,8 +341,8 @@ class Game extends JFrame {
         map = map.getScaledInstance((int) screenX, (int) screenY, Image.SCALE_DEFAULT);
 
         //getting picture of player and scaling it
-        mangoes = new Image[c.players.size()];
-        for (int i = 0; i < c.players.size(); i++) {
+        mangoes = new Image[6];
+        for (int i = 0; i < 6; i++) {
             mangoes[i] = Toolkit.getDefaultToolkit().getImage("graphics/mango" + (i + 1) + ".png");
             mangoes[i] = mangoes[i].getScaledInstance((int) (45 * scaleX), (int) (45 * scaleY), Image.SCALE_DEFAULT);
         }
@@ -722,11 +722,12 @@ class Game extends JFrame {
     }
 
     static double vel, accel, distance;
-
-    static void spin(double dist) {
+    static boolean move;
+    static void spin(double dist, boolean b) {
         distance = dist;
         vel = dist / 80.0;
         accel = -dist / 10000.0;
+        move = b;
         System.out.println("SPIN");
     }
 
@@ -782,6 +783,9 @@ class Game extends JFrame {
             System.out.println("spinning " + turn + " " + c.players.size());
             System.out.println(c.players.get(turn % c.players.size()).equals(player));
             if (c.players.get(turn % c.players.size()).equals(player)) {
+            	c.output.println(player.getName());
+            	c.output.println("/prio");
+            	c.output.flush();
                 c.output.println(player.getName());
                 c.output.println("/spin " + (rand.nextInt(360) + 5000));
                 c.output.flush();

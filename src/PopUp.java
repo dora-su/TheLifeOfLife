@@ -23,6 +23,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class PopUp {
 
@@ -57,9 +58,9 @@ public class PopUp {
 		JPanel panel = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
-
+				
 				g.drawImage(popWindow, 0, 0, null);
-
+				
 				repaint();
 			}
 		};
@@ -96,7 +97,10 @@ public class PopUp {
 					// go to certain index
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
-					
+					System.out.println(player1.getName() + " set to " + ((ChoiceTile)tile).getIndex());
+					player1.c.output.println(player1.getName());
+					player1.c.output.println("/tile " + ((ChoiceTile) tile).getIndex());
+					player1.c.output.flush();
 					player1.setTile(((ChoiceTile) tile).getIndex());
 
 				}
@@ -117,6 +121,10 @@ public class PopUp {
 						});
 						t.start();
 					}
+					System.out.println(player1.getName() + " set to " + (player1.getTile() + 1));
+					player1.c.output.println(player1.getName());
+					player1.c.output.println("/tile " + (player1.getTile() + 1));
+					player1.c.output.flush();
 					player1.setTile(player1.getTile() + 1);
 					Game.gameFrame.setEnabled(true);
 					popUp.dispose();
@@ -136,7 +144,9 @@ public class PopUp {
 				spin.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Game.spin.doClick();
+						player1.c.output.println(player1.getName());
+		                player1.c.output.println("/spin " + (new Random().nextInt(360) + 5000));
+		                player1.c.output.flush();
 						Game.gameFrame.setEnabled(true);
 						popUp.dispose();
 

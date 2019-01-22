@@ -22,13 +22,13 @@ class Player implements Comparable<Player>{
 	private boolean college;
 	private int add;
 	private int count;
-	int newTile;s
+	int newTile;
 	int family, startup;
 	Client c;
 
 	Player(String name) {
 		this.name = name;
-		tile = 115;
+		tile = 0;
 		this.player = this;
 		add = 0;
 		count = 0;
@@ -254,7 +254,12 @@ class Player implements Comparable<Player>{
 					//System.out.println("Speical Pop pup" + specialPopup);
 					//create a pop up with instructions if no special pop ups have been made already
 					if (count == 0 && !specialPopup) {
-						new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
+						if (popUp) {
+							new PopUp(path.get(player.getTile()).getMessage(), path.get(player.getTile()), player);
+						} else {
+							System.out.println(name + " set to " + newTile);
+							player.setTile(newTile);
+						}
 					}
 
 				}
