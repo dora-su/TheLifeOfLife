@@ -47,16 +47,13 @@ public class MainMenu extends JFrame {
 
         mainMenu = Toolkit.getDefaultToolkit().getImage("graphics/mainmenu.png");
 
+        //JPanel for the main menu
         JPanel mainPanel = new MainPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setSize(this.getSize());
         this.setContentPane(mainPanel);
 
-        //		JLabel title = new JLabel("Life of Life");
-        //		title.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
-        //		title.setHorizontalAlignment(JLabel.CENTER);
-        //		title.setFont(new Font("Arial", Font.BOLD, 50));
-
+        //JPanel for the options given
         JPanel options = new JPanel();
         options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
         options.setOpaque(false);
@@ -91,6 +88,7 @@ public class MainMenu extends JFrame {
 
         });
 
+        //client join button
         JButton client = new JButton(new ImageIcon("graphics/join.png"));
         client.setContentAreaFilled(false);
         client.setFocusPainted(false);
@@ -120,6 +118,7 @@ public class MainMenu extends JFrame {
 
         });
 
+        //button to access rules
         JButton rules = new JButton(new ImageIcon("graphics/rules.png"));
         rules.addMouseListener(new MouseListener() {
             @Override
@@ -146,6 +145,7 @@ public class MainMenu extends JFrame {
             }
         });
 
+        //adding action listers to buttons
         host.addActionListener(new HostButtonListener());
         client.addActionListener(new ClientButtonListener());
         rules.addActionListener(new RulesListener());
@@ -173,24 +173,8 @@ public class MainMenu extends JFrame {
         @Override
         public void actionPerformed(ActionEvent arg0) {
 
-            //Thread t1 = new Thread(new Runnable() {
-            //public void run() {
-            //new Server().go();
             new Client();
             new Server();
-
-
-            //}
-            //});
-            //			Thread t2 = new Thread(new Runnable() {
-            //				public void run() {
-            //					//new Client().login();
-            //				}
-            //			});
-            //			//t1.setPriority(5);
-            //			t2.setPriority(10);
-            //			//t1.start();
-            //			t2.start();
             dispose();
 
         }
@@ -203,6 +187,7 @@ public class MainMenu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent arg0) {
+        	//start up client
             new Thread(new Runnable() {
                 public void run() {
                     new Client();
@@ -218,6 +203,7 @@ public class MainMenu extends JFrame {
     private class RulesListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
+        	//open rules page
             Rules rules = new Rules();
         }
     }
@@ -229,6 +215,7 @@ public class MainMenu extends JFrame {
         public void paintComponent(Graphics g) {
             super.paintComponent(g); // required
             this.setDoubleBuffered(true);
+            //draw image background
             g.drawImage(mainMenu, 0, 0, null);
             repaint();
 
