@@ -36,7 +36,7 @@ class Player implements Comparable<Player> {
 	 */
 	Player(String name) {
 		this.name = name;
-		tile = 73;
+		tile = 0;
 		this.player = this;
 		add = 0;
 		count = 0;
@@ -168,40 +168,45 @@ class Player implements Comparable<Player> {
 	 * @param money the amount of money to be added
 	 */
 	public void addMoney(int money) {
+		System.out.println("add");
 		add += money;
 		if (c != null) {
 			c.output.println(c.userName);
 			c.output.println("/status " + (player.money + add) + " 0");
 			c.output.flush();
 		}
-		add /= 2;
+		//add /= 2;
+		
 		//add money by different increments based on the amount that needs to be added or subtracted
-		new Timer(1, new ActionListener() {
+
+		 Timer t = new Timer(1, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int decrease = 0;
-				if (Math.abs(add) < 250) {
-					decrease = 1;
-				} else if (Math.abs(add) < 500) {
+				if (Math.abs(add) <= 250) {
 					decrease = 5;
-				} else if (Math.abs(add) < 1000) {
+				} else if (Math.abs(add) <= 500) {
 					decrease = 10;
-				} else if (Math.abs(add) < 10000) {
+				} else if (Math.abs(add) <= 1000) {
 					decrease = 100;
-				} else {
+				} else if (Math.abs(add) <= 10000) {
+					decrease = 1000;
+				} else if (Math.abs(add) <= 100000){
 					decrease = 10000;
+				} else {
+					decrease = 100000;
 				}
+				
 				if (add > 0) {
 					add -= decrease;
-					player.setMoney(player.money + decrease);
+					player.money += decrease;
 
 				} else if (add < 0) {
 					add += decrease;
-					player.setMoney(player.getMoney() - decrease);
-
+					player.money -= decrease;
 				}
-
 			}
-		}).start();
+		});
+		t.start();		
 	}
 
 	/**
@@ -353,6 +358,9 @@ class Player implements Comparable<Player> {
 					//if the tile the player lands on is a pay day tile, increase their salary
 					if (count == 0 && (path.get(player.tile) instanceof PayDayTile)) {
 						career.setSalary((int) (career.getSalary() * 1.05));
+						c.output.println(name);
+						c.output.println("/status " + money + " 1");
+						c.output.flush();
 					}
 
 					if (count == 0 && (path.get(player.tile) instanceof MoneyTile)) {

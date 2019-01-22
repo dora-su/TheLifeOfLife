@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class HouseSelection extends JFrame {
+	private Image soldImg;
 	/**
 	 * Constructor
 	 *
@@ -35,14 +36,19 @@ public class HouseSelection extends JFrame {
 		JPanel panel = new JPanel();
 
 		this.add(panel);
-
+		
 		panel.setLayout(new GridLayout(2, 4));
 
 		ArrayList<JButton> buttons = new ArrayList<JButton>();
 
 		for (Property p : Game.properties) {
 			// Property p = Game.properties.get(i);
+			
 			JButton button = new JButton(p.getImage());
+			soldImg = Toolkit.getDefaultToolkit()
+					.getImage("graphics/homes/" + p.getName().toLowerCase() + "SOLD.png");
+			soldImg = soldImg.getScaledInstance((int) (250 * Game.scaleX), (int) (400 * Game.scaleY),
+					java.awt.Image.SCALE_SMOOTH);
 			if (!Game.soldProperties[Game.properties.indexOf(p)]) {
 				button.addActionListener(new ActionListener() {
 
@@ -76,17 +82,15 @@ public class HouseSelection extends JFrame {
 						player.c.output.println(player.c.userName);
 						player.c.output.println("/removep " + Game.properties.indexOf(p));
 						player.c.output.flush();
-						Image soldImg = Toolkit.getDefaultToolkit()
-								.getImage("graphics/homes/" + p.getName().toLowerCase() + "SOLD.png");
-						soldImg = soldImg.getScaledInstance((int) (250 * Game.scaleX), (int) (400 * Game.scaleY),
-								java.awt.Image.SCALE_SMOOTH);
-
+						
 						button.setIcon(new ImageIcon(soldImg));
 
 						dispose();
 					}
 
 				});
+			} else {
+				button.setIcon(new ImageIcon(soldImg));
 			}
 			buttons.add(button);
 			panel.add(button);

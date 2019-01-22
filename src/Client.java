@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Client extends JFrame {
-	//declaring variables
-	//declaring variables
+	// declaring variables
+	// declaring variables
 	private JTextField typeField;
 	private JTextArea msgArea;
 	private Socket mySocket; // socket for connection
@@ -56,38 +56,38 @@ public class Client extends JFrame {
 
 	private ImageIcon icon;
 	private Font font;
+
 	/**
-	 * Main
-	 * Runs the client interface
+	 * Main Runs the client interface
 	 *
 	 * @param args parameters from command line
 	 */
-	//	public static void main(String[] args) {
-	//		new ChatClient().login();
-	//	}
+	// public static void main(String[] args) {
+	// new ChatClient().login();
+	// }
 
 	Client() {
 		frame = this;
 
-        //set icon image
-        icon = new ImageIcon("graphics/icon.png");
-        this.setIconImage(icon.getImage());
+		// set icon image
+		icon = new ImageIcon("graphics/icon.png");
+		this.setIconImage(icon.getImage());
 
 		JPanel panel = new Panel();
 
-		//get the font
-        try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf"));
-        } catch (FontFormatException e) {
-            System.out.println("Font format is incorrect.");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Font file not found.");
-            e.printStackTrace();
-        }
+		// get the font
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf"));
+		} catch (FontFormatException e) {
+			System.out.println("Font format is incorrect.");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Font file not found.");
+			e.printStackTrace();
+		}
 
-        //set the font size
-        font = font.deriveFont(Font.PLAIN,50);
+		// set the font size
+		font = font.deriveFont(Font.PLAIN, 50);
 
 		JTextArea userName = new JTextArea("");
 		userName.getDocument().putProperty("filterNewlines", Boolean.TRUE);
@@ -133,8 +133,30 @@ public class Client extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Thread t1 = new Thread(new Runnable() {
 					public void run() {
+
+						if (!userName.getText().matches("[a-zA-Z0-9]+") || userName.getText() == null) {
+							JOptionPane.showMessageDialog(null, "Please enter a valid username");
+							return;
+						}
+						String ipA = "";
+						if (ip.getText() == "localhost") {
+							ipA = "127.0.0.1";
+						} else {
+							ipA = ip.getText();
+						}
+
+						if (!ipA.matches("[0-9.]+")) {
+							JOptionPane.showMessageDialog(null, "IP must only contain digits and periods!");
+							return;
+						}
+
+						if (!port.getText().matches("[0-9]+")) {
+							JOptionPane.showMessageDialog(null, "Port must be a number!");
+							return;
+						}
+
 						frame.dispose();
-						go(userName.getText(), ip.getText(), Integer.parseInt(port.getText()));
+						go(userName.getText(), ipA, Integer.parseInt(port.getText()));
 
 					}
 				});
@@ -184,70 +206,14 @@ public class Client extends JFrame {
 	}
 
 	/**
-	 * login
-	 * Allows the user to choose userName, server IP and the port number
-	 */
-	public void login() {
-		//getting user userName
-		//		String userName = JOptionPane.showInputDialog("Please enter your username (Without spaces)");
-		//		if (userName == null) {
-		//			running = false;
-		//			return;
-		//		}
-		//		userName = userName.trim();
-		//
-		//		//making sure the userName entered is valid
-		//		if (!userName.matches("[a-zA-Z0-9]+")) {
-		//			JOptionPane.showMessageDialog(null, "Username must only contain alphanumeric characters!");
-		//			login();
-		//			return;
-		//		}
-		//
-		//		//getting the Ip address that the client want to connect to
-		//		String ipAddress = JOptionPane.showInputDialog("Please enter your Ip Address");
-		//		if (ipAddress == null) {
-		//			running = false;
-		//			return;
-		//		}
-		//
-		//		//if the Ip address is localhost convert it to 127.0.0.1 which is the same thing
-		//		if (ipAddress.equals("localhost")) {
-		//			ipAddress = "127.0.0.1";
-		//		}
-		//
-		//		//making sure the ip address entered is valid
-		//		if (!ipAddress.matches("[0-9.]+")) {
-		//			JOptionPane.showMessageDialog(null, "IP must only contain digits and periods!");
-		//			login();
-		//			return;
-		//		}
-		//
-		//		//getting the port num that the user would like to connect to
-		//		String portNum = JOptionPane.showInputDialog("Please enter a port number");
-		//		if (portNum == null) {
-		//			running = false;
-		//			return;
-		//		}
-		//
-		//		//making sure the port number entered is valid
-		//		if (!portNum.matches("[0-9]+")) {
-		//			JOptionPane.showMessageDialog(null, "Port must be a number!");
-		//			login();
-		//			return;
-		//		}
-
-	}
-
-	/**
-	 * go
-	 * Runs the chat client UI
+	 * go Runs the chat client UI
 	 *
 	 * @param username1, the userName of the user
-	 * @param ip,        the server Ip address the the client wants to connect to
-	 * @param port,      the port that client wants to make a connection on
+	 * @param ip, the server Ip address the the client wants to connect to
+	 * @param port, the port that client wants to make a connection on
 	 */
 	public void go(String username1, String ip, int port) {
-		//Creating the chat client UI
+		// Creating the chat client UI
 		blockedUsers = new ArrayList<String>();
 		map = new HashMap<String, Player>();
 		listData = new ArrayList<JPanel>();
@@ -262,35 +228,35 @@ public class Client extends JFrame {
 		userName = username1;
 		typeField = new JTextField(10);
 
-		//creating message area and setting it as not editable
+		// creating message area and setting it as not editable
 		msgArea = new JTextArea();
 		msgArea.setEditable(false);
 
-		//adding scroll to the message area
+		// adding scroll to the message area
 		JScrollPane scroll = new JScrollPane(msgArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		typeField.addActionListener(new EnterListener());
 
-		//adding all panel to the main screen
+		// adding all panel to the main screen
 		southPanel.add(typeField);
 		southPanel.add(sendButton);
 		southPanel.add(errorLabel);
 		southPanel.add(clearButton);
 		status = new JPanel();
 		status.setLayout(new BoxLayout(status, BoxLayout.Y_AXIS));
-		//adding and setting size of scroll wheel
+		// adding and setting size of scroll wheel
 		JScrollPane scrollList = new JScrollPane(status, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollList.setPreferredSize(new Dimension(100, 309));
 		scrollList.setMaximumSize(scrollList.getPreferredSize());
 		scrollList.setMinimumSize(scrollList.getMinimumSize());
 
-		//set window to be visible
+		// set window to be visible
 		window1.add(BorderLayout.WEST, scrollList);
 		window1.add(BorderLayout.CENTER, scroll);
 		window1.add(BorderLayout.SOUTH, southPanel);
 		window1.setSize(600, 400);
-		//		window1.setVisible(true);
+		// window1.setVisible(true);
 		// call a method that connects to the server
 		l = new Lobby(this);
 		connect(ip, port);
@@ -302,8 +268,7 @@ public class Client extends JFrame {
 	}
 
 	/**
-	 * connect
-	 * Attempts to connect to the server and creates the socket and streams
+	 * connect Attempts to connect to the server and creates the socket and streams
 	 *
 	 * @param ip   the ip address
 	 * @param port the port humber
@@ -313,27 +278,28 @@ public class Client extends JFrame {
 		System.out.println("Attempting to make a connection..");
 
 		try {
-			//attempt socket connection, wait until a connection is made
+			// attempt socket connection, wait until a connection is made
 			mySocket = new Socket(ip, port);
 
-			//steam for network input
+			// steam for network input
 			InputStreamReader stream1 = new InputStreamReader(mySocket.getInputStream());
 			input = new BufferedReader(stream1);
-			//assign printwriter to network stream
+			// assign printwriter to network stream
 			output = new PrintWriter(mySocket.getOutputStream());
 
-			//send new userName to server to allow all clients to see new user joining the chat
+			// send new userName to server to allow all clients to see new user joining the
+			// chat
 			msgArea.append(userName + " has joined the chat.\n");
 			output.println(userName);
 			output.flush();
 
-			//setting status of user to active
+			// setting status of user to active
 			panel = new JPanel();
 			label = new JLabel(userName);
 			panel.add(label);
 			p = new Player(userName);
 			p.setClient(this);
-			//players.add(p);
+			// players.add(p);
 			map.put(userName, p);
 			button = new JButton("Details");
 			button.addActionListener(new InformationActionListener(userName));
@@ -349,41 +315,39 @@ public class Client extends JFrame {
 				JOptionPane.showMessageDialog(null, "Username already exists");
 				l.dispose();
 				window1.dispose();
-				login();
 				running = false;
 				return null;
 			}
 			admin = S.split(" ")[0];
 			idx = Integer.parseInt(S.split(" ")[1]);
 			// updates status of everyone else on the server
-			//            while (true) {
+			// while (true) {
 			//
-			//                // get username
-			//                String userName = input.readLine();
+			// // get username
+			// String userName = input.readLine();
 			//
-			//                if (userName == null || userName.equals("")) {
-			//                    break;
-			//                }
-			//                //get the status that the user would like to change to
-			//                String money = input.readLine();
+			// if (userName == null || userName.equals("")) {
+			// break;
+			// }
+			// //get the status that the user would like to change to
+			// String money = input.readLine();
 			//
-			//                //Changed user status based on the user's command
-			//                // checks for valid status
+			// //Changed user status based on the user's command
+			// // checks for valid status
 			//
-			//                //updating the user's new status
-			//                label = new JLabel(userName);
-			////                listData.add(label);
-			//                status.add(label);
-			//                status.revalidate();
-			//                status.repaint();
-			////                map.put(userName, money);
-			//            }
+			// //updating the user's new status
+			// label = new JLabel(userName);
+			//// listData.add(label);
+			// status.add(label);
+			// status.revalidate();
+			// status.repaint();
+			//// map.put(userName, money);
+			// }
 		} catch (IOException e) { // connection error occurred
-			//Show that connection to server failed
+			// Show that connection to server failed
 			System.out.println("Connection to Server Failed");
 			window1.dispose();
 			JOptionPane.showMessageDialog(null, "Connection to Server Failed");
-			login();
 		}
 
 		System.out.println("Connection made.");
@@ -391,8 +355,8 @@ public class Client extends JFrame {
 	}
 
 	/**
-	 * readMessagesFromServer
-	 * This method waits for server input and then displays it on the UI
+	 * readMessagesFromServer This method waits for server input and then displays
+	 * it on the UI
 	 */
 	private void readMessagesFromServer() {
 
@@ -411,7 +375,7 @@ public class Client extends JFrame {
 							|| user.equals("admin")) {
 
 						// admin command
-						//                        System.out.println(msg);
+						// System.out.println(msg);
 						if (user.equals(admin) && msg.startsWith("/")) {
 
 							// user is banned
@@ -451,7 +415,7 @@ public class Client extends JFrame {
 								JOptionPane.showMessageDialog(null, "You have been Kicked");
 								running = false;
 								System.exit(-1);
-								//login();
+								// login();
 
 								// server stop
 							} else if (msg.startsWith("/stop")) {
@@ -482,7 +446,7 @@ public class Client extends JFrame {
 							if (msg.equals("")) {
 								msgArea.append(user + " disconnected.\n");
 								l.removeUser(user);
-								
+
 								// update status
 							} else if (msg.startsWith("/status")) {
 								String money = msg.split(" ")[1];
@@ -490,11 +454,11 @@ public class Client extends JFrame {
 
 								// new user joining
 								if (!map.containsKey(user)) {
-									
+
 									label = new JLabel(user);
 									Player p = new Player(user);
 									p.setMoney(Integer.parseInt(money));
-									//                                p.setSalary(Integer.parseInt(salary));
+									// p.setSalary(Integer.parseInt(salary));
 									players.add(p);
 									map.put(user, p);
 									panel = new JPanel();
@@ -509,10 +473,13 @@ public class Client extends JFrame {
 									msgArea.append(user + " joined the chat.\n");
 								} else {
 									// update status and not new
-									Player p = map.get(user);
-									p.setMoney(Integer.parseInt(money));
-									if (!salary.equals("0")) {
-										p.getCareer().setSalary((int) (p.getCareer().getSalary() * 1.05));
+									Player pl = map.get(user);
+									if (!pl.equals(this.p)) {
+										pl.setMoney(Integer.parseInt(money));
+
+										if (!salary.equals("0")) {
+											pl.getCareer().setSalary((int) (p.getCareer().getSalary() * 1.05));
+										}
 									}
 								}
 							} else if (msg.startsWith("/spin")) {
@@ -520,7 +487,7 @@ public class Client extends JFrame {
 								if (!players.get(g.turn % players.size()).equals(map.get(user))) {
 									g.turn--;
 								}
-								
+
 								Game.spin(Double.parseDouble(msg.split(" ")[1]), true);
 							} else if (msg.startsWith("/removep")) {
 								map.get(user).addProperty(g.properties.get(Integer.parseInt(msg.split(" ")[1])));
@@ -655,12 +622,12 @@ public class Client extends JFrame {
 		public void actionPerformed(ActionEvent event) {
 
 			// tells everyone user has disconnected
-			//            output.println(userName);
-			//            output.println();
-			//            output.flush();
-			//            running = false;
+			// output.println(userName);
+			// output.println();
+			// output.flush();
+			// running = false;
 			window1.dispose();
-			//login();
+			// login();
 		}
 	}
 

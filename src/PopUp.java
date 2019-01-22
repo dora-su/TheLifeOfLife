@@ -121,7 +121,7 @@ public class PopUp {
 						Game.myCareer.setIcon(new ImageIcon(pic));
 					}
 					if (player1.getTile() == 1 || player1.getTile() == 75) {
-						player1.addMoney(50000);
+						player1.addMoney(-300000);
 					}
 					
 					// go to certain index

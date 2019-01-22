@@ -97,6 +97,11 @@ class Server extends JFrame {
                 }
                 Thread t1 = new Thread(new Runnable() {
                     public void run() {
+                       
+                        if (!port.getText().matches("[0-9]+")) {
+							JOptionPane.showMessageDialog(null, "Port must be a number!");
+							return;
+						}
                         frame.dispose();
                         go(port.getText());
 
