@@ -192,11 +192,13 @@ public class Client extends JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
+            	//setting hover image
                 start.setIcon(new ImageIcon("graphics/join_server_hover.png"));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
+            	//setting hover image
                 start.setIcon(new ImageIcon("graphics/join_server.png"));
             }
 
@@ -736,6 +738,7 @@ public class Client extends JFrame {
             // jlabels with information
             JFrame frame = new JFrame();
             frame.setSize(300, 500);
+            //setting labels for player info
             JLabel name = new JLabel("Name: " + p.getName());
             JLabel family = new JLabel("Family Size: " + p.family);
             JLabel money = new JLabel("Money: " + p.getMoney());
@@ -748,6 +751,7 @@ public class Client extends JFrame {
                     frame.dispose();
                 }
             });
+            //adding details jlabel for player information
             JPanel panel = new JPanel();
             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
             // add jlabels to panel
@@ -765,10 +769,12 @@ public class Client extends JFrame {
 
 }
 
+//inner class
 class Panel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // required
         this.setDoubleBuffered(true);
+        //draw client menu background
         g.drawImage(Toolkit.getDefaultToolkit().getImage("graphics/client_menu.png"), 0, 0, null);
         repaint();
 

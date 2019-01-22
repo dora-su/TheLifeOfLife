@@ -48,7 +48,7 @@ public class Game extends JFrame {
     private static Image careerPlaceHolder, housePlaceHolder;
     private Image spinPic, hoverSpinPic;
     private Image chatPic, hoverChatPic;
-    static Image startUpPic;
+    private static Image startUpPic;
     private ImageIcon icon;
     int turn;
 
@@ -72,6 +72,8 @@ public class Game extends JFrame {
     private JFrame careerFrame, houseFrame;
     private Game g;
     private Polygon p;
+    private static double vel, accel, distance;
+    static boolean move;
 
     static double screenX = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     static double screenY = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -747,9 +749,7 @@ public class Game extends JFrame {
 
     }
 
-    static double vel, accel, distance;
-    static boolean move;
-
+    
     /**
      * Spins the wheel
      *
@@ -806,7 +806,6 @@ public class Game extends JFrame {
                     }
                     finished = true;
                     running = false;
-                    spinText = false;
                 }
                 // delay vel each time
                 // so the spinner slows down
