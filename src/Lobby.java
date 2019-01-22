@@ -75,6 +75,7 @@ public class Lobby extends JFrame {
         mainPanel.setSize(this.getSize());
         this.setContentPane(mainPanel);
 
+        //option panel
         JPanel options = new JPanel();
         options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
         options.setOpaque(false);
@@ -82,6 +83,7 @@ public class Lobby extends JFrame {
         options.setSize(this.size());
         options.setLocation(450, 200);
 
+        //imready button
         JButton imready = new JButton(new ImageIcon("graphics/ready.png"));
         imready.setContentAreaFilled(false);
         imready.setFocusPainted(false);
@@ -91,8 +93,11 @@ public class Lobby extends JFrame {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 if (ready) {
+                	//hover effect
                     imready.setIcon(new ImageIcon("graphics/ready_hover.png"));
                 } else {
+                	//hover effect
+
                     imready.setIcon(new ImageIcon("graphics/ready.png"));
                 }
             }
@@ -100,8 +105,10 @@ public class Lobby extends JFrame {
             @Override
             public void mouseEntered(MouseEvent arg0) {
                 if (!ready) {
+                	//hover effect
                     imready.setIcon(new ImageIcon("graphics/ready_hover.png"));
                 } else {
+                	//hover effect
                     imready.setIcon(new ImageIcon("graphics/ready.png"));
                 }
             }
@@ -109,8 +116,10 @@ public class Lobby extends JFrame {
             @Override
             public void mouseExited(MouseEvent arg0) {
                 if (ready) {
-                    imready.setIcon(new ImageIcon("graphics/ready_hover.png"));
+                	//hover effect
+                   imready.setIcon(new ImageIcon("graphics/ready_hover.png"));
                 } else {
+                	//hover effect
                     imready.setIcon(new ImageIcon("graphics/ready.png"));
                 }
             }
@@ -125,10 +134,8 @@ public class Lobby extends JFrame {
 
         });
 
+        //ading buttons and JLabels to the frame
         imready.addActionListener(new ReadyButtonListener());
-//        for (int i = 0; i < 6; i++) {
-//            players.add(playerList[i]);
-//        }
         options.add(Box.createRigidArea(new Dimension(0, 170)));
         options.add(imready);
 
@@ -208,10 +215,8 @@ public class Lobby extends JFrame {
                 font = Font.createFont(Font.TRUETYPE_FONT, new File("graphics/fonts/josefin.ttf"));
             } catch (FontFormatException e) {
                 System.out.println("Font format is incorrect.");
-                e.printStackTrace();
             } catch (IOException e) {
                 System.out.println("Font file not found.");
-                e.printStackTrace();
             }
 
             //set the font size

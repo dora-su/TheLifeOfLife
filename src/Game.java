@@ -48,7 +48,7 @@ public class Game extends JFrame {
     private static Image careerPlaceHolder, housePlaceHolder;
     private Image spinPic, hoverSpinPic;
     private Image chatPic, hoverChatPic;
-    static Image startUpPic;
+    private static Image startUpPic;
     private ImageIcon icon;
     int turn;
 
@@ -61,6 +61,7 @@ public class Game extends JFrame {
 
     //variables for spinner
     private static boolean finished = false;
+    private boolean spinText;
     private static int rotate;
     private static Random rand = new Random();
     private static Client c;
@@ -72,6 +73,8 @@ public class Game extends JFrame {
     private JFrame careerFrame, houseFrame;
     private Game g;
     private Polygon p;
+    private static double vel, accel, distance;
+    static boolean move;
 
     static double screenX = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     static double screenY = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -747,9 +750,7 @@ public class Game extends JFrame {
 
     }
 
-    static double vel, accel, distance;
-    static boolean move;
-
+    
     /**
      * Spins the wheel
      *
