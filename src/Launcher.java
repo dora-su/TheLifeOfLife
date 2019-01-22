@@ -17,6 +17,7 @@ import java.io.IOException;
 public class Launcher {
     /**
      * Main method
+     *
      * @param args command line arguments
      */
     public static void main(String[] args) {
@@ -32,7 +33,17 @@ public class Launcher {
             System.out.println(e);
             System.out.println("Sound could not be loaded.");
         }
-
+        LoadingScreen l = new LoadingScreen(2000);
+        while (true) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (l.getLoaded()) {
+                break;
+            }
+        }
         new MainMenu();
     }
 }
