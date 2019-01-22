@@ -43,8 +43,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CareerSelection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="161" column="18" selection-start-line="161" selection-start-column="18" selection-end-line="161" selection-end-column="18" />
+            <state relative-caret-position="-2306">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -56,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="72" column="46" selection-start-line="60" selection-start-column="9" selection-end-line="72" selection-end-column="46" />
+            <state relative-caret-position="243">
+              <caret line="70" column="46" selection-start-line="70" selection-start-column="46" selection-end-line="70" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="127" selection-start-line="127" selection-end-line="127" />
+            <state relative-caret-position="517">
+              <caret line="138" selection-start-line="138" selection-end-line="138" />
             </state>
           </provider>
         </entry>
@@ -101,20 +101,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-816">
-              <caret line="688" column="9" lean-forward="true" selection-start-line="688" selection-start-column="9" selection-end-line="688" selection-end-column="9" />
+            <state relative-caret-position="-1156">
+              <caret line="668" column="9" lean-forward="true" selection-start-line="668" selection-start-column="9" selection-end-line="668" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#26720#26721#0" expanded="true" />
-                <element signature="e#26793#26794#0" expanded="true" />
-                <element signature="e#26871#26872#0" expanded="true" />
-                <element signature="e#26939#26940#0" expanded="true" />
-                <element signature="e#32334#32335#0" expanded="true" />
-                <element signature="e#32407#32408#0" expanded="true" />
-                <element signature="e#32482#32483#0" expanded="true" />
-                <element signature="e#32550#32551#0" expanded="true" />
-                <element signature="e#32912#32913#0" expanded="true" />
-                <element signature="e#32988#32989#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HouseSelection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="69" column="49" lean-forward="true" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
+            <state relative-caret-position="153">
+              <caret line="70" column="49" lean-forward="true" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -232,36 +222,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="TheLifeOfLife" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TheLifeOfLife" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TheLifeOfLife" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TheLifeOfLife" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TheLifeOfLife" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TheLifeOfLife" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Client.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548174307866" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548174501848" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -349,13 +318,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59429000" />
+    <option name="totallyTimeSpent" value="59566000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.19379845" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19352227" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -365,7 +334,7 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.3243243" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.49964765" visible="true" weight="0.28596804" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49964765" visible="true" weight="0.28596804" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -596,8 +565,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="72" column="46" selection-start-line="60" selection-start-column="9" selection-end-line="72" selection-end-column="46" />
+        <state relative-caret-position="243">
+          <caret line="70" column="46" selection-start-line="70" selection-start-column="46" selection-end-line="70" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -619,8 +588,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/HouseSelection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="69" column="49" lean-forward="true" selection-start-line="69" selection-start-column="49" selection-end-line="69" selection-end-column="49" />
+        <state relative-caret-position="153">
+          <caret line="70" column="49" lean-forward="true" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -636,27 +605,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
+        <state relative-caret-position="517">
+          <caret line="138" selection-start-line="138" selection-end-line="138" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-816">
-          <caret line="688" column="9" lean-forward="true" selection-start-line="688" selection-start-column="9" selection-end-line="688" selection-end-column="9" />
+        <state relative-caret-position="-1156">
+          <caret line="668" column="9" lean-forward="true" selection-start-line="668" selection-start-column="9" selection-end-line="668" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#26720#26721#0" expanded="true" />
-            <element signature="e#26793#26794#0" expanded="true" />
-            <element signature="e#26871#26872#0" expanded="true" />
-            <element signature="e#26939#26940#0" expanded="true" />
-            <element signature="e#32334#32335#0" expanded="true" />
-            <element signature="e#32407#32408#0" expanded="true" />
-            <element signature="e#32482#32483#0" expanded="true" />
-            <element signature="e#32550#32551#0" expanded="true" />
-            <element signature="e#32912#32913#0" expanded="true" />
-            <element signature="e#32988#32989#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -710,8 +669,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CareerSelection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="161" column="18" selection-start-line="161" selection-start-column="18" selection-end-line="161" selection-end-column="18" />
+        <state relative-caret-position="-2306">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
