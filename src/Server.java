@@ -140,7 +140,7 @@ class Server extends JFrame {
         }
         String ip = ipAddress.toString();
 
-        ip = ip.substring(ip.indexOf(("/") + 1);
+        ip = ip.substring(ip.indexOf(("/") + 1));
         //set the font size
         font = font.deriveFont(Font.PLAIN,35);
 
